@@ -44,6 +44,11 @@ html {
   }
 
   /* FIN SCROLLBAR */
+
+  ::selection {
+    color: var(--main-red);
+    background: var(--main-purple);
+  }
 }
 
 body,
@@ -179,6 +184,7 @@ input {
     min-height: max(400px, 70dvh);
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 
     &__type {
       display: flex;
@@ -202,13 +208,14 @@ input {
       flex: 1;
       border-radius: inherit;
       border-radius: .4rem;
-      border: 3px solid rgb(80, 80, 80);
+      border: 2px solid rgb(100, 100, 100);
       outline: none;
       padding: .4rem;
       resize: none;
       background: var(--bg-code);
       color: var(--color-code);
       font-size: 1rem;
+      transition: 200ms;
 
       /* INICIO SCROLLBAR */
       scrollbar-width: thin;
@@ -236,11 +243,12 @@ input {
 
   &__output {
     flex: 1;
-    border-radius: .4rem;
     min-width: 300px;
     min-height: max(400px, 70dvh);
     display: flex;
     flex-direction: column;
+    transition: 200ms;
+    overflow: hidden;
 
     p {
       color: var(--main-white);
@@ -254,9 +262,13 @@ input {
       height: 100%;
       flex: 1;
       border-radius: .4rem;
-      border: 3px solid rgb(80, 80, 80);
+      border: 2px solid rgb(100, 100, 100);
       outline: none;
       overflow: hidden;
     }
   }
+}
+
+.dim {
+  opacity: .4;
 }

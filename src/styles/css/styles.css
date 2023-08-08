@@ -36,6 +36,10 @@ html ::-webkit-scrollbar-track {
 html ::-webkit-scrollbar-thumb {
   background: var(--main-purple);
 }
+html ::selection {
+  color: var(--main-red);
+  background: var(--main-purple);
+}
 
 body,
 #root {
@@ -162,6 +166,7 @@ input {
   min-height: max(400px, 70dvh);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 .mainCode__input__type {
   display: flex;
@@ -182,13 +187,14 @@ input {
   flex: 1;
   border-radius: inherit;
   border-radius: 0.4rem;
-  border: 3px solid rgb(80, 80, 80);
+  border: 2px solid rgb(100, 100, 100);
   outline: none;
   padding: 0.4rem;
   resize: none;
   background: var(--bg-code);
   color: var(--color-code);
   font-size: 1rem;
+  transition: 200ms;
   /* INICIO SCROLLBAR */
   scrollbar-width: thin;
   scrollbar-color: var(--main-gray) var(--bg-main);
@@ -208,11 +214,12 @@ input {
 }
 .mainCode__output {
   flex: 1;
-  border-radius: 0.4rem;
   min-width: 300px;
   min-height: max(400px, 70dvh);
   display: flex;
   flex-direction: column;
+  transition: 200ms;
+  overflow: hidden;
 }
 .mainCode__output p {
   color: var(--main-white);
@@ -225,9 +232,13 @@ input {
   height: 100%;
   flex: 1;
   border-radius: 0.4rem;
-  border: 3px solid rgb(80, 80, 80);
+  border: 2px solid rgb(100, 100, 100);
   outline: none;
   overflow: hidden;
+}
+
+.dim {
+  opacity: 0.4;
 }
 
 /*# sourceMappingURL=styles.css.map */

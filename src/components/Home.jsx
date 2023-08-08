@@ -12,7 +12,7 @@ export default function Home() {
         iframe.current.contentWindow.document.write(
             html + `<style>` + css + `</style>` + `<script>` + js + `</script>`
         )
-        iframe.current.contentWindow.document.close() 
+        iframe.current.contentWindow.document.close()
 
     }, [html, css, js])
 
@@ -30,17 +30,31 @@ export default function Home() {
                         <span>{tabActive.toUpperCase()}</span>
                     </div>
                     {tabActive === "html" &&
-                        <textarea spellCheck="false" className="mainCode__input__text" value={html} onChange={e => setHtml(e.target.value)}></textarea>
+                        <textarea spellCheck="false" className={`mainCode__input__text ${html === "" && `dim`}`} value={html} onChange={e => setHtml(e.target.value)} onKeyDown={(e) => {
+                            if (e.key === "Tab") {
+                                e.preventDefault();
+                                setHtml(html => html + "  ")
+                            }
+                        }}></textarea>
                     }
                     {tabActive === "css" &&
-                        <textarea spellCheck="false" className="mainCode__input__text" value={css} onChange={e => setCss(e.target.value)}></textarea>
+                        <textarea spellCheck="false" className={`mainCode__input__text ${css === "" && `dim`}`} value={css} onChange={e => setCss(e.target.value)} onKeyDown={(e) => {
+                            if (e.key === "Tab") {
+                                e.preventDefault();
+                                setCss(css => css + "  ")
+                            }
+                        }}></textarea>
                     }
                     {tabActive === "js" &&
-                        <textarea spellCheck="false" className="mainCode__input__text" value={js} onChange={e => setJs(e.target.value)}></textarea>
+                        <textarea spellCheck="false" className={`mainCode__input__text ${js === "" && `dim`}`} value={js} onChange={e => setJs(e.target.value)} onKeyDown={(e) => {
+                            if (e.key === "Tab") {
+                                e.preventDefault();
+                                setJs(js => js + "  ")
+                            }
+                        }}></textarea>
                     }
-
                 </div>
-                <div className="mainCode__output">
+                <div className={`mainCode__output ${html === "" && css === "" && js === "" && `dim`}`}>
                     <p>OUTPUT</p>
                     <iframe ref={iframe} className="mainCode__output__iframe">
 
