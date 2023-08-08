@@ -54,11 +54,12 @@ export default function Home() {
                         }}></textarea>
                     }
                 </div>
-                <div className={`mainCode__output ${html === "" && css === "" && js === "" && `dim`}`}>
+                <div className={`mainCode__output `}>
                     <p>OUTPUT</p>
-                    <iframe ref={iframe} className="mainCode__output__iframe">
-
-                    </iframe>
+                    <div className={`mainCode__output__iframeWrapper ${html === "" && css === "" && js === "" && `dim`}`}>
+                        <iframe ref={iframe} className="mainCode__output__iframe">
+                        </iframe>
+                    </div>
                 </div>
             </div>
         </div>
