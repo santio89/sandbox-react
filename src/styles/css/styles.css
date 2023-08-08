@@ -141,16 +141,20 @@ input {
   border: none;
   font-weight: bold;
   background: linear-gradient(45deg, var(--main-purple), var(--main-red));
+  background-size: 300%;
+  background-position: 50% 50%;
   color: var(--main-btn-clr);
   font-size: clamp(1.1rem, 1.1rem + 2vw, 1.2rem);
   cursor: pointer;
   transition: 200ms;
 }
-.tabs button:hover {
-  box-shadow: 0 4px 10px 0 var(--main-btn-bg);
+.tabs button:hover, .tabs button:focus {
+  box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
+  background-position: 0% 50%;
 }
 .tabs button[data-active=true] {
-  box-shadow: 0 4px 10px 0 var(--main-btn-bg);
+  box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
+  background-position: 0% 50%;
 }
 
 .mainCode {
