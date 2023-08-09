@@ -20,7 +20,6 @@ export default function Home() {
             } else {
                 return true;
             }
-
         };
     }, [html, css, js])
 

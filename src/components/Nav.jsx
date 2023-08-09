@@ -1,19 +1,24 @@
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setThemeReducer } from "../store/actions/theme.action";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
-export default function Nav({rootTheme}) {
+export default function Nav({ rootTheme }) {
   const dispatch = useDispatch();
-
   const darkTheme = useSelector(state => state.theme.darkTheme);
+  const firstRender = useRef(true)
 
   const toggleDarkTheme = () => {
     dispatch(setThemeReducer(!darkTheme))
   }
 
-  useEffect(()=>{
-    rootTheme.current.classList.toggle("dark-theme", darkTheme);
+  useEffect(() => {
+    if (firstRender.current === true) {
+      firstRender.current = false;
+      return
+    } else {
+      rootTheme.current.classList.toggle("dark-theme", !darkTheme);
+    }
   }, [darkTheme])
 
   return (
