@@ -13,6 +13,15 @@ export default function Home() {
             html + `<style>` + css + `</style>` + `<script>` + js + `</script>`
         )
         iframe.current.contentWindow.document.close()
+
+        window.onbeforeunload = () => {
+            if (html === "" && css === "" && js === "") {
+                return null
+            } else {
+                return true;
+            }
+
+        };
     }, [html, css, js])
 
     return (

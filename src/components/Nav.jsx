@@ -16,7 +16,6 @@ export default function Nav({rootTheme}) {
     rootTheme.current.classList.toggle("dark-theme", darkTheme);
   }, [darkTheme])
 
-
   return (
     <header className='main__header'>
       <nav>
