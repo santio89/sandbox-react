@@ -2,18 +2,10 @@ import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Home from "./components/Home";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-import { useSelector, useDispatch } from "react-redux";
-import { setThemeReducer } from "./store/actions/theme.action";
-import { useEffect } from "react";
+import { useRef } from "react";
 
 function App() {
-  const dispatch = useDispatch();
-
-  const darkTheme = useSelector(state => state.darkTheme);
-
-  const toggleDarkTheme = () => {
-    dispatch(setThemeReducer(false))
-  }
+  const rootTheme = useRef()
 
   const Layout = () => (
     <>
@@ -23,20 +15,15 @@ function App() {
     </>
   );
 
-  useEffect(()=>{
-    console.log(darkTheme)
-  }, [darkTheme])
-
   return (
     <>
-      <div className={darkTheme ? 'root-theme dark-theme' : 'root-theme'}>
+      <div ref={rootTheme} className="root-theme">
         <BrowserRouter>
-          <Nav darkTheme={darkTheme} toggleDarkTheme={toggleDarkTheme} />
+          <Nav rootTheme={rootTheme} />
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
             </Route>
-
           </Routes>
           {/* <Footer /> */}
         </BrowserRouter>
