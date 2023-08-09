@@ -8,30 +8,32 @@ export default function Home() {
     const iframe = useRef(null)
     const textarea = useRef(null)
 
+    const [textCursor, setTextCursor] = useState(null)
+
     const insertTabs = (type) => {
-        /*  const text = `${textarea.current.value.substring(
-             0, textarea.current.selectionStart)}${"  "}${textarea.current.value.substring(
-                 textarea.current.selectionEnd,
-                 textarea.current.value.length
-             )}`; */
+        const text = `${textarea.current.value.substring(
+            0, textarea.current.selectionStart)}${"  "}${textarea.current.value.substring(
+                textarea.current.selectionEnd,
+                textarea.current.value.length
+            )}`;
 
-        const spaceEvent = new KeyboardEvent('keydown', { 'keyCode': 32, 'which': 32 })
-        document.dispatchEvent(spaceEvent)
-        document.dispatchEvent(spaceEvent)
+        const selection = (textarea.current.selectionEnd - textarea.current.selectionStart)
 
-        /*         switch (type) {
-                    case 'html':
-                        setHtml(text);
-                        break;
-                    case 'css':
-                        setCss(text);
-                        break;
-                    case 'js':
-                        setJs(text);
-                        break;
-                    default:
-                        return
-                } */
+        setTextCursor(textarea.current.selectionEnd - selection + 2)
+
+        switch (type) {
+            case 'html':
+                setHtml(text);
+                break;
+            case 'css':
+                setCss(text);
+                break;
+            case 'js':
+                setJs(text);
+                break;
+            default:
+                return
+        }
     }
 
     useEffect(() => {
@@ -48,6 +50,15 @@ export default function Home() {
                 return true;
             }
         };
+
+        if (textCursor) {
+            /* const selection = (textarea.current.selectionEnd - textarea.current.selectionStart)
+            const newLength = textarea.current.length - selection + 2 */
+
+            textarea.current.selectionStart = textCursor;
+            textarea.current.selectionEnd = textCursor;
+            setTextCursor(null)
+        }
     }, [html, css, js])
 
     return (
