@@ -318,7 +318,7 @@ input {
 
     &:hover,
     &:focus-visible {
-      outline: 1px dashed rgba(40, 40, 40, .4);
+      filter: drop-shadow(0 0 4px var(--main-purple)) 
     }
   }
 }

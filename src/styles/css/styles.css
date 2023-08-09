@@ -278,7 +278,7 @@ input {
   border-radius: 50%;
 }
 .theme-mode button:hover, .theme-mode button:focus-visible {
-  outline: 1px dashed rgba(40, 40, 40, 0.4);
+  filter: drop-shadow(0 0 4px var(--main-purple));
 }
 
 .moon-fill {
