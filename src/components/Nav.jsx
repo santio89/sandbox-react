@@ -13,7 +13,6 @@ export default function Nav({ rootTheme }) {
   }
 
   useEffect(() => {
-    console.log(darkTheme)
     if (firstRender.current === true) {
       firstRender.current = false;
       return
