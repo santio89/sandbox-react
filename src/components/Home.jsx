@@ -13,7 +13,6 @@ export default function Home() {
             html + `<style>` + css + `</style>` + `<script>` + js + `</script>`
         )
         iframe.current.contentWindow.document.close()
-
     }, [html, css, js])
 
     return (

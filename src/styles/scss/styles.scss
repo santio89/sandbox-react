@@ -5,15 +5,15 @@
   --main-black: rgb(40, 40, 40);
   --main-gray: rgb(80, 80, 80);
 
-  --clr-nav: var(--main-white);
+  --clr-nav: rgb(250, 250, 250);
 
-  --color-code: var(--main-white);
+  --color-code: rgb(250, 250, 250);
 
-  --main-btn-bg: var(--main-purple);
-  --main-btn-clr: var(--main-white);
+  --main-btn-bg: rgb(107, 31, 248);
+  --main-btn-clr: rgb(250, 250, 250);
 
-  --bg-main: var(--main-black);
-  --bg-code: var(--main-gray);
+  --bg-main: rgb(40, 40, 40);
+  --bg-code: rgb(80, 80, 80);
 }
 
 * {
@@ -52,12 +52,31 @@ html {
 }
 
 body,
-#root {
+#root,
+.root-theme {
   width: 100%;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
   font-family: 'Courier New', Courier, monospace;
+}
+
+.dark-theme {
+  --main-purple: rgb(107, 31, 248);
+  --main-red: rgb(210, 28, 83);
+  --main-white: rgb(5, 5, 5);
+  --main-black: rgb(250, 250, 250);
+  --main-gray: rgb(220, 220, 220);
+
+  --clr-nav: rgb(5, 5, 5);
+
+  --color-code: rgb(5, 5, 5);
+
+  --main-btn-bg: rgb(107, 31, 248);
+  --main-btn-clr: rgb(250, 250, 250);
+
+  --bg-main: rgb(250, 250, 250);
+  --bg-code: rgb(220, 220, 220);
 }
 
 a,
@@ -73,13 +92,15 @@ input {
 .main__header {
   background: linear-gradient(45deg, var(--main-purple), var(--main-red));
   color: var(--clr-nav);
-  padding: .2rem;
+  padding: 2px 8px;
   font-size: .8rem;
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
+  align-items: center;
   z-index: 2;
   position: sticky;
   top: 0;
+  overflow: hidden;
 }
 
 /* fin header */
@@ -163,7 +184,8 @@ input {
     cursor: pointer;
     transition: 200ms;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
       background-position: 0% 50%;
     }
@@ -281,4 +303,30 @@ input {
 
 .dim {
   opacity: .4;
+}
+
+.theme-mode {
+  button {
+    background: none;
+    outline: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 50%;
+
+    &:hover,
+    &:focus-visible {
+      outline: 1px dashed rgba(40, 40, 40, .4);
+    }
+  }
+}
+
+.moon-fill {
+  color: rgb(40, 40, 40);
+}
+
+.sun-fill {
+  color: rgb(250, 250, 250);
 }
