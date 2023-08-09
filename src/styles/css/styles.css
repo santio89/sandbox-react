@@ -117,17 +117,17 @@ input {
   background-image: url("/icon.svg");
   background-repeat: no-repeat;
   background-position: 0% 0%;
-  background-size: 50%;
+  background-size: max(600px, 50%);
   z-index: 0;
 }
 .mainContainer::after {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("/icon.svg"), url("/icon.svg");
+  background-image: url("/icon.svg");
   background-repeat: no-repeat;
   background-position: 0% 0%;
-  background-size: 50%;
+  background-size: max(600px, 50%);
   z-index: 0;
   transform: rotate(180deg);
 }
@@ -186,6 +186,7 @@ input {
 .mainCode__input {
   flex: 1;
   min-width: 300px;
+  max-width: 100%;
   min-height: max(400px, 70dvh);
   display: flex;
   flex-direction: column;
@@ -193,16 +194,21 @@ input {
 }
 .mainCode__input__type {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
+  align-items: center;
 }
 .mainCode__input__type span {
   color: var(--main-white);
-  font-weight: bold;
   padding: 0.4rem;
   font-weight: bold;
 }
+.mainCode__input__type span:first-child {
+  padding-right: 0;
+}
 .mainCode__input__type span:last-child {
+  padding-left: 0;
   color: var(--main-purple);
+  text-shadow: 0 0 4px var(--main-purple);
 }
 .mainCode__input__text {
   width: 100%;
@@ -237,6 +243,7 @@ input {
 .mainCode__output {
   flex: 1;
   min-width: 300px;
+  max-width: 100%;
   min-height: max(400px, 70dvh);
   display: flex;
   flex-direction: column;
@@ -245,6 +252,9 @@ input {
   color: var(--main-white);
   font-weight: bold;
   padding: 0.4rem;
+  display: flex;
+  justify-content: start;
+  align-items: center;
 }
 .mainCode__output__iframeWrapper {
   overflow: hidden;

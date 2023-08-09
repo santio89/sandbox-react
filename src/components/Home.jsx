@@ -33,7 +33,7 @@ export default function Home() {
             <div className="mainCode">
                 <div className="mainCode__input">
                     <div className="mainCode__input__type">
-                        <span>INPUT</span>
+                        <span>INPUT-</span>
                         <span>{tabActive.toUpperCase()}</span>
                     </div>
                     {tabActive === "html" &&
