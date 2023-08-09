@@ -6,6 +6,33 @@ export default function Home() {
     const [css, setCss] = useState("")
     const [js, setJs] = useState("")
     const iframe = useRef(null)
+    const textarea = useRef(null)
+
+    const insertTabs = (type) => {
+        /*  const text = `${textarea.current.value.substring(
+             0, textarea.current.selectionStart)}${"  "}${textarea.current.value.substring(
+                 textarea.current.selectionEnd,
+                 textarea.current.value.length
+             )}`; */
+
+        const spaceEvent = new KeyboardEvent('keydown', { 'keyCode': 32, 'which': 32 })
+        document.dispatchEvent(spaceEvent)
+        document.dispatchEvent(spaceEvent)
+
+        /*         switch (type) {
+                    case 'html':
+                        setHtml(text);
+                        break;
+                    case 'css':
+                        setCss(text);
+                        break;
+                    case 'js':
+                        setJs(text);
+                        break;
+                    default:
+                        return
+                } */
+    }
 
     useEffect(() => {
         iframe.current.contentWindow.document.open();
@@ -37,26 +64,26 @@ export default function Home() {
                         <span>{tabActive.toUpperCase()}</span>
                     </div>
                     {tabActive === "html" &&
-                        <textarea spellCheck="false" className={`mainCode__input__text ${html === "" && `dim`}`} value={html} onChange={e => setHtml(e.target.value)} onKeyDown={(e) => {
+                        <textarea ref={textarea} spellCheck="false" className={`mainCode__input__text ${html === "" && `dim`}`} value={html} onChange={e => setHtml(e.target.value)} onKeyDown={(e) => {
                             if (e.key === "Tab") {
                                 e.preventDefault();
-                                setHtml(html => html + "  ")
+                                insertTabs("html")
                             }
                         }}></textarea>
                     }
                     {tabActive === "css" &&
-                        <textarea spellCheck="false" className={`mainCode__input__text ${css === "" && `dim`}`} value={css} onChange={e => setCss(e.target.value)} onKeyDown={(e) => {
+                        <textarea ref={textarea} spellCheck="false" className={`mainCode__input__text ${css === "" && `dim`}`} value={css} onChange={e => setCss(e.target.value)} onKeyDown={(e) => {
                             if (e.key === "Tab") {
                                 e.preventDefault();
-                                setCss(css => css + "  ")
+                                insertTabs("css")
                             }
                         }}></textarea>
                     }
                     {tabActive === "js" &&
-                        <textarea spellCheck="false" className={`mainCode__input__text ${js === "" && `dim`}`} value={js} onChange={e => setJs(e.target.value)} onKeyDown={(e) => {
+                        <textarea ref={textarea} spellCheck="false" className={`mainCode__input__text ${js === "" && `dim`}`} value={js} onChange={e => setJs(e.target.value)} onKeyDown={(e) => {
                             if (e.key === "Tab") {
                                 e.preventDefault();
-                                setJs(js => js + "  ")
+                                insertTabs("js")
                             }
                         }}></textarea>
                     }
