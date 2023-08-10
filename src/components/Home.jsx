@@ -57,13 +57,13 @@ export default function Home() {
         )
         iframe.current.contentWindow.document.close()
 
-        window.onbeforeunload = () => {
+      /*   window.onbeforeunload = () => {
             if (html === "" && css === "" && js === "") {
                 return null
             } else {
                 return true;
             }
-        };
+        }; */
 
         if (textCursor) {
             /* const selection = (textarea.current.selectionEnd - textarea.current.selectionStart)
