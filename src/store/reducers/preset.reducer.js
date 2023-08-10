@@ -52,7 +52,7 @@ spot.addEventListener("click", ()=>{
 `
 
 const initialState = {
-  presets: [{ name: 'example-1', id: 1, html: exampleHtml1, css: exampleCss1, js: exampleJs1 }]
+  presets: [{ name: 'example-1', id: "testid01", html: exampleHtml1, css: exampleCss1, js: exampleJs1 }]
 }
 
 const PresetReducer = (state = initialState, action) => {

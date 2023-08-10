@@ -4,6 +4,7 @@ import { setThemeReducer } from "../store/actions/theme.action";
 import { useState, useEffect, useRef } from "react";
 import { setCodeAll } from "../store/actions/code.action";
 import { savePreset, deletePreset } from "../store/actions/presets.action";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Nav({ rootTheme }) {
   const dispatch = useDispatch();
@@ -14,6 +15,8 @@ export default function Nav({ rootTheme }) {
   const firstRender = useRef(true)
   const modal = useRef()
   const [saveMode, setSaveMode] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
+  const [selectedId, setSelectedId] = useState(null);
   const [savePresetName, setSavePresetName] = useState("");
   const [saved, setSaved] = useState(false)
 
@@ -26,7 +29,6 @@ export default function Nav({ rootTheme }) {
   const toggleModal = () => {
     if (saveMode) {
       setSavePresetName("")
-      setSaveMode(false)
     }
     modal.current.hasAttribute("open") ? modal.current.close() : modal.current.showModal()
   }
@@ -40,6 +42,12 @@ export default function Nav({ rootTheme }) {
 
   const setPreset = (html, css, js) => {
     dispatch(setCodeAll(html, css, js))
+    setSelectedId(null)
+  }
+
+  const deleteSelectedPreset = (id) => {
+    dispatch(deletePreset(presets, id))
+    setDeleteId(null)
   }
 
   const saveNewPreset = (name, html, css, js) => {
@@ -47,7 +55,8 @@ export default function Nav({ rootTheme }) {
     if (name === "") {
       return
     }
-    dispatch(savePreset(presets, { name, html, css, js }))
+    const id = uuidv4();
+    dispatch(savePreset(presets, { id, name, html, css, js }))
     setSavePresetName("")
     setSaved(true)
   }
@@ -103,7 +112,7 @@ export default function Nav({ rootTheme }) {
       <dialog className="main__modal" ref={modal}>
         <div className="main__modal__inner">
           <div className="main__modal__header">
-            {saveMode ? <p>Save Preset</p> : <p>Choose Preset</p>}
+            {saveMode ? <p>Save preset</p> : <p>Choose preset</p>}
             <div className="main__modal__header__buttons">
               <button onClick={() => { toggleSave() }}>
                 {
@@ -128,16 +137,48 @@ export default function Nav({ rootTheme }) {
             saveMode ?
               <div className="presets">
                 <div className="presets__save">
-                  <input type="text" placeholder="PRESET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} id="save-input" maxLength={25} />
+                  <input type="text" placeholder="PRESET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} id="save-input" maxLength={30} />
                   <button disabled={savePresetName.trim() === ""} onClick={() => { saveNewPreset(savePresetName, html, css, js) }} data-saved={saved ? 'saved!' : ''}>Save</button>
                 </div>
               </div> :
               <div className="presets">
                 {
                   presets?.map(preset => {
-                    return (<button className="presets__option" key={preset.id} onClick={() => { setPreset(preset.html, preset.css, preset.js) }}>
-                      <span>{preset.name}</span>
-                    </button>)
+                    return (
+                      <button className="presets__option" key={preset.id} onClick={() => { setSelectedId(preset.id) }} >
+                        {
+                          selectedId === preset.id ?
+                            <span className="presets__option__confirm">
+                              <span>Select preset?</span>
+                              <span className="presets__option__confirm__buttons">
+                                <span onClick={(e) => { e.stopPropagation(); setPreset(preset.html, preset.css, preset.js) }}>Yes</span>
+                                <span onClick={(e) => { e.stopPropagation(); setSelectedId(null) }}>No</span>
+                              </span>
+                            </span>
+                            :
+                            (deleteId === preset.id ?
+                              <span className="presets__option__confirm">
+                                <span>Delete preset?</span>
+                                <span className="presets__option__confirm__buttons">
+                                  <span onClick={(e) => { e.stopPropagation(); deleteSelectedPreset(preset.id) }}>Yes</span>
+                                  <span onClick={(e) => { e.stopPropagation(); setDeleteId(null) }}>No</span>
+                                </span>
+                              </span> :
+                              <span className="presets__option__main">
+                                <span className="presets__option__main__name">{preset.name}</span>
+                                <span className="presets__option__main__del" onClick={(e) => {
+                                  e.stopPropagation();
+                                  setDeleteId(preset.id)
+                                }}>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" className="bi-file-x-fill" viewBox="0 0 16 16">
+                                    <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM6.854 6.146 8 7.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 8l1.147 1.146a.5.5 0 0 1-.708.708L8 8.707 6.854 9.854a.5.5 0 0 1-.708-.708L7.293 8 6.146 6.854a.5.5 0 1 1 .708-.708z" />
+                                  </svg>
+                                </span>
+                              </span>
+                            )
+                        }
+                      </button>
+                    )
                   })
                 }
               </div>
