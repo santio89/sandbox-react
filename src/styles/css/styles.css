@@ -286,6 +286,7 @@ input {
   align-items: center;
   cursor: pointer;
   border-radius: 50%;
+  padding: 2px;
 }
 .theme-mode button:hover, .theme-mode button:focus-visible {
   filter: drop-shadow(0 0 4px var(--main-purple));
