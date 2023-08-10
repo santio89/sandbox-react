@@ -15,7 +15,7 @@ const CodeReducer = (state = initialState, action) => {
         case 'SET_CODE':
             return { ...state, html: action.html, css: action.css, js: action.js }
         default:
-            return { ...state }
+            return state
     }
 }
 

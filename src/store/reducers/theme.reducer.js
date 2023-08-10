@@ -7,7 +7,7 @@ const ThemeReducer = (state=initialState, action) => {
         case 'SET_THEME':
             return {...state, darkTheme: action.darkTheme}
         default: 
-            return {...state}
+            return state
     }
 }
 

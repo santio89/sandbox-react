@@ -59,7 +59,7 @@ const PresetReducer = (state = initialState, action) => {
     case 'SET_PRESETS':
       return { presets: action.presets }
     default:
-      return { ...state }
+      return state
   }
 }
 
