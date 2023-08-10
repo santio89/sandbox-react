@@ -1,10 +1,24 @@
 import { useEffect, useRef, useState } from "react"
+import { useSelector, useDispatch } from "react-redux";
+import { setCodeHtml, setCodeCss, setCodeJs } from "../store/actions/code.action";
 
 export default function Home() {
     const [tabActive, setTabActive] = useState("html")
-    const [html, setHtml] = useState("")
-    const [css, setCss] = useState("")
-    const [js, setJs] = useState("")
+    const dispatch = useDispatch()
+    const html = useSelector(state => state.code.html)
+    const css = useSelector(state => state.code.css)
+    const js = useSelector(state => state.code.js)
+
+    const setHtml = (html) => {
+        dispatch(setCodeHtml(html))
+    }
+    const setCss = (css) => {
+        dispatch(setCodeCss(css))
+    }
+    const setJs = (js) => {
+        dispatch(setCodeJs(js))
+    }
+
     const iframe = useRef(null)
     const textarea = useRef(null)
 
