@@ -66,9 +66,6 @@ export default function Home() {
         }; */
 
         if (textCursor) {
-            /* const selection = (textarea.current.selectionEnd - textarea.current.selectionStart)
-            const newLength = textarea.current.length - selection + 2 */
-
             textarea.current.selectionStart = textCursor;
             textarea.current.selectionEnd = textCursor;
             setTextCursor(null)
