@@ -45,7 +45,6 @@ div:active{
 `
 
 const exampleJs1 = `var spot = document.querySelector("div");
-
 spot.addEventListener("click", ()=>{
   document.body.classList.toggle("bg-magenta")
 })
