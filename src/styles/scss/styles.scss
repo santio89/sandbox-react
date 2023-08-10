@@ -1,5 +1,6 @@
 :root {
   --main-purple: rgb(107, 31, 248);
+  --main-purple-variation: rgb(63, 3, 133);
   --main-red: rgb(210, 28, 83);
   --main-white: rgb(250, 250, 250);
   --main-black: rgb(40, 40, 40);
@@ -46,7 +47,7 @@ html {
   /* FIN SCROLLBAR */
 
   ::selection {
-    color: var(--main-red);
+    color: var(--main-purple-variation);
     background: var(--main-purple);
   }
 }
@@ -449,9 +450,7 @@ button {
 
       &:hover,
       &:focus-visible {
-        border: 1px solid var(--main-red);
         box-shadow: -2px 2px 8px 0 var(--main-purple);
-        background-position: 50% 50%;
       }
 
       &:active {
@@ -475,6 +474,11 @@ button {
         border-bottom: 2px solid var(--main-purple);
         color: var(--main-white);
         text-shadow: 1px 1px 0 var(--main-purple);
+        text-align: center;
+
+        &::placeholder{
+          color: rgb(180,180,180);
+        }
       }
 
       button {
@@ -497,19 +501,30 @@ button {
         cursor: pointer;
         transition: 200ms;
         border: 1px solid var(--main-purple);
+        position: relative;
+
+        &::after {
+          content: attr(data-saved);
+          position: absolute;
+          top: 50%;
+          right: -120%;
+          transform: translateY(-50%);
+          color: var(--main-purple);
+          transition: 200ms;
+        }
 
         &:hover,
         &:focus-visible {
           box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
-          background-position: 50% 50%;
         }
 
         &:active {
           scale: .94
         }
 
-        &[disabled]{
-          filter: grayscale(1);
+        &[disabled] {
+          border: 1px solid rgb(60, 60, 60);
+          background: rgb(80, 80, 80);
           pointer-events: none;
         }
       }

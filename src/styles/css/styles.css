@@ -1,5 +1,6 @@
 :root {
   --main-purple: rgb(107, 31, 248);
+  --main-purple-variation: rgb(63, 3, 133);
   --main-red: rgb(210, 28, 83);
   --main-white: rgb(250, 250, 250);
   --main-black: rgb(40, 40, 40);
@@ -37,7 +38,7 @@ html ::-webkit-scrollbar-thumb {
   background: var(--main-purple);
 }
 html ::selection {
-  color: var(--main-red);
+  color: var(--main-purple-variation);
   background: var(--main-purple);
 }
 
@@ -397,9 +398,7 @@ button {
   box-sizing: content-box;
 }
 .main__modal .presets__option:hover, .main__modal .presets__option:focus-visible {
-  border: 1px solid var(--main-red);
   box-shadow: -2px 2px 8px 0 var(--main-purple);
-  background-position: 50% 50%;
 }
 .main__modal .presets__option:active {
   scale: 0.94;
@@ -420,6 +419,10 @@ button {
   border-bottom: 2px solid var(--main-purple);
   color: var(--main-white);
   text-shadow: 1px 1px 0 var(--main-purple);
+  text-align: center;
+}
+.main__modal .presets__save input::placeholder {
+  color: rgb(180, 180, 180);
 }
 .main__modal .presets__save button {
   align-self: center;
@@ -441,16 +444,26 @@ button {
   cursor: pointer;
   transition: 200ms;
   border: 1px solid var(--main-purple);
+  position: relative;
+}
+.main__modal .presets__save button::after {
+  content: attr(data-saved);
+  position: absolute;
+  top: 50%;
+  right: -120%;
+  transform: translateY(-50%);
+  color: var(--main-purple);
+  transition: 200ms;
 }
 .main__modal .presets__save button:hover, .main__modal .presets__save button:focus-visible {
   box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
-  background-position: 50% 50%;
 }
 .main__modal .presets__save button:active {
   scale: 0.94;
 }
 .main__modal .presets__save button[disabled] {
-  filter: grayscale(1);
+  border: 1px solid rgb(60, 60, 60);
+  background: rgb(80, 80, 80);
   pointer-events: none;
 }
 .main__modal__header {

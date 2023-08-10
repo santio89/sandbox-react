@@ -14,7 +14,8 @@ export default function Nav({ rootTheme }) {
   const firstRender = useRef(true)
   const modal = useRef()
   const [saveMode, setSaveMode] = useState(false);
-  const [savePresetName, setSavePresetName] = useState("")
+  const [savePresetName, setSavePresetName] = useState("");
+  const [saved, setSaved] = useState(false)
 
   const presets = useSelector(state => state.preset.presets)
 
@@ -25,13 +26,14 @@ export default function Nav({ rootTheme }) {
   const toggleModal = () => {
     if (saveMode) {
       setSavePresetName("")
+      setSaveMode(false)
     }
     modal.current.hasAttribute("open") ? modal.current.close() : modal.current.showModal()
   }
 
   const toggleSave = () => {
     if (saveMode) {
-      setSavePresetName("")
+      setSavePresetName("");
     }
     setSaveMode(saveMode => !saveMode)
   }
@@ -46,6 +48,8 @@ export default function Nav({ rootTheme }) {
       return
     }
     dispatch(savePreset(presets, { name, html, css, js }))
+    setSavePresetName("")
+    setSaved(true)
   }
 
   useEffect(() => {
@@ -56,6 +60,18 @@ export default function Nav({ rootTheme }) {
       rootTheme.current.classList.toggle("dark-theme", !darkTheme);
     }
   }, [darkTheme])
+
+  useEffect(() => {
+    let timeout = null;
+    if (saved) {
+      timeout = setTimeout(() => {
+        setSaved(false)
+      }, 1000)
+    }
+
+    return () => { clearTimeout(timeout) }
+
+  }, [saved])
 
   return (
     <header className='main__header'>
@@ -113,7 +129,7 @@ export default function Nav({ rootTheme }) {
               <div className="presets">
                 <div className="presets__save">
                   <input type="text" placeholder="PRESET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} id="save-input" maxLength={25} />
-                  <button disabled={savePresetName.trim() === ""} onClick={() => { saveNewPreset(savePresetName, html, css, js) }}>Save</button>
+                  <button disabled={savePresetName.trim() === ""} onClick={() => { saveNewPreset(savePresetName, html, css, js) }} data-saved={saved ? 'saved!' : ''}>Save</button>
                 </div>
               </div> :
               <div className="presets">
