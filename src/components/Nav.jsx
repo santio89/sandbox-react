@@ -112,7 +112,7 @@ export default function Nav({ rootTheme }) {
       <dialog className="main__modal" ref={modal}>
         <div className="main__modal__inner">
           <div className="main__modal__header">
-            {saveMode ? <p>Save preset</p> : <p>Choose preset</p>}
+            {saveMode ? <p>Save snippet</p> : <p>Choose snippet</p>}
             <div className="main__modal__header__buttons">
               <button onClick={() => { toggleSave() }}>
                 {
@@ -137,7 +137,7 @@ export default function Nav({ rootTheme }) {
             saveMode ?
               <div className="presets">
                 <div className="presets__save">
-                  <input type="text" placeholder="PRESET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} id="save-input" maxLength={30} />
+                  <input type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} id="save-input" maxLength={30} />
                   <button disabled={savePresetName.trim() === ""} onClick={() => { saveNewPreset(savePresetName, html, css, js) }} data-saved={saved ? 'saved!' : ''}>Save</button>
                 </div>
               </div> :
@@ -149,7 +149,7 @@ export default function Nav({ rootTheme }) {
                         {
                           selectedId === preset.id ?
                             <span className="presets__option__confirm">
-                              <span>Load preset?</span>
+                              <span>Load snippet?</span>
                               <span className="presets__option__confirm__buttons">
                                 <span onClick={(e) => { e.stopPropagation(); setPreset(preset.html, preset.css, preset.js) }}>Yes</span>
                                 <span onClick={(e) => { e.stopPropagation(); setSelectedId(null) }}>No</span>
@@ -158,7 +158,7 @@ export default function Nav({ rootTheme }) {
                             :
                             (deleteId === preset.id ?
                               <span className="presets__option__confirm">
-                                <span>Delete preset?</span>
+                                <span>Delete snipper?</span>
                                 <span className="presets__option__confirm__buttons">
                                   <span onClick={(e) => { e.stopPropagation(); deleteSelectedPreset(preset.id) }}>Yes</span>
                                   <span onClick={(e) => { e.stopPropagation(); setDeleteId(null) }}>No</span>
