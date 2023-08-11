@@ -3,9 +3,11 @@ import Home from "./components/Home";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import { useRef } from "react";
+import { useSelector } from "react-redux";
 
 function App() {
   const rootTheme = useRef()
+  const darkTheme = useSelector(state => state.theme.darkTheme);
 
   const Layout = () => (
     <>
@@ -17,7 +19,7 @@ function App() {
 
   return (
     <>
-      <div ref={rootTheme} className="root-theme">
+      <div ref={rootTheme} className={`root-theme ${darkTheme && 'dark-theme'}`}>
         <BrowserRouter>
           <Nav rootTheme={rootTheme} />
           <Routes>
