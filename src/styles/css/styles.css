@@ -457,9 +457,6 @@ button {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  /* &:active {
-    transform: scale(.94)
-  } */
 }
 .main__modal .presets__option:hover, .main__modal .presets__option:focus-visible {
   box-shadow: -2px 2px 8px 0 var(--main-purple);
@@ -491,7 +488,7 @@ button {
   max-width: 48px;
   font-weight: normal;
   font-size: 0.94em;
-  transition: 100ms;
+  transition: scale 100ms;
 }
 .main__modal .presets__option__confirm__buttons span:hover, .main__modal .presets__option__confirm__buttons span:focus-visible {
   outline: 1px solid var(--main-red);
@@ -517,7 +514,7 @@ button {
   position: absolute;
   bottom: -10px;
   right: -10px;
-  transition: 100ms;
+  transition: scale 100ms;
 }
 .main__modal .presets__option__main__del svg {
   color: var(--main-purple-variation);
