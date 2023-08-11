@@ -481,7 +481,7 @@ button {
   gap: 0.8em;
 }
 .main__modal .presets__option__confirm__buttons span {
-  padding: 0.2em;
+  padding: 2px;
   border-radius: 0.2em;
   background-color: var(--main-purple-variation);
   display: flex;
