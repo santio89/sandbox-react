@@ -88,7 +88,7 @@ button {
 .main__header {
   background: linear-gradient(45deg, var(--main-purple), var(--main-red));
   color: var(--clr-nav);
-  padding: 2px 8px;
+  padding: 3px 8px;
   font-size: 0.8rem;
   display: flex;
   justify-content: space-between;
@@ -115,12 +115,59 @@ button {
   border-radius: 50%;
   padding: 2px;
   transition: 200ms;
+  color: var(--main-black);
+}
+.main__header__buttons button svg {
+  fill: var(--main-black);
 }
 .main__header__buttons button:hover, .main__header__buttons button:focus-visible {
   filter: drop-shadow(0 0 4px var(--main-purple));
 }
 .main__header__buttons button:active {
   scale: 0.9;
+}
+.main__header__buttons button.create-new {
+  color: var(--main-white);
+  background: var(--main-black);
+  border-radius: 0;
+}
+.main__header__buttons button.create-new svg {
+  fill: var(--main-white);
+}
+.main__header .new-project {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main__header .new-project-confirm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+}
+.main__header .new-project-confirm-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+}
+.main__header .new-project-confirm-btns button {
+  border-radius: 0;
+  padding: 2px;
+  border-radius: 4px;
+  width: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main__header span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(250, 250, 250);
+}
+.main__header span:first-child {
+  margin-right: 0.2rem;
 }
 
 /* fin header */
@@ -228,7 +275,7 @@ button {
   flex: 1;
   min-width: 300px;
   max-width: 100%;
-  min-height: max(400px, 70dvh);
+  min-height: max(420px, 70dvh);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -251,6 +298,51 @@ button {
   color: var(--main-purple);
   text-shadow: 0 0 4px var(--main-purple);
 }
+.mainCode__input__type__btnWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mainCode__input__type__btnWrapper a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--main-purple);
+  transition: 200ms;
+}
+.mainCode__input__type__btnWrapper a:active {
+  scale: 0.9;
+}
+.mainCode__input__type__clearConfirm {
+  color: var(--main-red);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  margin-inline: 0.4rem;
+}
+.mainCode__input__type__clearConfirm__buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+}
+.mainCode__input__type__clearConfirm__buttons button {
+  cursor: pointer;
+  padding: 2px;
+  width: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.94em;
+}
+.mainCode__input__type__clearConfirm__buttons button:hover, .mainCode__input__type__clearConfirm__buttons button:focus-visible {
+  background: var(--main-red);
+  color: white;
+}
+.mainCode__input__type__clearConfirm__buttons button:active {
+  scale: 0.9;
+}
 .mainCode__input__type__clear {
   cursor: pointer;
   color: var(--main-red);
@@ -272,37 +364,6 @@ button {
   justify-content: center;
   align-items: center;
   gap: 0.4rem;
-}
-.mainCode__input__type__clearConfirm {
-  color: var(--main-red);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.8rem;
-  margin-inline: 0.4rem;
-}
-.mainCode__input__type__clearConfirm__buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.4rem;
-}
-.mainCode__input__type__clearConfirm__buttons button {
-  cursor: pointer;
-  border-radius: 2px;
-  padding: 2px;
-  width: 36px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.94em;
-}
-.mainCode__input__type__clearConfirm__buttons button:hover, .mainCode__input__type__clearConfirm__buttons button:focus-visible {
-  background: var(--main-red);
-  color: white;
-}
-.mainCode__input__type__clearConfirm__buttons button:active {
-  scale: 0.9;
 }
 .mainCode__input__text {
   width: 100%;
@@ -338,7 +399,7 @@ button {
   flex: 1;
   min-width: 300px;
   max-width: 100%;
-  min-height: max(400px, 70dvh);
+  min-height: max(420px, 70dvh);
   display: flex;
   flex-direction: column;
 }

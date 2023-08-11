@@ -80,6 +80,7 @@ body,
   --bg-code: rgb(220, 220, 220);
 }
 
+
 a,
 button,
 textarea,
@@ -102,7 +103,7 @@ button {
 .main__header {
   background: linear-gradient(45deg, var(--main-purple), var(--main-red));
   color: var(--clr-nav);
-  padding: 2px 8px;
+  padding: 3px 8px;
   font-size: .8rem;
   display: flex;
   justify-content: space-between;
@@ -129,6 +130,11 @@ button {
       border-radius: 50%;
       padding: 2px;
       transition: 200ms;
+      color: var(--main-black);
+
+      svg {
+        fill: var(--main-black);
+      }
 
       &:hover,
       &:focus-visible {
@@ -138,11 +144,65 @@ button {
       &:active {
         scale: .9
       }
+
+      &.create-new {
+        color: var(--main-white);
+        background: var(--main-black);
+        border-radius: 0;
+
+        svg {
+          fill: var(--main-white);
+        }
+      }
     }
+  }
+
+
+  .new-project {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-confirm {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: .4rem;
+
+      &-btns {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: .2rem;
+
+        button {
+          border-radius: 0;
+          padding: 2px;
+          border-radius: 4px;
+          width: 28px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+  }
+
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(250, 250, 250);
+
+    &:first-child {
+      margin-right: .2rem;
+    }
+
   }
 }
 
 /* fin header */
+
 
 /* footer */
 .main__footer {
@@ -257,7 +317,7 @@ button {
     flex: 1;
     min-width: 300px;
     max-width: 100%;
-    min-height: max(400px, 70dvh);
+    min-height: max(420px, 70dvh);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -280,6 +340,60 @@ button {
           padding-left: 0;
           color: var(--main-purple);
           text-shadow: 0 0 4px var(--main-purple);
+        }
+      }
+
+      &__btnWrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        a {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: var(--main-purple);
+          transition: 200ms;
+
+          &:active {
+            scale: .9
+          }
+        }
+      }
+
+      &__clearConfirm {
+        color: var(--main-red);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: .8rem;
+        margin-inline: .4rem;
+
+        &__buttons {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: .4rem;
+
+          button {
+            cursor: pointer;
+            padding: 2px;
+            width: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: .94em;
+
+            &:hover,
+            &:focus-visible {
+              background: var(--main-red);
+              color: white;
+            }
+
+            &:active {
+              scale: .9
+            }
+          }
         }
       }
 
@@ -307,43 +421,6 @@ button {
           justify-content: center;
           align-items: center;
           gap: .4rem;
-        }
-      }
-
-      &__clearConfirm {
-        color: var(--main-red);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: .8rem;
-        margin-inline: .4rem;
-
-        &__buttons {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: .4rem;
-
-          button {
-            cursor: pointer;
-            border-radius: 2px;
-            padding: 2px;
-            width: 36px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: .94em;
-
-            &:hover,
-            &:focus-visible {
-              background: var(--main-red);
-              color: white;
-            }
-
-            &:active {
-              scale: .9
-            }
-          }
         }
       }
     }
@@ -390,7 +467,7 @@ button {
     flex: 1;
     min-width: 300px;
     max-width: 100%;
-    min-height: max(400px, 70dvh);
+    min-height: max(420px, 70dvh);
     display: flex;
     flex-direction: column;
 

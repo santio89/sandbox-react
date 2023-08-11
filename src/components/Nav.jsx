@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setThemeReducer } from "../store/actions/theme.action";
+import { setCodeHtml, setCodeCss, setCodeJs } from "../store/actions/code.action";
 import { useState, useEffect, useRef } from "react";
 import { setCodeAll } from "../store/actions/code.action";
 import { savePreset, deletePreset } from "../store/actions/presets.action";
@@ -18,11 +19,19 @@ export default function Nav() {
   const [selectedId, setSelectedId] = useState(null);
   const [savePresetName, setSavePresetName] = useState("");
   const [saved, setSaved] = useState(false)
+  const [newProject, setNewProject] = useState(false)
 
   const presets = useSelector(state => state.preset.presets)
 
   const toggleDarkTheme = () => {
     dispatch(setThemeReducer(!darkTheme))
+  }
+
+  const startNewProject = () => {
+    dispatch(setCodeHtml(""))
+    dispatch(setCodeCss(""))
+    dispatch(setCodeJs(""))
+    setNewProject(false)
   }
 
   const toggleModal = () => {
@@ -79,7 +88,7 @@ export default function Nav() {
       </nav>
       <div className="main__header__buttons">
         <button onClick={() => { toggleModal() }}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="diamond-fill" viewBox="0 0 16 16">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="diamond-fill" viewBox="0 0 16 16">
             <path d="M9.05.435c-.58-.58-1.52-.58-2.1 0L4.047 3.339 8 7.293l3.954-3.954L9.049.435zm3.61 3.611L8.708 8l3.954 3.954 2.904-2.905c.58-.58.58-1.519 0-2.098l-2.904-2.905zm-.706 8.614L8 8.708l-3.954 3.954 2.905 2.904c.58.58 1.519.58 2.098 0l2.905-2.904zm-8.614-.706L7.292 8 3.339 4.046.435 6.951c-.58.58-.58 1.519 0 2.098l2.904 2.905z" />
           </svg>
         </button>
@@ -97,6 +106,25 @@ export default function Nav() {
             </button>
           }
         </div>
+        <div className="new-project">
+          {
+            newProject ?
+              <span className="new-project-confirm">
+                <span>New snippet?</span>
+                <span className="new-project-confirm-btns">
+                  <button onClick={() => { startNewProject() }}>Yes</button>
+                  <button onClick={() => { setNewProject(false) }}>No</button>
+                </span>
+              </span>
+              :
+              <button className="create-new" onClick={() => setNewProject(true)}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi-plus-lg" viewBox="0 0 16 16">
+                  <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                </svg>
+              </button>
+          }
+        </div>
+
       </div>
 
       <dialog className="main__modal" ref={modal}>

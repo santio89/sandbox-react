@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { setCodeHtml, setCodeCss, setCodeJs } from "../store/actions/code.action";
+import { Link } from "react-router-dom";
 
 export default function Home() {
     const [tabActive, setTabActive] = useState("html")
@@ -9,6 +10,8 @@ export default function Home() {
     const html = useSelector(state => state.code.html)
     const css = useSelector(state => state.code.css)
     const js = useSelector(state => state.code.js)
+    const [downloadBlob, setDownloadBlob] = useState("")
+    const [downloadUrl, setDownloadUrl] = useState("")
 
     const iframe = useRef(null)
     const textarea = useRef(null)
@@ -39,6 +42,29 @@ export default function Home() {
                 return
         }
         setClearConfirm(false);
+    }
+
+    const enableClear = () => {
+        switch (tabActive) {
+            case 'html':
+                if (html === "") {
+                    return
+                }
+                break;
+            case 'css':
+                if (css === "") {
+                    return
+                }
+                break;
+            case 'js':
+                if (js === "") {
+                    return
+                }
+                break;
+            default:
+                return
+        }
+        setClearConfirm(true)
     }
 
     const setFullscreen = () => {
@@ -73,10 +99,9 @@ export default function Home() {
     }
 
     useEffect(() => {
+        const newCode = html + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>\n`
         iframe.current.contentWindow.document.open();
-        iframe.current.contentWindow.document.write(
-            html + `<style>` + css + `</style>` + `<script>` + js + `</script>`
-        )
+        iframe.current.contentWindow.document.write(newCode)
         iframe.current.contentWindow.document.close()
 
         if (textCursor) {
@@ -84,7 +109,45 @@ export default function Home() {
             textarea.current.selectionEnd = textCursor;
             setTextCursor(null)
         }
+
+        switch (tabActive) {
+            case 'html':
+                if (html === "") {
+                    setClearConfirm(false)
+                }
+                break;
+            case 'css':
+                if (css === "") {
+                    setClearConfirm(false)
+                }
+                break;
+            case 'js':
+                if (js === "") {
+                    setClearConfirm(false)
+                }
+                break;
+            default:
+                return
+        }
+
+        const newBlob = new Blob([newCode], { type: 'text/html' });
+        setDownloadBlob(newBlob)
     }, [html, css, js])
+
+    useEffect(() => {
+        setClearConfirm(false)
+    }, [tabActive])
+
+    useEffect(() => {
+        if (downloadBlob !== "") {
+            const newDownloadUrl = window.URL.createObjectURL(downloadBlob);
+            setDownloadUrl(newDownloadUrl)
+        }
+
+        return () => {
+            window.URL.revokeObjectURL(downloadUrl)
+        }
+    }, [downloadBlob])
 
     return (
         <div className="home">
@@ -100,23 +163,31 @@ export default function Home() {
                             <span>INPUT-</span>
                             <span>{tabActive.toUpperCase()}</span>
                         </span>
-                        {
-                            clearConfirm ?
-                                <span className="mainCode__input__type__clearConfirm">
-                                    <span>Clear?</span>
-                                    <span className="mainCode__input__type__clearConfirm__buttons">
-                                        <button onClick={() => { resetCode(tabActive) }}>Yes</button>
-                                        <button onClick={() => { setClearConfirm(false) }}>No</button>
+                        <span className="mainCode__input__type__btnWrapper">
+                            <Link to={downloadUrl} target="_blank" download title="Download code">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-file-arrow-down-fill" viewBox="0 0 16 16">
+                                    <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM8 5a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5A.5.5 0 0 1 8 5z" />
+                                </svg>
+                            </Link>
+                            {
+                                clearConfirm ?
+                                    <span className="mainCode__input__type__clearConfirm">
+                                        <span>Clear?</span>
+                                        <span className="mainCode__input__type__clearConfirm__buttons">
+                                            <button onClick={() => { resetCode(tabActive) }}>Yes</button>
+                                            <button onClick={() => { setClearConfirm(false) }}>No</button>
+                                        </span>
                                     </span>
-                                </span>
-                                :
-                                <button className="mainCode__input__type__clear" title="Clear" onClick={() => { setClearConfirm(true) }}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-slash-circle" viewBox="0 0 16 16">
-                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                        <path d="M11.354 4.646a.5.5 0 0 0-.708 0l-6 6a.5.5 0 0 0 .708.708l6-6a.5.5 0 0 0 0-.708z" />
-                                    </svg>
-                                </button>
-                        }
+                                    :
+                                    <button className="mainCode__input__type__clear" title="Clear" onClick={() => { enableClear() }}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-slash-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                            <path d="M11.354 4.646a.5.5 0 0 0-.708 0l-6 6a.5.5 0 0 0 .708.708l6-6a.5.5 0 0 0 0-.708z" />
+                                        </svg>
+                                    </button>
+                            }
+                        </span>
+
                     </div>
                     {tabActive === "html" &&
                         <textarea ref={textarea} spellCheck="false" className={`mainCode__input__text ${html === "" && `dim`}`} value={html} onChange={e => setHtml(e.target.value)} onKeyDown={(e) => {
