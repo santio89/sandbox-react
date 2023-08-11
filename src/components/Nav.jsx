@@ -12,7 +12,6 @@ export default function Nav() {
   const html = useSelector(state => state.code.html)
   const css = useSelector(state => state.code.css)
   const js = useSelector(state => state.code.js)
-  const firstRender = useRef(true)
   const modal = useRef()
   const [saveMode, setSaveMode] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
