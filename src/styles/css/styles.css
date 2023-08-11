@@ -124,6 +124,7 @@ button {
   filter: drop-shadow(0 0 4px var(--main-purple));
 }
 .main__header__buttons button:active {
+  filter: drop-shadow(0 0 4px var(--main-purple));
   scale: 0.9;
 }
 .main__header__buttons button.create-new {
@@ -159,6 +160,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: none;
 }
 .main__header span {
   display: flex;
@@ -254,6 +256,9 @@ button {
   border: 1px solid var(--main-purple);
 }
 .tabs button:active {
+  box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
+  background-position: 0% 50%;
+  border: 1px solid var(--main-purple);
   scale: 0.94;
 }
 .tabs button[data-active=true] {
@@ -310,7 +315,11 @@ button {
   color: var(--main-purple);
   transition: 200ms;
 }
+.mainCode__input__type__btnWrapper a:hover {
+  color: var(--main-red);
+}
 .mainCode__input__type__btnWrapper a:active {
+  color: var(--main-red);
   scale: 0.9;
 }
 .mainCode__input__type__clearConfirm {
@@ -341,6 +350,8 @@ button {
   color: white;
 }
 .mainCode__input__type__clearConfirm__buttons button:active {
+  color: white;
+  background: var(--main-red);
   scale: 0.9;
 }
 .mainCode__input__type__clear {
@@ -357,6 +368,7 @@ button {
   background: var(--main-red);
 }
 .mainCode__input__type__clear:active {
+  background: var(--main-red);
   scale: 0.9;
 }
 .mainCode__input__type__clear__buttons {
@@ -424,6 +436,7 @@ button {
   background: var(--main-red);
 }
 .mainCode__output__type__full:active {
+  background: var(--main-red);
   scale: 0.9;
 }
 .mainCode__output__iframeWrapper {
@@ -570,6 +583,7 @@ button {
   outline: 1px solid var(--main-red);
 }
 .main__modal .presets__option__confirm__buttons span:active {
+  outline: 1px solid var(--main-red);
   scale: 0.94;
 }
 .main__modal .presets__option__main {
@@ -599,6 +613,7 @@ button {
   color: var(--main-red);
 }
 .main__modal .presets__option__main__del:active {
+  color: var(--main-red);
   scale: 0.94;
 }
 .main__modal .presets__save {
@@ -657,6 +672,7 @@ button {
   box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
 }
 .main__modal .presets__save button:active {
+  box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
   scale: 0.94;
 }
 .main__modal .presets__save button[disabled] {
@@ -693,6 +709,7 @@ button {
   background: rgba(0, 0, 0, 0.2);
 }
 .main__modal__header button:active {
+  background: rgba(0, 0, 0, 0.2);
   scale: 0.9;
 }
 .main__modal__header button[disabled] {

@@ -142,6 +142,7 @@ button {
       }
 
       &:active {
+        filter: drop-shadow(0 0 4px var(--main-purple));
         scale: .9
       }
 
@@ -183,6 +184,7 @@ button {
           display: flex;
           justify-content: center;
           align-items: center;
+          transition: none;
         }
       }
     }
@@ -293,6 +295,9 @@ button {
     }
 
     &:active {
+      box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
+      background-position: 0% 50%;
+      border: 1px solid var(--main-purple);
       scale: .94
     }
 
@@ -355,7 +360,12 @@ button {
           color: var(--main-purple);
           transition: 200ms;
 
+          &:hover {
+            color: var(--main-red);
+          }
+
           &:active {
+            color: var(--main-red);
             scale: .9
           }
         }
@@ -391,6 +401,8 @@ button {
             }
 
             &:active {
+              color: white;
+              background: var(--main-red);
               scale: .9
             }
           }
@@ -413,6 +425,7 @@ button {
         }
 
         &:active {
+          background: var(--main-red);
           scale: .9
         }
 
@@ -494,6 +507,7 @@ button {
         }
 
         &:active {
+          background: var(--main-red);
           scale: .9
         }
       }
@@ -657,6 +671,7 @@ button {
             }
 
             &:active {
+              outline: 1px solid var(--main-red);
               scale: .94
             }
           }
@@ -694,6 +709,7 @@ button {
           }
 
           &:active {
+            color: var(--main-red);
             scale: .94
           }
         }
@@ -761,6 +777,7 @@ button {
         }
 
         &:active {
+          box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
           scale: .94
         }
 
@@ -805,6 +822,7 @@ button {
       }
 
       &:active {
+        background: rgba(0, 0, 0, .2);
         scale: .9
       }
 
