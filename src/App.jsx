@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Home from "./components/Home";
 import Nav from "./components/Nav";
-import Footer from "./components/Footer";
 import { useSelector } from "react-redux";
 
 function App() {
@@ -25,7 +24,6 @@ function App() {
               <Route path="/" element={<Home />} />
             </Route>
           </Routes>
-          {/* <Footer /> */}
         </BrowserRouter>
       </div>
     </>
