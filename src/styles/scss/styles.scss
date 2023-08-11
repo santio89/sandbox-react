@@ -56,6 +56,7 @@ body,
 #root,
 .root-theme {
   width: 100%;
+  min-height: 100vh;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -322,6 +323,7 @@ button {
     flex: 1;
     min-width: 300px;
     max-width: 100%;
+    min-height: max(420px, 70vh);
     min-height: max(420px, 70dvh);
     display: flex;
     flex-direction: column;
@@ -480,6 +482,7 @@ button {
     flex: 1;
     min-width: 300px;
     max-width: 100%;
+    min-height: max(420px, 70vh);
     min-height: max(420px, 70dvh);
     display: flex;
     flex-direction: column;
