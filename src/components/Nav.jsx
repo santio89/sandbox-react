@@ -149,7 +149,7 @@ export default function Nav({ rootTheme }) {
                         {
                           selectedId === preset.id ?
                             <span className="presets__option__confirm">
-                              <span>Select preset?</span>
+                              <span>Load preset?</span>
                               <span className="presets__option__confirm__buttons">
                                 <span onClick={(e) => { e.stopPropagation(); setPreset(preset.html, preset.css, preset.js) }}>Yes</span>
                                 <span onClick={(e) => { e.stopPropagation(); setSelectedId(null) }}>No</span>
