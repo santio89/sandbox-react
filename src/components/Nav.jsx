@@ -112,7 +112,7 @@ export default function Nav({ rootTheme }) {
       <dialog className="main__modal" ref={modal}>
         <div className="main__modal__inner">
           <div className="main__modal__header">
-            {saveMode ? <p>Save snippet</p> : <p>Choose snippet</p>}
+            {saveMode ? <p>Save snippet</p> : <p>Snippets</p>}
             <div className="main__modal__header__buttons">
               <button onClick={() => { toggleSave() }} disabled={!saveMode}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-caret-left-fill" viewBox="0 0 16 16">
