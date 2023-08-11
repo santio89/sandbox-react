@@ -157,7 +157,7 @@ export default function Nav({ rootTheme }) {
                             :
                             (deleteId === preset.id ?
                               <span className="presets__option__confirm">
-                                <span>Delete snipper?</span>
+                                <span>Delete snippet?</span>
                                 <span className="presets__option__confirm__buttons">
                                   <span onClick={(e) => { e.stopPropagation(); deleteSelectedPreset(preset.id) }}>Yes</span>
                                   <span onClick={(e) => { e.stopPropagation(); setDeleteId(null) }}>No</span>
