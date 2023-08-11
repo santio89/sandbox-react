@@ -491,9 +491,13 @@ button {
   max-width: 48px;
   font-weight: normal;
   font-size: 0.94em;
+  transition: 100ms;
 }
 .main__modal .presets__option__confirm__buttons span:hover, .main__modal .presets__option__confirm__buttons span:focus-visible {
   outline: 1px solid var(--main-red);
+}
+.main__modal .presets__option__confirm__buttons span:active {
+  scale: 0.94;
 }
 .main__modal .presets__option__main {
   flex: 1;
@@ -513,12 +517,16 @@ button {
   position: absolute;
   bottom: -10px;
   right: -10px;
+  transition: 100ms;
 }
 .main__modal .presets__option__main__del svg {
   color: var(--main-purple-variation);
 }
 .main__modal .presets__option__main__del:hover svg, .main__modal .presets__option__main__del:focus-visible svg {
   color: var(--main-red);
+}
+.main__modal .presets__option__main__del:active {
+  scale: 0.94;
 }
 .main__modal .presets__save {
   display: flex;

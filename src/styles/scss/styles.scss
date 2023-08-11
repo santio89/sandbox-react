@@ -557,10 +557,15 @@ button {
             max-width: 48px;
             font-weight: normal;
             font-size: .94em;
+            transition: 100ms;
 
             &:hover,
             &:focus-visible {
               outline: 1px solid var(--main-red)
+            }
+
+            &:active {
+              scale: .94
             }
           }
         }
@@ -585,6 +590,7 @@ button {
           position: absolute;
           bottom: -10px;
           right: -10px;
+          transition: 100ms;
 
           svg {
             color: var(--main-purple-variation);
@@ -593,6 +599,10 @@ button {
           &:hover svg,
           &:focus-visible svg {
             color: var(--main-red)
+          }
+
+          &:active {
+            scale: .94
           }
         }
       }

@@ -147,7 +147,7 @@ export default function Nav({ rootTheme }) {
                       <button className="presets__option" key={preset.id} onClick={() => { setSelectedId(preset.id) }} >
                         {
                           selectedId === preset.id ?
-                            <span className="presets__option__confirm">
+                            <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                               <span>Load snippet?</span>
                               <span className="presets__option__confirm__buttons">
                                 <span onClick={(e) => { e.stopPropagation(); setPreset(preset.html, preset.css, preset.js) }}>Yes</span>
@@ -156,7 +156,7 @@ export default function Nav({ rootTheme }) {
                             </span>
                             :
                             (deleteId === preset.id ?
-                              <span className="presets__option__confirm">
+                              <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                                 <span>Delete snippet?</span>
                                 <span className="presets__option__confirm__buttons">
                                   <span onClick={(e) => { e.stopPropagation(); deleteSelectedPreset(preset.id) }}>Yes</span>
