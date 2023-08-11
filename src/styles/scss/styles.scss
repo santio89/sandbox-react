@@ -291,6 +291,7 @@ button {
         justify-content: center;
         align-items: center;
         gap: .8rem;
+        margin-inline: .4rem;
 
         &:hover,
         &:focus-visible {
@@ -315,6 +316,7 @@ button {
         justify-content: center;
         align-items: center;
         gap: .8rem;
+        margin-inline: .4rem;
 
         &__buttons {
           display: flex;
