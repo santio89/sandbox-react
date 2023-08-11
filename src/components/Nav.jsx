@@ -38,7 +38,13 @@ export default function Nav() {
     if (saveMode) {
       setSavePresetName("")
     }
-    modal.current.hasAttribute("open") ? modal.current.close() : modal.current.showModal()
+    if (modal.current.hasAttribute("open")) {
+      modal.current.close()
+    } else {
+      setSelectedId(null)
+      setDeleteId(null)
+      modal.current.showModal()
+    }
   }
 
   const toggleSave = () => {
@@ -80,6 +86,11 @@ export default function Nav() {
     return () => { clearTimeout(timeout) }
 
   }, [saved])
+
+  useEffect(() => {
+    setSelectedId(null)
+    setDeleteId(null)
+  }, [saveMode])
 
   return (
     <header className='main__header'>
