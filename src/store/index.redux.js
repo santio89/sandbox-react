@@ -15,7 +15,7 @@ const RootReducer = combineReducers({
 const persistConfig = {
     key: 'root',
     storage: storage,
-    whitelist: ["theme", "preset"],
+    whitelist: ["theme", "preset", "code"],
     timeout: 0,
 }
 

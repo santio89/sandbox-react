@@ -4,6 +4,7 @@ import { setCodeHtml, setCodeCss, setCodeJs } from "../store/actions/code.action
 
 export default function Home() {
     const [tabActive, setTabActive] = useState("html")
+    const [clearConfirm, setClearConfirm] = useState(false);
     const dispatch = useDispatch()
     const html = useSelector(state => state.code.html)
     const css = useSelector(state => state.code.css)
@@ -17,6 +18,22 @@ export default function Home() {
     }
     const setJs = (js) => {
         dispatch(setCodeJs(js))
+    }
+    const resetCode = (code) => {
+        switch (code) {
+            case 'html':
+                dispatch(setCodeHtml(""))
+                break;
+            case 'css':
+                dispatch(setCodeCss(""))
+                break;
+            case 'js':
+                dispatch(setCodeJs(""))
+                break;
+            default:
+                return
+        }
+        setClearConfirm(false);
     }
 
     const iframe = useRef(null)
@@ -57,14 +74,6 @@ export default function Home() {
         )
         iframe.current.contentWindow.document.close()
 
-        window.onbeforeunload = () => {
-            if (html === "" && css === "" && js === "") {
-                return null
-            } else {
-                return true;
-            }
-        };
-
         if (textCursor) {
             textarea.current.selectionStart = textCursor;
             textarea.current.selectionEnd = textCursor;
@@ -82,8 +91,27 @@ export default function Home() {
             <div className="mainCode">
                 <div className="mainCode__input">
                     <div className="mainCode__input__type">
-                        <span>INPUT-</span>
-                        <span>{tabActive.toUpperCase()}</span>
+                        <span className="mainCode__input__type__active">
+                            <span>INPUT-</span>
+                            <span>{tabActive.toUpperCase()}</span>
+                        </span>
+                        {
+                            clearConfirm ?
+                                <span className="mainCode__input__type__clearConfirm">
+                                    <span>Clear?</span>
+                                    <span className="mainCode__input__type__clearConfirm__buttons">
+                                        <button onClick={() => { resetCode(tabActive) }}>Yes</button>
+                                        <button onClick={() => { setClearConfirm(false) }}>No</button>
+                                    </span>
+                                </span>
+                                :
+                                <button className="mainCode__input__type__clear" title="Clear" onClick={() => { setClearConfirm(true) }}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-slash-circle" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                        <path d="M11.354 4.646a.5.5 0 0 0-.708 0l-6 6a.5.5 0 0 0 .708.708l6-6a.5.5 0 0 0 0-.708z" />
+                                    </svg>
+                                </button>
+                        }
                     </div>
                     {tabActive === "html" &&
                         <textarea ref={textarea} spellCheck="false" className={`mainCode__input__text ${html === "" && `dim`}`} value={html} onChange={e => setHtml(e.target.value)} onKeyDown={(e) => {

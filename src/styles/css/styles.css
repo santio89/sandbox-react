@@ -235,21 +235,72 @@ button {
 }
 .mainCode__input__type {
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
 }
-.mainCode__input__type span {
+.mainCode__input__type__active {
   color: var(--main-white);
   padding: 0.4rem;
   font-weight: bold;
 }
-.mainCode__input__type span:first-child {
+.mainCode__input__type__active span:first-child {
   padding-right: 0;
 }
-.mainCode__input__type span:last-child {
+.mainCode__input__type__active span:last-child {
   padding-left: 0;
   color: var(--main-purple);
   text-shadow: 0 0 4px var(--main-purple);
+}
+.mainCode__input__type__clear {
+  cursor: pointer;
+  color: var(--main-red);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+}
+.mainCode__input__type__clear:hover, .mainCode__input__type__clear:focus-visible {
+  background: var(--main-red);
+}
+.mainCode__input__type__clear:active {
+  scale: 0.9;
+}
+.mainCode__input__type__clear__buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+}
+.mainCode__input__type__clearConfirm {
+  color: var(--main-red);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+}
+.mainCode__input__type__clearConfirm__buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+}
+.mainCode__input__type__clearConfirm__buttons button {
+  cursor: pointer;
+  border-radius: 2px;
+  padding: 2px;
+  width: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.94em;
+}
+.mainCode__input__type__clearConfirm__buttons button:hover, .mainCode__input__type__clearConfirm__buttons button:focus-visible {
+  background: var(--main-red);
+  color: white;
+}
+.mainCode__input__type__clearConfirm__buttons button:active {
+  scale: 0.9;
 }
 .mainCode__input__text {
   width: 100%;
@@ -550,15 +601,20 @@ button {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  border-radius: 1em;
+  border-radius: 50%;
   padding: 6px;
   transition: 200ms;
+  aspect-ratio: 1;
 }
 .main__modal__header button:hover, .main__modal__header button:focus-visible {
   background: rgba(0, 0, 0, 0.2);
 }
 .main__modal__header button:active {
   scale: 0.9;
+}
+.main__modal__header button[disabled] {
+  pointer-events: none;
+  color: rgb(80, 80, 80);
 }
 .main__modal::backdrop {
   background: rgba(40, 40, 40, 0.4);
