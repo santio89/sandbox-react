@@ -10,6 +10,11 @@ export default function Home() {
     const css = useSelector(state => state.code.css)
     const js = useSelector(state => state.code.js)
 
+    const iframe = useRef(null)
+    const textarea = useRef(null)
+
+    const [textCursor, setTextCursor] = useState(null)
+
     const setHtml = (html) => {
         dispatch(setCodeHtml(html))
     }
@@ -36,10 +41,10 @@ export default function Home() {
         setClearConfirm(false);
     }
 
-    const iframe = useRef(null)
-    const textarea = useRef(null)
-
-    const [textCursor, setTextCursor] = useState(null)
+    const setFullscreen = () => {
+        console.log(iframe.current)
+        iframe.current.requestFullscreen()
+    }
 
     const insertTabs = (type) => {
         const text = `${textarea.current.value.substring(
@@ -139,9 +144,18 @@ export default function Home() {
                     }
                 </div>
                 <div className={`mainCode__output `}>
-                    <p>OUTPUT</p>
+                    <div className="mainCode__output__type">
+                        <span className="mainCode__output__type__active">
+                            <span>OUTPUT</span>
+                        </span>
+                        <button className="mainCode__output__type__full" title="Fullscreen" onClick={() => { setFullscreen() }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-arrows-fullscreen" viewBox="0 0 16 16">
+                                <path fillRule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z" />
+                            </svg>
+                        </button>
+                    </div>
                     <div className={`mainCode__output__iframeWrapper ${html === "" && css === "" && js === "" && `dim`}`}>
-                        <iframe ref={iframe} className="mainCode__output__iframe">
+                        <iframe allow="fullscreen" ref={iframe} className="mainCode__output__iframe">
                         </iframe>
                     </div>
                 </div>

@@ -342,13 +342,28 @@ button {
   display: flex;
   flex-direction: column;
 }
-.mainCode__output p {
+.mainCode__output__type {
   color: var(--main-white);
   font-weight: bold;
   padding: 0.4rem;
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
+}
+.mainCode__output__type__full {
+  cursor: pointer;
+  color: var(--main-red);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  margin-inline: 0.4rem;
+}
+.mainCode__output__type__full:hover, .mainCode__output__type__full:focus-visible {
+  background: var(--main-red);
+}
+.mainCode__output__type__full:active {
+  scale: 0.9;
 }
 .mainCode__output__iframeWrapper {
   overflow: hidden;
