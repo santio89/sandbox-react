@@ -81,6 +81,24 @@ body,
   --bg-code: rgb(80, 80, 80);
 }
 
+.light-theme {
+  --main-purple: rgb(107, 31, 248);
+  --main-red: rgb(210, 28, 83);
+  --main-white: rgb(5, 5, 5);
+  --main-black: rgb(250, 250, 250);
+  --main-gray: rgb(220, 220, 220);
+
+  --clr-nav: rgb(250, 250, 250);
+
+  --color-code: rgb(5, 5, 5);
+
+  --main-btn-bg: rgb(107, 31, 248);
+  --main-btn-clr: rgb(250, 250, 250);
+
+  --bg-main: rgb(250, 250, 250);
+  --bg-code: rgb(220, 220, 220);
+}
+
 
 a,
 button,
