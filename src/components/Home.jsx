@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { setCodeHtml, setCodeCss, setCodeJs } from "../store/actions/code.action";
 import { Link } from "react-router-dom";
+import Prism from 'prismjs'
+import '../utils/prism/prism-dark.css'
 
 
 export default function Home() {
@@ -14,8 +16,14 @@ export default function Home() {
     const [downloadBlob, setDownloadBlob] = useState("")
     const [downloadUrl, setDownloadUrl] = useState("")
 
+    const [prismContentHtml, setPrismContentHtml] = useState(html)
+    const [prismContentCss, setPrismContentCss] = useState(css)
+    const [prismContentJs, setPrismContentJs] = useState(js)
+
     const iframe = useRef(null)
     const textarea = useRef(null)
+
+    const codeInput = useRef(null)
 
     const [textCursor, setTextCursor] = useState(null)
 
@@ -43,6 +51,12 @@ export default function Home() {
                 return
         }
         setClearConfirm(false);
+    }
+
+    const syncScroll = () => {
+        codeInput.current.scrollTop = textarea.current.scrollTop;
+        codeInput.current.scrollLeft = textarea.current.scrollLeft;
+
     }
 
     const enableClear = () => {
@@ -113,16 +127,19 @@ export default function Home() {
 
         switch (tabActive) {
             case 'html':
+                setPrismContentHtml(html)
                 if (html === "") {
                     setClearConfirm(false)
                 }
                 break;
             case 'css':
+                setPrismContentCss(css)
                 if (css === "") {
                     setClearConfirm(false)
                 }
                 break;
             case 'js':
+                setPrismContentJs(js)
                 if (js === "") {
                     setClearConfirm(false)
                 }
@@ -133,10 +150,25 @@ export default function Home() {
 
         const newBlob = new Blob([newCode], { type: 'text/html' });
         setDownloadBlob(newBlob)
+
     }, [html, css, js])
 
     useEffect(() => {
         setClearConfirm(false)
+
+        switch (tabActive) {
+            case 'html':
+                setPrismContentHtml(html)
+                break;
+            case 'css':
+                setPrismContentCss(css)
+                break;
+            case 'js':
+                setPrismContentJs(js)
+                break;
+            default:
+                return
+        }
     }, [tabActive])
 
     useEffect(() => {
@@ -149,6 +181,10 @@ export default function Home() {
             window.URL.revokeObjectURL(downloadUrl)
         }
     }, [downloadBlob])
+
+    useEffect(() => {
+        Prism.highlightAll()
+    }, [prismContentHtml, prismContentCss, prismContentJs, tabActive])
 
     return (
         <div className="home">
@@ -191,28 +227,54 @@ export default function Home() {
 
                     </div>
                     {tabActive === "html" &&
-                        <textarea ref={textarea} spellCheck="false" className={`mainCode__input__text ${html === "" && `dim`}`} value={html} onChange={e => setHtml(e.target.value)} onKeyDown={(e) => {
-                            if (e.key === "Tab") {
-                                e.preventDefault();
-                                insertTabs("html")
-                            }
-                        }}></textarea>
-                    }
+                        <div className="mainCode__input__textWrapper">
+                            <pre className={`mainCode__input__text ${html === "" && `dim pre`}`} aria-hidden="true" ref={codeInput}>
+                                <code className="language-html code" >
+                                    {prismContentHtml}
+                                </code>
+                            </pre>
+
+                            <textarea ref={textarea} spellCheck="false" className={`mainCode__input__text ${html === "" && `dim`} textarea`} value={html} onChange={e => setHtml(e.target.value)} onKeyDown={(e) => {
+                                if (e.key === "Tab") {
+                                    e.preventDefault();
+                                    insertTabs("html")
+                                }
+                                syncScroll();
+                            }} onScroll={() => { syncScroll() }}></textarea>
+                        </div>}
                     {tabActive === "css" &&
-                        <textarea ref={textarea} spellCheck="false" className={`mainCode__input__text ${css === "" && `dim`}`} value={css} onChange={e => setCss(e.target.value)} onKeyDown={(e) => {
-                            if (e.key === "Tab") {
-                                e.preventDefault();
-                                insertTabs("css")
-                            }
-                        }}></textarea>
+                        <div className="mainCode__input__textWrapper">
+                            <pre className={`mainCode__input__text ${css === "" && `dim pre`}`} aria-hidden="true" ref={codeInput}>
+                                <code className="language-css code">
+                                    {prismContentCss}
+                                </code>
+                            </pre>
+
+                            <textarea ref={textarea} spellCheck="false" className={`mainCode__input__text ${css === "" && `dim`} textarea`} value={css} onChange={e => setCss(e.target.value)} onKeyDown={(e) => {
+                                if (e.key === "Tab") {
+                                    e.preventDefault();
+                                    insertTabs("css");
+                                    syncScroll()
+                                }
+                            }} onScroll={() => { syncScroll() }}></textarea>
+                        </div>
                     }
                     {tabActive === "js" &&
-                        <textarea ref={textarea} spellCheck="false" className={`mainCode__input__text ${js === "" && `dim`}`} value={js} onChange={e => setJs(e.target.value)} onKeyDown={(e) => {
-                            if (e.key === "Tab") {
-                                e.preventDefault();
-                                insertTabs("js")
-                            }
-                        }}></textarea>
+                        <div className="mainCode__input__textWrapper">
+                            <pre className={`mainCode__input__text ${js === "" && `dim pre`}`} aria-hidden="true" ref={codeInput}>
+                                <code className="language-js code">
+                                    {prismContentJs}
+                                </code>
+                            </pre>
+
+                            <textarea ref={textarea} spellCheck="false" className={`mainCode__input__text ${js === "" && `dim`} textarea`} value={js} onChange={e => setJs(e.target.value)} onKeyDown={(e) => {
+                                if (e.key === "Tab") {
+                                    e.preventDefault();
+                                    insertTabs("js");
+                                    syncScroll()
+                                }
+                            }} onScroll={() => { syncScroll() }}></textarea>
+                        </div>
                     }
                 </div>
                 <div className={`mainCode__output `}>
