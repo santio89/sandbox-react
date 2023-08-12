@@ -16,7 +16,7 @@ function App() {
 
   return (
     <>
-      <div className={`root-theme ${darkTheme && 'dark-theme'}`}>
+      <div className={`root-theme ${darkTheme ? 'dark-theme' : ""}`}>
         <BrowserRouter>
           <Nav />
           <Routes>
