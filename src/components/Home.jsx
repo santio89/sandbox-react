@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { setCodeHtml, setCodeCss, setCodeJs } from "../store/actions/code.action";
 import { Link } from "react-router-dom";
-import '../utils/prism/prism.css'
 
 
 export default function Home() {
@@ -191,9 +190,6 @@ export default function Home() {
                         </span>
 
                     </div>
-                    <pre id="highlighting" aria-hidden="true">
-                        <code className="language-html" id="highlighting-content"></code>
-                    </pre>
                     {tabActive === "html" &&
                         <textarea ref={textarea} spellCheck="false" className={`mainCode__input__text ${html === "" && `dim`}`} value={html} onChange={e => setHtml(e.target.value)} onKeyDown={(e) => {
                             if (e.key === "Tab") {
