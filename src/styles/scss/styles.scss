@@ -492,6 +492,14 @@ button {
         font-size: 1rem;
         color: var(--main-white);
         line-height: 1.2;
+        font-family: monospace, 'Courier New', Courier;
+      }
+
+      pre[class*="language-"].light-theme,
+      code[class*="language-"].light-theme {
+        font-size: 1rem;
+        color: var(--main-white);
+        line-height: 1.2;
       }
     }
 
@@ -502,7 +510,7 @@ button {
       border-radius: .4rem;
       border: 2px solid rgb(100, 100, 100);
       outline: none;
-      padding: .4rem !important;
+      padding: .5rem !important;
       resize: none;
       background: var(--bg-code);
       color: var(--color-code);

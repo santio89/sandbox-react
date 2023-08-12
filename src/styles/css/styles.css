@@ -424,6 +424,13 @@ button {
   font-size: 1rem;
   color: var(--main-white);
   line-height: 1.2;
+  font-family: monospace, "Courier New", Courier;
+}
+.mainCode__input__textWrapper pre[class*=language-].light-theme,
+.mainCode__input__textWrapper code[class*=language-].light-theme {
+  font-size: 1rem;
+  color: var(--main-white);
+  line-height: 1.2;
 }
 .mainCode__input__text {
   width: 100%;
@@ -432,7 +439,7 @@ button {
   border-radius: 0.4rem;
   border: 2px solid rgb(100, 100, 100);
   outline: none;
-  padding: 0.4rem !important;
+  padding: 0.5rem !important;
   resize: none;
   background: var(--bg-code);
   color: var(--color-code);

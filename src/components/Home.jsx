@@ -13,6 +13,7 @@ export default function Home() {
     const html = useSelector(state => state.code.html)
     const css = useSelector(state => state.code.css)
     const js = useSelector(state => state.code.js)
+    const darkTheme = useSelector(state => state.theme.darkTheme);
     const [downloadBlob, setDownloadBlob] = useState("")
     const [downloadUrl, setDownloadUrl] = useState("")
 
@@ -229,7 +230,7 @@ export default function Home() {
                     {tabActive === "html" &&
                         <div className="mainCode__input__textWrapper">
                             <pre className={`mainCode__input__text ${html === "" && `dim pre`}`} aria-hidden="true" ref={codeInput}>
-                                <code className="language-html code" >
+                                <code className={`language-html code ${!darkTheme ? "light-theme" : ""}`} >
                                     {prismContentHtml}
                                 </code>
                             </pre>
