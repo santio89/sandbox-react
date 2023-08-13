@@ -101,59 +101,48 @@ export default function Home() {
         iframe.current.requestFullscreen()
     }
 
-    const insertTabs = (type) => {
+    const insertTabs = () => {
         let text;
         switch (tabActive) {
             case 'html': {
                 text = `${textareaHtml.current.value.substring(
-                    0, textareaHtml.current.selectionStart)}${"\t"}${textareaHtml.current.value.substring(
+                    0, textareaHtml.current.selectionStart)}${"  "}${textareaHtml.current.value.substring(
                         textareaHtml.current.selectionEnd,
                         textareaHtml.current.value.length
                     )}`;
 
                 const selection = (textareaHtml.current.selectionEnd - textareaHtml.current.selectionStart)
 
+                setHtml(text);
                 setTextCursor(textareaHtml.current.selectionEnd - selection + 2)
                 break;
             }
             case 'css': {
                 text = `${textareaCss.current.value.substring(
-                    0, textareaCss.current.selectionStart)}${"\t"}${textareaCss.current.value.substring(
+                    0, textareaCss.current.selectionStart)}${"  "}${textareaCss.current.value.substring(
                         textareaCss.current.selectionEnd,
                         textareaCss.current.value.length
                     )}`;
 
                 const selection = (textareaCss.current.selectionEnd - textareaCss.current.selectionStart)
 
+                setCss(text);
                 setTextCursor(textareaCss.current.selectionEnd - selection + 2)
                 break;
             }
             case 'js': {
                 text = `${textareaJs.current.value.substring(
-                    0, textareaJs.current.selectionStart)}${"\t"}${textareaJs.current.value.substring(
+                    0, textareaJs.current.selectionStart)}${"  "}${textareaJs.current.value.substring(
                         textareaJs.current.selectionEnd,
                         textareaJs.current.value.length
                     )}`;
 
                 const selection = (textareaJs.current.selectionEnd - textareaJs.current.selectionStart)
 
+                setJs(text);
                 setTextCursor(textareaJs.current.selectionEnd - selection + 2)
                 break;
             }
-            default:
-                return
-        }
-
-        switch (type) {
-            case 'html':
-                setHtml(text);
-                break;
-            case 'css':
-                setCss(text);
-                break;
-            case 'js':
-                setJs(text);
-                break;
             default:
                 return
         }
@@ -328,7 +317,7 @@ export default function Home() {
                         <textarea ref={textareaHtml} spellCheck="false" className={`mainCode__input__text ${html === "" && `dim`} textarea`} value={html} onChange={e => setHtml(e.target.value)} onKeyDown={(e) => {
                             if (e.key === "Tab") {
                                 e.preventDefault();
-                                insertTabs("html")
+                                insertTabs()
                             }
                             syncScroll();
                         }} onScroll={() => { syncScroll() }}></textarea>
@@ -344,7 +333,7 @@ export default function Home() {
                         <textarea ref={textareaCss} spellCheck="false" className={`mainCode__input__text ${css === "" && `dim`} textarea`} value={css} onChange={e => setCss(e.target.value)} onKeyDown={(e) => {
                             if (e.key === "Tab") {
                                 e.preventDefault();
-                                insertTabs("css");
+                                insertTabs();
                                 syncScroll()
                             }
                         }} onScroll={() => { syncScroll() }}></textarea>
@@ -360,7 +349,7 @@ export default function Home() {
                         <textarea ref={textareaJs} spellCheck="false" className={`mainCode__input__text ${js === "" && `dim`} textarea`} value={js} onChange={e => setJs(e.target.value)} onKeyDown={(e) => {
                             if (e.key === "Tab") {
                                 e.preventDefault();
-                                insertTabs("js");
+                                insertTabs();
                                 syncScroll()
                             }
                         }} onScroll={() => { syncScroll() }}></textarea>
