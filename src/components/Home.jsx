@@ -169,15 +169,33 @@ export default function Home() {
         setClearConfirm(false)
 
         switch (tabActive) {
-            case 'html':
-                setPrismContentHtml(html)
+            case 'html': {
+                let trimHtml = html;
+                while (trimHtml && trimHtml[trimHtml.length - 1] === "\n") {
+                    trimHtml = trimHtml.slice(0, -1);
+                }
+                setHtml(trimHtml)
+                setPrismContentHtml(trimHtml)
                 break;
-            case 'css':
-                setPrismContentCss(css)
+            }
+            case 'css': {
+                let trimCss = css;
+                while (trimCss && trimCss[trimCss.length - 1] === "\n") {
+                    trimCss = trimCss.slice(0, -1);
+                }
+                setCss(trimCss)
+                setPrismContentCss(trimCss)
                 break;
-            case 'js':
-                setPrismContentJs(js)
+            }
+            case 'js': {
+                let trimJs = js;
+                while (trimJs && trimJs[trimJs.length - 1] === "\n") {
+                    trimJs = trimJs.slice(0, -1);
+                }
+                setJs(trimJs)
+                setPrismContentJs(trimJs)
                 break;
+            }
             default:
                 return
         }
