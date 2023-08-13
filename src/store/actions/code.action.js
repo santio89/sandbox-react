@@ -1,5 +1,4 @@
 export const setCodeHtml = (html) => {
-
     return async dispatch => {
         dispatch({
             type: "SET_HTML",
@@ -9,7 +8,6 @@ export const setCodeHtml = (html) => {
 }
 
 export const setCodeCss = (css) => {
-
     return async dispatch => {
         dispatch({
             type: "SET_CSS",
@@ -19,7 +17,6 @@ export const setCodeCss = (css) => {
 }
 
 export const setCodeJs = (js) => {
-
     return async dispatch => {
         dispatch({
             type: "SET_JS",
@@ -29,7 +26,6 @@ export const setCodeJs = (js) => {
 }
 
 export const setCodeAll = (html, css, js) => {
-
     return async dispatch => {
         dispatch({
             type: "SET_CODE",
