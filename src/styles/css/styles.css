@@ -271,6 +271,7 @@ button {
   cursor: pointer;
   transition: 200ms;
   border: 1px solid var(--main-red);
+  text-shadow: 1px 1px 0 rgb(40, 40, 40);
 }
 .tabs button:hover, .tabs button:focus-visible {
   box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
