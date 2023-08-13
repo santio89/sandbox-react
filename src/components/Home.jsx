@@ -211,7 +211,6 @@ export default function Home() {
 
         const newBlob = new Blob([newCode], { type: 'text/html' });
         setDownloadBlob(newBlob)
-
     }, [html, css, js])
 
     useEffect(() => {
