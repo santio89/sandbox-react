@@ -323,7 +323,7 @@ export default function Home() {
                         }} onScroll={() => { syncScroll() }}></textarea>
                     </div>
 
-                    <div className={`mainCode__input__textWrapper ${tabActive !== "css" && "d-none"}`}>
+                    <div className={`mainCode__input__textWrapper ${tabActive !== "css" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
                         <pre className={`mainCode__input__text ${css === "" && `dim pre`}`} aria-hidden="true" ref={codeInputCss}>
                             <code className="language-css code">
                                 {prismContentCss}
@@ -339,7 +339,7 @@ export default function Home() {
                         }} onScroll={() => { syncScroll() }}></textarea>
                     </div>
 
-                    <div className={`mainCode__input__textWrapper ${tabActive !== "js" && "d-none"}`}>
+                    <div className={`mainCode__input__textWrapper ${tabActive !== "js" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
                         <pre className={`mainCode__input__text ${js === "" && `dim pre`}`} aria-hidden="true" ref={codeInputJs}>
                             <code className="language-js code">
                                 {prismContentJs}
