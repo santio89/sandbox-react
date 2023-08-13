@@ -22,10 +22,13 @@ export default function Home() {
     const [prismContentJs, setPrismContentJs] = useState(js)
 
     const iframe = useRef(null)
-    const textarea = useRef(null)
+    const textareaHtml = useRef(null)
+    const textareaCss = useRef(null)
+    const textareaJs = useRef(null)
 
-    const codeInput = useRef(null)
-    const codeInputInner = useRef(null)
+    const codeInputHtml = useRef(null)
+    const codeInputCss = useRef(null)
+    const codeInputJs = useRef(null)
 
     const [textCursor, setTextCursor] = useState(null)
 
@@ -56,7 +59,19 @@ export default function Home() {
     }
 
     const syncScroll = () => {
-        codeInput.current.scrollTop = textarea.current.scrollTop;
+        switch (tabActive) {
+            case 'html':
+                codeInputHtml.current.scrollTop = textareaHtml.current.scrollTop;
+                break;
+            case 'css':
+                codeInputCss.current.scrollTop = textareaCss.current.scrollTop;
+                break;
+            case 'js':
+                codeInputJs.current.scrollTop = textareaJs.current.scrollTop;
+                break;
+            default:
+                return
+        }
     }
 
     const enableClear = () => {
@@ -87,15 +102,47 @@ export default function Home() {
     }
 
     const insertTabs = (type) => {
-        const text = `${textarea.current.value.substring(
-            0, textarea.current.selectionStart)}${"\t"}${textarea.current.value.substring(
-                textarea.current.selectionEnd,
-                textarea.current.value.length
-            )}`;
+        let text;
+        switch (tabActive) {
+            case 'html': {
+                text = `${textareaHtml.current.value.substring(
+                    0, textareaHtml.current.selectionStart)}${"\t"}${textareaHtml.current.value.substring(
+                        textareaHtml.current.selectionEnd,
+                        textareaHtml.current.value.length
+                    )}`;
 
-        const selection = (textarea.current.selectionEnd - textarea.current.selectionStart)
+                const selection = (textareaHtml.current.selectionEnd - textareaHtml.current.selectionStart)
 
-        setTextCursor(textarea.current.selectionEnd - selection + 2)
+                setTextCursor(textareaHtml.current.selectionEnd - selection + 2)
+                break;
+            }
+            case 'css': {
+                text = `${textareaCss.current.value.substring(
+                    0, textareaCss.current.selectionStart)}${"\t"}${textareaCss.current.value.substring(
+                        textareaCss.current.selectionEnd,
+                        textareaCss.current.value.length
+                    )}`;
+
+                const selection = (textareaCss.current.selectionEnd - textareaCss.current.selectionStart)
+
+                setTextCursor(textareaCss.current.selectionEnd - selection + 2)
+                break;
+            }
+            case 'js': {
+                text = `${textareaJs.current.value.substring(
+                    0, textareaJs.current.selectionStart)}${"\t"}${textareaJs.current.value.substring(
+                        textareaJs.current.selectionEnd,
+                        textareaJs.current.value.length
+                    )}`;
+
+                const selection = (textareaJs.current.selectionEnd - textareaJs.current.selectionStart)
+
+                setTextCursor(textareaJs.current.selectionEnd - selection + 2)
+                break;
+            }
+            default:
+                return
+        }
 
         switch (type) {
             case 'html':
@@ -119,8 +166,22 @@ export default function Home() {
         iframe.current.contentWindow.document.close()
 
         if (textCursor) {
-            textarea.current.selectionStart = textCursor;
-            textarea.current.selectionEnd = textCursor;
+            switch (tabActive) {
+                case 'html':
+                    textareaHtml.current.selectionStart = textCursor;
+                    textareaHtml.current.selectionEnd = textCursor;
+                    break;
+                case 'css':
+                    textareaCss.current.selectionStart = textCursor;
+                    textareaCss.current.selectionEnd = textCursor;
+                    break;
+                case 'js':
+                    textareaJs.current.selectionStart = textCursor;
+                    textareaJs.current.selectionEnd = textCursor;
+                    break;
+                default:
+                    return
+            }
             setTextCursor(null)
         }
 
@@ -256,56 +317,55 @@ export default function Home() {
                         </span>
 
                     </div>
-                    {tabActive === "html" &&
-                        <div className="mainCode__input__textWrapper">
-                            <pre className={`mainCode__input__text ${html === "" && `dim pre`}`} aria-hidden="true" ref={codeInput}>
-                                <code ref={codeInputInner} className={`language-html code ${!darkTheme ? "light-theme" : ""}`} >
-                                    {prismContentHtml}
-                                </code>
-                            </pre>
 
-                            <textarea ref={textarea} spellCheck="false" className={`mainCode__input__text ${html === "" && `dim`} textarea`} value={html} onChange={e => setHtml(e.target.value)} onKeyDown={(e) => {
-                                if (e.key === "Tab") {
-                                    e.preventDefault();
-                                    insertTabs("html")
-                                }
-                                syncScroll();
-                            }} onScroll={() => { syncScroll() }}></textarea>
-                        </div>}
-                    {tabActive === "css" &&
-                        <div className="mainCode__input__textWrapper">
-                            <pre className={`mainCode__input__text ${css === "" && `dim pre`}`} aria-hidden="true" ref={codeInput}>
-                                <code className="language-css code">
-                                    {prismContentCss}
-                                </code>
-                            </pre>
+                    <div className={`mainCode__input__textWrapper ${tabActive !== "html" && "d-none"}`}>
+                        <pre className={`mainCode__input__text ${html === "" && `dim pre`}`} aria-hidden="true" ref={codeInputHtml}>
+                            <code className={`language-html code ${!darkTheme ? "light-theme" : ""}`} >
+                                {prismContentHtml}
+                            </code>
+                        </pre>
 
-                            <textarea ref={textarea} spellCheck="false" className={`mainCode__input__text ${css === "" && `dim`} textarea`} value={css} onChange={e => setCss(e.target.value)} onKeyDown={(e) => {
-                                if (e.key === "Tab") {
-                                    e.preventDefault();
-                                    insertTabs("css");
-                                    syncScroll()
-                                }
-                            }} onScroll={() => { syncScroll() }}></textarea>
-                        </div>
-                    }
-                    {tabActive === "js" &&
-                        <div className="mainCode__input__textWrapper">
-                            <pre className={`mainCode__input__text ${js === "" && `dim pre`}`} aria-hidden="true" ref={codeInput}>
-                                <code className="language-js code">
-                                    {prismContentJs}
-                                </code>
-                            </pre>
+                        <textarea ref={textareaHtml} spellCheck="false" className={`mainCode__input__text ${html === "" && `dim`} textarea`} value={html} onChange={e => setHtml(e.target.value)} onKeyDown={(e) => {
+                            if (e.key === "Tab") {
+                                e.preventDefault();
+                                insertTabs("html")
+                            }
+                            syncScroll();
+                        }} onScroll={() => { syncScroll() }}></textarea>
+                    </div>
 
-                            <textarea ref={textarea} spellCheck="false" className={`mainCode__input__text ${js === "" && `dim`} textarea`} value={js} onChange={e => setJs(e.target.value)} onKeyDown={(e) => {
-                                if (e.key === "Tab") {
-                                    e.preventDefault();
-                                    insertTabs("js");
-                                    syncScroll()
-                                }
-                            }} onScroll={() => { syncScroll() }}></textarea>
-                        </div>
-                    }
+                    <div className={`mainCode__input__textWrapper ${tabActive !== "css" && "d-none"}`}>
+                        <pre className={`mainCode__input__text ${css === "" && `dim pre`}`} aria-hidden="true" ref={codeInputCss}>
+                            <code className="language-css code">
+                                {prismContentCss}
+                            </code>
+                        </pre>
+
+                        <textarea ref={textareaCss} spellCheck="false" className={`mainCode__input__text ${css === "" && `dim`} textarea`} value={css} onChange={e => setCss(e.target.value)} onKeyDown={(e) => {
+                            if (e.key === "Tab") {
+                                e.preventDefault();
+                                insertTabs("css");
+                                syncScroll()
+                            }
+                        }} onScroll={() => { syncScroll() }}></textarea>
+                    </div>
+
+                    <div className={`mainCode__input__textWrapper ${tabActive !== "js" && "d-none"}`}>
+                        <pre className={`mainCode__input__text ${js === "" && `dim pre`}`} aria-hidden="true" ref={codeInputJs}>
+                            <code className="language-js code">
+                                {prismContentJs}
+                            </code>
+                        </pre>
+
+                        <textarea ref={textareaJs} spellCheck="false" className={`mainCode__input__text ${js === "" && `dim`} textarea`} value={js} onChange={e => setJs(e.target.value)} onKeyDown={(e) => {
+                            if (e.key === "Tab") {
+                                e.preventDefault();
+                                insertTabs("js");
+                                syncScroll()
+                            }
+                        }} onScroll={() => { syncScroll() }}></textarea>
+                    </div>
+
                 </div>
                 <div className={`mainCode__output `}>
                     <div className="mainCode__output__type">

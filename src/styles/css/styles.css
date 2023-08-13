@@ -528,6 +528,11 @@ button {
 
 .dim {
   opacity: 0.4;
+  color: transparent !important;
+}
+
+.dim * {
+  color: transparent !important;
 }
 
 .moon-fill {
@@ -791,5 +796,8 @@ button {
 }
 
 /* fin modal */
+.d-none {
+  display: none;
+}
 
 /*# sourceMappingURL=styles.css.map */
