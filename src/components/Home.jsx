@@ -57,7 +57,6 @@ export default function Home() {
 
     const syncScroll = () => {
         codeInput.current.scrollTop = textarea.current.scrollTop;
-        codeInput.current.scrollLeft = textarea.current.scrollLeft;
     }
 
     const enableClear = () => {
