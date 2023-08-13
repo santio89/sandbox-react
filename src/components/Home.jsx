@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCodeHtml, setCodeCss, setCodeJs } from "../store/actions/code.action";
 import { Link } from "react-router-dom";
 import Prism from 'prismjs'
-import '../utils/prism/prism-dark.css'
+import '../styles/css/prism.css'
 
 
 export default function Home() {
@@ -318,9 +318,9 @@ export default function Home() {
 
                     </div>
 
-                    <div className={`mainCode__input__textWrapper ${tabActive !== "html" && "d-none"}`}>
+                    <div className={`mainCode__input__textWrapper ${tabActive !== "html" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
                         <pre className={`mainCode__input__text ${html === "" && `dim pre`}`} aria-hidden="true" ref={codeInputHtml}>
-                            <code className={`language-html code ${!darkTheme ? "light-theme" : ""}`} >
+                            <code className={`language-html code`} >
                                 {prismContentHtml}
                             </code>
                         </pre>
