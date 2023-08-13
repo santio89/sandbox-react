@@ -1,5 +1,4 @@
-const exampleHtml1 = `<div>hey!</div>
-`;
+const exampleHtml1 = `<div>hey!</div>`;
 const exampleCss1 = `*{
   margin: 0;
   padding: 0;
@@ -41,14 +40,12 @@ div:active{
 
 .bg-magenta{
   background-color: magenta;
-}
-`
+}`
 
 const exampleJs1 = `var spot = document.querySelector("div");
 spot.addEventListener("click", ()=>{
   document.body.classList.toggle("bg-magenta")
-})
-`
+})`
 
 const initialState = {
   presets: [{ name: 'example-1', id: "testid01", html: exampleHtml1, css: exampleCss1, js: exampleJs1 }]

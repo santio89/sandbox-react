@@ -425,6 +425,7 @@ button {
   color: var(--main-white);
   line-height: 1.2;
   font-family: monospace, "Courier New", Courier;
+  tab-size: 2;
 }
 .mainCode__input__textWrapper pre[class*=language-].light-theme,
 .mainCode__input__textWrapper code[class*=language-].light-theme {
@@ -464,6 +465,7 @@ button {
   background: transparent;
   caret-color: var(--main-white);
   line-height: 1.2;
+  tab-size: 2;
 }
 .mainCode__input__text::-webkit-scrollbar {
   width: 4px;

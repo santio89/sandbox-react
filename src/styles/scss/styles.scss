@@ -493,6 +493,7 @@ button {
         color: var(--main-white);
         line-height: 1.2;
         font-family: monospace, 'Courier New', Courier;
+        tab-size: 2;
       }
 
       pre[class*="language-"].light-theme,
@@ -528,6 +529,7 @@ button {
         background: transparent;
         caret-color: var(--main-white);
         line-height: 1.2;
+        tab-size: 2;
       }
 
       /* INICIO SCROLLBAR */

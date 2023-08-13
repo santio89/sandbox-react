@@ -84,13 +84,12 @@ export default function Home() {
     }
 
     const setFullscreen = () => {
-        console.log(iframe.current)
         iframe.current.requestFullscreen()
     }
 
     const insertTabs = (type) => {
         const text = `${textarea.current.value.substring(
-            0, textarea.current.selectionStart)}${"  "}${textarea.current.value.substring(
+            0, textarea.current.selectionStart)}${"\t"}${textarea.current.value.substring(
                 textarea.current.selectionEnd,
                 textarea.current.value.length
             )}`;
@@ -129,24 +128,30 @@ export default function Home() {
         switch (tabActive) {
             case 'html':
                 if (html && html[html.length - 1] === "\n") {
-                    console.log("tea")
-                     setHtml(html + " ");
+                    setPrismContentHtml(html + " ");
                 } else {
                     setPrismContentHtml(html);
                 }
-
-                if (html === "" || html === " ") {
+                if (html === "") {
                     setClearConfirm(false)
                 }
                 break;
             case 'css':
-                setPrismContentCss(css)
+                if (css && css[css.length - 1] === "\n") {
+                    setPrismContentCss(css + " ");
+                } else {
+                    setPrismContentCss(css);
+                }
                 if (css === "") {
                     setClearConfirm(false)
                 }
                 break;
             case 'js':
-                setPrismContentJs(js)
+                if (js && js[js.length - 1] === "\n") {
+                    setPrismContentJs(js + " ");
+                } else {
+                    setPrismContentJs(js);
+                }
                 if (js === "") {
                     setClearConfirm(false)
                 }
@@ -191,13 +196,7 @@ export default function Home() {
 
     useEffect(() => {
         Prism.highlightAll()
-
-
-        /*    if (textarea.current.value[textarea.current.value.length - 1] == "\n") {
-               console.log("ok")
-               codeInputInner.innerHtml += "qwe"
-           } */
-
+        syncScroll()
     }, [prismContentHtml, prismContentCss, prismContentJs, tabActive])
 
     return (
@@ -253,7 +252,6 @@ export default function Home() {
                                     e.preventDefault();
                                     insertTabs("html")
                                 }
-
                                 syncScroll();
                             }} onScroll={() => { syncScroll() }}></textarea>
                         </div>}

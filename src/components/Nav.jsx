@@ -70,7 +70,22 @@ export default function Nav() {
       return
     }
     const id = uuidv4();
-    dispatch(savePreset(presets, { id, name, html, css, js }))
+
+    let trimHtml = html;
+    let trimCss = css;
+    let trimJs = js;
+
+    while (trimHtml && trimHtml[trimHtml.length - 1] === "\n") {
+      trimHtml = trimHtml.slice(0, -1);
+    }
+    while (trimCss && trimCss[trimCss.length - 1] === "\n") {
+      trimCss = trimCss.slice(0, -1);
+    }
+    while (trimJs && trimJs[trimJs.length - 1] === "\n") {
+      trimJs = trimJs.slice(0, -1);
+    }
+
+    dispatch(savePreset(presets, { id, name, html: trimHtml, css: trimCss, js: trimJs }))
     setSavePresetName("")
     setSaved(true)
   }
