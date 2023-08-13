@@ -114,7 +114,7 @@ export default function Nav({ rootTheme }) {
   return (
     <header className='main__header'>
       <nav>
-        <Link className="main__header__site" to={"/"}>SandBox|HTML-CSS-JS</Link>
+        <Link className="main__header__site" to={"/"}><h1>SandBox|HTML-CSS-JS</h1></Link>
       </nav>
       <div className="main__header__buttons">
         <button onClick={() => { toggleModal() }}>

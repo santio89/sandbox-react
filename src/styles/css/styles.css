@@ -115,9 +115,22 @@ button {
   top: 0;
   overflow: hidden;
 }
+.main__header nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .main__header__site {
   font-family: "Courier New", Courier, monospace;
+  font-weight: normal;
+  font-size: 0.8rem;
   text-shadow: 1px 1px 0 rgb(40, 40, 40);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main__header__site h1 {
+  font: inherit;
 }
 .main__header__site:focus-visible {
   outline: 1px solid var(--main-red);

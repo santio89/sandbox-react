@@ -134,9 +134,24 @@ button {
   top: 0;
   overflow: hidden;
 
+  nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   &__site {
     font-family: 'Courier New', Courier, monospace;
+    font-weight: normal;
+    font-size: .8rem;
     text-shadow: 1px 1px 0 rgb(40, 40, 40);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+      font: inherit;
+    }
 
     &:focus-visible {
       outline: 1px solid var(--main-red);
@@ -314,7 +329,7 @@ button {
     cursor: pointer;
     transition: 200ms;
     border: 1px solid var(--main-red);
-    text-shadow: 1px 1px 0 rgb(40,40,40);
+    text-shadow: 1px 1px 0 rgb(40, 40, 40);
 
     &:hover,
     &:focus-visible {
