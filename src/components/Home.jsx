@@ -106,7 +106,7 @@ export default function Home() {
         switch (tabActive) {
             case 'html': {
                 text = `${textareaHtml.current.value.substring(
-                    0, textareaHtml.current.selectionStart)}${"  "}${textareaHtml.current.value.substring(
+                    0, textareaHtml.current.selectionStart)}${"\t"}${textareaHtml.current.value.substring(
                         textareaHtml.current.selectionEnd,
                         textareaHtml.current.value.length
                     )}`;
@@ -114,12 +114,12 @@ export default function Home() {
                 const selection = (textareaHtml.current.selectionEnd - textareaHtml.current.selectionStart)
 
                 setHtml(text);
-                setTextCursor(textareaHtml.current.selectionEnd - selection + 2)
+                setTextCursor(textareaHtml.current.selectionEnd - selection + 1)
                 break;
             }
             case 'css': {
                 text = `${textareaCss.current.value.substring(
-                    0, textareaCss.current.selectionStart)}${"  "}${textareaCss.current.value.substring(
+                    0, textareaCss.current.selectionStart)}${"\t"}${textareaCss.current.value.substring(
                         textareaCss.current.selectionEnd,
                         textareaCss.current.value.length
                     )}`;
@@ -127,12 +127,12 @@ export default function Home() {
                 const selection = (textareaCss.current.selectionEnd - textareaCss.current.selectionStart)
 
                 setCss(text);
-                setTextCursor(textareaCss.current.selectionEnd - selection + 2)
+                setTextCursor(textareaCss.current.selectionEnd - selection + 1)
                 break;
             }
             case 'js': {
                 text = `${textareaJs.current.value.substring(
-                    0, textareaJs.current.selectionStart)}${"  "}${textareaJs.current.value.substring(
+                    0, textareaJs.current.selectionStart)}${"\t"}${textareaJs.current.value.substring(
                         textareaJs.current.selectionEnd,
                         textareaJs.current.value.length
                     )}`;
@@ -140,7 +140,7 @@ export default function Home() {
                 const selection = (textareaJs.current.selectionEnd - textareaJs.current.selectionStart)
 
                 setJs(text);
-                setTextCursor(textareaJs.current.selectionEnd - selection + 2)
+                setTextCursor(textareaJs.current.selectionEnd - selection + 1)
                 break;
             }
             default:
