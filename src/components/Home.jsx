@@ -25,6 +25,7 @@ export default function Home() {
     const textarea = useRef(null)
 
     const codeInput = useRef(null)
+    const codeInputInner = useRef(null)
 
     const [textCursor, setTextCursor] = useState(null)
 
@@ -57,7 +58,6 @@ export default function Home() {
     const syncScroll = () => {
         codeInput.current.scrollTop = textarea.current.scrollTop;
         codeInput.current.scrollLeft = textarea.current.scrollLeft;
-
     }
 
     const enableClear = () => {
@@ -128,8 +128,14 @@ export default function Home() {
 
         switch (tabActive) {
             case 'html':
-                setPrismContentHtml(html)
-                if (html === "") {
+                if (html && html[html.length - 1] === "\n") {
+                    console.log("tea")
+                     setHtml(html + " ");
+                } else {
+                    setPrismContentHtml(html);
+                }
+
+                if (html === "" || html === " ") {
                     setClearConfirm(false)
                 }
                 break;
@@ -185,6 +191,13 @@ export default function Home() {
 
     useEffect(() => {
         Prism.highlightAll()
+
+
+        /*    if (textarea.current.value[textarea.current.value.length - 1] == "\n") {
+               console.log("ok")
+               codeInputInner.innerHtml += "qwe"
+           } */
+
     }, [prismContentHtml, prismContentCss, prismContentJs, tabActive])
 
     return (
@@ -230,7 +243,7 @@ export default function Home() {
                     {tabActive === "html" &&
                         <div className="mainCode__input__textWrapper">
                             <pre className={`mainCode__input__text ${html === "" && `dim pre`}`} aria-hidden="true" ref={codeInput}>
-                                <code className={`language-html code ${!darkTheme ? "light-theme" : ""}`} >
+                                <code ref={codeInputInner} className={`language-html code ${!darkTheme ? "light-theme" : ""}`} >
                                     {prismContentHtml}
                                 </code>
                             </pre>
@@ -240,6 +253,7 @@ export default function Home() {
                                     e.preventDefault();
                                     insertTabs("html")
                                 }
+
                                 syncScroll();
                             }} onScroll={() => { syncScroll() }}></textarea>
                         </div>}

@@ -439,7 +439,7 @@ button {
   border-radius: 0.4rem;
   border: 2px solid rgb(100, 100, 100);
   outline: none;
-  padding: 0.5rem !important;
+  padding: 0.5rem 0.5rem 0 0.5rem !important;
   resize: none;
   background: var(--bg-code);
   color: var(--color-code);
