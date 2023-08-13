@@ -7,7 +7,7 @@ import { setCodeAll } from "../store/actions/code.action";
 import { savePreset, deletePreset } from "../store/actions/presets.action";
 import { v4 as uuidv4 } from 'uuid';
 
-export default function Nav() {
+export default function Nav({ rootTheme }) {
   const dispatch = useDispatch();
   const darkTheme = useSelector(state => state.theme.darkTheme);
   const html = useSelector(state => state.code.html)
@@ -106,6 +106,10 @@ export default function Nav() {
     setSelectedId(null)
     setDeleteId(null)
   }, [saveMode])
+
+  useEffect(() => {
+    rootTheme.current.classList.toggle("light-theme", !darkTheme)
+  }, [darkTheme])
 
   return (
     <header className='main__header'>

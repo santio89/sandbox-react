@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Home from "./components/Home";
 import Nav from "./components/Nav";
-import { useSelector } from "react-redux";
 import './styles/css/styles.css'
+import { useRef } from "react";
 
 function App() {
-  const darkTheme = useSelector(state => state.theme.darkTheme);
+  const rootTheme = useRef();
 
   const Layout = () => (
     <>
@@ -17,9 +17,9 @@ function App() {
 
   return (
     <>
-      <div className={`root-theme ${darkTheme ? 'dark-theme' : "light-theme"}`}>
+      <div ref={rootTheme} className={`root-theme`}>
         <BrowserRouter>
-          <Nav />
+          <Nav rootTheme={rootTheme} />
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
