@@ -135,7 +135,7 @@ button {
 
   &__site {
     font-family: 'Courier New', Courier, monospace;
-    text-shadow: 1px 1px 0 rgb(40,40,40);
+    text-shadow: 1px 1px 0 rgb(40, 40, 40);
 
     &:focus-visible {
       outline: 1px solid var(--main-red);
@@ -204,6 +204,7 @@ button {
         display: flex;
         justify-content: center;
         align-items: center;
+        gap: 2px;
 
         button {
           border-radius: 0;
@@ -216,9 +217,11 @@ button {
           transition: none;
           filter: none;
           color: var(--main-white);
+          background: var(--main-gray);
 
-          &:hover,  &:focus-visible{
-            background: var(--main-purple)
+          &:hover,
+          &:focus-visible {
+            background: var(--main-purple);
           }
         }
       }
@@ -401,13 +404,14 @@ button {
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 2px;
         margin-inline: .4rem;
+        gap: 4px;
 
         &__buttons {
           display: flex;
           justify-content: center;
           align-items: center;
+          gap: 4px;
 
           button {
             cursor: pointer;
@@ -417,15 +421,16 @@ button {
             justify-content: center;
             align-items: center;
             font-size: .94em;
+            background: var(--main-gray);
 
             &:hover,
             &:focus-visible {
               background: var(--main-red);
-              color: white;
+              color: rgb(250, 250, 250);
             }
 
             &:active {
-              color: white;
+              color: rgb(250, 250, 250);
               background: var(--main-red);
               scale: .9
             }
