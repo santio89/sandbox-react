@@ -113,7 +113,7 @@ export default function Home() {
 
                 const selection = (textareaHtml.current.selectionEnd - textareaHtml.current.selectionStart)
 
-                setHtml(text);      
+                setHtml(text);
                 setTextCursor(textareaHtml.current.selectionEnd - selection + 1)
                 break;
             }
@@ -123,7 +123,7 @@ export default function Home() {
                         textareaCss.current.selectionEnd,
                         textareaCss.current.value.length
                     )}`;
-                            
+
                 const selection = (textareaCss.current.selectionEnd - textareaCss.current.selectionStart)
 
                 setCss(text);
