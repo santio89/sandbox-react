@@ -150,12 +150,12 @@ button {
   scale: 0.9;
 }
 .main__header__buttons button.create-new {
-  color: var(--main-white);
+  color: var(--main-red);
   background: var(--main-black);
   border-radius: 0;
 }
 .main__header__buttons button.create-new svg {
-  fill: var(--main-white);
+  fill: var(--main-red);
 }
 .main__header .new-project {
   display: flex;

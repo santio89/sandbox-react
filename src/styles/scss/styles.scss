@@ -175,12 +175,12 @@ button {
       }
 
       &.create-new {
-        color: var(--main-white);
+        color: var(--main-red);
         background: var(--main-black);
         border-radius: 0;
 
         svg {
-          fill: var(--main-white);
+          fill: var(--main-red);
         }
       }
     }
