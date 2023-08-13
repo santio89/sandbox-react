@@ -368,7 +368,7 @@ export default function Home() {
                         </button>
                     </div>
                     <div className={`mainCode__output__iframeWrapper ${html === "" && css === "" && js === "" && `dim`}`}>
-                        <iframe allow="fullscreen" ref={iframe} className="mainCode__output__iframe">
+                        <iframe allow="fullscreen" ref={iframe} className="mainCode__output__iframe" title="Output">
                         </iframe>
                     </div>
                 </div>
