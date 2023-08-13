@@ -468,6 +468,7 @@ button {
   caret-color: var(--main-white);
   line-height: 1.2;
   tab-size: 2;
+  white-space: pre-wrap;
 }
 .mainCode__input__text::-webkit-scrollbar {
   width: 4px;

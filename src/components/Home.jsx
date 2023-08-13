@@ -160,7 +160,7 @@ export default function Home() {
     }
 
     useEffect(() => {
-        const newCode = html + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>\n`
+        const newCode = `\n<body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>\n`
         iframe.current.contentWindow.document.open();
         iframe.current.contentWindow.document.write(newCode)
         iframe.current.contentWindow.document.close()
