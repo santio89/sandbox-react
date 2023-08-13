@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { setCodeHtml, setCodeCss, setCodeJs } from "../store/actions/code.action";
 import { Link } from "react-router-dom";
+import Prism from 'prismjs'
+import '../styles/css/prism.css'
+
 
 export default function Home() {
     const [tabActive, setTabActive] = useState("html")
@@ -10,11 +13,22 @@ export default function Home() {
     const html = useSelector(state => state.code.html)
     const css = useSelector(state => state.code.css)
     const js = useSelector(state => state.code.js)
+    const darkTheme = useSelector(state => state.theme.darkTheme);
     const [downloadBlob, setDownloadBlob] = useState("")
     const [downloadUrl, setDownloadUrl] = useState("")
 
+    const [prismContentHtml, setPrismContentHtml] = useState(html)
+    const [prismContentCss, setPrismContentCss] = useState(css)
+    const [prismContentJs, setPrismContentJs] = useState(js)
+
     const iframe = useRef(null)
-    const textarea = useRef(null)
+    const textareaHtml = useRef(null)
+    const textareaCss = useRef(null)
+    const textareaJs = useRef(null)
+
+    const codeInputHtml = useRef(null)
+    const codeInputCss = useRef(null)
+    const codeInputJs = useRef(null)
 
     const [textCursor, setTextCursor] = useState(null)
 
@@ -44,6 +58,22 @@ export default function Home() {
         setClearConfirm(false);
     }
 
+    const syncScroll = () => {
+        switch (tabActive) {
+            case 'html':
+                codeInputHtml.current.scrollTop = textareaHtml.current.scrollTop;
+                break;
+            case 'css':
+                codeInputCss.current.scrollTop = textareaCss.current.scrollTop;
+                break;
+            case 'js':
+                codeInputJs.current.scrollTop = textareaJs.current.scrollTop;
+                break;
+            default:
+                return
+        }
+    }
+
     const enableClear = () => {
         switch (tabActive) {
             case 'html':
@@ -68,20 +98,51 @@ export default function Home() {
     }
 
     const setFullscreen = () => {
-        console.log(iframe.current)
         iframe.current.requestFullscreen()
     }
 
     const insertTabs = (type) => {
-        const text = `${textarea.current.value.substring(
-            0, textarea.current.selectionStart)}${"  "}${textarea.current.value.substring(
-                textarea.current.selectionEnd,
-                textarea.current.value.length
-            )}`;
+        let text;
+        switch (tabActive) {
+            case 'html': {
+                text = `${textareaHtml.current.value.substring(
+                    0, textareaHtml.current.selectionStart)}${"\t"}${textareaHtml.current.value.substring(
+                        textareaHtml.current.selectionEnd,
+                        textareaHtml.current.value.length
+                    )}`;
 
-        const selection = (textarea.current.selectionEnd - textarea.current.selectionStart)
+                const selection = (textareaHtml.current.selectionEnd - textareaHtml.current.selectionStart)
 
-        setTextCursor(textarea.current.selectionEnd - selection + 2)
+                setTextCursor(textareaHtml.current.selectionEnd - selection + 2)
+                break;
+            }
+            case 'css': {
+                text = `${textareaCss.current.value.substring(
+                    0, textareaCss.current.selectionStart)}${"\t"}${textareaCss.current.value.substring(
+                        textareaCss.current.selectionEnd,
+                        textareaCss.current.value.length
+                    )}`;
+
+                const selection = (textareaCss.current.selectionEnd - textareaCss.current.selectionStart)
+
+                setTextCursor(textareaCss.current.selectionEnd - selection + 2)
+                break;
+            }
+            case 'js': {
+                text = `${textareaJs.current.value.substring(
+                    0, textareaJs.current.selectionStart)}${"\t"}${textareaJs.current.value.substring(
+                        textareaJs.current.selectionEnd,
+                        textareaJs.current.value.length
+                    )}`;
+
+                const selection = (textareaJs.current.selectionEnd - textareaJs.current.selectionStart)
+
+                setTextCursor(textareaJs.current.selectionEnd - selection + 2)
+                break;
+            }
+            default:
+                return
+        }
 
         switch (type) {
             case 'html':
@@ -105,23 +166,52 @@ export default function Home() {
         iframe.current.contentWindow.document.close()
 
         if (textCursor) {
-            textarea.current.selectionStart = textCursor;
-            textarea.current.selectionEnd = textCursor;
+            switch (tabActive) {
+                case 'html':
+                    textareaHtml.current.selectionStart = textCursor;
+                    textareaHtml.current.selectionEnd = textCursor;
+                    break;
+                case 'css':
+                    textareaCss.current.selectionStart = textCursor;
+                    textareaCss.current.selectionEnd = textCursor;
+                    break;
+                case 'js':
+                    textareaJs.current.selectionStart = textCursor;
+                    textareaJs.current.selectionEnd = textCursor;
+                    break;
+                default:
+                    return
+            }
             setTextCursor(null)
         }
 
         switch (tabActive) {
             case 'html':
+                if (html && html[html.length - 1] === "\n") {
+                    setPrismContentHtml(html + " ");
+                } else {
+                    setPrismContentHtml(html);
+                }
                 if (html === "") {
                     setClearConfirm(false)
                 }
                 break;
             case 'css':
+                if (css && css[css.length - 1] === "\n") {
+                    setPrismContentCss(css + " ");
+                } else {
+                    setPrismContentCss(css);
+                }
                 if (css === "") {
                     setClearConfirm(false)
                 }
                 break;
             case 'js':
+                if (js && js[js.length - 1] === "\n") {
+                    setPrismContentJs(js + " ");
+                } else {
+                    setPrismContentJs(js);
+                }
                 if (js === "") {
                     setClearConfirm(false)
                 }
@@ -132,10 +222,43 @@ export default function Home() {
 
         const newBlob = new Blob([newCode], { type: 'text/html' });
         setDownloadBlob(newBlob)
+
     }, [html, css, js])
 
     useEffect(() => {
         setClearConfirm(false)
+
+        switch (tabActive) {
+            case 'html': {
+                let trimHtml = html;
+                while (trimHtml && trimHtml[trimHtml.length - 1] === "\n") {
+                    trimHtml = trimHtml.slice(0, -1);
+                }
+                setHtml(trimHtml)
+                setPrismContentHtml(trimHtml)
+                break;
+            }
+            case 'css': {
+                let trimCss = css;
+                while (trimCss && trimCss[trimCss.length - 1] === "\n") {
+                    trimCss = trimCss.slice(0, -1);
+                }
+                setCss(trimCss)
+                setPrismContentCss(trimCss)
+                break;
+            }
+            case 'js': {
+                let trimJs = js;
+                while (trimJs && trimJs[trimJs.length - 1] === "\n") {
+                    trimJs = trimJs.slice(0, -1);
+                }
+                setJs(trimJs)
+                setPrismContentJs(trimJs)
+                break;
+            }
+            default:
+                return
+        }
     }, [tabActive])
 
     useEffect(() => {
@@ -148,6 +271,11 @@ export default function Home() {
             window.URL.revokeObjectURL(downloadUrl)
         }
     }, [downloadBlob])
+
+    useEffect(() => {
+        Prism.highlightAll()
+        syncScroll()
+    }, [prismContentHtml, prismContentCss, prismContentJs, tabActive])
 
     return (
         <div className="home">
@@ -189,30 +317,55 @@ export default function Home() {
                         </span>
 
                     </div>
-                    {tabActive === "html" &&
-                        <textarea ref={textarea} spellCheck="false" className={`mainCode__input__text ${html === "" && `dim`}`} value={html} onChange={e => setHtml(e.target.value)} onKeyDown={(e) => {
+
+                    <div className={`mainCode__input__textWrapper ${tabActive !== "html" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
+                        <pre className={`mainCode__input__text ${html === "" && `dim pre`}`} aria-hidden="true" ref={codeInputHtml}>
+                            <code className={`language-html code`} >
+                                {prismContentHtml}
+                            </code>
+                        </pre>
+
+                        <textarea ref={textareaHtml} spellCheck="false" className={`mainCode__input__text ${html === "" && `dim`} textarea`} value={html} onChange={e => setHtml(e.target.value)} onKeyDown={(e) => {
                             if (e.key === "Tab") {
                                 e.preventDefault();
                                 insertTabs("html")
                             }
-                        }}></textarea>
-                    }
-                    {tabActive === "css" &&
-                        <textarea ref={textarea} spellCheck="false" className={`mainCode__input__text ${css === "" && `dim`}`} value={css} onChange={e => setCss(e.target.value)} onKeyDown={(e) => {
+                            syncScroll();
+                        }} onScroll={() => { syncScroll() }}></textarea>
+                    </div>
+
+                    <div className={`mainCode__input__textWrapper ${tabActive !== "css" && "d-none"}`}>
+                        <pre className={`mainCode__input__text ${css === "" && `dim pre`}`} aria-hidden="true" ref={codeInputCss}>
+                            <code className="language-css code">
+                                {prismContentCss}
+                            </code>
+                        </pre>
+
+                        <textarea ref={textareaCss} spellCheck="false" className={`mainCode__input__text ${css === "" && `dim`} textarea`} value={css} onChange={e => setCss(e.target.value)} onKeyDown={(e) => {
                             if (e.key === "Tab") {
                                 e.preventDefault();
-                                insertTabs("css")
+                                insertTabs("css");
+                                syncScroll()
                             }
-                        }}></textarea>
-                    }
-                    {tabActive === "js" &&
-                        <textarea ref={textarea} spellCheck="false" className={`mainCode__input__text ${js === "" && `dim`}`} value={js} onChange={e => setJs(e.target.value)} onKeyDown={(e) => {
+                        }} onScroll={() => { syncScroll() }}></textarea>
+                    </div>
+
+                    <div className={`mainCode__input__textWrapper ${tabActive !== "js" && "d-none"}`}>
+                        <pre className={`mainCode__input__text ${js === "" && `dim pre`}`} aria-hidden="true" ref={codeInputJs}>
+                            <code className="language-js code">
+                                {prismContentJs}
+                            </code>
+                        </pre>
+
+                        <textarea ref={textareaJs} spellCheck="false" className={`mainCode__input__text ${js === "" && `dim`} textarea`} value={js} onChange={e => setJs(e.target.value)} onKeyDown={(e) => {
                             if (e.key === "Tab") {
                                 e.preventDefault();
-                                insertTabs("js")
+                                insertTabs("js");
+                                syncScroll()
                             }
-                        }}></textarea>
-                    }
+                        }} onScroll={() => { syncScroll() }}></textarea>
+                    </div>
+
                 </div>
                 <div className={`mainCode__output `}>
                     <div className="mainCode__output__type">

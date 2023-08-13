@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Home from "./components/Home";
 import Nav from "./components/Nav";
 import { useSelector } from "react-redux";
+import './styles/css/styles.css'
 
 function App() {
   const darkTheme = useSelector(state => state.theme.darkTheme);
