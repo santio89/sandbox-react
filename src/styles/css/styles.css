@@ -117,6 +117,9 @@ button {
 .main__header__site {
   font-family: "Courier New", Courier, monospace;
 }
+.main__header__site:focus-visible {
+  outline: 1px solid var(--main-red);
+}
 .main__header__buttons {
   display: flex;
   justify-content: center;
@@ -140,10 +143,10 @@ button {
   fill: var(--main-black);
 }
 .main__header__buttons button:hover, .main__header__buttons button:focus-visible {
-  filter: drop-shadow(0 0 4px var(--main-purple));
+  filter: drop-shadow(0 0 4px var(--main-black));
 }
 .main__header__buttons button:active {
-  filter: drop-shadow(0 0 4px var(--main-purple));
+  filter: drop-shadow(0 0 4px var(--main-black));
   scale: 0.9;
 }
 .main__header__buttons button.create-new {
