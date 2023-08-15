@@ -242,7 +242,7 @@ export default function Home() {
     }, [tabActive])
 
     useEffect(() => {
-        if (!loadSnippet) {
+        if (loadSnippet) {
             setClearConfirm(false)
         }
     }, [loadSnippet])

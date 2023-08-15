@@ -34,7 +34,7 @@ export default function Nav({ rootTheme }) {
     dispatch(setCodeCss(""))
     dispatch(setCodeJs(""))
     dispatch(setLoadSnippet(true))
-    dispatch(setLoadSnippet(false))
+    setLoaded(true)
     setNewProject(false)
   }
 
@@ -64,7 +64,6 @@ export default function Nav({ rootTheme }) {
   const setPreset = (html, css, js) => {
     dispatch(setCodeAll(html, css, js))
     dispatch(setLoadSnippet(true))
-    dispatch(setLoadSnippet(false))
     setLoaded(true)
     setNewProject(false)
   }
@@ -119,6 +118,8 @@ export default function Nav({ rootTheme }) {
         setLoaded(false)
         setSelectedId(null)
       }, 1000)
+    } else {
+      dispatch(setLoadSnippet(false))
     }
 
     return () => { clearTimeout(timeout) }
