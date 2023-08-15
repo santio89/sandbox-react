@@ -151,9 +151,14 @@ export default function Home() {
     }
 
     useEffect(() => {
-        const timeout = setTimeout(() => {
+        let timeout = null;
+        if (loadSnippet) {
             setCodeOutput(`<body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>`)
-        }, 1000);
+        } else {
+            timeout = setTimeout(() => {
+                setCodeOutput(`<body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>`)
+            }, 1000);
+        }
 
         if (textCursor) {
             switch (tabActive) {
