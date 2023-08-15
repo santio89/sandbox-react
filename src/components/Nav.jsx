@@ -5,6 +5,7 @@ import { setCodeHtml, setCodeCss, setCodeJs } from "../store/actions/code.action
 import { useState, useEffect, useRef } from "react";
 import { setCodeAll } from "../store/actions/code.action";
 import { savePreset, deletePreset } from "../store/actions/presets.action";
+import { setModal, setLoadSnippet } from "../store/actions/modal.action";
 import { v4 as uuidv4 } from 'uuid';
 
 export default function Nav({ rootTheme }) {
@@ -32,6 +33,8 @@ export default function Nav({ rootTheme }) {
     dispatch(setCodeHtml(""))
     dispatch(setCodeCss(""))
     dispatch(setCodeJs(""))
+    dispatch(setLoadSnippet(true))
+    dispatch(setLoadSnippet(false))
     setNewProject(false)
   }
 
@@ -40,8 +43,11 @@ export default function Nav({ rootTheme }) {
       setSavePresetName("")
     }
     if (modal.current.hasAttribute("open")) {
+      dispatch(setModal(false))
       modal.current.close()
+      setSaveMode(false)
     } else {
+      dispatch(setModal(true))
       setSelectedId(null)
       setDeleteId(null)
       modal.current.showModal()
@@ -57,7 +63,10 @@ export default function Nav({ rootTheme }) {
 
   const setPreset = (html, css, js) => {
     dispatch(setCodeAll(html, css, js))
+    dispatch(setLoadSnippet(true))
+    dispatch(setLoadSnippet(false))
     setLoaded(true)
+    setNewProject(false)
   }
 
   const deleteSelectedPreset = (id) => {
@@ -104,7 +113,6 @@ export default function Nav({ rootTheme }) {
   }, [saved])
 
   useEffect(() => {
-    console.log(loaded)
     let timeout = null;
     if (loaded) {
       timeout = setTimeout(() => {
@@ -164,7 +172,7 @@ export default function Nav({ rootTheme }) {
                 </span>
               </span>
               :
-              <button className="create-new" onClick={() => setNewProject(true)}>
+              <button className="create-new" onClick={() => { setNewProject(true); }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi-plus-lg" viewBox="0 0 16 16">
                   <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
                 </svg>

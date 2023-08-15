@@ -14,6 +14,7 @@ export default function Home() {
     const css = useSelector(state => state.code.css)
     const js = useSelector(state => state.code.js)
     const darkTheme = useSelector(state => state.theme.darkTheme);
+    const loadSnippet = useSelector(state => state.modal.loadSnippet)
     const [downloadBlob, setDownloadBlob] = useState("")
     const [downloadUrl, setDownloadUrl] = useState("")
 
@@ -181,9 +182,6 @@ export default function Home() {
                 } else {
                     setPrismContentHtml(html);
                 }
-                if (html === "") {
-                    setClearConfirm(false)
-                }
                 break;
             case 'css':
                 if (css && css[css.length - 1] === "\n") {
@@ -191,18 +189,12 @@ export default function Home() {
                 } else {
                     setPrismContentCss(css);
                 }
-                if (css === "") {
-                    setClearConfirm(false)
-                }
                 break;
             case 'js':
                 if (js && js[js.length - 1] === "\n") {
                     setPrismContentJs(js + " ");
                 } else {
                     setPrismContentJs(js);
-                }
-                if (js === "") {
-                    setClearConfirm(false)
                 }
                 break;
             default:
@@ -248,6 +240,12 @@ export default function Home() {
                 return
         }
     }, [tabActive])
+
+    useEffect(() => {
+        if (!loadSnippet) {
+            setClearConfirm(false)
+        }
+    }, [loadSnippet])
 
     useEffect(() => {
         if (downloadBlob !== "") {
