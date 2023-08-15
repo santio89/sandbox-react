@@ -9,7 +9,8 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(20,20,20)
+  background: rgb(20,20,20);
+  min-height: 100vh;
 }
 
 div{
@@ -42,7 +43,7 @@ div:active{
   background-color: magenta;
 }`
 
-const exampleJs1 = `var spot = document.querySelector("div");
+const exampleJs1 = `const spot = document.querySelector("div");
 spot.addEventListener("click", ()=>{
   document.body.classList.toggle("bg-magenta")
 })`

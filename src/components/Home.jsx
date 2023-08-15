@@ -17,6 +17,7 @@ export default function Home() {
     const loadSnippet = useSelector(state => state.modal.loadSnippet)
     const [downloadBlob, setDownloadBlob] = useState("")
     const [downloadUrl, setDownloadUrl] = useState("")
+    const [codeOutput, setCodeOutput] = useState("")
 
     const [prismContentHtml, setPrismContentHtml] = useState(html)
     const [prismContentCss, setPrismContentCss] = useState(css)
@@ -150,10 +151,7 @@ export default function Home() {
     }
 
     useEffect(() => {
-        const newCode = `\n<body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>\n`
-        iframe.current.contentWindow.document.open();
-        iframe.current.contentWindow.document.write(newCode)
-        iframe.current.contentWindow.document.close()
+        setCodeOutput(`<body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>`)
 
         if (textCursor) {
             switch (tabActive) {
@@ -201,9 +199,12 @@ export default function Home() {
                 return
         }
 
-        const newBlob = new Blob([newCode], { type: 'text/html' });
-        setDownloadBlob(newBlob)
     }, [html, css, js])
+
+    useEffect(() => {
+        const newBlob = new Blob([codeOutput], { type: 'text/html' });
+        setDownloadBlob(newBlob)
+    }, [codeOutput])
 
     useEffect(() => {
         setClearConfirm(false)
@@ -365,7 +366,7 @@ export default function Home() {
                         </button>
                     </div>
                     <div className={`mainCode__output__iframeWrapper ${html === "" && css === "" && js === "" && `dim`}`}>
-                        <iframe allow="fullscreen" ref={iframe} className="mainCode__output__iframe" title="Output">
+                        <iframe srcDoc={codeOutput}/* sandbox="allow-scripts" */ allow="fullscreen" ref={iframe} className="mainCode__output__iframe" title="Output">
                         </iframe>
                     </div>
                 </div>
