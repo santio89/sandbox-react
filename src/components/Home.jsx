@@ -310,7 +310,6 @@ export default function Home() {
                                     </button>
                             }
                         </span>
-
                     </div>
 
                     <div className={`mainCode__input__textWrapper ${tabActive !== "html" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
