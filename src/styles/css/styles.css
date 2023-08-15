@@ -429,11 +429,6 @@ button {
   max-width: 100%;
   max-height: 100%;
   flex: 1;
-  white-space: pre-wrap;
-  white-space: -moz-pre-wrap;
-  white-space: -pre-wrap;
-  white-space: -o-pre-wrap;
-  word-wrap: break-word;
 }
 .mainCode__input__textWrapper pre[class*=language-],
 .mainCode__input__textWrapper code[class*=language-] {
@@ -442,7 +437,11 @@ button {
   line-height: 1.2;
   font-family: monospace, "Courier New", Courier;
   tab-size: 2;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
   white-space: pre-wrap;
+  word-wrap: break-word;
 }
 .mainCode__input__textWrapper pre[class*=language-].light-theme,
 .mainCode__input__textWrapper code[class*=language-].light-theme {
