@@ -151,7 +151,9 @@ export default function Home() {
     }
 
     useEffect(() => {
-        setCodeOutput(`<body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>`)
+        const timeout = setTimeout(() => {
+            setCodeOutput(`<body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>`)
+        }, 1000);
 
         if (textCursor) {
             switch (tabActive) {
@@ -199,6 +201,7 @@ export default function Home() {
                 return
         }
 
+        return () => clearTimeout(timeout)
     }, [html, css, js])
 
     useEffect(() => {
@@ -366,7 +369,7 @@ export default function Home() {
                         </button>
                     </div>
                     <div className={`mainCode__output__iframeWrapper ${html === "" && css === "" && js === "" && `dim`}`}>
-                        <iframe srcDoc={codeOutput}/* sandbox="allow-scripts" */ allow="fullscreen" ref={iframe} className="mainCode__output__iframe" title="Output">
+                        <iframe srcDoc={codeOutput} allow="fullscreen" ref={iframe} className="mainCode__output__iframe" title="Output">
                         </iframe>
                     </div>
                 </div>
