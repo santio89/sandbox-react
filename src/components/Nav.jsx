@@ -19,6 +19,7 @@ export default function Nav({ rootTheme }) {
   const [selectedId, setSelectedId] = useState(null);
   const [savePresetName, setSavePresetName] = useState("");
   const [saved, setSaved] = useState(false)
+  const [loaded, setLoaded] = useState(false)
   const [newProject, setNewProject] = useState(false)
 
   const presets = useSelector(state => state.preset.presets)
@@ -56,7 +57,7 @@ export default function Nav({ rootTheme }) {
 
   const setPreset = (html, css, js) => {
     dispatch(setCodeAll(html, css, js))
-    setSelectedId(null)
+    setLoaded(true)
   }
 
   const deleteSelectedPreset = (id) => {
@@ -101,6 +102,20 @@ export default function Nav({ rootTheme }) {
     return () => { clearTimeout(timeout) }
 
   }, [saved])
+
+  useEffect(() => {
+    console.log(loaded)
+    let timeout = null;
+    if (loaded) {
+      timeout = setTimeout(() => {
+        setLoaded(false)
+        setSelectedId(null)
+      }, 1000)
+    }
+
+    return () => { clearTimeout(timeout) }
+
+  }, [loaded])
 
   useEffect(() => {
     setSelectedId(null)
@@ -194,9 +209,9 @@ export default function Nav({ rootTheme }) {
                 {
                   presets?.map(preset => {
                     return (
-                      <button className="presets__option" key={preset.id} onClick={() => { setSelectedId(preset.id) }} >
+                      <button disabled={loaded || saved} className="presets__option" key={preset.id} onClick={() => { setSelectedId(preset.id) }} >
                         {
-                          selectedId === preset.id ?
+                          selectedId === preset.id && !loaded ?
                             <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                               <span>Load snippet?</span>
                               <span className="presets__option__confirm__buttons">
@@ -205,26 +220,33 @@ export default function Nav({ rootTheme }) {
                               </span>
                             </span>
                             :
-                            (deleteId === preset.id ?
+                            (selectedId === preset.id && loaded ?
                               <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
-                                <span>Delete snippet?</span>
-                                <span className="presets__option__confirm__buttons">
-                                  <span onClick={(e) => { e.stopPropagation(); deleteSelectedPreset(preset.id) }}>Yes</span>
-                                  <span onClick={(e) => { e.stopPropagation(); setDeleteId(null) }}>No</span>
-                                </span>
-                              </span> :
-                              <span className="presets__option__main">
-                                <span className="presets__option__main__name">{preset.name}</span>
-                                <span className="presets__option__main__del" onClick={(e) => {
-                                  e.stopPropagation();
-                                  setDeleteId(preset.id)
-                                }}>
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" className="bi-file-x-fill" viewBox="0 0 16 16">
-                                    <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM6.854 6.146 8 7.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 8l1.147 1.146a.5.5 0 0 1-.708.708L8 8.707 6.854 9.854a.5.5 0 0 1-.708-.708L7.293 8 6.146 6.854a.5.5 0 1 1 .708-.708z" />
-                                  </svg>
-                                </span>
+                                <span>Snippet loaded!</span>
                               </span>
+                              :
+                              (deleteId === preset.id ?
+                                <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
+                                  <span>Delete snippet?</span>
+                                  <span className="presets__option__confirm__buttons">
+                                    <span onClick={(e) => { e.stopPropagation(); deleteSelectedPreset(preset.id) }}>Yes</span>
+                                    <span onClick={(e) => { e.stopPropagation(); setDeleteId(null) }}>No</span>
+                                  </span>
+                                </span> :
+                                <span className="presets__option__main">
+                                  <span className="presets__option__main__name">{preset.name}</span>
+                                  <span className="presets__option__main__del" onClick={(e) => {
+                                    e.stopPropagation();
+                                    setDeleteId(preset.id)
+                                  }}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" className="bi-file-x-fill" viewBox="0 0 16 16">
+                                      <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM6.854 6.146 8 7.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 8l1.147 1.146a.5.5 0 0 1-.708.708L8 8.707 6.854 9.854a.5.5 0 0 1-.708-.708L7.293 8 6.146 6.854a.5.5 0 1 1 .708-.708z" />
+                                    </svg>
+                                  </span>
+                                </span>
+                              )
                             )
+
                         }
                       </button>
                     )
