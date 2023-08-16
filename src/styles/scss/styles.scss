@@ -830,7 +830,7 @@ button {
       font-weight: bold;
       font-size: 1.2rem;
       border-radius: .4em;
-      padding: .125rem;
+      padding: 2px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -940,7 +940,7 @@ button {
         &__edit {
           position: absolute;
           bottom: 0;
-          right: 20px;
+          right: 22px;
           display: flex;
           justify-content: center;
           align-items: center;

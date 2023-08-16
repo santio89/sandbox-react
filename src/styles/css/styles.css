@@ -721,7 +721,7 @@ button {
   font-weight: bold;
   font-size: 1.2rem;
   border-radius: 0.4em;
-  padding: 0.125rem;
+  padding: 2px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -814,7 +814,7 @@ button {
 .main__modal .presets__option__main__edit {
   position: absolute;
   bottom: 0;
-  right: 20px;
+  right: 22px;
   display: flex;
   justify-content: center;
   align-items: center;
