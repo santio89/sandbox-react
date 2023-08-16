@@ -21,6 +21,8 @@ export default function Home() {
     const [downloadUrl, setDownloadUrl] = useState("")
     const [codeOutput, setCodeOutput] = useState("")
     const [copyClipboard, setCopyClipboard] = useState(false)
+    const [formatCode, setFormatCode] = useState(false)
+    const [downloadCode, setDownloadCode] = useState(false)
 
     const [prismContentHtml, setPrismContentHtml] = useState(html)
     const [prismContentCss, setPrismContentCss] = useState(css)
@@ -82,6 +84,7 @@ export default function Home() {
             default:
                 return
         }
+        setFormatCode(true)
     }
 
     const syncScroll = () => {
@@ -267,6 +270,28 @@ export default function Home() {
     }, [copyClipboard])
 
     useEffect(() => {
+        let timeout = null;
+        if (formatCode) {
+            timeout = setTimeout(() => {
+                setFormatCode(false)
+            }, 1000)
+        }
+
+        return () => clearTimeout(timeout)
+    }, [formatCode])
+
+    useEffect(() => {
+        let timeout = null;
+        if (downloadCode) {
+            timeout = setTimeout(() => {
+                setDownloadCode(false)
+            }, 1000)
+        }
+
+        return () => clearTimeout(timeout)
+    }, [downloadCode])
+
+    useEffect(() => {
         setClearConfirm(false)
 
         switch (tabActive) {
@@ -339,11 +364,20 @@ export default function Home() {
                             <span>{tabActive.toUpperCase()}</span>
                         </span>
                         <span className="mainCode__input__type__btnWrapper">
-                            <button className="mainCode__input__type__format" title="Format code" onClick={() => { beautify() }}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-file-code-fill" viewBox="0 0 16 16">
-                                    <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM6.646 5.646a.5.5 0 1 1 .708.708L5.707 8l1.647 1.646a.5.5 0 0 1-.708.708l-2-2a.5.5 0 0 1 0-.708l2-2zm2.708 0 2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 8 8.646 6.354a.5.5 0 1 1 .708-.708z" />
-                                </svg>
-                            </button>
+                            {
+                                formatCode ?
+                                    <button className="mainCode__input__type__format" title="Format code" onClick={() => { beautify() }}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-file-check-fill" viewBox="0 0 16 16">
+                                            <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1.146 6.854-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
+                                        </svg>
+                                    </button>
+                                    :
+                                    <button className="mainCode__input__type__format" title="Format code" onClick={() => { beautify() }}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-file-code-fill" viewBox="0 0 16 16">
+                                            <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM6.646 5.646a.5.5 0 1 1 .708.708L5.707 8l1.647 1.646a.5.5 0 0 1-.708.708l-2-2a.5.5 0 0 1 0-.708l2-2zm2.708 0 2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 8 8.646 6.354a.5.5 0 1 1 .708-.708z" />
+                                        </svg>
+                                    </button>
+                            }
                             {
                                 copyClipboard ?
                                     <button className="mainCode__input__type__clip" title="Copy to clipboard" onClick={() => { copyToClipboard() }}>
@@ -435,11 +469,21 @@ export default function Home() {
                             <span>OUTPUT</span>
                         </span>
                         <span className="mainCode__output__type__btnWrapper">
-                            <Link to={downloadUrl} target="_blank" download title="Download code output">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-file-arrow-down-fill" viewBox="0 0 16 16">
-                                    <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM8 5a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5A.5.5 0 0 1 8 5z" />
-                                </svg>
-                            </Link>
+                            {
+                                downloadCode ?
+                                    <Link to={downloadUrl} target="_blank" download title="Download code output" onClick={() => setDownloadCode(true)}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-file-check-fill" viewBox="0 0 16 16">
+                                            <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1.146 6.854-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
+                                        </svg>
+                                    </Link>
+                                    :
+                                    <Link to={downloadUrl} target="_blank" download title="Download code output" onClick={() => setDownloadCode(true)}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-file-arrow-down-fill" viewBox="0 0 16 16">
+                                            <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM8 5a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5A.5.5 0 0 1 8 5z" />
+                                        </svg>
+                                    </Link>
+                            }
+
                             <button className="mainCode__output__type__full" title="Fullscreen" onClick={() => { setFullscreen() }}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-arrows-fullscreen" viewBox="0 0 16 16">
                                     <path fillRule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z" />

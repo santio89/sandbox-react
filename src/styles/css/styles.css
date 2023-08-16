@@ -752,7 +752,7 @@ button {
 }
 .main__modal .presets__option__confirm__buttons span {
   padding: 4px 2px;
-  background-color: var(--main-purple-variation);
+  background-color: var(--main-purple);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -764,7 +764,7 @@ button {
   border-radius: 2px;
 }
 .main__modal .presets__option__confirm__buttons span:hover, .main__modal .presets__option__confirm__buttons span:focus-visible {
-  background: var(--main-purple);
+  background: var(--main-purple-variation);
 }
 .main__modal .presets__option__confirm__buttons span:active {
   scale: 0.94;

@@ -864,7 +864,7 @@ button {
 
           span {
             padding: 4px 2px;
-            background-color: var(--main-purple-variation);
+            background-color: var(--main-purple);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -877,7 +877,7 @@ button {
 
             &:hover,
             &:focus-visible {
-              background: var(--main-purple);
+              background: var(--main-purple-variation);
             }
 
             &:active {
