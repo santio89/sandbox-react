@@ -734,7 +734,7 @@ button {
     align-items: stretch;
     background: var(--main-purple-variation);
   }
-  
+
   &__header {
     background: var(--main-purple-variation);
     display: flex;
@@ -815,17 +815,22 @@ button {
 
     /* FIN SCROLLBAR */
 
+    &__noSnippet {
+      font-size: 1.5rem;
+      color: var(--main-white)
+    }
+
     &__option {
       aspect-ratio: 4/3;
       width: clamp(100px, 100px + 10vw, 200px);
       background-color: var(--main-purple);
       border: 2px solid var(--main-purple);
       cursor: pointer;
-      color: white;
+      color: rgb(248, 248, 248);
       font-weight: bold;
       font-size: 1.2rem;
       border-radius: .4em;
-      padding: .2em;
+      padding: .125rem;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -847,6 +852,19 @@ button {
         align-items: center;
         gap: .8em;
 
+        input {
+          background: none;
+          max-width: 100%;
+          outline: none;
+          border: none;
+          border-bottom: 1px dashed var(--main-purple-variation);
+          text-align: center;
+
+          &::placeholder {
+            color: rgb(180, 180, 180);
+          }
+        }
+
         &__buttons {
           display: flex;
           justify-content: center;
@@ -865,10 +883,11 @@ button {
             font-size: .94em;
             line-height: 1;
             border-radius: 2px;
+            color: var(--main-purple-variation);
 
             &:hover,
             &:focus-visible {
-              background: var(--main-purple-variation);
+              color: rgb(248, 248, 248);
             }
 
             &:active {
@@ -895,12 +914,41 @@ button {
 
         &__del {
           position: absolute;
-          bottom: -10px;
-          right: -10px;
+          bottom: 0;
+          right: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          aspect-ratio: 1;
+          width: 20px;
 
           svg {
             color: var(--main-purple-variation);
-            border-radius: .4em 0 0 0;
+          }
+
+          &:hover svg,
+          &:focus-visible svg {
+            color: var(--main-red);
+          }
+
+          &:active {
+            color: var(--main-red);
+            scale: .94
+          }
+        }
+
+        &__edit {
+          position: absolute;
+          bottom: 0;
+          right: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          aspect-ratio: 1;
+          width: 20px;
+
+          svg {
+            color: var(--main-purple-variation);
           }
 
           &:hover svg,

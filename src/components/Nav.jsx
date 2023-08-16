@@ -4,7 +4,7 @@ import { setThemeReducer } from "../store/actions/theme.action";
 import { setCodeHtml, setCodeCss, setCodeJs } from "../store/actions/code.action";
 import { useState, useEffect, useRef } from "react";
 import { setCodeAll } from "../store/actions/code.action";
-import { savePreset, deletePreset } from "../store/actions/presets.action";
+import { savePreset, deletePreset, editPreset } from "../store/actions/presets.action";
 import { setModal, setLoadSnippet } from "../store/actions/modal.action";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -17,11 +17,13 @@ export default function Nav({ rootTheme }) {
   const modal = useRef()
   const [saveMode, setSaveMode] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
+  const [editIt, setEditId] = useState(null)
   const [selectedId, setSelectedId] = useState(null);
   const [savePresetName, setSavePresetName] = useState("");
   const [saved, setSaved] = useState(false)
   const [loaded, setLoaded] = useState(false)
   const [newProject, setNewProject] = useState(false)
+  const [editName, setEditName] = useState("")
 
   const presets = useSelector(state => state.preset.presets)
 
@@ -50,6 +52,7 @@ export default function Nav({ rootTheme }) {
       dispatch(setModal(true))
       setSelectedId(null)
       setDeleteId(null)
+      setEditId(null)
       modal.current.showModal()
     }
   }
@@ -71,6 +74,11 @@ export default function Nav({ rootTheme }) {
   const deleteSelectedPreset = (id) => {
     dispatch(deletePreset(presets, id))
     setDeleteId(null)
+  }
+
+  const editSelectedPreset = (id, newName) => {
+    dispatch(editPreset(presets, id, newName))
+    setEditId(null)
   }
 
   const saveNewPreset = (name, html, css, js) => {
@@ -129,6 +137,7 @@ export default function Nav({ rootTheme }) {
   useEffect(() => {
     setSelectedId(null)
     setDeleteId(null)
+    setEditId(null)
   }, [saveMode])
 
   useEffect(() => {
@@ -210,13 +219,14 @@ export default function Nav({ rootTheme }) {
             saveMode ?
               <div className="presets">
                 <div className="presets__save">
-                  <input type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} id="save-input" maxLength={30} />
+                  <input type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} id="save-input" maxLength={30} onSubmit={() => { saveNewPreset(savePresetName, html, css, js) }} />
                   <button disabled={savePresetName.trim() === ""} onClick={() => { saveNewPreset(savePresetName, html, css, js) }} data-saved={saved ? 'saved!' : ''}>Save</button>
                 </div>
               </div> :
               <div className="presets">
                 {
-                  presets?.map(preset => {
+                  presets.length > 0 ?
+                  (presets?.map(preset => {
                     return (
                       <button disabled={loaded || saved} className="presets__option" key={preset.id} onClick={() => { setSelectedId(preset.id) }} >
                         {
@@ -234,32 +244,51 @@ export default function Nav({ rootTheme }) {
                                 <span>Snippet loaded!</span>
                               </span>
                               :
-                              (deleteId === preset.id ?
-                                <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
-                                  <span>Delete snippet?</span>
-                                  <span className="presets__option__confirm__buttons">
-                                    <span onClick={(e) => { e.stopPropagation(); deleteSelectedPreset(preset.id) }}>Yes</span>
-                                    <span onClick={(e) => { e.stopPropagation(); setDeleteId(null) }}>No</span>
+                              editIt === preset.id ?
+                                (
+                                  <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
+                                    <span>Edit name?</span>
+                                    <input type="text" value={editName} onChange={e => setEditName(e.target.value)} placeholder="NEW NAME" />
+                                    <span className="presets__option__confirm__buttons">
+                                      <span onClick={(e) => { e.stopPropagation(); editSelectedPreset(preset.id, editName) }}>Yes</span>
+                                      <span onClick={(e) => { e.stopPropagation(); setEditId(null) }}>No</span>
+                                    </span>
                                   </span>
-                                </span> :
-                                <span className="presets__option__main">
-                                  <span className="presets__option__main__name">{preset.name}</span>
-                                  <span className="presets__option__main__del" onClick={(e) => {
-                                    e.stopPropagation();
-                                    setDeleteId(preset.id)
-                                  }}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" className="bi-file-x-fill" viewBox="0 0 16 16">
-                                      <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM6.854 6.146 8 7.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 8l1.147 1.146a.5.5 0 0 1-.708.708L8 8.707 6.854 9.854a.5.5 0 0 1-.708-.708L7.293 8 6.146 6.854a.5.5 0 1 1 .708-.708z" />
-                                    </svg>
+                                ) :
+                                (deleteId === preset.id ?
+                                  <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
+                                    <span>Delete snippet?</span>
+                                    <span className="presets__option__confirm__buttons">
+                                      <span onClick={(e) => { e.stopPropagation(); deleteSelectedPreset(preset.id) }}>Yes</span>
+                                      <span onClick={(e) => { e.stopPropagation(); setDeleteId(null) }}>No</span>
+                                    </span>
+                                  </span> :
+                                  <span className="presets__option__main">
+                                    <span className="presets__option__main__name">{preset.name}</span>
+                                    <span className="presets__option__main__edit" onClick={(e) => {
+                                      e.stopPropagation();
+                                      setEditId(preset.id)
+                                    }}>
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi-pencil-fill" viewBox="0 0 16 16">
+                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                                      </svg>
+                                    </span>
+                                    <span className="presets__option__main__del" onClick={(e) => {
+                                      e.stopPropagation();
+                                      setDeleteId(preset.id)
+                                    }}>
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi-trash-fill" viewBox="0 0 16 16">
+                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                      </svg>
+                                    </span>
                                   </span>
-                                </span>
-                              )
+                                )
                             )
-
                         }
                       </button>
                     )
-                  })
+                  })):
+                  <div className="presets__noSnippet">No snippets saved</div>
                 }
               </div>
           }

@@ -21,3 +21,15 @@ export const deletePreset = (presets, id) => {
         })
     }
 }
+
+export const editPreset = (presets, id, newName) => {
+    const index = presets.findIndex(preset => preset.id === id);
+    presets[index].name = newName
+    
+    return async dispatch => {
+        dispatch({
+            type: "SET_PRESETS",
+            presets
+        })
+    }
+}
