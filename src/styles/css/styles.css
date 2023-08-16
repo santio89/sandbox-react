@@ -740,7 +740,7 @@ button {
   right: -10px;
 }
 .main__modal .presets__option__main__del svg {
-  color: var(--main-purple-variation);
+  color: var(--main-purple);
   border-radius: 2px 0 0 0;
 }
 .main__modal .presets__option__main__del:hover svg, .main__modal .presets__option__main__del:focus-visible svg {
