@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { setCodeHtml, setCodeCss, setCodeJs } from "../store/actions/code.action";
+import { html_beautify, css_beautify, js_beautify } from "js-beautify";
 import { Link } from "react-router-dom";
 import Prism from 'prismjs'
 import '../styles/css/prism.css'
-import { html_beautify } from "js-beautify";
-import { css_beautify } from "js-beautify";
-import { js_beautify } from "js-beautify";
+
 
 
 export default function Home() {
