@@ -633,11 +633,10 @@ button {
   width: clamp(300px, 300px + 40vw, 800px);
   aspect-ratio: 5/4;
   min-height: min(500px, 80%);
-  background: var(--main-purple);
-  border: 4px solid var(--main-purple);
+  background: var(--main-purple-variation);
   outline: none;
+  border: none;
   max-width: 100%;
-  overflow: hidden;
 }
 .main__modal__inner {
   width: 100%;
@@ -646,12 +645,47 @@ button {
   flex-direction: column;
   justify-content: start;
   align-items: stretch;
+  background: var(--main-purple-variation);
+}
+.main__modal__header {
+  background: var(--main-purple-variation);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px 2px 8px;
+  color: rgb(248, 248, 248);
+  font-size: 1rem;
+}
+.main__modal__header__buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main__modal__header button {
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 6px;
+  transition: 200ms;
+  aspect-ratio: 1;
+}
+.main__modal__header button:hover, .main__modal__header button:focus-visible {
+  background: rgba(0, 0, 0, 0.2);
+}
+.main__modal__header button:active {
+  background: rgba(0, 0, 0, 0.2);
+  scale: 0.9;
+}
+.main__modal__header button[disabled] {
+  pointer-events: none;
+  color: rgb(80, 80, 80);
 }
 .main__modal .presets {
   flex: 1;
-  background-color: var(--main-purple);
-  background-image: linear-gradient(135deg, var(--main-purple) 10%, var(--main-black) 10%, var(--main-black) 90%, var(--main-purple) 90%);
-  border-radius: 0.4em;
+  border-radius: 0 0 1em 1em;
   padding-inline: max(4%, 1rem);
   padding-block: max(8%, 2rem);
   width: 100%;
@@ -661,6 +695,9 @@ button {
   flex-flow: row wrap;
   gap: clamp(8px, 10%, 2em);
   overflow-y: scroll;
+  border: 2px solid var(--main-purple-variation);
+  border-top: none;
+  background: var(--main-black);
   /* INICIO SCROLLBAR */
   scrollbar-width: thin;
   scrollbar-color: var(--main-gray) var(--bg-main);
@@ -680,24 +717,21 @@ button {
 }
 .main__modal .presets__option {
   aspect-ratio: 4/3;
-  width: clamp(100px, 100px + 8vw, 180px);
-  background-color: var(--main-purple-variation);
-  background-repeat: repeat-x;
+  width: clamp(100px, 100px + 10vw, 200px);
+  background-color: var(--main-purple);
+  border: 2px solid var(--main-purple);
   cursor: pointer;
   color: white;
   font-weight: bold;
   font-size: 1.2rem;
   border-radius: 0.4em;
-  border: 2px solid var(--main-purple-variation);
   padding: 0.2em;
-  box-sizing: content-box;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
 }
 .main__modal .presets__option:hover, .main__modal .presets__option:focus, .main__modal .presets__option:active {
-  border: 2px solid var(--main-purple);
   box-shadow: 0 0 10px 0 var(--main-purple);
 }
 .main__modal .presets__option__confirm {
@@ -755,8 +789,8 @@ button {
   right: -10px;
 }
 .main__modal .presets__option__main__del svg {
-  color: var(--main-purple);
-  border-radius: 2px 0 0 0;
+  color: var(--main-purple-variation);
+  border-radius: 0.4em 0 0 0;
 }
 .main__modal .presets__option__main__del:hover svg, .main__modal .presets__option__main__del:focus-visible svg {
   color: var(--main-red);
@@ -827,42 +861,6 @@ button {
   border: 1px solid rgb(60, 60, 60);
   background: rgb(80, 80, 80);
   pointer-events: none;
-}
-.main__modal__header {
-  background: var(--main-purple);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 8px 4px 8px;
-  color: rgb(248, 248, 248);
-  font-size: 1rem;
-}
-.main__modal__header__buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.main__modal__header button {
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  border-radius: 50%;
-  padding: 6px;
-  transition: 200ms;
-  aspect-ratio: 1;
-}
-.main__modal__header button:hover, .main__modal__header button:focus-visible {
-  background: rgba(0, 0, 0, 0.2);
-}
-.main__modal__header button:active {
-  background: rgba(0, 0, 0, 0.2);
-  scale: 0.9;
-}
-.main__modal__header button[disabled] {
-  pointer-events: none;
-  color: rgb(80, 80, 80);
 }
 .main__modal::backdrop {
   background: rgba(40, 40, 40, 0.4);
