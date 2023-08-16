@@ -629,12 +629,13 @@ button {
         gap: .8rem;
         margin-inline: .4rem;
 
-        svg{
+        svg {
           color: var(--main-red);
           fill: var(--main-red);
         }
 
-        &:hover, &:active{
+        &:hover,
+        &:active {
           background-color: var(--main-red);
         }
       }
@@ -728,7 +729,7 @@ button {
   .presets {
     flex: 1;
     background-color: var(--main-purple);
-    background-image: linear-gradient(45deg, var(--main-purple) 15%, var(--main-black) 15%, var(--main-black) 85%, var(--main-purple) 85%);
+    background-image: linear-gradient(135deg, var(--main-purple) 10%, var(--main-black) 10%, var(--main-black) 90%, var(--main-purple) 90%);
     border-radius: .4em;
     padding-inline: max(4%, 1rem);
     padding-block: max(8%, 2rem);
@@ -762,20 +763,16 @@ button {
     /* FIN SCROLLBAR */
 
     &__option {
-      aspect-ratio: 1;
+      aspect-ratio: 4/3;
       width: clamp(100px, 100px + 8vw, 180px);
-      background-color: var(--main-purple);
-      background-image: linear-gradient(45deg, var(--main-purple), var(--main-red));
-      border: 1px solid var(--main-red);
+      background-color: var(--main-purple-variation);
+      background-repeat: repeat-x;
       cursor: pointer;
       color: white;
       font-weight: bold;
       font-size: 1.2rem;
-      background-size: 300%;
-      background-position: 0% 50%;
       border-radius: .4em;
-      border: 2px solid var(--main-purple);
-      transition: 200ms;
+      border: 2px solid var(--main-purple-variation);
       padding: .2em;
       box-sizing: content-box;
       display: flex;
@@ -784,8 +781,10 @@ button {
       overflow: hidden;
 
       &:hover,
-      &:focus-visible {
-        box-shadow: -2px 2px 8px 0 var(--main-purple);
+      &:focus,
+      &:active {
+        border: 2px solid var(--main-purple);
+        box-shadow: 0 0 10px 0 var(--main-purple)
       }
 
       &__confirm {
@@ -882,7 +881,6 @@ button {
         border: none;
         border-bottom: 2px solid var(--main-purple);
         color: var(--main-white);
-        text-shadow: 1px 1px 0 var(--main-purple);
         text-align: center;
 
         &::placeholder {
