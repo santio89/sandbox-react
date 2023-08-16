@@ -59,7 +59,7 @@ const snippetExample_1 = {
     background-color: var(--btn-color);
   }`,
   js: `const btn = document.querySelector(".btnSlider");
-  btn.addEventListener("click", ()=>{
+  btn.addEventListener("click", () => {
     document.body.classList.toggle("bg-magenta")
   })`
 }

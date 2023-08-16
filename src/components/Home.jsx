@@ -66,17 +66,17 @@ export default function Home() {
     const beautify = () => {
         switch (tabActive) {
             case 'html': {
-                const beautify = html_beautify(html)
+                const beautify = html_beautify(html, { indent_size: 2, indent_with_tabs: true, space_in_empty_paren: true })
                 setHtml(beautify)
                 break;
             }
             case 'css': {
-                const beautify = css_beautify(css)
+                const beautify = css_beautify(css, { indent_size: 2, indent_with_tabs: true, space_in_empty_paren: true })
                 setCss(beautify)
                 break;
             }
             case 'js': {
-                const beautify = js_beautify(js)
+                const beautify = js_beautify(js, { indent_size: 2, indent_with_tabs: true, space_in_empty_paren: true })
                 setJs(beautify)
                 break;
             }
