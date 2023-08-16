@@ -58,7 +58,7 @@ const snippetExample_1 = {
   .bg-magenta {
     background-color: var(--btn-color);
   }`,
-  js: `const btn = document.querySelector("div");
+  js: `const btn = document.querySelector(".btnSlider");
   btn.addEventListener("click", ()=>{
     document.body.classList.toggle("bg-magenta")
   })`
