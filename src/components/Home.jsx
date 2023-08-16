@@ -18,6 +18,7 @@ export default function Home() {
     const [downloadBlob, setDownloadBlob] = useState("")
     const [downloadUrl, setDownloadUrl] = useState("")
     const [codeOutput, setCodeOutput] = useState("")
+    const [copyClipboard, setCopyClipboard] = useState(false)
 
     const [prismContentHtml, setPrismContentHtml] = useState(html)
     const [prismContentCss, setPrismContentCss] = useState(css)
@@ -43,8 +44,8 @@ export default function Home() {
     const setJs = (js) => {
         dispatch(setCodeJs(js))
     }
-    const resetCode = (code) => {
-        switch (code) {
+    const resetCode = () => {
+        switch (tabActive) {
             case 'html':
                 dispatch(setCodeHtml(""))
                 break;
@@ -97,6 +98,23 @@ export default function Home() {
                 return
         }
         setClearConfirm(true)
+    }
+
+    const copyToClipboard = () => {
+        switch (tabActive) {
+            case 'html':
+                navigator.clipboard.writeText(html);
+                break;
+            case 'css':
+                navigator.clipboard.writeText(css);
+                break;
+            case 'js':
+                navigator.clipboard.writeText(js);
+                break;
+            default:
+                return
+        }
+        setCopyClipboard(true)
     }
 
     const setFullscreen = () => {
@@ -215,6 +233,17 @@ export default function Home() {
     }, [codeOutput])
 
     useEffect(() => {
+        let timeout = null;
+        if (copyClipboard) {
+            timeout = setTimeout(() => {
+                setCopyClipboard(false)
+            }, 1000)
+        }
+
+        return () => clearTimeout(timeout)
+    }, [copyClipboard])
+
+    useEffect(() => {
         setClearConfirm(false)
 
         switch (tabActive) {
@@ -287,17 +316,28 @@ export default function Home() {
                             <span>{tabActive.toUpperCase()}</span>
                         </span>
                         <span className="mainCode__input__type__btnWrapper">
-                            <Link to={downloadUrl} target="_blank" download title="Download">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-file-arrow-down-fill" viewBox="0 0 16 16">
-                                    <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM8 5a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5A.5.5 0 0 1 8 5z" />
-                                </svg>
-                            </Link>
+                            {
+                                copyClipboard ?
+                                    <button className="mainCode__input__type__clip" title="Copy to clipboard" onClick={() => { copyToClipboard() }}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi clipboard-check-fill" viewBox="0 0 16 16">
+                                            <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z" />
+                                            <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z" />
+                                        </svg>
+                                    </button>
+                                    :
+                                    <button className="mainCode__input__type__clip" title="Copy to clipboard" onClick={() => { copyToClipboard() }}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-clipboard-fill" viewBox="0 0 16 16">
+                                            <path fillRule="evenodd" d="M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Zm-5 0A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm-2 0h1v1A2.5 2.5 0 0 0 6.5 5h3A2.5 2.5 0 0 0 12 2.5v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z" />
+                                        </svg>
+                                    </button>
+                            }
+
                             {
                                 clearConfirm ?
                                     <span className="mainCode__input__type__clearConfirm">
                                         <span>Clear?</span>
                                         <span className="mainCode__input__type__clearConfirm__buttons">
-                                            <button onClick={() => { resetCode(tabActive) }}>Yes</button>
+                                            <button onClick={() => { resetCode() }}>Yes</button>
                                             <button onClick={() => { setClearConfirm(false) }}>No</button>
                                         </span>
                                     </span>
@@ -366,11 +406,18 @@ export default function Home() {
                         <span className="mainCode__output__type__active">
                             <span>OUTPUT</span>
                         </span>
-                        <button className="mainCode__output__type__full" title="Fullscreen" onClick={() => { setFullscreen() }}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-arrows-fullscreen" viewBox="0 0 16 16">
-                                <path fillRule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z" />
-                            </svg>
-                        </button>
+                        <span className="mainCode__output__type__btnWrapper">
+                            <Link to={downloadUrl} target="_blank" download title="Download code output">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-file-arrow-down-fill" viewBox="0 0 16 16">
+                                    <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM8 5a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5A.5.5 0 0 1 8 5z" />
+                                </svg>
+                            </Link>
+                            <button className="mainCode__output__type__full" title="Fullscreen" onClick={() => { setFullscreen() }}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-arrows-fullscreen" viewBox="0 0 16 16">
+                                    <path fillRule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z" />
+                                </svg>
+                            </button>
+                        </span>
                     </div>
                     <div className={`mainCode__output__iframeWrapper ${codeOutput === ("" || `<body>\n` + "" + `\n</body>\n` + `\n<style>\n` + "" + `\n</style>\n` + `\n<script>\n` + "" + `\n</script>`) && `dim`}`}>
                         <iframe srcDoc={codeOutput} allow="fullscreen" ref={iframe} className="mainCode__output__iframe" title="Output">

@@ -343,18 +343,20 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  line-height: 0;
 }
-.mainCode__input__type__btnWrapper a {
+.mainCode__input__type__clip {
   display: flex;
   justify-content: center;
   align-items: center;
   color: var(--main-purple);
   transition: 200ms;
+  cursor: pointer;
 }
-.mainCode__input__type__btnWrapper a:hover {
+.mainCode__input__type__clip:hover {
   color: var(--main-red);
 }
-.mainCode__input__type__btnWrapper a:active {
+.mainCode__input__type__clip:active {
   color: var(--main-red);
   scale: 0.9;
 }
@@ -509,6 +511,26 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.mainCode__output__type__btnWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 0;
+}
+.mainCode__output__type__btnWrapper a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--main-purple);
+  transition: 200ms;
+}
+.mainCode__output__type__btnWrapper a:hover {
+  color: var(--main-red);
+}
+.mainCode__output__type__btnWrapper a:active {
+  color: var(--main-red);
+  scale: 0.9;
 }
 .mainCode__output__type__full {
   cursor: pointer;

@@ -395,22 +395,24 @@ button {
         display: flex;
         justify-content: center;
         align-items: center;
+        line-height: 0;
+      }
 
-        a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          color: var(--main-purple);
-          transition: 200ms;
+      &__clip {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--main-purple);
+        transition: 200ms;
+        cursor: pointer;
 
-          &:hover {
-            color: var(--main-red);
-          }
+        &:hover {
+          color: var(--main-red);
+        }
 
-          &:active {
-            color: var(--main-red);
-            scale: .9
-          }
+        &:active {
+          color: var(--main-red);
+          scale: .9
         }
       }
 
@@ -590,6 +592,30 @@ button {
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      &__btnWrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 0;
+
+        a {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: var(--main-purple);
+          transition: 200ms;
+
+          &:hover {
+            color: var(--main-red);
+          }
+
+          &:active {
+            color: var(--main-red);
+            scale: .9
+          }
+        }
+      }
 
       &__full {
         cursor: pointer;
