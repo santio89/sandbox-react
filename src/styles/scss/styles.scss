@@ -397,6 +397,25 @@ button {
         display: flex;
         justify-content: center;
         align-items: center;
+        gap: .5rem;
+      }
+
+      &__format {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--main-purple);
+        transition: 200ms;
+        cursor: pointer;
+
+        &:hover {
+          color: var(--main-red);
+        }
+
+        &:active {
+          color: var(--main-red);
+          scale: .9
+        }
       }
 
       &__clip {
@@ -464,7 +483,6 @@ button {
         justify-content: center;
         align-items: center;
         gap: .8rem;
-        margin-inline: .4rem;
         transition: 200ms;
 
         &:hover,

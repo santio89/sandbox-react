@@ -345,6 +345,22 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 0.5rem;
+}
+.mainCode__input__type__format {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--main-purple);
+  transition: 200ms;
+  cursor: pointer;
+}
+.mainCode__input__type__format:hover {
+  color: var(--main-red);
+}
+.mainCode__input__type__format:active {
+  color: var(--main-red);
+  scale: 0.9;
 }
 .mainCode__input__type__clip {
   display: flex;
@@ -402,7 +418,6 @@ button {
   justify-content: center;
   align-items: center;
   gap: 0.8rem;
-  margin-inline: 0.4rem;
   transition: 200ms;
 }
 .mainCode__input__type__clear:hover, .mainCode__input__type__clear:focus-visible {
