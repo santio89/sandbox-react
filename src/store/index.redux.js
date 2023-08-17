@@ -13,14 +13,17 @@ const RootReducer = combineReducers({
     preset: PresetReducer,
     modal: ModalReducer,
     html: undoable(HtmlReducer, {
+        limit: 100,
         undoType: 'HTML_UNDO',
         redoType: 'HTML_REDO',
     }),
     css: undoable(CssReducer, {
+        limit: 100,
         undoType: 'CSS_UNDO',
         redoType: 'CSS_REDO',
     }),
     js: undoable(JsReducer, {
+        limit: 100,
         undoType: 'JS_UNDO',
         redoType: 'JS_REDO',
     }),
