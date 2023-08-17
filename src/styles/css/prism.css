@@ -287,7 +287,9 @@ pre[class*="language-"]>code[class*="language-"] {
 
 .code-light code[class*="language-"],
 .code-light .code-light pre[class*="language-"] {
-	color: #393A34;
+	color: #878882
+		/* #393A34 */
+	;
 	font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
 	direction: ltr;
 	text-align: left;
@@ -354,7 +356,9 @@ code[class*="language-"] ::selection {
 
 .code-light .token.punctuation,
 .token.operator {
-	color: #393A34;
+	color: #878882
+		/* #393A34 */
+	;
 	/* no highlight */
 }
 
@@ -379,7 +383,9 @@ code[class*="language-"] ::selection {
 }
 
 .code-light .token.function {
-	color: #393A34;
+	color: #878882
+		/* #393A34 */
+	;
 }
 
 .code-light .token.deleted,
@@ -424,7 +430,9 @@ code[class*="language-"] ::selection {
 
 .code-light .token.directive.tag .tag {
 	background: #ffff00;
-	color: #393A34;
+	color: #878882
+		/* #393A34 */
+	;
 }
 
 /* overrides color-values for the Line Numbers plugin
