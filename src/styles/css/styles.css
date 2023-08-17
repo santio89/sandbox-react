@@ -243,7 +243,7 @@ button {
   inset: 0;
   background-image: url("/icon.svg");
   background-repeat: no-repeat;
-  background-position: 0% -80%;
+  background-position: 0% -20%;
   background-size: max(600px, 50%);
   z-index: 0;
   transform: rotate(180deg);
@@ -315,10 +315,10 @@ button {
   flex: 1;
   min-width: 300px;
   max-width: 100%;
-  height: max(420px, 70dvh);
-  height: max(420px, 70vh);
-  min-height: max(420px, 70dvh);
-  min-height: max(420px, 70vh);
+  height: clamp(420px, 74dvh, 1080px);
+  height: clamp(420px, 74vh, 1080px);
+  min-height: min(1080px, 74dvh);
+  min-height: min(1080px, 74vh);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -516,10 +516,10 @@ button {
   flex: 1;
   min-width: 300px;
   max-width: 100%;
-  height: max(420px, 70vh);
-  height: max(420px, 70dvh);
-  min-height: max(420px, 70vh);
-  min-height: max(420px, 70dvh);
+  height: clamp(420px, 74dvh, 1080px);
+  height: clamp(420px, 74vh, 1080px);
+  min-height: min(1080px, 74dvh);
+  min-height: min(1080px, 74vh);
   display: flex;
   flex-direction: column;
 }
