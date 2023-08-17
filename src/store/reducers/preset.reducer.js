@@ -9,7 +9,8 @@ css: `* {
 }
 
 html {
-  --btn-shadow: 30px;
+  --btn-shadow-length: 30px;
+  --btn-shadow-color: pink;
   --btn-color: magenta
 }
 
@@ -26,11 +27,11 @@ body {
   border: none;
   outline: none;
   cursor: pointer;
-  padding-right: var(--btn-shadow);
+  padding-right: var(--btn-shadow-length);
 }
 
 .btnSlider span {
-  background-color: magenta;
+  background-color: var(--btn-color);
   border-radius: 2em;
   padding: 1rem;
   display: inline-block;
@@ -41,12 +42,12 @@ body {
   font-family: helvetica;
   font-weight: 700;
   font-size: 2rem;
-  box-shadow: var(--btn-shadow) 0px 0 0 pink;
+  box-shadow: var(--btn-shadow-length) 0px 0 0 var(--btn-shadow-color);
 }
 
 .btnSlider:hover span,
 .btnSlider:focus-visible span {
-  translate: var(--btn-shadow) 0;
+  translate: var(--btn-shadow-length) 0;
   opacity: 1;
   box-shadow: 0 0 0 pink;
 }
