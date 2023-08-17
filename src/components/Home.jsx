@@ -222,33 +222,47 @@ export default function Home() {
                 break;
             }
             case 'css': {
-                text = `${textareaCss.current.value.substring(
-                    0, textareaCss.current.selectionStart)}${"/* "}${textareaCss.current.value.substring(
-                        textareaCss.current.selectionStart,
-                        textareaCss.current.selectionEnd
-                    )}${" */"}${textareaCss.current.value.substring(
-                        textareaCss.current.selectionEnd,
-                        textareaCss.current.value.length
-                    )}`;
+                if (textareaCss.current.value.startsWith("/*", textareaCss.current.selectionStart) && textareaCss.current.value.endsWith("*/", textareaCss.current.selectionEnd)) {
+                    text = textareaCss.current.value.replace("/*", "").replace("*/", "");
+                    selection = (textareaCss.current.selectionEnd)
+                    setCss(text);
+                    setTextCursor(selection - 3)
+                } else {
+                    text = `${textareaCss.current.value.substring(
+                        0, textareaCss.current.selectionStart)}${"/* "}${textareaCss.current.value.substring(
+                            textareaCss.current.selectionStart,
+                            textareaCss.current.selectionEnd
+                        )}${" */"}${textareaCss.current.value.substring(
+                            textareaCss.current.selectionEnd,
+                            textareaCss.current.value.length
+                        )}`;
 
-                const selection = (textareaCss.current.selectionEnd)
-                setCss(text);
-                setTextCursor(selection + 3)
+                    selection = (textareaCss.current.selectionEnd)
+                    setCss(text);
+                    setTextCursor(selection + 3)
+                }
                 break;
             }
             case 'js': {
-                text = `${textareaJs.current.value.substring(
-                    0, textareaJs.current.selectionStart)}${"/* "}${textareaJs.current.value.substring(
-                        textareaJs.current.selectionStart,
-                        textareaJs.current.selectionEnd
-                    )}${" */"}${textareaJs.current.value.substring(
-                        textareaJs.current.selectionEnd,
-                        textareaJs.current.value.length
-                    )}`;
+                if (textareaJs.current.value.startsWith("/*", textareaJs.current.selectionStart) && textareaJs.current.value.endsWith("*/", textareaJs.current.selectionEnd)) {
+                    text = textareaJs.current.value.replace("/*", "").replace("*/", "");
+                    selection = (textareaJs.current.selectionEnd)
+                    setJs(text);
+                    setTextCursor(selection - 3)
+                } else {
+                    text = `${textareaJs.current.value.substring(
+                        0, textareaJs.current.selectionStart)}${"/* "}${textareaJs.current.value.substring(
+                            textareaJs.current.selectionStart,
+                            textareaJs.current.selectionEnd
+                        )}${" */"}${textareaJs.current.value.substring(
+                            textareaJs.current.selectionEnd,
+                            textareaJs.current.value.length
+                        )}`;
 
-                const selection = (textareaJs.current.selectionEnd)
-                setJs(text);
-                setTextCursor(selection + 3)
+                    selection = (textareaJs.current.selectionEnd)
+                    setJs(text);
+                    setTextCursor(selection + 3)
+                }
                 break;
             }
             default:
