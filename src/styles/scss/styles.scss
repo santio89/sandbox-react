@@ -600,6 +600,7 @@ button {
     flex: 1;
     min-width: 300px;
     max-width: 100%;
+    height: max(420px, 70vh);
     height: max(420px, 70dvh);
     min-height: max(420px, 70vh);
     min-height: max(420px, 70dvh);
