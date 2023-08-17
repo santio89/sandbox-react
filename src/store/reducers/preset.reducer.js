@@ -49,7 +49,7 @@ body {
 .btnSlider:focus-visible span {
   translate: var(--btn-shadow-length) 0;
   opacity: 1;
-  box-shadow: 0 0 0 pink;
+  box-shadow: 0 0 0 var(--btn-shadow-color);
 }
 
 .btnSlider:active span {
