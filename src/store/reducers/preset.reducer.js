@@ -53,6 +53,9 @@ body {
 }
 
 .btnSlider:active span {
+  translate: var(--btn-shadow-length) 0;
+  opacity: 1;
+  box-shadow: 0 0 0 var(--btn-shadow-color);
   transform: scale(.8);
 }
 
