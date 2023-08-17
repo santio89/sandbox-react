@@ -148,44 +148,6 @@ export default function Home() {
         iframe.current.requestFullscreen()
     }
 
-    const checkInput = (e) => {
-        if (e.key === "Tab") {
-            e.preventDefault();
-            insertTabs()
-        } else if (e.key == "z" && e.ctrlKey) {
-            e.preventDefault();
-            switch (tabActive) {
-                case 'html':
-                    dispatch({ type: "HTML_UNDO" })
-                    break;
-                case 'css':
-                    dispatch({ type: "CSS_UNDO" })
-                    break;
-                case 'js':
-                    dispatch({ type: "JS_UNDO" })
-                    break;
-                default:
-                    return
-            }
-        } else if (e.key == "y" && e.ctrlKey) {
-            e.preventDefault();
-            switch (tabActive) {
-                case 'html':
-                    dispatch({ type: "HTML_REDO" })
-                    break;
-                case 'css':
-                    dispatch({ type: "CSS_REDO" })
-                    break;
-                case 'js':
-                    dispatch({ type: "JS_REDO" })
-                    break;
-                default:
-                    return
-            }
-        }
-        syncScroll();
-    }
-
     const insertTabs = () => {
         let text;
         switch (tabActive) {
@@ -231,6 +193,111 @@ export default function Home() {
             default:
                 return
         }
+    }
+
+    const insertComment = () => {
+        let text;
+        let selection;
+        switch (tabActive) {
+            case 'html': {
+                if (textareaHtml.current.value.startsWith("<!--", textareaHtml.current.selectionStart) && textareaHtml.current.value.endsWith("-->", textareaHtml.current.selectionEnd)) {
+                    text = textareaHtml.current.value.replace("<!--", "").replace("-->", "");
+                    selection = (textareaHtml.current.selectionEnd)
+                    setHtml(text);
+                    setTextCursor(selection - 3)
+                } else {
+                    text = `${textareaHtml.current.value.substring(
+                        0, textareaHtml.current.selectionStart)}${"<!-- "}${textareaHtml.current.value.substring(
+                            textareaHtml.current.selectionStart,
+                            textareaHtml.current.selectionEnd
+                        )}${" -->"}${textareaHtml.current.value.substring(
+                            textareaHtml.current.selectionEnd,
+                            textareaHtml.current.value.length
+                        )}`;
+
+                    selection = (textareaHtml.current.selectionEnd)
+                    setHtml(text);
+                    setTextCursor(selection + 5)
+                }
+                break;
+            }
+            case 'css': {
+                text = `${textareaCss.current.value.substring(
+                    0, textareaCss.current.selectionStart)}${"/* "}${textareaCss.current.value.substring(
+                        textareaCss.current.selectionStart,
+                        textareaCss.current.selectionEnd
+                    )}${" */"}${textareaCss.current.value.substring(
+                        textareaCss.current.selectionEnd,
+                        textareaCss.current.value.length
+                    )}`;
+
+                const selection = (textareaCss.current.selectionEnd)
+                setCss(text);
+                setTextCursor(selection + 3)
+                break;
+            }
+            case 'js': {
+                text = `${textareaJs.current.value.substring(
+                    0, textareaJs.current.selectionStart)}${"/* "}${textareaJs.current.value.substring(
+                        textareaJs.current.selectionStart,
+                        textareaJs.current.selectionEnd
+                    )}${" */"}${textareaJs.current.value.substring(
+                        textareaJs.current.selectionEnd,
+                        textareaJs.current.value.length
+                    )}`;
+
+                const selection = (textareaJs.current.selectionEnd)
+                setJs(text);
+                setTextCursor(selection + 3)
+                break;
+            }
+            default:
+                return
+        }
+    }
+
+    const checkInput = (e) => {
+        if (e.key.toUpperCase() === "TAB") {
+            e.preventDefault();
+            insertTabs()
+        } else if (e.key.toUpperCase() === "Z" && e.ctrlKey) {
+            e.preventDefault();
+            switch (tabActive) {
+                case 'html':
+                    dispatch({ type: "HTML_UNDO" })
+                    break;
+                case 'css':
+                    dispatch({ type: "CSS_UNDO" })
+                    break;
+                case 'js':
+                    dispatch({ type: "JS_UNDO" })
+                    break;
+                default:
+                    return
+            }
+        } else if (e.key.toUpperCase() === "Y" && e.ctrlKey) {
+            e.preventDefault();
+            switch (tabActive) {
+                case 'html':
+                    dispatch({ type: "HTML_REDO" })
+                    break;
+                case 'css':
+                    dispatch({ type: "CSS_REDO" })
+                    break;
+                case 'js':
+                    dispatch({ type: "JS_REDO" })
+                    break;
+                default:
+                    return
+            }
+        } else if (e.key.toUpperCase() === "F" && e.altKey && e.shiftKey) {
+            e.preventDefault();
+            beautify()
+        } else if (e.key.toUpperCase() === "A" && e.altKey && e.shiftKey) {
+            e.preventDefault()
+            insertComment();
+        }
+        syncScroll();
     }
 
     useEffect(() => {
