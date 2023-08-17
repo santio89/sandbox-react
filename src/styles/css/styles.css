@@ -835,6 +835,12 @@ button {
   display: flex;
   flex-direction: column;
   flex: 1;
+  max-width: 100%;
+}
+.main__modal .presets__save form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   gap: 1rem;
   max-width: 100%;
 }

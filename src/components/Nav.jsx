@@ -225,8 +225,10 @@ export default function Nav({ rootTheme }) {
             saveMode ?
               <div className="presets">
                 <div className="presets__save">
-                  <input type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} id="save-input" maxLength={30} onSubmit={() => { saveNewPreset(savePresetName, html, css, js) }} />
-                  <button disabled={savePresetName.trim() === ""} onClick={() => { saveNewPreset(savePresetName, html, css, js) }} data-saved={saved ? 'saved!' : ''}>Save</button>
+                  <form onSubmit={(e) => { e.preventDefault(); saveNewPreset(savePresetName, html, css, js) }}>
+                    <input type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} maxLength={30} />
+                    <button disabled={savePresetName.trim() === ""} data-saved={saved ? 'saved!' : ''}>Save</button>
+                  </form>
                 </div>
               </div> :
               <div className="presets">
@@ -254,11 +256,13 @@ export default function Nav({ rootTheme }) {
                                   (
                                     <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                                       <span>Rename snippet?</span>
-                                      <input type="text" value={editName} onChange={e => setEditName(e.target.value)} placeholder="NEW NAME" />
-                                      <span className="presets__option__confirm__buttons">
-                                        <span onClick={(e) => { e.stopPropagation(); editSelectedPreset(preset.id, editName) }}>Yes</span>
-                                        <span onClick={(e) => { e.stopPropagation(); setEditId(null) }}>No</span>
-                                      </span>
+                                      <form onSubmit={(e) => { e.preventDefault(); editSelectedPreset(preset.id, editName) }}>
+                                        <input type="text" value={editName} onChange={e => setEditName(e.target.value)} placeholder="NEW NAME" />
+                                        <span className="presets__option__confirm__buttons">
+                                          <span onClick={(e) => { e.stopPropagation(); editSelectedPreset(preset.id, editName) }}>Yes</span>
+                                          <span onClick={(e) => { e.stopPropagation(); setEditId(null) }}>No</span>
+                                        </span>
+                                      </form>
                                     </span>
                                   ) :
                                   (deleteId === preset.id ?
