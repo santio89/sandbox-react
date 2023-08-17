@@ -17,7 +17,7 @@ export default function Nav({ rootTheme }) {
   const modal = useRef()
   const [saveMode, setSaveMode] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
-  const [editIt, setEditId] = useState(null)
+  const [editId, setEditId] = useState(null)
   const [selectedId, setSelectedId] = useState(null);
   const [savePresetName, setSavePresetName] = useState("");
   const [saved, setSaved] = useState(false)
@@ -106,6 +106,12 @@ export default function Nav({ rootTheme }) {
     setSavePresetName("")
     setSaved(true)
   }
+
+  useEffect(() => {
+    if (editId === null) {
+      setEditName("")
+    }
+  }, [editId])
 
   useEffect(() => {
     let timeout = null;
@@ -244,10 +250,10 @@ export default function Nav({ rootTheme }) {
                                   <span>Snippet loaded!</span>
                                 </span>
                                 :
-                                editIt === preset.id ?
+                                editId === preset.id ?
                                   (
                                     <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
-                                      <span>Edit name?</span>
+                                      <span>Rename snippet?</span>
                                       <input type="text" value={editName} onChange={e => setEditName(e.target.value)} placeholder="NEW NAME" />
                                       <span className="presets__option__confirm__buttons">
                                         <span onClick={(e) => { e.stopPropagation(); editSelectedPreset(preset.id, editName) }}>Yes</span>
