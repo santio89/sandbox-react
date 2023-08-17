@@ -5,6 +5,7 @@ import { html_beautify, css_beautify, js_beautify } from "js-beautify";
 import { Link } from "react-router-dom";
 import Prism from 'prismjs'
 import '../styles/css/prism.css'
+import { ActionCreators } from 'redux-undo'
 
 
 
@@ -12,9 +13,9 @@ export default function Home() {
     const [tabActive, setTabActive] = useState("html")
     const [clearConfirm, setClearConfirm] = useState(false);
     const dispatch = useDispatch()
-    const html = useSelector(state => state.code.html)
-    const css = useSelector(state => state.code.css)
-    const js = useSelector(state => state.code.js)
+    const html = useSelector(state => state.html.present.html)
+    const css = useSelector(state => state.css.present.css)
+    const js = useSelector(state => state.js.present.js)
     const darkTheme = useSelector(state => state.theme.darkTheme);
     const loadSnippet = useSelector(state => state.modal.loadSnippet)
     const [downloadBlob, setDownloadBlob] = useState("")
@@ -145,6 +146,44 @@ export default function Home() {
 
     const setFullscreen = () => {
         iframe.current.requestFullscreen()
+    }
+
+    const checkInput = (e) => {
+        if (e.key === "Tab") {
+            e.preventDefault();
+            insertTabs()
+        } else if (e.key == "z" && e.ctrlKey) {
+            e.preventDefault();
+            switch (tabActive) {
+                case 'html':
+                    dispatch({ type: "HTML_UNDO" })
+                    break;
+                case 'css':
+                    dispatch({ type: "CSS_UNDO" })
+                    break;
+                case 'js':
+                    dispatch({ type: "JS_UNDO" })
+                    break;
+                default:
+                    return
+            }
+        } else if (e.key == "y" && e.ctrlKey) {
+            e.preventDefault();
+            switch (tabActive) {
+                case 'html':
+                    dispatch({ type: "HTML_REDO" })
+                    break;
+                case 'css':
+                    dispatch({ type: "CSS_REDO" })
+                    break;
+                case 'js':
+                    dispatch({ type: "JS_REDO" })
+                    break;
+                default:
+                    return
+            }
+        }
+        syncScroll();
     }
 
     const insertTabs = () => {
@@ -421,13 +460,7 @@ export default function Home() {
                             </code>
                         </pre>
 
-                        <textarea ref={textareaHtml} spellCheck="false" className={`mainCode__input__text ${html === "" && `dim`} textarea`} value={html} onChange={e => setHtml(e.target.value)} onKeyDown={(e) => {
-                            if (e.key === "Tab") {
-                                e.preventDefault();
-                                insertTabs()
-                            }
-                            syncScroll();
-                        }} onScroll={() => { syncScroll() }}></textarea>
+                        <textarea ref={textareaHtml} spellCheck="false" className={`mainCode__input__text ${html === "" && `dim`} textarea`} value={html} onChange={e => setHtml(e.target.value)} onKeyDown={(e) => checkInput(e)} onScroll={() => { syncScroll() }}></textarea>
                     </div>
 
                     <div className={`mainCode__input__textWrapper ${tabActive !== "css" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
@@ -437,13 +470,7 @@ export default function Home() {
                             </code>
                         </pre>
 
-                        <textarea ref={textareaCss} spellCheck="false" className={`mainCode__input__text ${css === "" && `dim`} textarea`} value={css} onChange={e => setCss(e.target.value)} onKeyDown={(e) => {
-                            if (e.key === "Tab") {
-                                e.preventDefault();
-                                insertTabs();
-                                syncScroll()
-                            }
-                        }} onScroll={() => { syncScroll() }}></textarea>
+                        <textarea ref={textareaCss} spellCheck="false" className={`mainCode__input__text ${css === "" && `dim`} textarea`} value={css} onChange={e => setCss(e.target.value)} onKeyDown={(e) => checkInput(e)} onScroll={() => { syncScroll() }}></textarea>
                     </div>
 
                     <div className={`mainCode__input__textWrapper ${tabActive !== "js" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
@@ -453,13 +480,7 @@ export default function Home() {
                             </code>
                         </pre>
 
-                        <textarea ref={textareaJs} spellCheck="false" className={`mainCode__input__text ${js === "" && `dim`} textarea`} value={js} onChange={e => setJs(e.target.value)} onKeyDown={(e) => {
-                            if (e.key === "Tab") {
-                                e.preventDefault();
-                                insertTabs();
-                                syncScroll()
-                            }
-                        }} onScroll={() => { syncScroll() }}></textarea>
+                        <textarea ref={textareaJs} spellCheck="false" className={`mainCode__input__text ${js === "" && `dim`} textarea`} value={js} onChange={e => setJs(e.target.value)} onKeyDown={(e) => checkInput(e)} onScroll={() => { syncScroll() }}></textarea>
                     </div>
 
                 </div>

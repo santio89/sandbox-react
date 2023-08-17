@@ -28,9 +28,15 @@ export const setCodeJs = (js) => {
 export const setCodeAll = (html, css, js) => {
     return async dispatch => {
         dispatch({
-            type: "SET_CODE",
-            html,
-            css,
+            type: "SET_HTML",
+            html
+        })
+        dispatch({
+            type: "SET_CSS",
+            css
+        })
+        dispatch({
+            type: "SET_JS",
             js
         })
     }

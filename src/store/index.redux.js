@@ -1,23 +1,35 @@
 import { legacy_createStore as createStore, combineReducers, applyMiddleware } from "redux";
 import ThemeReducer from './reducers/theme.reducer'
 import PresetReducer from "./reducers/preset.reducer";
-import CodeReducer from "./reducers/code.reducer";
+import { HtmlReducer, CssReducer, JsReducer } from "./reducers/code.reducer";
 import ModalReducer from './reducers/modal.reducer'
 import thunk from "redux-thunk";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import undoable from "redux-undo"
 
 const RootReducer = combineReducers({
     theme: ThemeReducer,
     preset: PresetReducer,
-    code: CodeReducer,
     modal: ModalReducer,
+    html: undoable(HtmlReducer, {
+        undoType: 'HTML_UNDO',
+        redoType: 'HTML_REDO',
+    }),
+    css: undoable(CssReducer, {
+        undoType: 'CSS_UNDO',
+        redoType: 'CSS_REDO',
+    }),
+    js: undoable(JsReducer, {
+        undoType: 'JS_UNDO',
+        redoType: 'JS_REDO',
+    }),
 })
 
 const persistConfig = {
     key: 'root',
     storage: storage,
-    whitelist: ["theme", "preset", "code"],
+    whitelist: ["theme", "preset", "html", "css", "js"],
     timeout: 0,
 }
 
