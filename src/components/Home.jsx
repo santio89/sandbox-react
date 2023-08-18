@@ -5,9 +5,6 @@ import { html_beautify, css_beautify, js_beautify } from "js-beautify";
 import { Link } from "react-router-dom";
 import Prism from 'prismjs'
 import '../styles/css/prism.css'
-import { ActionCreators } from 'redux-undo'
-
-
 
 export default function Home() {
     const [tabActive, setTabActive] = useState("html")
