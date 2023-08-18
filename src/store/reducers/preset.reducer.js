@@ -1,8 +1,8 @@
 const snippetExample_1 = {
-html: `<button class="btnSlider">
+  html: `<button class="btnSlider">
   <span class="btnSlider-inner">hey!</span>
 </button>`,
-css: `* {
+  css: `* {
   margin: 0;
   padding: 0;
   box-sizing: border-box
@@ -62,14 +62,14 @@ body {
 .bg-magenta {
   background-color: var(--btn-color);
 }`,
-js: `const btn = document.querySelector(".btnSlider");
+  js: `const btn = document.querySelector(".btnSlider");
 btn.addEventListener("click", () => {
   document.body.classList.toggle("bg-magenta")
 })`
 }
 
 const snippetExample_2 = {
-html: `<main class="ui">
+  html: `<main class="ui">
   <div class="1" data-number="1"></div>
   <div class="2" data-number="2"></div>
   <div class="3" data-number="3"></div>
@@ -87,7 +87,7 @@ html: `<main class="ui">
   <p class="text"></p>
   <button class="reset">Reset</button>
 </section>`,
-css: `* {
+  css: `* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -202,7 +202,7 @@ div:hover {
 .blueWins {
   background-color: rgba(73, 73, 247, 0.726);
 }`,
-js: `const blocks = document.querySelectorAll('div');
+  js: `const blocks = document.querySelectorAll('div');
 const results = document.querySelector('.message');
 const reset = document.querySelector('.reset');
 const text = document.querySelector('.text');
@@ -322,7 +322,136 @@ reset.addEventListener('click', () => {
 })`
 }
 
+const snippetExample_3 = {
+  html: `<div class="container">
+<div class="shape-blob"></div>
+<div class="shape-blob one"></div>
+<div class="shape-blob two"></div>
+</div>`,
+  css: `html {
+	--main-color: hotpink;
+	--sec-color: navy
+}
 
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.alt-theme {
+	--main-color: aqua;
+	--sec-color: black
+}
+
+.container {
+	background: lightblue;
+	background: linear-gradient(45deg, var(--main-color), var(--sec-color));
+	min-height: 100vh;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	position: relative;
+}
+
+.shape-blob {
+	background: linear-gradient(45deg, var(--main-color), var(--sec-color));
+	height: 200px;
+	width: 200px;
+	border-radius: 30% 50% 20% 40%;
+	animation:
+		transform 20s ease-in-out infinite both alternate,
+		movement_one 40s ease-in-out infinite both;
+	opacity: .7;
+	position: absolute;
+	left: 70%;
+	top: 50%;
+	opacity: .4
+}
+
+.shape-blob.one {
+	height: 500px;
+	width: 500px;
+	left: -200px;
+	top: -150px;
+	transform: rotate(-180deg);
+	animation: transform 30s ease-in-out infinite both alternate, movement_two 60s ease-in-out infinite both;
+}
+
+.shape-blob.two {
+	height: 350px;
+	width: 350px;
+	left: 500px;
+	top: -150px;
+	transform: rotate(-180deg);
+	animation: transform 30s ease-in-out infinite both alternate, movement_two 60s ease-in-out infinite both;
+}
+
+@keyframes transform {
+
+	0%,
+	100% {
+		border-radius: 33% 67% 70% 30% / 30% 30% 70% 70%;
+	}
+
+	20% {
+		border-radius: 37% 63% 51% 49% / 37% 65% 35% 63%;
+	}
+
+	40% {
+		border-radius: 36% 64% 64% 36% / 64% 48% 52% 36%;
+	}
+
+	60% {
+		border-radius: 37% 63% 51% 49% / 30% 30% 70% 70%;
+	}
+
+	80% {
+		border-radius: 40% 60% 42% 58% / 41% 51% 49% 59%;
+	}
+}
+
+
+@keyframes movement_one {
+
+	0%,
+	100% {
+		transform: none;
+	}
+
+	50% {
+		transform: translate(50%, 20%) rotateY(10deg) scale(1.2);
+	}
+}
+
+@keyframes movement_two {
+
+	0%,
+	500% {
+		transform: none;
+	}
+
+	50% {
+		transform: translate(50%, 20%) rotate(-200deg) scale(1.2);
+	}
+}
+
+h1 {
+	font-family: 'Playfair Display', serif;
+	font-size: 5em;
+	letter-spacing: 2px;
+	font-weight: 900;
+	color: white;
+	line-height: .9em;
+	position: relative;
+	z-index: 4;
+	text-shadow: 2px 3px 15px rgba(0, 0, 0, .15);
+}`,
+  js: `document.body.addEventListener("click", () => {
+	document.body.classList.toggle("alt-theme")
+})`
+}
 
 const initialState = {
   presets: [
@@ -337,7 +466,14 @@ const initialState = {
       html: snippetExample_2.html,
       css: snippetExample_2.css,
       js: snippetExample_2.js
-    }]
+    },
+    {
+      name: 'blobs', id: "testid03",
+      html: snippetExample_3.html,
+      css: snippetExample_3.css,
+      js: snippetExample_3.js
+    }
+  ]
 }
 
 const PresetReducer = (state = initialState, action) => {
