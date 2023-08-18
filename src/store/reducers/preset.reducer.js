@@ -455,7 +455,8 @@ h1 {
 }
 
 const initialState = {
-  presets: [
+  presets: [],
+  defaultPresets: [
     {
       name: 'slider-btn', id: "testid01",
       html: snippetExample_1.html,
@@ -480,7 +481,7 @@ const initialState = {
 const PresetReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_PRESETS':
-      return { presets: action.presets }
+      return { ...state, presets: action.presets }
     default:
       return state
   }
