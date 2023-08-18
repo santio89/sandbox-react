@@ -324,9 +324,9 @@ reset.addEventListener('click', () => {
 
 const snippetExample_3 = {
   html: `<div class="container">
-<div class="shape-blob"></div>
-<div class="shape-blob one"></div>
-<div class="shape-blob two"></div>
+	<div class="shape-blob"></div>
+	<div class="shape-blob one"></div>
+	<div class="shape-blob two"></div>
 </div>`,
   css: `html {
 	--main-color: hotpink;
