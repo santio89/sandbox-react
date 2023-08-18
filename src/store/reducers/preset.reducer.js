@@ -336,6 +336,7 @@ const snippetExample_3 = {
 body {
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;
 }
 
 .alt-theme {
