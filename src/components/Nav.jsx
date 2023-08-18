@@ -335,12 +335,12 @@ export default function Nav({ rootTheme }) {
                           </button>
                         )
                       })) :
-                      <div className="presets__noSnippet">No default snippets saved</div>)
+                      <div className="presets__noSnippet">No featured snippets saved</div>)
 
                 }
                 <div className="presets__tabs">
                   <button className={`presets__tabs__btn ${snippetTab === true && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab(true) }}>My snippets</button>
-                  <button className={`presets__tabs__btn ${snippetTab === false && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab(false) }}>Default snippets</button>
+                  <button className={`presets__tabs__btn ${snippetTab === false && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab(false) }}>Featured snippets</button>
                 </div>
               </div>
           }
