@@ -222,8 +222,9 @@ button {
         gap: 2px;
 
         button {
+          cursor: pointer;
           border-radius: 0;
-          padding: 2px;
+          padding: 0;
           border-radius: 0;
           width: 28px;
           display: flex;
@@ -458,6 +459,8 @@ button {
             align-items: center;
             font-size: .94em;
             background: var(--main-gray);
+            padding: 0;
+            transition: none;
 
             &:hover,
             &:focus-visible {
@@ -936,16 +939,19 @@ button {
 
           svg {
             color: var(--main-purple-variation);
+            fill: var(--main-purple-variation);
           }
 
           &:hover svg,
           &:focus-visible svg {
             color: var(--main-red);
+            fill: var(--main-red);
           }
 
           &:active {
             color: var(--main-red);
-            scale: .94
+            fill: var(--main-red);
+            scale: .9
           }
         }
 
@@ -961,16 +967,19 @@ button {
 
           svg {
             color: var(--main-purple-variation);
+            fill: var(--main-purple-variation);
           }
 
           &:hover svg,
           &:focus-visible svg {
-            color: var(--main-red)
+            color: var(--main-red);
+            fill: var(--main-red);
           }
 
           &:active {
             color: var(--main-red);
-            scale: .94
+            fill: var(--main-red);
+            scale: .9
           }
         }
       }

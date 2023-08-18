@@ -190,8 +190,9 @@ button {
   gap: 2px;
 }
 .main__header .new-project-confirm-btns button {
+  cursor: pointer;
   border-radius: 0;
-  padding: 2px;
+  padding: 0;
   border-radius: 0;
   width: 28px;
   display: flex;
@@ -399,6 +400,8 @@ button {
   align-items: center;
   font-size: 0.94em;
   background: var(--main-gray);
+  padding: 0;
+  transition: none;
 }
 .mainCode__input__type__clearConfirm__buttons button:hover, .mainCode__input__type__clearConfirm__buttons button:focus-visible {
   background: var(--main-red);
@@ -813,13 +816,16 @@ button {
 }
 .main__modal .presets__option__main__del svg {
   color: var(--main-purple-variation);
+  fill: var(--main-purple-variation);
 }
 .main__modal .presets__option__main__del:hover svg, .main__modal .presets__option__main__del:focus-visible svg {
   color: var(--main-red);
+  fill: var(--main-red);
 }
 .main__modal .presets__option__main__del:active {
   color: var(--main-red);
-  scale: 0.94;
+  fill: var(--main-red);
+  scale: 0.9;
 }
 .main__modal .presets__option__main__edit {
   position: absolute;
@@ -833,13 +839,16 @@ button {
 }
 .main__modal .presets__option__main__edit svg {
   color: var(--main-purple-variation);
+  fill: var(--main-purple-variation);
 }
 .main__modal .presets__option__main__edit:hover svg, .main__modal .presets__option__main__edit:focus-visible svg {
   color: var(--main-red);
+  fill: var(--main-red);
 }
 .main__modal .presets__option__main__edit:active {
   color: var(--main-red);
-  scale: 0.94;
+  fill: var(--main-red);
+  scale: 0.9;
 }
 .main__modal .presets__save {
   display: flex;
