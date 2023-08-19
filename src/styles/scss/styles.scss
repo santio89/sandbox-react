@@ -401,7 +401,8 @@ button {
         gap: .5rem;
       }
 
-      &__format, &__comment {
+      &__format,
+      &__comment {
         display: flex;
         justify-content: center;
         align-items: center;
