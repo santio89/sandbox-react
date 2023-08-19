@@ -348,7 +348,7 @@ button {
   align-items: center;
   gap: 0.5rem;
 }
-.mainCode__input__type__format {
+.mainCode__input__type__format, .mainCode__input__type__comment {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -356,10 +356,10 @@ button {
   transition: 200ms;
   cursor: pointer;
 }
-.mainCode__input__type__format:hover {
+.mainCode__input__type__format:hover, .mainCode__input__type__comment:hover {
   color: var(--main-red);
 }
-.mainCode__input__type__format:active {
+.mainCode__input__type__format:active, .mainCode__input__type__comment:active {
   color: var(--main-red);
   scale: 0.9;
 }

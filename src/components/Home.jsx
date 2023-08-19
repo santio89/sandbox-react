@@ -19,7 +19,6 @@ export default function Home() {
     const [downloadUrl, setDownloadUrl] = useState("")
     const [codeOutput, setCodeOutput] = useState("")
     const [copyClipboard, setCopyClipboard] = useState(false)
-    const [formatCode, setFormatCode] = useState(false)
     const [downloadCode, setDownloadCode] = useState(false)
 
     const [prismContentHtml, setPrismContentHtml] = useState(html)
@@ -82,7 +81,6 @@ export default function Home() {
             default:
                 return
         }
-        setFormatCode(true)
     }
 
     const syncScroll = () => {
@@ -388,17 +386,6 @@ export default function Home() {
 
     useEffect(() => {
         let timeout = null;
-        if (formatCode) {
-            timeout = setTimeout(() => {
-                setFormatCode(false)
-            }, 1000)
-        }
-
-        return () => clearTimeout(timeout)
-    }, [formatCode])
-
-    useEffect(() => {
-        let timeout = null;
         if (downloadCode) {
             timeout = setTimeout(() => {
                 setDownloadCode(false)
@@ -482,18 +469,18 @@ export default function Home() {
                         </span>
                         <span className="mainCode__input__type__btnWrapper">
                             {
-                                formatCode ?
-                                    <button className="mainCode__input__type__format" title="Format code" onClick={() => { beautify() }}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-file-check-fill" viewBox="0 0 16 16">
-                                            <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1.146 6.854-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
-                                        </svg>
-                                    </button>
-                                    :
-                                    <button className="mainCode__input__type__format" title="Format code" onClick={() => { beautify() }}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-file-code-fill" viewBox="0 0 16 16">
-                                            <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM6.646 5.646a.5.5 0 1 1 .708.708L5.707 8l1.647 1.646a.5.5 0 0 1-.708.708l-2-2a.5.5 0 0 1 0-.708l2-2zm2.708 0 2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 8 8.646 6.354a.5.5 0 1 1 .708-.708z" />
-                                        </svg>
-                                    </button>
+                                <button className="mainCode__input__type__format" title="Format code (alt+shift+f)" onClick={() => { beautify() }}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi-code" viewBox="0 0 16 16">
+                                        <path d="M5.854 4.854a.5.5 0 1 0-.708-.708l-3.5 3.5a.5.5 0 0 0 0 .708l3.5 3.5a.5.5 0 0 0 .708-.708L2.707 8l3.147-3.146zm4.292 0a.5.5 0 0 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5a.5.5 0 0 1-.708-.708L13.293 8l-3.147-3.146z" />
+                                    </svg>
+                                </button>
+                            }
+                            {
+                                <button className="mainCode__input__type__comment" title="Insert comment (alt+shift+a)" onClick={() => { insertComment() }}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-asterisk" viewBox="0 0 16 16">
+                                        <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z" />
+                                    </svg>
+                                </button>
                             }
                             {
                                 copyClipboard ?
