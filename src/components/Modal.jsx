@@ -99,10 +99,10 @@ export default function Modal({ callbacks }) {
         }
 
         const closeModalClick = (e) => {
-            /*    if (modalActive && e.target !== "dialog.main__modal") {
-                   e.preventDefault();
-                   closeModal()
-               } */
+            if (modalActive && e.target.className == "main__modal") {
+                e.preventDefault();
+                closeModal()
+            }
         }
 
         if (modalActive) {
