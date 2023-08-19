@@ -300,14 +300,12 @@ export default function Home() {
                     return
             }
         } else if (e.key.toUpperCase() === "F" && e.altKey && e.shiftKey) {
-            console.log("a")
             e.preventDefault();
             beautify()
         } else if (e.key.toUpperCase() === "A" && e.altKey && e.shiftKey) {
-            console.log("c")
             e.preventDefault()
             insertComment();
-        } 
+        }
         syncScroll();
     }
 
