@@ -66,11 +66,12 @@ export default function Home() {
             case 'html': {
                 const beautify = html_beautify(html, { indent_size: 2, indent_with_tabs: true, space_in_empty_paren: true })
 
-               /*  const selection = (textareaHtml.current.selectionEnd - textareaHtml.current.selectionStart) */
-                const start = textareaHtml.current.selectionEnd;
-                const end = textareaHtml.current.selectionStart
+                /*  put textcursor at position of start of next character
+                 const selection = (textareaHtml.current.selectionEnd - textareaHtml.current.selectionStart)
+                 const start = textareaHtml.current.selectionStart;
+                 const end = textareaHtml.current.selectionEnd */
                 setHtml(beautify)
-                setTextCursor(1)
+                /* setTextCursor(start) */
                 break;
             }
             case 'css': {
