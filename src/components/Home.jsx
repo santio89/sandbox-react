@@ -65,7 +65,12 @@ export default function Home() {
         switch (tabActive) {
             case 'html': {
                 const beautify = html_beautify(html, { indent_size: 2, indent_with_tabs: true, space_in_empty_paren: true })
+
+               /*  const selection = (textareaHtml.current.selectionEnd - textareaHtml.current.selectionStart) */
+                const start = textareaHtml.current.selectionEnd;
+                const end = textareaHtml.current.selectionStart
                 setHtml(beautify)
+                setTextCursor(1)
                 break;
             }
             case 'css': {
