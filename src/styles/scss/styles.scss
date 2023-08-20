@@ -36,7 +36,6 @@ html {
   /* track */
   ::-webkit-scrollbar-track {
     background: var(--bg-main)
-      /* var(--color-back) */
   }
 
   /* handle */
@@ -582,18 +581,19 @@ button {
 
       /* width */
       &::-webkit-scrollbar {
-        width: 4px;
+        width: 8px;
       }
 
       /* track */
       &::-webkit-scrollbar-track {
         background: var(--main-black);
-        background: rgb(100, 100, 100);
+        border-radius: 1em;
       }
 
       /* handle */
       &::-webkit-scrollbar-thumb {
         background: var(--main-gray);
+        border-radius: 1em;
       }
 
       /* FIN SCROLLBAR */

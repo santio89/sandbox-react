@@ -506,14 +506,15 @@ button {
   transition: opacity 200ms;
 }
 .mainCode__input__text::-webkit-scrollbar {
-  width: 4px;
+  width: 8px;
 }
 .mainCode__input__text::-webkit-scrollbar-track {
   background: var(--main-black);
-  background: rgb(100, 100, 100);
+  border-radius: 1em;
 }
 .mainCode__input__text::-webkit-scrollbar-thumb {
   background: var(--main-gray);
+  border-radius: 1em;
 }
 .mainCode__output {
   flex: 1;
