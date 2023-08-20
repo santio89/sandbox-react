@@ -513,8 +513,7 @@ button {
   border-radius: 1em;
 }
 .mainCode__input__text::-webkit-scrollbar-thumb {
-  background: var(--main-gray);
-  border-radius: 1em;
+  background: rgb(100, 100, 100);
 }
 .mainCode__output {
   flex: 1;

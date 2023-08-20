@@ -592,8 +592,7 @@ button {
 
       /* handle */
       &::-webkit-scrollbar-thumb {
-        background: var(--main-gray);
-        border-radius: 1em;
+        background: rgb(100,100,100)
       }
 
       /* FIN SCROLLBAR */
