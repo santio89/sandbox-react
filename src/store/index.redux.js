@@ -1,8 +1,9 @@
 import { legacy_createStore as createStore, combineReducers, applyMiddleware } from "redux";
 import ThemeReducer from './reducers/theme.reducer'
 import PresetReducer from "./reducers/preset.reducer";
-import { HtmlReducer, CssReducer, JsReducer } from "./reducers/code.reducer";
+import AuthReducer from "./reducers/auth.reducer";
 import ModalReducer from './reducers/modal.reducer'
+import { HtmlReducer, CssReducer, JsReducer } from "./reducers/code.reducer";
 import thunk from "redux-thunk";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -27,12 +28,13 @@ const RootReducer = combineReducers({
         undoType: 'JS_UNDO',
         redoType: 'JS_REDO',
     }),
+    auth: AuthReducer
 })
 
 const persistConfig = {
     key: 'root',
     storage: storage,
-    whitelist: ["theme", "preset", "html", "css", "js"],
+    whitelist: ["theme", "preset", "html", "css", "js", "auth"],
     timeout: 0,
 }
 

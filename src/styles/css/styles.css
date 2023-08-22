@@ -140,7 +140,7 @@ button {
   align-items: center;
   gap: 8px;
 }
-.main__header__buttons button {
+.main__header__buttons > div button {
   background: none;
   outline: none;
   border: none;
@@ -153,22 +153,22 @@ button {
   transition: 200ms;
   color: var(--main-black);
 }
-.main__header__buttons button svg {
+.main__header__buttons > div button svg {
   fill: var(--main-black);
 }
-.main__header__buttons button:hover, .main__header__buttons button:focus-visible {
+.main__header__buttons > div button:hover, .main__header__buttons > div button:focus-visible {
   filter: drop-shadow(0 0 4px var(--main-black));
 }
-.main__header__buttons button:active {
+.main__header__buttons > div button:active {
   filter: drop-shadow(0 0 4px var(--main-black));
   scale: 0.9;
 }
-.main__header__buttons button.create-new {
+.main__header__buttons > div button.create-new {
   color: var(--main-red);
   background: var(--main-black);
   border-radius: 0;
 }
-.main__header__buttons button.create-new svg {
+.main__header__buttons > div button.create-new svg {
   fill: var(--main-red);
 }
 .main__header .new-project {
@@ -659,7 +659,7 @@ button {
   justify-content: center;
   align-items: center;
 }
-.main__modal__header button {
+.main__modal__header__buttons button {
   font-weight: bold;
   display: flex;
   justify-content: center;
@@ -670,22 +670,22 @@ button {
   transition: 200ms;
   aspect-ratio: 1;
 }
-.main__modal__header button svg {
+.main__modal__header__buttons button svg {
   color: rgb(248, 248, 248);
   fill: rgb(248, 248, 248);
 }
-.main__modal__header button:hover, .main__modal__header button:focus-visible {
+.main__modal__header__buttons button:hover, .main__modal__header__buttons button:focus-visible {
   background: rgba(0, 0, 0, 0.2);
 }
-.main__modal__header button:active {
+.main__modal__header__buttons button:active {
   background: rgba(0, 0, 0, 0.2);
   scale: 0.9;
 }
-.main__modal__header button[disabled] {
+.main__modal__header__buttons button[disabled] {
   pointer-events: none;
   color: rgb(80, 80, 80);
 }
-.main__modal__header button[disabled] svg {
+.main__modal__header__buttons button[disabled] svg {
   color: rgb(80, 80, 80);
   fill: rgb(80, 80, 80);
 }
@@ -705,6 +705,7 @@ button {
   border-top: none;
   background: var(--main-black);
   position: relative;
+  overflow-x: hidden;
   /* INICIO SCROLLBAR */
   scrollbar-width: thin;
   scrollbar-color: var(--main-gray) var(--bg-main);
@@ -725,6 +726,99 @@ button {
 .main__modal .presets__noSnippet {
   font-size: 1.5rem;
   color: var(--main-white);
+}
+.main__modal .presets__profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+}
+.main__modal .presets__profile__userInfo {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  gap: 1rem;
+  color: var(--main-white);
+}
+.main__modal .presets__profile__userInfo__data {
+  word-break: break-all;
+  white-space: pre-wrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main__modal .presets__profile__userInfo__data__img {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main__modal .presets__profile__userInfo__data__img img {
+  border-radius: 0.2em;
+  width: 100px;
+  object-fit: cover;
+}
+.main__modal .presets__profile__userInfo__data__text {
+  flex: 1;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+.main__modal .presets__profile__userInfo__data__signOut {
+  align-self: center;
+  cursor: pointer;
+  color: var(--main-red);
+  fill: var(--main-red);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  transition: scale 200ms;
+  background: var(--main-gray);
+  border-radius: 0.2em;
+  padding: 0.5em;
+}
+.main__modal .presets__profile__userInfo__data__signOut svg {
+  fill: inherit;
+}
+.main__modal .presets__profile__userInfo__data__signOut:hover, .main__modal .presets__profile__userInfo__data__signOut:focus-visible {
+  color: var(--main-white);
+  fill: var(--main-white);
+}
+.main__modal .presets__profile__userInfo__data__signOut:active {
+  scale: 0.9;
+  color: var(--main-white);
+  fill: var(--main-white);
+}
+.main__modal .presets__profile__googleBtn {
+  font-size: 1.4rem;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: var(--main-white);
+  fill: var(--main-purple);
+  padding: 1em;
+  transition: scale 200ms;
+  background: var(--main-gray);
+  border-radius: 0.4em;
+  cursor: pointer;
+}
+.main__modal .presets__profile__googleBtn svg {
+  fill: inherit;
+}
+.main__modal .presets__profile__googleBtn:hover, .main__modal .presets__profile__googleBtn:focus-visible {
+  color: var(--main-red);
+  fill: var(--main-red);
+}
+.main__modal .presets__profile__googleBtn:active {
+  scale: 0.9;
+  color: var(--main-red);
+  fill: var(--main-red);
 }
 .main__modal .presets__option {
   aspect-ratio: 4/3;

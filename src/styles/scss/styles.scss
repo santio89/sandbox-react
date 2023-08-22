@@ -162,7 +162,7 @@ button {
     align-items: center;
     gap: 8px;
 
-    button {
+    >div button {
       background: none;
       outline: none;
       border: none;
@@ -592,7 +592,7 @@ button {
 
       /* handle */
       &::-webkit-scrollbar-thumb {
-        background: rgb(100,100,100)
+        background: rgb(100, 100, 100)
       }
 
       /* FIN SCROLLBAR */
@@ -755,44 +755,46 @@ button {
       display: flex;
       justify-content: center;
       align-items: center;
-    }
 
-    button {
-      font-weight: bold;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      border-radius: 50%;
-      padding: 6px;
-      transition: 200ms;
-      aspect-ratio: 1;
 
-      svg {
-        color: rgb(248, 248, 248);
-        fill: rgb(248, 248, 248);
-      }
-
-      &:hover,
-      &:focus-visible {
-        background: rgba(0, 0, 0, .2);
-      }
-
-      &:active {
-        background: rgba(0, 0, 0, .2);
-        scale: .9
-      }
-
-      &[disabled] {
-        pointer-events: none;
-        color: rgb(80, 80, 80);
+      button {
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 50%;
+        padding: 6px;
+        transition: 200ms;
+        aspect-ratio: 1;
 
         svg {
+          color: rgb(248, 248, 248);
+          fill: rgb(248, 248, 248);
+        }
+
+        &:hover,
+        &:focus-visible {
+          background: rgba(0, 0, 0, .2);
+        }
+
+        &:active {
+          background: rgba(0, 0, 0, .2);
+          scale: .9
+        }
+
+        &[disabled] {
+          pointer-events: none;
           color: rgb(80, 80, 80);
-          fill: rgb(80, 80, 80);
+
+          svg {
+            color: rgb(80, 80, 80);
+            fill: rgb(80, 80, 80);
+          }
         }
       }
     }
+
   }
 
   .presets {
@@ -811,6 +813,7 @@ button {
     border-top: none;
     background: var(--main-black);
     position: relative;
+    overflow-x: hidden;
 
     /* INICIO SCROLLBAR */
     scrollbar-width: thin;
@@ -836,6 +839,117 @@ button {
     &__noSnippet {
       font-size: 1.5rem;
       color: var(--main-white)
+    }
+
+    &__profile {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1rem;
+
+      &__userInfo {
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        flex-direction: column;
+        gap: 1rem;
+        color: var(--main-white);
+
+        &__data {
+          word-break: break-all;
+          white-space: pre-wrap;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          &__img {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+              border-radius: .2em;
+              width: 100px;
+              object-fit: cover;
+            }
+          }
+
+          &__text {
+            flex: 1;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: start;
+          }
+
+          &__signOut {
+            align-self: center;
+            cursor: pointer;
+            color: var(--main-red);
+            fill: var(--main-red);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            transition: scale 200ms;
+            background: var(--main-gray);
+            border-radius: .2em;
+            padding: .5em;
+
+
+            svg {
+              fill: inherit;
+            }
+
+            &:hover,
+            &:focus-visible {
+              color: var(--main-white);
+              fill: var(--main-white)
+            }
+
+            &:active {
+              scale: .9;
+              color: var(--main-white);
+              fill: var(--main-white)
+            }
+          }
+
+        }
+      }
+
+      &__googleBtn {
+        font-size: 1.4rem;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        color: var(--main-white);
+        fill: var(--main-purple);
+        padding: 1em;
+        transition: scale 200ms;
+        background: var(--main-gray);
+        border-radius: .4em;
+        cursor: pointer;
+
+        svg {
+          fill: inherit
+        }
+
+        &:hover,
+        &:focus-visible {
+          color: var(--main-red);
+          fill: var(--main-red)
+        }
+
+        &:active {
+          scale: .9;
+          color: var(--main-red);
+          fill: var(--main-red)
+        }
+      }
     }
 
     &__option {
