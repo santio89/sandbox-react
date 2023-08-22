@@ -861,15 +861,16 @@ button {
           display: flex;
           justify-content: center;
           align-items: center;
+          gap: 1rem;
 
           &__img {
-            flex: 1;
+            /* flex: 1; */
             display: flex;
             justify-content: center;
             align-items: center;
 
             img {
-              border-radius: .2em;
+              border-radius: 50%;
               width: 100px;
               object-fit: cover;
             }
@@ -882,10 +883,20 @@ button {
             flex-direction: column;
             justify-content: center;
             align-items: start;
+            gap: .5rem;
+
+            &__line {
+              display: flex;
+              justify-content: center;
+
+              >span:first-child {
+                color: var(--main-purple)
+              }
+            }
+
           }
 
           &__signOut {
-            align-self: center;
             cursor: pointer;
             color: var(--main-red);
             fill: var(--main-red);
@@ -893,11 +904,6 @@ button {
             justify-content: center;
             align-items: center;
             gap: 1rem;
-            transition: scale 200ms;
-            background: var(--main-gray);
-            border-radius: .2em;
-            padding: .5em;
-
 
             svg {
               fill: inherit;

@@ -110,11 +110,11 @@ export default function Modal({ callbacks }) {
                                         <img src={user.avatar} alt="profile image" />
                                     </div>
                                     <div className="presets__profile__userInfo__data__text">
-                                        <div className="presets__profile__userInfo__data">
-                                            • {user.displayName}
+                                        <div className="presets__profile__userInfo__data__text__line">
+                                            <span>• </span><span>{user.displayName}</span>
                                         </div>
-                                        <div className="presets__profile__userInfo__data">
-                                            • {user.email}
+                                        <div className="presets__profile__userInfo__data__text__line">
+                                            <span>• </span><span>{user.email}</span>
                                         </div>
                                     </div>
                                 </div>
