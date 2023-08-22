@@ -669,16 +669,20 @@ button {
   padding: 6px;
   transition: 200ms;
   aspect-ratio: 1;
-}
-.main__modal__header__buttons button svg {
   color: rgb(248, 248, 248);
   fill: rgb(248, 248, 248);
 }
+.main__modal__header__buttons button svg {
+  fill: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .main__modal__header__buttons button:hover, .main__modal__header__buttons button:focus-visible {
-  background: rgba(0, 0, 0, 0.2);
+  fill: var(--main-red);
 }
 .main__modal__header__buttons button:active {
-  background: rgba(0, 0, 0, 0.2);
+  fill: var(--main-red);
   scale: 0.9;
 }
 .main__modal__header__buttons button[disabled] {
@@ -688,6 +692,9 @@ button {
 .main__modal__header__buttons button[disabled] svg {
   color: rgb(80, 80, 80);
   fill: rgb(80, 80, 80);
+}
+.main__modal__header__buttons button.modalOptionActive {
+  fill: var(--main-red);
 }
 .main__modal .presets {
   flex: 1;

@@ -337,24 +337,24 @@ export default function Modal({ callbacks }) {
                 <div className="main__modal__header">
                     <span>{modalTitle()}</span>
                     <div className="main__modal__header__buttons">
-                        <button onClick={() => { setModalOption("profile") }}>
+                        <button className={`${modalOption === "profile" && "modalOptionActive"}`} onClick={() => { setModalOption("profile") }}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-person-fill" viewBox="0 0 16 16">
                                 <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
                             </svg>
                         </button>
-                        <button onClick={() => { setModalOption("snippets") }}>
+                        <button className={`${modalOption === "snippets" && "modalOptionActive"}`} onClick={() => { setModalOption("snippets") }}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-stickies-fill" viewBox="0 0 16 16">
                                 <path d="M0 1.5V13a1 1 0 0 0 1 1V1.5a.5.5 0 0 1 .5-.5H14a1 1 0 0 0-1-1H1.5A1.5 1.5 0 0 0 0 1.5z" />
                                 <path d="M3.5 2A1.5 1.5 0 0 0 2 3.5v11A1.5 1.5 0 0 0 3.5 16h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 16 9.586V3.5A1.5 1.5 0 0 0 14.5 2h-11zm6 8.5a1 1 0 0 1 1-1h4.396a.25.25 0 0 1 .177.427l-5.146 5.146a.25.25 0 0 1-.427-.177V10.5z" />
                             </svg>
                         </button>
-                        <button onClick={() => { setModalOption("save") }}>
+                        <button className={`${modalOption === "save" && "modalOptionActive"}`} onClick={() => { setModalOption("save") }}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-save-fill" viewBox="0 0 16 16">
                                 <path d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v7.793L4.854 6.646a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l3.5-3.5a.5.5 0 0 0-.708-.708L8.5 9.293V1.5z" />
                             </svg>
                         </button>
-                        <button onClick={() => { closeModal() }}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="x-lg" viewBox="0 0 16 16">
+                        <button className="modalClose" onClick={() => { closeModal() }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="x-lg" viewBox="0 0 16 16">
                                 <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
                             </svg>
                         </button>
