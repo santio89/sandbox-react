@@ -783,7 +783,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 .main__modal .presets__profile__userInfo__data__signOut svg {
   fill: inherit;
