@@ -756,7 +756,6 @@ button {
       justify-content: center;
       align-items: center;
 
-
       button {
         font-weight: bold;
         display: flex;
@@ -764,7 +763,7 @@ button {
         align-items: center;
         cursor: pointer;
         border-radius: 50%;
-        padding: 6px;
+        padding: .5rem;
         transition: 200ms;
         aspect-ratio: 1;
         color: rgb(248, 248, 248);
@@ -780,11 +779,13 @@ button {
         &:hover,
         &:focus-visible {
           fill: var(--main-red);
+          background: rgba(20, 20, 20, .4);
         }
 
         &:active {
           fill: var(--main-red);
-          scale: .9
+          scale: .9;
+          background: rgba(20, 20, 20, .4);
         }
 
         &[disabled] {
@@ -799,6 +800,7 @@ button {
 
         &.modalOptionActive {
           fill: var(--main-red);
+          background: rgba(20, 20, 20, .4);
         }
       }
     }

@@ -29,7 +29,7 @@ export default function Modal({ callbacks }) {
     const [saved, setSaved] = useState(false)
     const [editName, setEditName] = useState("")
     const [snippetTab, setSnippetTab] = useState(true)
-    const [modalOption, setModalOption] = useState("profile")
+    const [modalOption, setModalOption] = useState("snippets")
 
 
     const signInWithGoogle = () => {
@@ -52,12 +52,12 @@ export default function Modal({ callbacks }) {
     }
 
     const deleteSelectedPreset = (id) => {
-        dispatch(deletePreset(presets, id))
+        dispatch(deletePreset(presets, id, user.userId))
         setDeleteId(null)
     }
 
     const editSelectedPreset = (id, newName) => {
-        dispatch(editPreset(presets, id, newName))
+        dispatch(editPreset(presets, id, newName, user.userId))
         setEditId(null)
     }
 
@@ -82,7 +82,7 @@ export default function Modal({ callbacks }) {
             trimJs = trimJs.slice(0, -1);
         }
 
-        dispatch(savePreset(presets, { id, name, html: trimHtml, css: trimCss, js: trimJs }))
+        dispatch(savePreset(presets, { id, name, html: trimHtml, css: trimCss, js: trimJs }, user.userId))
         setSavePresetName("")
         setSaved(true)
     }
@@ -256,7 +256,7 @@ export default function Modal({ callbacks }) {
     }
 
     useEffect(() => {
-        setModalOption("profile")
+        setModalOption("snippets")
         setSnippetTab(true)
         setSelectedId(null)
         setDeleteId(null)
@@ -337,11 +337,6 @@ export default function Modal({ callbacks }) {
                 <div className="main__modal__header">
                     <span>{modalTitle()}</span>
                     <div className="main__modal__header__buttons">
-                        <button className={`${modalOption === "profile" && "modalOptionActive"}`} onClick={() => { setModalOption("profile") }}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-person-fill" viewBox="0 0 16 16">
-                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
-                            </svg>
-                        </button>
                         <button className={`${modalOption === "snippets" && "modalOptionActive"}`} onClick={() => { setModalOption("snippets") }}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-stickies-fill" viewBox="0 0 16 16">
                                 <path d="M0 1.5V13a1 1 0 0 0 1 1V1.5a.5.5 0 0 1 .5-.5H14a1 1 0 0 0-1-1H1.5A1.5 1.5 0 0 0 0 1.5z" />
@@ -351,6 +346,11 @@ export default function Modal({ callbacks }) {
                         <button className={`${modalOption === "save" && "modalOptionActive"}`} onClick={() => { setModalOption("save") }}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-save-fill" viewBox="0 0 16 16">
                                 <path d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v7.793L4.854 6.646a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l3.5-3.5a.5.5 0 0 0-.708-.708L8.5 9.293V1.5z" />
+                            </svg>
+                        </button>
+                        <button className={`${modalOption === "profile" && "modalOptionActive"}`} onClick={() => { setModalOption("profile") }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
                             </svg>
                         </button>
                         <button className="modalClose" onClick={() => { closeModal() }}>
