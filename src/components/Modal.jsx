@@ -223,7 +223,12 @@ export default function Modal({ callbacks }) {
                                 (defaultPresets?.length > 0 ?
                                     (defaultPresets?.map(preset => {
                                         return (
-                                            <button disabled={loaded || saved} className="presets__option" key={preset.id} onClick={() => { setSelectedId(preset.id) }} >
+                                            <button disabled={loaded || saved} className="presets__option" key={preset.id} onClick={() => {
+                                                setEditName("");
+                                                setEditId(null);
+                                                setDeleteId(null);
+                                                setSelectedId(preset.id)
+                                            }} >
                                                 {
                                                     selectedId === preset.id && !loaded ?
                                                         <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
@@ -333,13 +338,13 @@ export default function Modal({ callbacks }) {
         }
 
         return () => { clearTimeout(timeout) }
-
     }, [loaded])
 
     useEffect(() => {
         setSelectedId(null)
         setDeleteId(null)
         setEditId(null)
+        setSavePresetName("")
     }, [modalOption])
 
 
@@ -349,7 +354,7 @@ export default function Modal({ callbacks }) {
                 <div className="main__modal__header">
                     <span>{modalTitle()}</span>
                     <div className="main__modal__header__buttons">
-                        <button className={`${modalOption === "snippets" && "modalOptionActive"}`} onClick={() => { setModalOption("snippets") }}>
+                        <button className={`${modalOption === "snippets" && "modalOptionActive"}`} onClick={() => { setSnippetTab(user.userId ? "mySnippets" : "featuredSnippets"); setModalOption("snippets") }}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-stickies-fill" viewBox="0 0 16 16">
                                 <path d="M0 1.5V13a1 1 0 0 0 1 1V1.5a.5.5 0 0 1 .5-.5H14a1 1 0 0 0-1-1H1.5A1.5 1.5 0 0 0 0 1.5z" />
                                 <path d="M3.5 2A1.5 1.5 0 0 0 2 3.5v11A1.5 1.5 0 0 0 3.5 16h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 16 9.586V3.5A1.5 1.5 0 0 0 14.5 2h-11zm6 8.5a1 1 0 0 1 1-1h4.396a.25.25 0 0 1 .177.427l-5.146 5.146a.25.25 0 0 1-.427-.177V10.5z" />
