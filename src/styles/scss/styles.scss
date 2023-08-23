@@ -755,6 +755,7 @@ button {
       display: flex;
       justify-content: center;
       align-items: center;
+      gap: 2px;
 
       button {
         font-weight: bold;
@@ -766,8 +767,7 @@ button {
         padding: .5rem;
         transition: 200ms;
         aspect-ratio: 1;
-        color: rgb(248, 248, 248);
-        fill: rgb(248, 248, 248);
+        fill: var(--main-purple);
 
         svg {
           fill: inherit;
@@ -778,12 +778,12 @@ button {
 
         &:hover,
         &:focus-visible {
-          fill: var(--main-red);
+          fill: rgb(248, 248, 248);
           background: rgba(20, 20, 20, .4);
         }
 
         &:active {
-          fill: var(--main-red);
+          fill: rgb(248, 248, 248);
           scale: .9;
           background: rgba(20, 20, 20, .4);
         }
@@ -799,7 +799,7 @@ button {
         }
 
         &.modalOptionActive {
-          fill: var(--main-red);
+          fill: rgb(248, 248, 248);
           background: rgba(20, 20, 20, .4);
         }
       }
