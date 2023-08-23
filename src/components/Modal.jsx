@@ -28,7 +28,7 @@ export default function Modal({ callbacks }) {
     const [savePresetName, setSavePresetName] = useState("");
     const [saved, setSaved] = useState(false)
     const [editName, setEditName] = useState("")
-    const [snippetTab, setSnippetTab] = useState("mySnippets")
+    const [snippetTab, setSnippetTab] = useState(user.userId ? "mySnippets" : "featuredSnippets")
     const [modalOption, setModalOption] = useState("snippets")
 
 
@@ -265,7 +265,7 @@ export default function Modal({ callbacks }) {
 
     useEffect(() => {
         setModalOption("snippets")
-        setSnippetTab("mySnippets")
+        setSnippetTab(user.userId ? "mySnippets" : "featuredSnippets")
         setSelectedId(null)
         setDeleteId(null)
         setEditId(null)
@@ -367,11 +367,11 @@ export default function Modal({ callbacks }) {
                     {modalContent()}
                     {modalOption === "snippets" &&
                         <>
-                            <div className="presets__tabs">
-                                <button className={`presets__tabs__btn ${snippetTab === "featuredSnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("featuredSnippets") }}>Featured snippets</button>
-                                <button className={`presets__tabs__btn ${snippetTab === "mySnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("mySnippets") }}>My snippets</button>
-                            </div>
                             <div className="presets__tabs presets__tabs--saveTab">
+                                <button className={`presets__tabs__btn ${snippetTab === "featuredSnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("featuredSnippets") }}>Featured snippets</button>
+                            </div>
+                            <div className="presets__tabs">
+                                <button className={`presets__tabs__btn ${snippetTab === "mySnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("mySnippets") }}>My snippets</button>
                                 <button className={`presets__tabs__btn ${snippetTab === "saveSnippet" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("saveSnippet") }}>Save snippet</button>
                             </div>
                         </>
