@@ -28,7 +28,7 @@ export default function Modal({ callbacks }) {
     const [savePresetName, setSavePresetName] = useState("");
     const [saved, setSaved] = useState(false)
     const [editName, setEditName] = useState("")
-    const [snippetTab, setSnippetTab] = useState(true)
+    const [snippetTab, setSnippetTab] = useState("mySnippets")
     const [modalOption, setModalOption] = useState("snippets")
 
 
@@ -93,8 +93,8 @@ export default function Modal({ callbacks }) {
                 return "Profile"
             case "snippets":
                 return "Snippets"
-            case "save":
-                return "Save snippet"
+            default:
+                return "Snippets"
         }
     }
 
@@ -139,11 +139,11 @@ export default function Modal({ callbacks }) {
                     </div>
                 </>
             case "snippets":
-                return <>
-                    {
-                        snippetTab === true ?
-                            (
-                                user.userId ?
+                switch (snippetTab) {
+                    case 'mySnippets':
+                        return <>
+                            {
+                                (user.userId ?
                                     (presets?.length > 0 ?
                                         (presets?.map(preset => {
                                             return (
@@ -211,61 +211,61 @@ export default function Modal({ callbacks }) {
                                         })) :
                                         <div className="presets__noSnippet">No snippets saved</div>) :
                                     <div className="presets__noSnippet" role="button" onClick={() => setModalOption("profile")}>Sign in to see your snippets</div>
-                            )
-                            :
-                            (defaultPresets?.length > 0 ?
-                                (defaultPresets?.map(preset => {
-                                    return (
-                                        <button disabled={loaded || saved} className="presets__option" key={preset.id} onClick={() => { setSelectedId(preset.id) }} >
-                                            {
-                                                selectedId === preset.id && !loaded ?
-                                                    <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
-                                                        <span>Load snippet?</span>
-                                                        <span className="presets__option__confirm__buttons">
-                                                            <span onClick={(e) => { e.stopPropagation(); setPreset(preset.html, preset.css, preset.js) }}>Yes</span>
-                                                            <span onClick={(e) => { e.stopPropagation(); setSelectedId(null) }}>No</span>
-                                                        </span>
-                                                    </span>
-                                                    :
-                                                    (selectedId === preset.id && loaded ?
+                                )
+                            }
+                        </>
+                    case 'featuredSnippets':
+                        return <>
+                            {
+                                (defaultPresets?.length > 0 ?
+                                    (defaultPresets?.map(preset => {
+                                        return (
+                                            <button disabled={loaded || saved} className="presets__option" key={preset.id} onClick={() => { setSelectedId(preset.id) }} >
+                                                {
+                                                    selectedId === preset.id && !loaded ?
                                                         <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
-                                                            <span>Snippet loaded!</span>
+                                                            <span>Load snippet?</span>
+                                                            <span className="presets__option__confirm__buttons">
+                                                                <span onClick={(e) => { e.stopPropagation(); setPreset(preset.html, preset.css, preset.js) }}>Yes</span>
+                                                                <span onClick={(e) => { e.stopPropagation(); setSelectedId(null) }}>No</span>
+                                                            </span>
                                                         </span>
                                                         :
-                                                        <span className="presets__option__main">
-                                                            <span className="presets__option__main__name">{preset.name}</span>
-                                                        </span>
-                                                    )
-                                            }
-                                        </button>
-                                    )
-                                })) :
-                                <div className="presets__noSnippet">No featured snippets saved</div>)
-
-                    }
-                    <div className="presets__tabs">
-                        <button className={`presets__tabs__btn ${snippetTab === true && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab(true) }}>My snippets</button>
-                        <button className={`presets__tabs__btn ${snippetTab === false && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab(false) }}>Featured snippets</button>
-                    </div>
-                </>
-            case "save":
-                return <>
-                    <div className="presets__save">
-                        {user.userId ?
-                            <form onSubmit={(e) => { e.preventDefault(); saveNewPreset(savePresetName, html, css, js) }}>
-                                <input type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} maxLength={30} />
-                                <button disabled={savePresetName.trim() === ""} data-saved={saved ? 'saved!' : ''}>Save</button>
-                            </form>
-                            :
-                            <div role="button" onClick={() => setModalOption("profile")} className="presets__noSnippet">Sign in to save your snippets</div>}
-                    </div>
-                </>
+                                                        (selectedId === preset.id && loaded ?
+                                                            <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
+                                                                <span>Snippet loaded!</span>
+                                                            </span>
+                                                            :
+                                                            <span className="presets__option__main">
+                                                                <span className="presets__option__main__name">{preset.name}</span>
+                                                            </span>
+                                                        )
+                                                }
+                                            </button>
+                                        )
+                                    })) :
+                                    <div className="presets__noSnippet">No featured snippets saved</div>)
+                            }
+                        </>
+                    case 'saveSnippet':
+                        return <>
+                            <div className="presets__save">
+                                {user.userId ?
+                                    <form onSubmit={(e) => { e.preventDefault(); saveNewPreset(savePresetName, html, css, js) }}>
+                                        <input type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} maxLength={30} />
+                                        <button disabled={savePresetName.trim() === ""} data-saved={saved ? 'saved!' : ''}>Save</button>
+                                    </form>
+                                    :
+                                    <div role="button" onClick={() => setModalOption("profile")} className="presets__noSnippet">Sign in to save your snippets</div>}
+                            </div>
+                        </>
+                }
         }
     }
 
     useEffect(() => {
         setModalOption("snippets")
-        setSnippetTab(true)
+        setSnippetTab("mySnippets")
         setSelectedId(null)
         setDeleteId(null)
         setEditId(null)
@@ -351,11 +351,6 @@ export default function Modal({ callbacks }) {
                                 <path d="M3.5 2A1.5 1.5 0 0 0 2 3.5v11A1.5 1.5 0 0 0 3.5 16h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 16 9.586V3.5A1.5 1.5 0 0 0 14.5 2h-11zm6 8.5a1 1 0 0 1 1-1h4.396a.25.25 0 0 1 .177.427l-5.146 5.146a.25.25 0 0 1-.427-.177V10.5z" />
                             </svg>
                         </button>
-                        <button className={`${modalOption === "save" && "modalOptionActive"}`} onClick={() => { setModalOption("save") }}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-save-fill" viewBox="0 0 16 16">
-                                <path d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v7.793L4.854 6.646a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l3.5-3.5a.5.5 0 0 0-.708-.708L8.5 9.293V1.5z" />
-                            </svg>
-                        </button>
                         <button className={`${modalOption === "profile" && "modalOptionActive"}`} onClick={() => { setModalOption("profile") }}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-person-fill" viewBox="0 0 16 16">
                                 <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
@@ -370,6 +365,17 @@ export default function Modal({ callbacks }) {
                 </div>
                 <div className="presets">
                     {modalContent()}
+                    {modalOption === "snippets" &&
+                        <>
+                            <div className="presets__tabs">
+                                <button className={`presets__tabs__btn ${snippetTab === "featuredSnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("featuredSnippets") }}>Featured snippets</button>
+                                <button className={`presets__tabs__btn ${snippetTab === "mySnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("mySnippets") }}>My snippets</button>
+                            </div>
+                            <div className="presets__tabs presets__tabs--saveTab">
+                                <button className={`presets__tabs__btn ${snippetTab === "saveSnippet" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("saveSnippet") }}>Save snippet</button>
+                            </div>
+                        </>
+                    }
                 </div>
             </div>
         </dialog>
