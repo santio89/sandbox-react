@@ -6,7 +6,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from './store/index.redux.js'
 import { firebaseApp } from './config/firebase.js';
 
-const startFirebaseApp = firebaseApp
+/* const startFirebaseApp = firebaseApp */
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(

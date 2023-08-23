@@ -825,6 +825,19 @@ button {
     position: relative;
     overflow-x: hidden;
 
+    div[role=button] {
+      cursor: pointer;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--main-purple)
+      }
+
+      &:active {
+        color: var(--main-purple)
+      }
+    }
+
     /* INICIO SCROLLBAR */
     scrollbar-width: thin;
     scrollbar-color: var(--main-gray) var(--bg-main);
@@ -943,9 +956,9 @@ button {
         align-items: center;
         gap: 1rem;
         color: var(--main-white);
-        fill: var(--main-purple);
+        fill: var(--main-purple-variation);
         padding: 1em;
-        transition: scale 200ms;
+        transition: 200ms;
         background: var(--main-gray);
         border-radius: .4em;
         cursor: pointer;
@@ -956,14 +969,16 @@ button {
 
         &:hover,
         &:focus-visible {
-          color: var(--main-red);
-          fill: var(--main-red)
+          color: var(--main-purple);
+          fill: var(--main-purple);
+          background: var(--main-purple-variation);
         }
 
         &:active {
           scale: .9;
-          color: var(--main-red);
-          fill: var(--main-red)
+          color: var(--main-purple);
+          fill: var(--main-purple);
+          background: var(--main-purple-variation);
         }
       }
     }
@@ -1118,6 +1133,8 @@ button {
     &__save {
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      align-items: center;
       flex: 1;
       max-width: 100%;
 
@@ -1206,6 +1223,11 @@ button {
         padding: 4px;
         color: var(--main-gray);
         transition: none;
+
+        &:hover,
+        &:focus-visible {
+          color: var(--main-white)
+        }
 
         &:active {
           scale: none

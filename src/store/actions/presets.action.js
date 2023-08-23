@@ -83,21 +83,24 @@ export const editPreset = (presets, id, newName, userId = null) => {
 }
 
 export const getPresets = (userId = null) => {
-    const presets = []
+    let presets = []
 
     return async dispatch => {
 
         if (userId) {
-            get(child(ref(db), `users/${userId}`)).then((snapshot) => {
+            get(child(ref(db), `presets/${userId}`)).then((snapshot) => {
                 if (snapshot.exists()) {
-                    console.log(snapshot.val());
+                    presets = snapshot.val().presets
+                    dispatch({
+                        type: "SET_PRESETS",
+                        presets
+                    })
                 } else {
                     console.log("No data available");
                 }
             }).catch((e) => {
                 console.log("error retrieving from db: ", e);
             });
-
         } else {
             dispatch({
                 type: "SET_PRESETS",

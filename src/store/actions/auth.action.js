@@ -1,6 +1,7 @@
 import { firebaseAuth as auth, firebaseGoogleProvider as provider } from "../../config/firebase"
 import { signInWithPopup, signOut, setPersistence, browserLocalPersistence, onAuthStateChanged } from "firebase/auth";
 import { getPresets } from "./presets.action";
+import { setCodeAll } from "./code.action";
 
 export const signUpEmail = (email, password) => {
 
@@ -14,7 +15,7 @@ export const signInGoogle = () => {
     return async dispatch => {
 
         onAuthStateChanged(auth, (user) => {
-            dispatch(getPresets, user?.uid)
+            dispatch(getPresets(user?.uid))
         })
 
 
@@ -48,6 +49,7 @@ export const signOutUser = () => {
     return async dispatch => {
 
         signOut(auth).then(() => {
+            dispatch(setCodeAll("", "", ""))
 
             dispatch({
                 type: "SIGN_OUT",

@@ -724,6 +724,15 @@ button {
   /* track */
   /* FIN SCROLLBAR */
 }
+.main__modal .presets div[role=button] {
+  cursor: pointer;
+}
+.main__modal .presets div[role=button]:hover, .main__modal .presets div[role=button]:focus-visible {
+  color: var(--main-purple);
+}
+.main__modal .presets div[role=button]:active {
+  color: var(--main-purple);
+}
 .main__modal .presets::-webkit-scrollbar {
   width: 4px;
 }
@@ -815,9 +824,9 @@ button {
   align-items: center;
   gap: 1rem;
   color: var(--main-white);
-  fill: var(--main-purple);
+  fill: var(--main-purple-variation);
   padding: 1em;
-  transition: scale 200ms;
+  transition: 200ms;
   background: var(--main-gray);
   border-radius: 0.4em;
   cursor: pointer;
@@ -826,13 +835,15 @@ button {
   fill: inherit;
 }
 .main__modal .presets__profile__googleBtn:hover, .main__modal .presets__profile__googleBtn:focus-visible {
-  color: var(--main-red);
-  fill: var(--main-red);
+  color: var(--main-purple);
+  fill: var(--main-purple);
+  background: var(--main-purple-variation);
 }
 .main__modal .presets__profile__googleBtn:active {
   scale: 0.9;
-  color: var(--main-red);
-  fill: var(--main-red);
+  color: var(--main-purple);
+  fill: var(--main-purple);
+  background: var(--main-purple-variation);
 }
 .main__modal .presets__option {
   aspect-ratio: 4/3;
@@ -961,6 +972,8 @@ button {
 .main__modal .presets__save {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   flex: 1;
   max-width: 100%;
 }
@@ -1039,6 +1052,9 @@ button {
   padding: 4px;
   color: var(--main-gray);
   transition: none;
+}
+.main__modal .presets__tabs__btn:hover, .main__modal .presets__tabs__btn:focus-visible {
+  color: var(--main-white);
 }
 .main__modal .presets__tabs__btn:active {
   scale: none;
