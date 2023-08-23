@@ -615,6 +615,7 @@ button {
   max-height: 100%;
   overflow: hidden;
   resize: vertical;
+  flex: 1;
 }
 .mainCode__output__iframe {
   border-radius: 0.2em;
