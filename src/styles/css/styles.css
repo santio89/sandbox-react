@@ -546,10 +546,8 @@ button {
   min-width: 300px;
   width: 100%;
   max-width: 100%;
-  height: clamp(420px, 74dvh, 1080px);
-  height: clamp(420px, 74vh, 1080px);
-  min-height: min(1080px, 74dvh);
-  min-height: min(1080px, 74vh);
+  height: clamp(min(1080px, 74dvh), 74dvh, 1080px);
+  height: clamp(min(1080px, 74vh), 74vh, 1080px);
   display: flex;
   flex-direction: column;
 }
@@ -610,12 +608,16 @@ button {
   background: white;
   transition: opacity 200ms;
   width: 100%;
-  height: 100%;
   max-width: 100%;
   max-height: 100%;
   overflow: hidden;
   resize: vertical;
-  flex: 1;
+  height: 400px;
+}
+@media (min-width: 800px) {
+  .mainCode__output__iframeWrapper {
+    height: 100%;
+  }
 }
 .mainCode__output__iframe {
   border-radius: 0.2em;
@@ -1072,7 +1074,7 @@ button {
   display: flex;
   position: absolute;
   bottom: 4px;
-  right: 4px;
+  left: 4px;
   padding: 4px;
 }
 .main__modal .presets__tabs__btn {
@@ -1091,8 +1093,9 @@ button {
   color: var(--main-white);
 }
 .main__modal .presets__tabs--saveTab {
-  right: initial;
-  left: 4px;
+  left: initial;
+  right: 4px;
+  white-space: pre-wrap;
 }
 .main__modal::backdrop {
   background: rgba(40, 40, 40, 0.4);

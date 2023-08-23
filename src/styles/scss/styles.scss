@@ -632,10 +632,8 @@ button {
     min-width: 300px;
     width: 100%;
     max-width: 100%;
-    height: clamp(420px, 74dvh, 1080px);
-    height: clamp(420px, 74vh, 1080px);
-    min-height: min(1080px, 74dvh);
-    min-height: min(1080px, 74vh);
+    height: clamp(min(1080px, 74dvh), 74dvh, 1080px);
+    height: clamp(min(1080px, 74vh), 74vh, 1080px);
     display: flex;
     flex-direction: column;
 
@@ -702,12 +700,15 @@ button {
       background: white;
       transition: opacity 200ms;
       width: 100%;
-      height: 100%;
       max-width: 100%;
       max-height: 100%;
       overflow: hidden;
       resize: vertical;
-      flex: 1
+      height: 400px;
+
+      @media(min-width: 800px) {
+        height: 100%
+      }
     }
 
     &__iframe {
@@ -1242,7 +1243,7 @@ button {
       display: flex;
       position: absolute;
       bottom: 4px;
-      right: 4px;
+      left: 4px;
       padding: 4px;
 
       &__btn {
@@ -1266,8 +1267,9 @@ button {
       }
 
       &--saveTab {
-        right: initial;
-        left: 4px;
+        left: initial;
+        right: 4px;
+        white-space: pre-wrap;
       }
     }
   }

@@ -385,12 +385,12 @@ export default function Modal({ callbacks }) {
                     {modalContent()}
                     {modalOption === "snippets" &&
                         <>
-                            <div className="presets__tabs presets__tabs--saveTab">
-                                <button className={`presets__tabs__btn ${snippetTab === "featuredSnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("featuredSnippets") }}>Featured snippets</button>
-                            </div>
                             <div className="presets__tabs">
                                 <button className={`presets__tabs__btn ${snippetTab === "mySnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("mySnippets") }}>My snippets</button>
                                 <button className={`presets__tabs__btn ${snippetTab === "saveSnippet" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("saveSnippet") }}>Save snippet</button>
+                            </div>
+                            <div className="presets__tabs presets__tabs--saveTab">
+                                <button className={`presets__tabs__btn ${snippetTab === "featuredSnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("featuredSnippets") }}>Featured{`\n`}snippets</button>
                             </div>
                         </>
                     }
