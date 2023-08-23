@@ -811,11 +811,6 @@ button {
   color: var(--main-white);
   fill: var(--main-white);
 }
-.main__modal .presets__profile__userInfo__data__signOut:active {
-  scale: 0.9;
-  color: var(--main-white);
-  fill: var(--main-white);
-}
 .main__modal .presets__profile__googleBtn {
   font-size: 1.4rem;
   display: flex;

@@ -1,10 +1,15 @@
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Home from "./components/Home";
 import Nav from "./components/Nav";
 import './styles/css/styles.css'
 import { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { authStateAction } from "./store/actions/auth.action";
+
 
 function App() {
+  const dispatch = useDispatch();
   const rootTheme = useRef();
 
   const Layout = () => (
@@ -14,6 +19,10 @@ function App() {
       </div>
     </>
   );
+
+  useEffect(() => {
+    dispatch(authStateAction())
+  }, [])
 
   return (
     <>

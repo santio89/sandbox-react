@@ -3,21 +3,18 @@ import { signInWithPopup, signOut, setPersistence, browserLocalPersistence, onAu
 import { getPresets } from "./presets.action";
 import { setCodeAll } from "./code.action";
 
-export const signUpEmail = (email, password) => {
+export const authStateAction = () => {
 
     return async dispatch => {
-
+        onAuthStateChanged(auth, (user) => {
+            dispatch(getPresets(user?.uid))
+        })
     }
 }
 
 export const signInGoogle = () => {
 
     return async dispatch => {
-
-        onAuthStateChanged(auth, (user) => {
-            dispatch(getPresets(user?.uid))
-        })
-
 
         setPersistence(auth, browserLocalPersistence)
             .then(async () => {
@@ -34,7 +31,7 @@ export const signInGoogle = () => {
                         })
                     }).catch((e) => {
                         console.log("error signing in with google: ", e)
-                    });;
+                    });
             })
             .catch((error) => {
                 console.log("error setting persistance: " + error);
