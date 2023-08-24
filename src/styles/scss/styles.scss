@@ -617,7 +617,6 @@ button {
         tab-size: 2;
         white-space: pre-wrap;
         transition: opacity 200ms;
-        resize: vertical;
 
         @media(min-width: 800px) {
           resize: vertical;
