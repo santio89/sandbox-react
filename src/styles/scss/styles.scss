@@ -553,6 +553,7 @@ button {
       display: flex;
       flex-direction: column;
       position: relative;
+      max-height: 582px;
 
       pre {
         margin: 0;
@@ -720,6 +721,7 @@ button {
       overflow: hidden;
       resize: vertical;
       height: 420px;
+      max-height: 582px;
 
       @media(min-width: 800px) {
         height: 100%

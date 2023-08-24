@@ -481,6 +481,7 @@ button {
   display: flex;
   flex-direction: column;
   position: relative;
+  max-height: 582px;
 }
 .mainCode__input__textWrapper pre {
   margin: 0;
@@ -629,6 +630,7 @@ button {
   overflow: hidden;
   resize: vertical;
   height: 420px;
+  max-height: 582px;
 }
 @media (min-width: 800px) {
   .mainCode__output__iframeWrapper {
