@@ -461,6 +461,27 @@ export default function Home() {
         syncScroll()
     }, [prismContentHtml, prismContentCss, prismContentJs, tabActive])
 
+    useEffect(() => {
+        const resizeBox = new ResizeObserver(entries => {
+            for (let entry of entries) {
+                const cr = entry.contentRect;
+                if (cr.height === 0) return
+
+                /* compensate:8padding+4border=12px */
+                codeInputHtml.current.style.height = cr.height + 12 + "px"
+                codeInputCss.current.style.height = cr.height + 12 + "px"
+                codeInputJs.current.style.height = cr.height + 12 + "px"
+                textareaHtml.current.style.height = cr.height + 12 + "px"
+                textareaCss.current.style.height = cr.height + 12 + "px"
+                textareaJs.current.style.height = cr.height + 12 + "px"
+            }
+        });
+
+        resizeBox.observe(textareaHtml.current)
+        resizeBox.observe(textareaCss.current)
+        resizeBox.observe(textareaJs.current)
+    }, [])
+
     return (
         <div className="home">
             <div className="tabs">

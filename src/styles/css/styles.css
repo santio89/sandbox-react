@@ -487,6 +487,7 @@ button {
   margin: 0;
   z-index: 0;
   display: flex;
+  height: 100%;
 }
 .mainCode__input__textWrapper code {
   max-width: 100%;
@@ -527,7 +528,7 @@ button {
   position: absolute;
   top: 0;
   left: 0;
-  min-height: 100%;
+  height: 100%;
   max-height: 100%;
   /* INICIO SCROLLBAR */
   scrollbar-width: thin;
@@ -546,7 +547,7 @@ button {
   tab-size: 2;
   white-space: pre-wrap;
   transition: opacity 200ms;
-  /* resize: vertical; */
+  resize: vertical;
 }
 .mainCode__input__text::-webkit-scrollbar {
   width: 8px;
@@ -856,6 +857,7 @@ button {
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+  font-weight: bold;
 }
 .main__modal .presets__profile__userInfo__data__signOut svg {
   fill: inherit;
@@ -878,6 +880,7 @@ button {
   background: var(--main-gray);
   border-radius: 0.4em;
   cursor: pointer;
+  font-weight: bold;
 }
 .main__modal .presets__profile__googleBtn svg {
   fill: inherit;
@@ -1106,17 +1109,21 @@ button {
 .main__modal .presets__tabs__btn {
   cursor: pointer;
   padding: 4px;
-  color: var(--main-gray);
+  color: var(--main-white);
   transition: none;
 }
 .main__modal .presets__tabs__btn:hover, .main__modal .presets__tabs__btn:focus-visible {
-  color: var(--main-white);
+  color: var(--main-purple);
+  font-weight: bold;
 }
 .main__modal .presets__tabs__btn:active {
   scale: none;
+  color: var(--main-purple);
+  font-weight: bold;
 }
 .main__modal .presets__tabs__btn--active {
-  color: var(--main-white);
+  color: var(--main-purple);
+  font-weight: bold;
 }
 .main__modal .presets__tabs--saveTab {
   left: initial;
