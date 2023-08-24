@@ -1041,12 +1041,17 @@ button {
       justify-content: center;
       align-items: center;
       overflow: hidden;
+      transition: 200ms;
 
       &:hover,
       &:focus,
       &:active {
         box-shadow: 0 0 10px 0 var(--main-purple);
         scale: none
+      }
+
+      &:hover span {
+        opacity: 1;
       }
 
       &__confirm {
@@ -1124,6 +1129,8 @@ button {
           align-items: center;
           aspect-ratio: 1;
           width: 20px;
+          opacity: 0;
+          transition: 200ms;
 
           svg {
             color: var(--main-purple-variation);
@@ -1132,13 +1139,13 @@ button {
 
           &:hover svg,
           &:focus-visible svg {
-            color: var(--main-red);
-            fill: var(--main-red);
+            color: rgb(248, 248, 248);
+            fill: rgb(248, 248, 248);
           }
 
           &:active {
-            color: var(--main-red);
-            fill: var(--main-red);
+            color: rgb(248, 248, 248);
+            fill: rgb(248, 248, 248);
             scale: .9
           }
         }
@@ -1152,6 +1159,8 @@ button {
           align-items: center;
           aspect-ratio: 1;
           width: 20px;
+          opacity: 0;
+          transition: 200ms;
 
           svg {
             color: var(--main-purple-variation);
@@ -1160,13 +1169,13 @@ button {
 
           &:hover svg,
           &:focus-visible svg {
-            color: var(--main-red);
-            fill: var(--main-red);
+            color: rgb(248, 248, 248);
+            fill: rgb(248, 248, 248);
           }
 
           &:active {
-            color: var(--main-red);
-            fill: var(--main-red);
+            color: rgb(248, 248, 248);
+            fill: rgb(248, 248, 248);
             scale: .9
           }
         }
