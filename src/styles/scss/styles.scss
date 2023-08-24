@@ -391,6 +391,10 @@ button {
     align-items: center;
   }
 
+  .Pane1.vertical {
+    min-width: 300px;
+  }
+
   .Resizer.vertical {
     cursor: col-resize;
     width: 2rem;

@@ -342,6 +342,9 @@ button {
   justify-content: center;
   align-items: center;
 }
+.mainCode .Pane1.vertical {
+  min-width: 300px;
+}
 .mainCode .Resizer.vertical {
   cursor: col-resize;
   width: 2rem;

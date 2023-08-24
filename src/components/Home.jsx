@@ -4,7 +4,7 @@ import { setCodeHtml, setCodeCss, setCodeJs } from "../store/actions/code.action
 import { html_beautify, css_beautify, js_beautify } from "js-beautify";
 import { Link } from "react-router-dom";
 import Prism from 'prismjs'
-import SplitPane, { Pane } from 'react-split-pane'
+import SplitPane from 'react-split-pane'
 
 export default function Home() {
     const [tabActive, setTabActive] = useState("html")
@@ -485,12 +485,29 @@ export default function Home() {
     }, [panelBreakpoint])
 
     useEffect(() => {
-        const resizeEvent = () => {
+        const windowPaneResizeFix = () => {
+            const containertWidth = document.querySelector(".SplitPane.vertical")?.getBoundingClientRect().width
+            const paneWidth = document.querySelector(".Pane.vertical.Pane1")?.getBoundingClientRect().width
+            const paneStyleWidth = document.querySelector(".Pane.vertical.Pane1")?.style.width
+
+            if (String(paneStyleWidth).endsWith("px")) {
+                document.querySelector(".Pane.vertical.Pane1").style.width = (paneWidth / containertWidth) * 100 + "%"
+            }
+        }
+
+
+        const paneResizeEvent = () => {
             window.innerWidth < 800 ? setPanelBreakpont(true) : setPanelBreakpont(false)
         }
-        window.addEventListener("resize", resizeEvent)
 
-        return () => window.removeEventListener("resize", resizeEvent)
+        const paneEvent = () => {
+            paneResizeEvent()
+            windowPaneResizeFix()
+        }
+
+        window.addEventListener("resize", paneEvent)
+
+        return () => window.removeEventListener("resize", paneEvent)
     }, [])
 
     return (
