@@ -15,6 +15,8 @@ export default function Modal({ callbacks }) {
     const defaultPresets = useSelector(state => state.preset.defaultPresets)
     const modalActive = useSelector(state => state.modal.active)
     const user = useSelector(state => state.auth)
+    const authLoader = useSelector(state => state.loader.authLoader)
+    const presetLoader = useSelector(state => state.loader.presetLoader)
 
     const { setNewProject } = callbacks;
 
@@ -30,7 +32,6 @@ export default function Modal({ callbacks }) {
     const [editName, setEditName] = useState("")
     const [snippetTab, setSnippetTab] = useState(user.userId ? "mySnippets" : "featuredSnippets")
     const [modalOption, setModalOption] = useState("snippets")
-
 
     const signInWithGoogle = () => {
         dispatch(signInGoogle())
@@ -118,7 +119,6 @@ export default function Modal({ callbacks }) {
                                         </div>
                                     </div>
                                 </div>
-
                                 <button className="presets__profile__userInfo__data presets__profile__userInfo__data__signOut" onClick={() => { signOutCurrentUser() }}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-box-arrow-right" viewBox="0 0 16 16">
                                         <path fillRule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
@@ -128,12 +128,16 @@ export default function Modal({ callbacks }) {
                                 </button>
                             </div>
                             :
-                            <button className="presets__profile__googleBtn" onClick={() => { signInWithGoogle() }}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" className="bi-google" viewBox="0 0 16 16">
-                                    <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z" />
-                                </svg>
-                                <span>Sign in with Google</span>
-                            </button>
+                            (authLoader ?
+                                <div className="loader">Loading...</div>
+                                :
+                                <button className="presets__profile__googleBtn" onClick={() => { signInWithGoogle() }}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" className="bi-google" viewBox="0 0 16 16">
+                                        <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z" />
+                                    </svg>
+                                    <span>Sign in with Google</span>
+                                </button>
+                            )
                         }
 
                     </div>
@@ -144,84 +148,88 @@ export default function Modal({ callbacks }) {
                         return <>
                             {
                                 (user.userId ?
-                                    (presets?.length > 0 ?
-                                        (presets?.map(preset => {
-                                            return (
-                                                <button disabled={loaded || saved} className="presets__option" key={preset.id} onClick={() => {
-                                                    setEditName("");
-                                                    setEditId(null);
-                                                    setDeleteId(null);
-                                                    setSelectedId(preset.id);
-                                                    setSelectedId(preset.id)
-                                                }} >
-                                                    {
-                                                        selectedId === preset.id && !loaded ?
-                                                            <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
-                                                                <span>Load snippet?</span>
-                                                                <span className="presets__option__confirm__buttons">
-                                                                    <span onClick={(e) => { e.stopPropagation(); setPreset(preset.html, preset.css, preset.js) }}>Yes</span>
-                                                                    <span onClick={(e) => { e.stopPropagation(); setSelectedId(null) }}>No</span>
-                                                                </span>
-                                                            </span>
-                                                            :
-                                                            (selectedId === preset.id && loaded ?
+                                    (presetLoader ? <div className="loader">Loading...</div>
+                                        :
+                                        (presets?.length > 0 ?
+                                            (presets?.map(preset => {
+                                                return (
+                                                    <button disabled={loaded || saved} className="presets__option" key={preset.id} onClick={() => {
+                                                        setEditName("");
+                                                        setEditId(null);
+                                                        setDeleteId(null);
+                                                        setSelectedId(preset.id);
+                                                        setSelectedId(preset.id)
+                                                    }} >
+                                                        {
+                                                            selectedId === preset.id && !loaded ?
                                                                 <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
-                                                                    <span>Snippet loaded!</span>
+                                                                    <span>Load snippet?</span>
+                                                                    <span className="presets__option__confirm__buttons">
+                                                                        <span onClick={(e) => { e.stopPropagation(); setPreset(preset.html, preset.css, preset.js) }}>Yes</span>
+                                                                        <span onClick={(e) => { e.stopPropagation(); setSelectedId(null) }}>No</span>
+                                                                    </span>
                                                                 </span>
                                                                 :
-                                                                editId === preset.id ?
-                                                                    (
-                                                                        <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
-                                                                            <span>Rename snippet?</span>
-                                                                            <form onSubmit={(e) => { e.preventDefault(); editSelectedPreset(preset.id, editName) }}>
-                                                                                <input type="text" value={editName} onChange={e => setEditName(e.target.value)} placeholder="NEW NAME" />
+                                                                (selectedId === preset.id && loaded ?
+                                                                    <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
+                                                                        <span>Snippet loaded!</span>
+                                                                    </span>
+                                                                    :
+                                                                    editId === preset.id ?
+                                                                        (
+                                                                            <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
+                                                                                <span>Rename snippet?</span>
+                                                                                <form onSubmit={(e) => { e.preventDefault(); editSelectedPreset(preset.id, editName) }}>
+                                                                                    <input type="text" value={editName} onChange={e => setEditName(e.target.value)} placeholder="NEW NAME" />
+                                                                                    <span className="presets__option__confirm__buttons">
+                                                                                        <span onClick={(e) => { e.stopPropagation(); editSelectedPreset(preset.id, editName) }}>Yes</span>
+                                                                                        <span onClick={(e) => { e.stopPropagation(); setEditId(null) }}>No</span>
+                                                                                    </span>
+                                                                                </form>
+                                                                            </span>
+                                                                        ) :
+                                                                        (deleteId === preset.id ?
+                                                                            <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
+                                                                                <span>Delete snippet?</span>
                                                                                 <span className="presets__option__confirm__buttons">
-                                                                                    <span onClick={(e) => { e.stopPropagation(); editSelectedPreset(preset.id, editName) }}>Yes</span>
-                                                                                    <span onClick={(e) => { e.stopPropagation(); setEditId(null) }}>No</span>
+                                                                                    <span onClick={(e) => { e.stopPropagation(); deleteSelectedPreset(preset.id) }}>Yes</span>
+                                                                                    <span onClick={(e) => { e.stopPropagation(); setDeleteId(null) }}>No</span>
                                                                                 </span>
-                                                                            </form>
-                                                                        </span>
-                                                                    ) :
-                                                                    (deleteId === preset.id ?
-                                                                        <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
-                                                                            <span>Delete snippet?</span>
-                                                                            <span className="presets__option__confirm__buttons">
-                                                                                <span onClick={(e) => { e.stopPropagation(); deleteSelectedPreset(preset.id) }}>Yes</span>
-                                                                                <span onClick={(e) => { e.stopPropagation(); setDeleteId(null) }}>No</span>
+                                                                            </span> :
+                                                                            <span className="presets__option__main">
+                                                                                <span className="presets__option__main__name">{preset.name}</span>
+                                                                                <span className="presets__option__main__edit" onClick={(e) => {
+                                                                                    e.stopPropagation();
+                                                                                    setEditId(preset.id);
+                                                                                    setEditName("");
+                                                                                    setDeleteId(null);
+                                                                                    setSelectedId(null)
+                                                                                }}>
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi-pencil-fill" viewBox="0 0 16 16">
+                                                                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                                                                                    </svg>
+                                                                                </span>
+                                                                                <span className="presets__option__main__del" onClick={(e) => {
+                                                                                    e.stopPropagation();
+                                                                                    setDeleteId(preset.id);
+                                                                                    setEditId(null);
+                                                                                    setSelectedId(null);
+                                                                                    setEditName("")
+                                                                                }}>
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi-trash-fill" viewBox="0 0 16 16">
+                                                                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                                                                    </svg>
+                                                                                </span>
                                                                             </span>
-                                                                        </span> :
-                                                                        <span className="presets__option__main">
-                                                                            <span className="presets__option__main__name">{preset.name}</span>
-                                                                            <span className="presets__option__main__edit" onClick={(e) => {
-                                                                                e.stopPropagation();
-                                                                                setEditId(preset.id);
-                                                                                setEditName("");
-                                                                                setDeleteId(null);
-                                                                                setSelectedId(null)
-                                                                            }}>
-                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi-pencil-fill" viewBox="0 0 16 16">
-                                                                                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
-                                                                                </svg>
-                                                                            </span>
-                                                                            <span className="presets__option__main__del" onClick={(e) => {
-                                                                                e.stopPropagation();
-                                                                                setDeleteId(preset.id);
-                                                                                setEditId(null);
-                                                                                setSelectedId(null);
-                                                                                setEditName("")
-                                                                            }}>
-                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi-trash-fill" viewBox="0 0 16 16">
-                                                                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                                                                </svg>
-                                                                            </span>
-                                                                        </span>
-                                                                    )
-                                                            )
-                                                    }
-                                                </button>
-                                            )
-                                        })) :
-                                        <div className="presets__noSnippet">No snippets saved</div>) :
+                                                                        )
+                                                                )
+                                                        }
+                                                    </button>
+                                                )
+                                            })) :
+                                            <div className="presets__noSnippet">No snippets saved</div>)
+
+                                    ) :
                                     <div className="presets__noSnippet" role="button" onClick={() => setModalOption("profile")}>Sign in to see your snippets</div>
                                 )
                             }
@@ -355,7 +363,6 @@ export default function Modal({ callbacks }) {
         setEditId(null)
         setSavePresetName("")
     }, [modalOption])
-
 
     return (
         <dialog className="main__modal" ref={modal}>

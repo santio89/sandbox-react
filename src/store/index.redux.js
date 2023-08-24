@@ -3,6 +3,7 @@ import ThemeReducer from './reducers/theme.reducer'
 import PresetReducer from "./reducers/preset.reducer";
 import AuthReducer from "./reducers/auth.reducer";
 import ModalReducer from './reducers/modal.reducer'
+import LoaderReducer from "./reducers/loader.reducer";
 import { HtmlReducer, CssReducer, JsReducer } from "./reducers/code.reducer";
 import thunk from "redux-thunk";
 import { persistReducer, persistStore } from "redux-persist";
@@ -28,7 +29,8 @@ const RootReducer = combineReducers({
         undoType: 'JS_UNDO',
         redoType: 'JS_REDO',
     }),
-    auth: AuthReducer
+    auth: AuthReducer,
+    loader: LoaderReducer
 })
 
 const persistConfig = {

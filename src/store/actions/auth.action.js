@@ -15,9 +15,13 @@ export const authStateAction = () => {
 export const signInGoogle = () => {
 
     return async dispatch => {
-
+        dispatch({
+            type: "SET_AUTH_LOADER",
+            authLoader: true
+        });
         setPersistence(auth, browserLocalPersistence)
             .then(async () => {
+
                 return signInWithPopup(auth, provider)
                     .then((result) => {
                         const user = result.user;
@@ -29,6 +33,11 @@ export const signInGoogle = () => {
                             displayName: user.displayName,
                             avatar: user.photoURL
                         })
+
+                        dispatch({
+                            type: "SET_AUTH_LOADER",
+                            authLoader: false
+                        });
                     }).catch((e) => {
                         console.log("error signing in with google: ", e)
                     });
@@ -44,6 +53,10 @@ export const signInGoogle = () => {
 export const signOutUser = () => {
 
     return async dispatch => {
+        dispatch({
+            type: "SET_AUTH_LOADER",
+            authLoader: true
+        });
 
         signOut(auth).then(() => {
             dispatch(setCodeAll("", "", ""))
@@ -51,6 +64,11 @@ export const signOutUser = () => {
             dispatch({
                 type: "SIGN_OUT",
             })
+
+            dispatch({
+                type: "SET_AUTH_LOADER",
+                authLoader: false
+            });
         }).catch((e) => {
             console.log("error signing out: ", e)
         });
