@@ -547,7 +547,11 @@ button {
   tab-size: 2;
   white-space: pre-wrap;
   transition: opacity 200ms;
-  resize: vertical;
+}
+@media (min-width: 800px) {
+  .mainCode__input__text.textarea {
+    resize: vertical;
+  }
 }
 .mainCode__input__text::-webkit-scrollbar {
   width: 8px;
@@ -629,13 +633,13 @@ button {
   max-width: 100%;
   max-height: 100%;
   overflow: hidden;
-  resize: vertical;
   height: 420px;
   max-height: 582px;
 }
 @media (min-width: 800px) {
   .mainCode__output__iframeWrapper {
     height: 100%;
+    resize: vertical;
   }
 }
 .mainCode__output__iframe {
