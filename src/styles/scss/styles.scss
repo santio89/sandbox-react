@@ -366,6 +366,12 @@ button {
     gap: 0;
   }
 
+  .NoSplitPane {
+    @media(min-width: 800px) {
+      display: none !important;
+    }
+  }
+
   .SplitPane.vertical {
     flex-grow: 1;
     padding: 1rem;
@@ -373,6 +379,10 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media(max-width: 799px) {
+      display: none !important;
+    }
   }
 
   .Pane.vertical {

@@ -319,6 +319,11 @@ button {
     gap: 0;
   }
 }
+@media (min-width: 800px) {
+  .mainCode .NoSplitPane {
+    display: none !important;
+  }
+}
 .mainCode .SplitPane.vertical {
   flex-grow: 1;
   padding: 1rem;
@@ -326,6 +331,11 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+@media (max-width: 799px) {
+  .mainCode .SplitPane.vertical {
+    display: none !important;
+  }
 }
 .mainCode .Pane.vertical {
   display: flex;
