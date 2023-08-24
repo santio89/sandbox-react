@@ -482,7 +482,9 @@ export default function Home() {
         resizeBox.observe(textareaHtml.current)
         resizeBox.observe(textareaCss.current)
         resizeBox.observe(textareaJs.current)
+    }, [panelBreakpoint])
 
+    useEffect(() => {
         const resizeEvent = () => {
             window.innerWidth < 800 ? setPanelBreakpont(true) : setPanelBreakpont(false)
         }
