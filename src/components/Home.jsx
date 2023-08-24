@@ -97,7 +97,6 @@ export default function Home() {
                 codeInputHtml.current.scrollTop = textareaHtml.current.scrollTop;
                 break;
             case 'css':
-                console.log(textareaCss.current)
                 codeInputCss.current.scrollTop = textareaCss.current.scrollTop;
                 break;
             case 'js':
