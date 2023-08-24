@@ -33,17 +33,16 @@ export const signInGoogle = () => {
                             displayName: user.displayName,
                             avatar: user.photoURL
                         })
-
-                        dispatch({
-                            type: "SET_AUTH_LOADER",
-                            authLoader: false
-                        });
                     }).catch((e) => {
                         console.log("error signing in with google: ", e)
                     });
-            })
-            .catch((error) => {
+            }).catch((error) => {
                 console.log("error setting persistance: " + error);
+            }).finally(() => {
+                dispatch({
+                    type: "SET_AUTH_LOADER",
+                    authLoader: false
+                });
             });
 
 
@@ -64,13 +63,13 @@ export const signOutUser = () => {
             dispatch({
                 type: "SIGN_OUT",
             })
-
+        }).catch((e) => {
+            console.log("error signing out: ", e)
+        }).finally(() => {
             dispatch({
                 type: "SET_AUTH_LOADER",
                 authLoader: false
             });
-        }).catch((e) => {
-            console.log("error signing out: ", e)
         });
     }
 }

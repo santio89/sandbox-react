@@ -84,7 +84,7 @@ export const editPreset = (presets, id, newName, userId = null) => {
 
 export const getPresets = (userId = null) => {
     let presets = []
-  
+
     return async dispatch => {
         dispatch({
             type: "SET_PRESET_LOADER",
@@ -101,12 +101,13 @@ export const getPresets = (userId = null) => {
                 } else {
                     console.log("No data available");
                 }
+            }).catch((e) => {
+                console.log("error retrieving from db: ", e);
+            }).finally(() => {
                 dispatch({
                     type: "SET_PRESET_LOADER",
                     presetLoader: false
                 });
-            }).catch((e) => {
-                console.log("error retrieving from db: ", e);
             });
         } else {
             dispatch({
