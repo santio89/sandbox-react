@@ -338,17 +338,22 @@ button {
   height: 100%;
 }
 .mainCode__input {
-  flex: 1;
   min-width: 300px;
   width: 100%;
   max-width: 100%;
-  height: clamp(420px, 74dvh, 1080px);
-  height: clamp(420px, 74vh, 1080px);
-  min-height: min(1080px, 74dvh);
-  min-height: min(1080px, 74vh);
+  height: 420px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+}
+@media (min-width: 800px) {
+  .mainCode__input {
+    flex: 1;
+    min-height: min(1080px, 74dvh);
+    min-height: min(1080px, 74vh);
+    height: clamp(min(1080px, 74dvh), 74dvh, 1080px);
+    height: clamp(min(1080px, 74vh), 74vh, 1080px);
+  }
 }
 .mainCode__input__type {
   display: flex;
@@ -530,6 +535,7 @@ button {
   tab-size: 2;
   white-space: pre-wrap;
   transition: opacity 200ms;
+  /* resize: vertical; */
 }
 .mainCode__input__text::-webkit-scrollbar {
   width: 8px;
@@ -612,7 +618,7 @@ button {
   max-height: 100%;
   overflow: hidden;
   resize: vertical;
-  height: 400px;
+  height: 420px;
 }
 @media (min-width: 800px) {
   .mainCode__output__iframeWrapper {
