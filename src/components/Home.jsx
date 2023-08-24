@@ -26,7 +26,6 @@ export default function Home() {
     const [prismContentJs, setPrismContentJs] = useState(js)
 
     const [panelDrag, setPanelDrag] = useState(false)
-    /* const [panelBreakpoint, setPanelBreakpoint] = useState(false) */
 
     const iframe = useRef(null)
     const textareaHtml = useRef(null)
