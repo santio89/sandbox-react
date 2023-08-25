@@ -921,7 +921,7 @@ button {
     position: relative;
     overflow-x: hidden;
 
-    div[role=button] {
+    div[role=button].presets__noSnippet {
       cursor: pointer;
 
       &:hover,

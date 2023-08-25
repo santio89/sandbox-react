@@ -817,13 +817,13 @@ button {
   /* track */
   /* FIN SCROLLBAR */
 }
-.main__modal .presets div[role=button] {
+.main__modal .presets div[role=button].presets__noSnippet {
   cursor: pointer;
 }
-.main__modal .presets div[role=button]:hover, .main__modal .presets div[role=button]:focus-visible {
+.main__modal .presets div[role=button].presets__noSnippet:hover, .main__modal .presets div[role=button].presets__noSnippet:focus-visible {
   color: var(--main-purple);
 }
-.main__modal .presets div[role=button]:active {
+.main__modal .presets div[role=button].presets__noSnippet:active {
   color: var(--main-purple);
 }
 .main__modal .presets::-webkit-scrollbar {
