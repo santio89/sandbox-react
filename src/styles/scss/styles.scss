@@ -415,7 +415,7 @@ button {
       opacity: .5
     }
 
-    &:hover::after {
+    &:active::after {
       opacity: 1
     }
   }
