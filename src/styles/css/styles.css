@@ -590,7 +590,7 @@ button {
 }
 .mainCode__input__text::-webkit-resizer {
   background-color: transparent;
-  background-image: url("./resize-vert.svg");
+  background-image: url("/resize-vert.svg");
   background-repeat: no-repeat;
 }
 .mainCode__output {
