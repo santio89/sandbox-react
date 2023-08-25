@@ -182,7 +182,7 @@ export default function Modal({ callbacks }) {
                                                                             <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                                                                                 <span>Rename snippet?</span>
                                                                                 <form onSubmit={(e) => { e.preventDefault(); editSelectedPreset(preset.id, editName) }}>
-                                                                                    <input type="text" value={editName} onChange={e => { setEditName(e.target.value) }} placeholder="NEW NAME" />
+                                                                                    <input type="text" value={editName} onChange={e => { setEditName(e.target.value) }} onKeyUp={(e) => e.stopPropagation()} placeholder="NEW NAME" />
                                                                                     <span className="presets__option__confirm__buttons">
                                                                                         <span onClick={(e) => { e.stopPropagation(); editSelectedPreset(preset.id, editName) }}>Yes</span>
                                                                                         <span onClick={(e) => { e.stopPropagation(); setEditId(null) }}>No</span>

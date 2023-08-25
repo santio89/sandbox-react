@@ -1156,6 +1156,7 @@ button {
   padding: 4px;
   color: var(--main-purple);
   transition: none;
+  border-radius: 2px;
 }
 .main__modal .presets__tabs__btn:hover, .main__modal .presets__tabs__btn:focus-visible {
   font-weight: bold;
