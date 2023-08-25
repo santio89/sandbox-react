@@ -490,27 +490,21 @@ export default function Home() {
             for (let entry of entries) {
                 const cr = entry.contentRect;
 
-                /* don't sync if pane hasn't resized */
+                /* don't sync if pane hasn't been resized manually */
                 if (cr.height === 0) return
                 switch (tabActive) {
                     case 'html':
-                        if (String(textareaHtml.current.style.height) === "") {
-                            return
-                        }
+                        if (String(textareaHtml.current.style.height) === "") return
                         break;
                     case 'css':
-                        if (String(textareaCss.current.style.height) === "") {
-                            return
-                        }
+                        if (String(textareaCss.current.style.height) === "") return
                         break;
                     case 'js':
-                        if (String(textareaJs.current.style.height) === "") {
-                            return
-                        }
+                        if (String(textareaJs.current.style.height) === "") return
                         break;
                 }
 
-                /*resize panel compensation:8padding+4border=12px */
+                /*resize panel sync:8padding+4border=12px */
                 codeInputHtml.current.style.height = cr.height + 12 + "px"
                 codeInputCss.current.style.height = cr.height + 12 + "px"
                 codeInputJs.current.style.height = cr.height + 12 + "px"
@@ -525,7 +519,7 @@ export default function Home() {
         resizeBox.observe(textareaJs.current)
 
         return () => resizeBox.disconnect()
-    }, [panelBreakpoint])
+    }, [panelBreakpoint, tabActive])
 
     useEffect(() => {
         const windowPaneResizeFix = () => {

@@ -1,7 +1,7 @@
 :root {
   --main-purple: rgb(107, 31, 248);
   --main-purple-variation: rgb(59, 21, 141);
-  --main-red: rgb(210, 28, 83);
+  --main-red: #d21c53;
   --main-white: rgb(248, 248, 248);
   --main-black: rgb(30, 30, 30);
   --main-gray: rgb(80, 80, 80);
@@ -558,14 +558,22 @@ button {
   }
 }
 .mainCode__input__text::-webkit-scrollbar {
-  width: 8px;
+  width: initial;
 }
 .mainCode__input__text::-webkit-scrollbar-track {
-  background: var(--main-black);
+  background: transparent;
   border-radius: 1em;
 }
 .mainCode__input__text::-webkit-scrollbar-thumb {
   background: rgb(100, 100, 100);
+}
+.mainCode__input__text::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+.mainCode__input__text::-webkit-resizer {
+  background-color: transparent;
+  background-image: url("./resize-vert.svg");
+  background-repeat: no-repeat;
 }
 .mainCode__output {
   flex: 1;
@@ -639,12 +647,37 @@ button {
   overflow: hidden;
   height: 420px;
   max-height: 582px;
+  /* INICIO SCROLLBAR */
+  scrollbar-width: thin;
+  scrollbar-color: var(--main-gray) var(--main-black);
+  /* width */
+  /* track */
+  /* handle */
+  /* FIN SCROLLBAR */
 }
 @media (min-width: 800px) {
   .mainCode__output__iframeWrapper {
     height: 100%;
     resize: vertical;
   }
+}
+.mainCode__output__iframeWrapper::-webkit-scrollbar {
+  width: initial;
+}
+.mainCode__output__iframeWrapper::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 1em;
+}
+.mainCode__output__iframeWrapper::-webkit-scrollbar-thumb {
+  background: rgb(100, 100, 100);
+}
+.mainCode__output__iframeWrapper::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+.mainCode__output__iframeWrapper::-webkit-resizer {
+  background-color: transparent;
+  background-image: url("./resize-vert.svg");
+  background-repeat: no-repeat;
 }
 .mainCode__output__iframe {
   border-radius: 0.2em;

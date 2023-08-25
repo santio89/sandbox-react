@@ -1,7 +1,7 @@
 :root {
   --main-purple: rgb(107, 31, 248);
   --main-purple-variation: rgb(59, 21, 141);
-  --main-red: rgb(210, 28, 83);
+  --main-red: #d21c53;
   --main-white: rgb(248, 248, 248);
   --main-black: rgb(30, 30, 30);
   --main-gray: rgb(80, 80, 80);
@@ -634,18 +634,28 @@ button {
 
       /* width */
       &::-webkit-scrollbar {
-        width: 8px;
+        width: initial
       }
 
       /* track */
       &::-webkit-scrollbar-track {
-        background: var(--main-black);
+        background: transparent;
         border-radius: 1em;
       }
 
       /* handle */
       &::-webkit-scrollbar-thumb {
         background: rgb(100, 100, 100)
+      }
+
+      &::-webkit-scrollbar-corner {
+        background-color: transparent;
+      }
+
+      &::-webkit-resizer {
+        background-color: transparent;
+        background-image: url("./resize-vert.svg");
+        background-repeat: no-repeat;
       }
 
       /* FIN SCROLLBAR */
@@ -735,6 +745,38 @@ button {
         height: 100%;
         resize: vertical;
       }
+
+      /* INICIO SCROLLBAR */
+      scrollbar-width: thin;
+      scrollbar-color: var(--main-gray) var(--main-black);
+
+      /* width */
+      &::-webkit-scrollbar {
+        width: initial
+      }
+
+      /* track */
+      &::-webkit-scrollbar-track {
+        background: transparent;
+        border-radius: 1em;
+      }
+
+      /* handle */
+      &::-webkit-scrollbar-thumb {
+        background: rgb(100, 100, 100)
+      }
+
+      &::-webkit-scrollbar-corner {
+        background-color: transparent;
+      }
+
+      &::-webkit-resizer {
+        background-color: transparent;
+        background-image: url("./resize-vert.svg");
+        background-repeat: no-repeat;
+      }
+
+      /* FIN SCROLLBAR */
     }
 
     &__iframe {
