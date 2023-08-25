@@ -554,6 +554,7 @@ button {
 @media (min-width: 800px) {
   .mainCode__input__text.textarea {
     resize: vertical;
+    height: 100%;
   }
 }
 .mainCode__input__text::-webkit-scrollbar {

@@ -489,7 +489,26 @@ export default function Home() {
         const resizeBox = new ResizeObserver(entries => {
             for (let entry of entries) {
                 const cr = entry.contentRect;
+
+                /* don't sync if pane hasn't resized */
                 if (cr.height === 0) return
+                switch (tabActive) {
+                    case 'html':
+                        if (String(textareaHtml.current.style.height) === "") {
+                            return
+                        }
+                        break;
+                    case 'css':
+                        if (String(textareaCss.current.style.height) === "") {
+                            return
+                        }
+                        break;
+                    case 'js':
+                        if (String(textareaJs.current.style.height) === "") {
+                            return
+                        }
+                        break;
+                }
 
                 /*resize panel compensation:8padding+4border=12px */
                 codeInputHtml.current.style.height = cr.height + 12 + "px"
@@ -504,6 +523,8 @@ export default function Home() {
         resizeBox.observe(textareaHtml.current)
         resizeBox.observe(textareaCss.current)
         resizeBox.observe(textareaJs.current)
+
+        return () => resizeBox.disconnect()
     }, [panelBreakpoint])
 
     useEffect(() => {
@@ -511,6 +532,7 @@ export default function Home() {
             const containertWidth = document.querySelector(".SplitPane.vertical")?.getBoundingClientRect().width
             const paneWidth = document.querySelector(".Pane.vertical.Pane1")?.getBoundingClientRect().width
             const paneStyleWidth = document.querySelector(".Pane.vertical.Pane1")?.style.width
+
 
             if (String(paneStyleWidth).endsWith("px")) {
                 document.querySelector(".Pane.vertical.Pane1").style.width = (paneWidth / containertWidth) * 100 + "%"
