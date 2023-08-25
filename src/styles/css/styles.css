@@ -674,7 +674,7 @@ button {
 }
 .mainCode__output__iframeWrapper::-webkit-resizer {
   background-color: transparent;
-  background-image: url("./resize-vert.svg");
+  background-image: url("/resize-vert.svg");
   background-repeat: no-repeat;
 }
 .mainCode__output__iframe {
