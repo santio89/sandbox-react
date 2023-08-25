@@ -1285,24 +1285,24 @@ button {
       &__btn {
         cursor: pointer;
         padding: 4px;
-        color: var(--main-white);
+        color: var(--main-purple);
         transition: none;
 
         &:hover,
         &:focus-visible {
-          color: var(--main-purple);
           font-weight: bold;
+          text-decoration: underline;
         }
 
         &:active {
           scale: none;
-          color: var(--main-purple);
           font-weight: bold;
+          text-decoration: underline;
         }
 
         &--active {
-          color: var(--main-purple);
           font-weight: bold;
+          text-decoration: underline;
         }
       }
 

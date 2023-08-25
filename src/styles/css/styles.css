@@ -1116,21 +1116,21 @@ button {
 .main__modal .presets__tabs__btn {
   cursor: pointer;
   padding: 4px;
-  color: var(--main-white);
+  color: var(--main-purple);
   transition: none;
 }
 .main__modal .presets__tabs__btn:hover, .main__modal .presets__tabs__btn:focus-visible {
-  color: var(--main-purple);
   font-weight: bold;
+  text-decoration: underline;
 }
 .main__modal .presets__tabs__btn:active {
   scale: none;
-  color: var(--main-purple);
   font-weight: bold;
+  text-decoration: underline;
 }
 .main__modal .presets__tabs__btn--active {
-  color: var(--main-purple);
   font-weight: bold;
+  text-decoration: underline;
 }
 .main__modal .presets__tabs--saveTab {
   left: initial;
