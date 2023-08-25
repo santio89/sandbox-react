@@ -43,12 +43,15 @@ export default function Home() {
     const setHtml = (html) => {
         dispatch(setCodeHtml(html))
     }
+
     const setCss = (css) => {
         dispatch(setCodeCss(css))
     }
+
     const setJs = (js) => {
         dispatch(setCodeJs(js))
     }
+
     const resetCode = () => {
         switch (tabActive) {
             case 'html':
@@ -65,27 +68,28 @@ export default function Home() {
         }
         setClearConfirm(false);
     }
+
     const beautify = () => {
         switch (tabActive) {
             case 'html': {
                 const beautify = html_beautify(html, { indent_size: 2, indent_with_tabs: true, space_in_empty_paren: true })
-
-                /*  put textcursor at position of start of next character
-                 const selection = (textareaHtml.current.selectionEnd - textareaHtml.current.selectionStart)
-                 const start = textareaHtml.current.selectionStart;
-                 const end = textareaHtml.current.selectionEnd */
+                const selection = (textareaHtml.current.selectionEnd)
                 setHtml(beautify)
-                /* setTextCursor(start) */
+                setTextCursor(selection)
                 break;
             }
             case 'css': {
                 const beautify = css_beautify(css, { indent_size: 2, indent_with_tabs: true, space_in_empty_paren: true })
+                const selection = (textareaCss.current.selectionEnd)
                 setCss(beautify)
+                setTextCursor(selection)
                 break;
             }
             case 'js': {
                 const beautify = js_beautify(js, { indent_size: 2, indent_with_tabs: true, space_in_empty_paren: true })
+                const selection = (textareaJs.current.selectionEnd)
                 setJs(beautify)
+                setTextCursor(selection)
                 break;
             }
             default:
@@ -282,30 +286,48 @@ export default function Home() {
         } else if (e.key.toUpperCase() === "Z" && e.ctrlKey) {
             e.preventDefault();
             switch (tabActive) {
-                case 'html':
+                case 'html': {
+                    const selection = (textareaHtml.current.selectionEnd)
                     dispatch({ type: "HTML_UNDO" })
+                    setTextCursor(selection)
                     break;
-                case 'css':
+                }
+                case 'css': {
+                    const selection = (textareaCss.current.selectionEnd)
                     dispatch({ type: "CSS_UNDO" })
+                    setTextCursor(selection)
                     break;
-                case 'js':
+                }
+                case 'js': {
+                    const selection = (textareaJs.current.selectionEnd)
                     dispatch({ type: "JS_UNDO" })
+                    setTextCursor(selection)
                     break;
+                }
                 default:
                     return
             }
         } else if (e.key.toUpperCase() === "Y" && e.ctrlKey) {
             e.preventDefault();
             switch (tabActive) {
-                case 'html':
+                case 'html': {
+                    const selection = (textareaHtml.current.selectionEnd)
                     dispatch({ type: "HTML_REDO" })
+                    setTextCursor(selection)
                     break;
-                case 'css':
+                }
+                case 'css': {
+                    const selection = (textareaCss.current.selectionEnd)
                     dispatch({ type: "CSS_REDO" })
+                    setTextCursor(selection)
                     break;
-                case 'js':
+                }
+                case 'js': {
+                    const selection = (textareaJs.current.selectionEnd)
                     dispatch({ type: "JS_REDO" })
+                    setTextCursor(selection)
                     break;
+                }
                 default:
                     return
             }
