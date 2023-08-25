@@ -1,7 +1,7 @@
 :root {
   --main-purple: rgb(107, 31, 248);
   --main-purple-variation: rgb(59, 21, 141);
-  --main-red: #d21c53;
+  --main-red: rgb(211, 29, 83);
   --main-white: rgb(248, 248, 248);
   --main-black: rgb(30, 30, 30);
   --main-gray: rgb(80, 80, 80);
@@ -398,7 +398,26 @@ button {
   .Resizer.vertical {
     cursor: col-resize;
     width: 2rem;
-    height: 100%
+    height: 100%;
+    position: relative;
+
+    &::after {
+      content: "↔";
+      aspect-ratio: 1;
+      width: 1rem;
+      font-size: 2rem;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      translate: -50% -50%;
+      color: var(--main-red);
+      pointer-events: none;
+      opacity: .5
+    }
+
+    &:hover::after {
+      opacity: 1
+    }
   }
 
   &__input {
@@ -746,37 +765,11 @@ button {
         resize: vertical;
       }
 
-      /* INICIO SCROLLBAR */
-      scrollbar-width: thin;
-      scrollbar-color: var(--main-gray) var(--main-black);
-
-      /* width */
-      &::-webkit-scrollbar {
-        width: initial
-      }
-
-      /* track */
-      &::-webkit-scrollbar-track {
-        background: transparent;
-        border-radius: 1em;
-      }
-
-      /* handle */
-      &::-webkit-scrollbar-thumb {
-        background: rgb(100, 100, 100)
-      }
-
-      &::-webkit-scrollbar-corner {
-        background-color: transparent;
-      }
-
       &::-webkit-resizer {
         background-color: transparent;
         background-image: url("./resize-vert.svg");
         background-repeat: no-repeat;
       }
-
-      /* FIN SCROLLBAR */
     }
 
     &__iframe {
