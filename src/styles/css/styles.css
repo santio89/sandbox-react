@@ -952,7 +952,10 @@ button {
   overflow: hidden;
   transition: 200ms;
 }
-.main__modal .presets__option:hover, .main__modal .presets__option:focus, .main__modal .presets__option:active {
+.main__modal .presets__option[disabled] {
+  pointer-events: none;
+}
+.main__modal .presets__option:hover, .main__modal .presets__option:focus-visible, .main__modal .presets__option:active {
   box-shadow: 0 0 10px 0 var(--main-purple);
   scale: none;
 }
