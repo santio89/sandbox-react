@@ -1,5 +1,5 @@
 :root {
-  --main-purple: rgb(107, 31, 248);
+  --main-purple: #6b1ff8;
   --main-purple-variation: rgb(59, 21, 141);
   --main-red: rgb(211, 29, 83);
   --main-white: rgb(248, 248, 248);
@@ -410,7 +410,7 @@ button {
       left: calc(50% - 1px);
       top: 50%;
       translate: -50% -50%;
-      color: var(--main-red);
+      color: var(--main-purple);
       pointer-events: none;
       opacity: .5
     }
