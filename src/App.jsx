@@ -7,6 +7,7 @@ import './styles/css/styles.css'
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { authStateAction } from "./store/actions/auth.action";
+import { Toaster } from 'sonner'
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
   return (
     <>
       <div ref={rootTheme} className={`root-theme`}>
+        <Toaster />
         <BrowserRouter>
           <Nav rootTheme={rootTheme} />
           <Routes>

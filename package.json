@@ -24,6 +24,7 @@
     "redux-thunk": "^2.4.2",
     "redux-undo": "^1.1.0",
     "sass": "^1.64.2",
+    "sonner": "^0.7.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

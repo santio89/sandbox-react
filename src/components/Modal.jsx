@@ -5,6 +5,7 @@ import { signInGoogle, signOutUser } from "../store/actions/auth.action";
 import { setCodeAll } from "../store/actions/code.action";
 import { savePreset, deletePreset, editPreset } from "../store/actions/presets.action";
 import { v4 as uuidv4 } from 'uuid';
+import { toast } from "sonner";
 
 export default function Modal({ callbacks }) {
     const dispatch = useDispatch();
@@ -45,26 +46,35 @@ export default function Modal({ callbacks }) {
         dispatch(setModal(false))
     }
 
-    const setPreset = (html, css, js) => {
+    const setPreset = (name, html, css, js) => {
         dispatch(setCodeAll(html, css, js))
         dispatch(setLoadSnippet(true))
-        setLoaded(true)
         setNewProject(false)
+        setLoaded(true)
+        toast.message('Snippets', {
+            description: `Snippet loaded: ${name}`,
+        })
     }
 
-    const deleteSelectedPreset = (id) => {
-        dispatch(deletePreset(presets, id, user.userId))
+    const deleteSelectedPreset = (name, id) => {
+        dispatch(deletePreset(presets, name, id, user.userId))
         setDeleteId(null)
     }
 
-    const editSelectedPreset = (id, newName) => {
+    const editSelectedPreset = (name, id, newName) => {
         const trimNewName = String(newName).trim()
         if (trimNewName === "") return
-        dispatch(editPreset(presets, id, newName, user.userId))
+        dispatch(editPreset(presets, name, id, newName, user.userId))
         setEditId(null)
     }
 
+    const noSave = () => {
+        setSaved(false)
+    }
+
     const saveNewPreset = (name, html, css, js) => {
+        setSaved(true)
+
         name = name.trim()
         if (name === "") {
             return
@@ -85,9 +95,8 @@ export default function Modal({ callbacks }) {
             trimJs = trimJs.slice(0, -1);
         }
 
-        dispatch(savePreset(presets, { id, name, html: trimHtml, css: trimCss, js: trimJs }, user.userId))
+        dispatch(savePreset(presets, { id, name, html: trimHtml, css: trimCss, js: trimJs }, user.userId, noSave))
         setSavePresetName("")
-        setSaved(true)
     }
 
     const modalTitle = () => {
@@ -167,7 +176,7 @@ export default function Modal({ callbacks }) {
                                                                 <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                                                                     <span>Load snippet?</span>
                                                                     <span className="presets__option__confirm__buttons">
-                                                                        <span onClick={(e) => { e.stopPropagation(); setPreset(preset.html, preset.css, preset.js) }}>Yes</span>
+                                                                        <span onClick={(e) => { e.stopPropagation(); setPreset(preset.name, preset.html, preset.css, preset.js) }}>Yes</span>
                                                                         <span onClick={(e) => { e.stopPropagation(); setSelectedId(null) }}>No</span>
                                                                     </span>
                                                                 </span>
@@ -181,10 +190,10 @@ export default function Modal({ callbacks }) {
                                                                         (
                                                                             <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                                                                                 <span>Rename snippet?</span>
-                                                                                <form onSubmit={(e) => { e.preventDefault(); editSelectedPreset(preset.id, editName) }}>
+                                                                                <form onSubmit={(e) => { e.preventDefault(); editSelectedPreset(preset.name, preset.id, editName) }}>
                                                                                     <input type="text" value={editName} onChange={e => { setEditName(e.target.value) }} placeholder="NEW NAME" />
                                                                                     <span className="presets__option__confirm__buttons">
-                                                                                        <span onClick={(e) => { e.stopPropagation(); editSelectedPreset(preset.id, editName) }}>Yes</span>
+                                                                                        <span onClick={(e) => { e.stopPropagation(); editSelectedPreset(preset.name, preset.id, editName) }}>Yes</span>
                                                                                         <span onClick={(e) => { e.stopPropagation(); setEditId(null) }}>No</span>
                                                                                     </span>
                                                                                 </form>
@@ -194,7 +203,7 @@ export default function Modal({ callbacks }) {
                                                                             <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                                                                                 <span>Delete snippet?</span>
                                                                                 <span className="presets__option__confirm__buttons">
-                                                                                    <span onClick={(e) => { e.stopPropagation(); deleteSelectedPreset(preset.id) }}>Yes</span>
+                                                                                    <span onClick={(e) => { e.stopPropagation(); deleteSelectedPreset(preset.name, preset.id) }}>Yes</span>
                                                                                     <span onClick={(e) => { e.stopPropagation(); setDeleteId(null) }}>No</span>
                                                                                 </span>
                                                                             </span> :
@@ -253,7 +262,7 @@ export default function Modal({ callbacks }) {
                                                         <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                                                             <span>Load snippet?</span>
                                                             <span className="presets__option__confirm__buttons">
-                                                                <span onClick={(e) => { e.stopPropagation(); setPreset(preset.html, preset.css, preset.js) }}>Yes</span>
+                                                                <span onClick={(e) => { e.stopPropagation(); setPreset(preset.name, preset.html, preset.css, preset.js) }}>Yes</span>
                                                                 <span onClick={(e) => { e.stopPropagation(); setSelectedId(null) }}>No</span>
                                                             </span>
                                                         </span>
@@ -280,7 +289,7 @@ export default function Modal({ callbacks }) {
                                 {user.userId ?
                                     <form onSubmit={(e) => { e.preventDefault(); saveNewPreset(savePresetName, html, css, js) }}>
                                         <input type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} maxLength={30} />
-                                        <button disabled={savePresetName.trim() === ""} data-saved={saved ? 'saved!' : ''}>Save</button>
+                                        <button disabled={savePresetName.trim() === ""} data-saved={saved ? 'saving...' : ''}>Save</button>
                                     </form>
                                     :
                                     <div role="button" onClick={() => setModalOption("profile")} className="presets__noSnippet">Sign in to save your snippets</div>}
@@ -392,18 +401,16 @@ export default function Modal({ callbacks }) {
                 </div>
                 <div className="presets">
                     {modalContent()}
-                    {modalOption === "snippets" &&
-                        <>
-                            <div className="presets__tabs">
-                                <button className={`presets__tabs__btn ${snippetTab === "mySnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("mySnippets") }}>My snippets</button>
-                                <button className={`presets__tabs__btn ${snippetTab === "saveSnippet" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("saveSnippet") }}>Save snippet</button>
-                            </div>
-                            <div className="presets__tabs presets__tabs--saveTab">
-                                <button className={`presets__tabs__btn ${snippetTab === "featuredSnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("featuredSnippets") }}>Featured{`\n`}snippets</button>
-                            </div>
-                        </>
-                    }
                 </div>
+                {modalOption === "snippets" &&
+                    <>
+                        <div className="presets__tabs">
+                            <button className={`presets__tabs__btn ${snippetTab === "mySnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("mySnippets") }}>My{`\n`}snippets</button>
+                            <button className={`presets__tabs__btn ${snippetTab === "saveSnippet" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("saveSnippet") }}>Save{`\n`}snippet</button>
+                            <button className={`presets__tabs__btn ${snippetTab === "featuredSnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("featuredSnippets") }}>Featured{`\n`}snippets</button>
+                        </div>
+                    </>
+                }
             </div>
         </dialog>
     )

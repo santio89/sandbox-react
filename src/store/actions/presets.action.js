@@ -1,7 +1,8 @@
 import { firebaseDb as db } from "../../config/firebase"
 import { ref, set, child, get } from "firebase/database";
+import { toast } from "sonner";
 
-export const savePreset = (presets, preset, userId = null) => {
+export const savePreset = (presets, preset, userId = null, callback) => {
     const newPresets = [...presets, preset]
 
     return async dispatch => {
@@ -15,19 +16,18 @@ export const savePreset = (presets, preset, userId = null) => {
                     type: "SET_PRESETS",
                     presets: newPresets
                 })
+                callback()
+                toast.message('Snippets', {
+                    description: `Snippet saved: ${preset.name}`,
+                })
             } catch (e) {
                 console.log("error saving to db: ", e)
             }
-        } else {
-            dispatch({
-                type: "SET_PRESETS",
-                presets: newPresets
-            })
         }
     }
 }
 
-export const deletePreset = (presets, id, userId = null) => {
+export const deletePreset = (presets, name, id, userId = null) => {
     const index = presets.findIndex(preset => preset.id === id);
     presets.splice(index, 1)
 
@@ -43,19 +43,17 @@ export const deletePreset = (presets, id, userId = null) => {
                     type: "SET_PRESETS",
                     presets
                 })
+                toast.message('Snippets', {
+                    description: `Snippet deleted: ${name}`,
+                })
             } catch (e) {
                 console.log("error saving to db: ", e)
             }
-        } else {
-            dispatch({
-                type: "SET_PRESETS",
-                presets
-            })
         }
     }
 }
 
-export const editPreset = (presets, id, newName, userId = null) => {
+export const editPreset = (presets, name, id, newName, userId = null) => {
     const index = presets.findIndex(preset => preset.id === id);
     presets[index].name = newName
 
@@ -70,14 +68,12 @@ export const editPreset = (presets, id, newName, userId = null) => {
                     type: "SET_PRESETS",
                     presets
                 })
+                toast.message('Snippets', {
+                    description: `Snippet renamed: ${name} ➔ ${newName}`,
+                })
             } catch (e) {
                 console.log("error saving to db: ", e)
             }
-        } else {
-            dispatch({
-                type: "SET_PRESETS",
-                presets
-            })
         }
     }
 }

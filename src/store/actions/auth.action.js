@@ -2,6 +2,7 @@ import { firebaseAuth as auth, firebaseGoogleProvider as provider } from "../../
 import { signInWithPopup, signOut, setPersistence, browserLocalPersistence, onAuthStateChanged } from "firebase/auth";
 import { getPresets } from "./presets.action";
 import { setCodeAll } from "./code.action";
+import { toast } from 'sonner'
 
 export const authStateAction = () => {
 
@@ -32,6 +33,9 @@ export const signInGoogle = () => {
                             email: user.email,
                             displayName: user.displayName,
                             avatar: user.photoURL
+                        })
+                        toast.message('Auth', {
+                            description: `User logged in: ${user.displayName}`,
                         })
                     }).catch((e) => {
                         console.log("error signing in with google: ", e)
@@ -70,6 +74,9 @@ export const signOutUser = () => {
                 type: "SET_AUTH_LOADER",
                 authLoader: false
             });
+            toast.message('Auth', {
+                description: `User logged out`,
+            })
         });
     }
 }

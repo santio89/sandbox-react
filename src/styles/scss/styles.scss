@@ -832,6 +832,7 @@ button {
     justify-content: start;
     align-items: stretch;
     background: var(--main-purple-variation);
+    position: relative;
   }
 
   &__header {
@@ -906,7 +907,7 @@ button {
   .presets {
     flex: 1;
     border-radius: 0 0 1em 1em;
-    padding-inline: max(4%, 1rem);
+    padding-inline: max(4%, 5rem);
     padding-block: max(8%, 2rem);
     width: 100%;
     display: flex;
@@ -918,7 +919,6 @@ button {
     border: 2px solid var(--main-purple-variation);
     border-top: none;
     background: var(--main-black);
-    position: relative;
     overflow-x: hidden;
 
     div[role=button].presets__noSnippet {
@@ -1076,7 +1076,7 @@ button {
 
     &__option {
       aspect-ratio: 4/3;
-      width: clamp(100px, 100px + 10vw, 200px);
+      width: clamp(100px, 100px + 10vw, 180px);
       background-color: var(--main-purple);
       border: 2px solid var(--main-purple);
       cursor: pointer;
@@ -1091,7 +1091,7 @@ button {
       overflow: hidden;
       transition: 200ms;
 
-      &[disabled]{
+      &[disabled] {
         pointer-events: none;
       }
 
@@ -1297,10 +1297,11 @@ button {
           content: attr(data-saved);
           position: absolute;
           top: 50%;
-          right: -120%;
-          transform: translateY(-50%);
+          right: -150%;
+          translate: 0 -50%;
           color: var(--main-purple);
           transition: 200ms;
+          font-weight: normal;
         }
 
         &:hover,
@@ -1323,18 +1324,23 @@ button {
 
     &__tabs {
       display: flex;
+      flex-direction: column;
       position: absolute;
-      bottom: 4px;
-      left: 4px;
+      bottom: 16px;
+      left: -2px;
       padding: 4px;
-      gap: 2px;
+      gap: 4px;
 
       &__btn {
         cursor: pointer;
         padding: 4px;
-        color: var(--main-purple);
+        color: rgb(248, 248, 248);
         transition: none;
-        border-radius: 2px;
+        border-radius: 0 2px 2px 0;
+        background: var(--main-gray);
+        width: 65px;
+        height: 40px;
+        text-align: left;
 
         &:hover,
         &:focus-visible {
@@ -1356,17 +1362,12 @@ button {
           color: rgb(248, 248, 248);
         }
       }
-
-      &--saveTab {
-        left: initial;
-        right: 4px;
-        white-space: pre-wrap;
-      }
     }
   }
 
   &::backdrop {
     background: rgba(40, 40, 40, .4);
+    background: transparent;
   }
 }
 
@@ -1469,5 +1470,10 @@ button {
   }
 }
 
-
 /* fin loader */
+
+li[data-sonner-toast] {
+  background: var(--main-purple-variation) !important;
+  border-color: var(--main-purple) !important;
+  color: rgb(248, 248, 248) !important
+}
