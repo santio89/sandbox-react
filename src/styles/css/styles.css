@@ -808,6 +808,8 @@ button {
   border-top: none;
   background: var(--main-black);
   overflow-x: hidden;
+  padding-inline: max(4%, 5rem);
+  padding-block: max(8%, 1rem);
   /* INICIO SCROLLBAR */
   scrollbar-width: thin;
   scrollbar-color: var(--main-gray) var(--bg-main);
@@ -936,15 +938,11 @@ button {
 }
 .main__modal .presets__optionWrapper {
   flex: 1;
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
   gap: clamp(8px, 10%, 2em);
-  padding-inline: max(4%, 5rem);
-  padding-block: max(8%, 2rem);
 }
 .main__modal .presets__option {
   aspect-ratio: 4/3;
