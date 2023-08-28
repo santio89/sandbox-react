@@ -6,6 +6,7 @@ import { setCodeAll } from "../store/actions/code.action";
 import { savePreset, deletePreset, editPreset } from "../store/actions/presets.action";
 import { v4 as uuidv4 } from 'uuid';
 import { toast } from "sonner";
+import autoAnimate from '@formkit/auto-animate'
 
 export default function Modal({ callbacks }) {
     const dispatch = useDispatch();
@@ -33,6 +34,8 @@ export default function Modal({ callbacks }) {
     const [editName, setEditName] = useState("")
     const [snippetTab, setSnippetTab] = useState(user.userId ? "mySnippets" : "featuredSnippets")
     const [modalOption, setModalOption] = useState("snippets")
+
+    const parentAnim = useRef(null)
 
     const signInWithGoogle = () => {
         dispatch(signInGoogle())
@@ -375,6 +378,10 @@ export default function Modal({ callbacks }) {
         setSavePresetName("")
     }, [modalOption])
 
+    useEffect(() => {
+        parentAnim.current && autoAnimate(parentAnim.current)
+    }, [parentAnim])
+
     return (
         <dialog className="main__modal" ref={modal}>
             <div className="main__modal__inner">
@@ -399,7 +406,7 @@ export default function Modal({ callbacks }) {
                         </button>
                     </div>
                 </div>
-                <div className="presets">
+                <div className="presets" ref={parentAnim}>
                     {modalContent()}
                 </div>
                 {modalOption === "snippets" &&

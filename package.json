@@ -11,6 +11,7 @@
     "watch-css": "sass ./src/styles/scss/styles.scss ./src/styles/css/styles.css --watch"
   },
   "dependencies": {
+    "@formkit/auto-animate": "^0.7.0",
     "firebase": "^10.2.0",
     "js-beautify": "^1.14.9",
     "prismjs": "^1.29.0",
