@@ -23,7 +23,10 @@ function App() {
   );
 
   useEffect(() => {
-    dispatch(authStateAction())
+    let ignore = false;
+    !ignore && dispatch(authStateAction())
+
+    return () => ignore = true
   }, [])
 
   return (
