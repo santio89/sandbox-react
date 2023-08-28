@@ -808,7 +808,7 @@ button {
   border-top: none;
   background: var(--main-black);
   overflow-x: hidden;
-  padding-inline: max(4%, 5rem);
+  padding-inline: max(8%, 5rem);
   padding-block: max(8%, 1rem);
   /* INICIO SCROLLBAR */
   scrollbar-width: thin;
@@ -835,6 +835,16 @@ button {
 }
 .main__modal__content::-webkit-scrollbar-track {
   background: transparent;
+}
+.main__modal__content__innerWrapper {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(8px, 10%, 2em);
 }
 .main__modal .presets__noSnippet {
   font-size: 1.5rem;
@@ -935,14 +945,6 @@ button {
   color: var(--main-purple);
   fill: var(--main-purple);
   background: var(--main-purple-variation);
-}
-.main__modal .presets__optionWrapper {
-  flex: 1;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-  gap: clamp(8px, 10%, 2em);
 }
 .main__modal .presets__option {
   aspect-ratio: 4/3;
