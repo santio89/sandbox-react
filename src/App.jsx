@@ -26,7 +26,7 @@ function App() {
     let ignore = false;
     !ignore && dispatch(authStateAction())
 
-    return () => ignore = true
+    return () => { ignore = true }
   }, [])
 
   return (
