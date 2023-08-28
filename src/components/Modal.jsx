@@ -406,8 +406,10 @@ export default function Modal({ callbacks }) {
                         </button>
                     </div>
                 </div>
-                <div className="presets" ref={parentAnim}>
-                    {modalContent()}
+                <div className="main__modal__content">
+                    <div className="presets__optionWrapper" ref={parentAnim}>
+                        {modalContent()}
+                    </div>
                 </div>
                 {modalOption === "snippets" &&
                     <>
