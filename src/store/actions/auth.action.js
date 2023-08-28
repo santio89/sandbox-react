@@ -35,7 +35,7 @@ export const signInGoogle = () => {
                             avatar: user.photoURL
                         })
                         toast.message('Auth', {
-                            description: `User logged in: ${user.displayName}`,
+                            description: `User signed in: ${user.displayName}`,
                         })
                     }).catch((e) => {
                         console.log("error signing in with google: ", e)
@@ -75,7 +75,7 @@ export const signOutUser = () => {
                 type: "SIGN_OUT",
             })
             toast.message('Auth', {
-                description: `User logged out`,
+                description: `User signed out`,
             })
         }).catch((e) => {
             console.log("error signing out: ", e)
