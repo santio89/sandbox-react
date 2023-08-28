@@ -919,10 +919,7 @@ button {
     border-top: none;
     background: var(--main-black);
     overflow-x: hidden;
-  }
 
-
-  .presets {
     div[role=button].presets__noSnippet {
       cursor: pointer;
 
@@ -956,7 +953,10 @@ button {
     }
 
     /* FIN SCROLLBAR */
+  }
 
+
+  .presets {
     &__noSnippet {
       font-size: 1.5rem;
       color: var(--main-white)
