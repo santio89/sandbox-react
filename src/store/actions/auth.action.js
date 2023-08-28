@@ -39,9 +39,16 @@ export const signInGoogle = () => {
                         })
                     }).catch((e) => {
                         console.log("error signing in with google: ", e)
+                        toast.error('Error signing in')
+                    }).finally(() => {
+                        dispatch({
+                            type: "SET_AUTH_LOADER",
+                            authLoader: false
+                        });
                     });
             }).catch((error) => {
                 console.log("error setting persistance: " + error);
+                toast.error('Error signing in')
             }).finally(() => {
                 dispatch({
                     type: "SET_AUTH_LOADER",
@@ -67,16 +74,17 @@ export const signOutUser = () => {
             dispatch({
                 type: "SIGN_OUT",
             })
+            toast.message('Auth', {
+                description: `User logged out`,
+            })
         }).catch((e) => {
             console.log("error signing out: ", e)
+            toast.error('Error signing out')
         }).finally(() => {
             dispatch({
                 type: "SET_AUTH_LOADER",
                 authLoader: false
             });
-            toast.message('Auth', {
-                description: `User logged out`,
-            })
         });
     }
 }

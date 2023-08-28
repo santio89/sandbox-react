@@ -22,6 +22,7 @@ export const savePreset = (presets, preset, userId = null, callback) => {
                 })
             } catch (e) {
                 console.log("error saving to db: ", e)
+                toast.error('Error saving snippet')
             }
         }
     }
@@ -48,6 +49,7 @@ export const deletePreset = (presets, name, id, userId = null) => {
                 })
             } catch (e) {
                 console.log("error saving to db: ", e)
+                toast.error('Error deleting snippet')
             }
         }
     }
@@ -73,6 +75,7 @@ export const editPreset = (presets, name, id, newName, userId = null) => {
                 })
             } catch (e) {
                 console.log("error saving to db: ", e)
+                toast.error('Error renaming snippet')
             }
         }
     }
