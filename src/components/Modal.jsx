@@ -378,9 +378,9 @@ export default function Modal({ callbacks }) {
         setSavePresetName("")
     }, [modalOption])
 
-    useEffect(() => {
+    /* useEffect(() => {
         parentAnim.current && autoAnimate(parentAnim.current)
-    }, [parentAnim])
+    }, [parentAnim]) */
 
     return (
         <dialog className="main__modal" ref={modal}>
