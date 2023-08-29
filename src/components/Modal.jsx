@@ -7,6 +7,7 @@ import { savePreset, deletePreset, editPreset } from "../store/actions/presets.a
 import { v4 as uuidv4 } from 'uuid';
 import { toast } from "sonner";
 import AnimWrapper from "./AnimWrapper";
+import NoAnimWrapper from "./NoAnimWrapper";
 
 export default function Modal({ callbacks }) {
     const dispatch = useDispatch();
@@ -248,7 +249,7 @@ export default function Modal({ callbacks }) {
             }
                         </AnimWrapper>
                     case 'featuredSnippets':
-                        return <>
+                        return <NoAnimWrapper>
                             {
                                 (defaultPresets?.length > 0 ?
                                     (defaultPresets?.map(preset => {
@@ -284,19 +285,19 @@ export default function Modal({ callbacks }) {
                                     })) :
                                     <div className="presets__noSnippet">No featured snippets saved</div>)
                             }
-                        </>
+                                </NoAnimWrapper>
                     case 'saveSnippet':
-                        return <>
+                        return <NoAnimWrapper>
                             <div className="presets__save">
                                 {user.userId ?
                                     <form onSubmit={(e) => { e.preventDefault(); saveNewPreset(savePresetName, html, css, js) }}>
-                                        <input type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} maxLength={30} />
+                                        <input spellcheck="false" type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} maxLength={30} />
                                         <button disabled={savePresetName.trim() === ""} data-saved={saved ? 'saving...' : ''}>Save</button>
                                     </form>
                                     :
                                     <div role="button" onClick={() => setModalOption("profile")} className="presets__noSnippet">Sign in to save your snippets</div>}
                             </div>
-                        </>
+                        </NoAnimWrapper>
                 }
         }
     }
