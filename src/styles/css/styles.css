@@ -849,7 +849,6 @@ button {
 .main__modal .presets__noSnippet {
   font-size: 1.5rem;
   color: var(--main-white);
-  white-space: nowrap;
 }
 .main__modal .presets__profile {
   display: flex;
