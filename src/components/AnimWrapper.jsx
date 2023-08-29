@@ -10,7 +10,7 @@ export default function AnimWrapper({ children }) {
     }, [parentAnim])
 
     return (
-        <div ref={parentAnim} style={{ width: "100%", display: "flex", justifyContent: "center", alignItens: "center", gap: "1rem", flexFlow: "row wrap" }}>
+        <div ref={parentAnim} className="animWrapper">
             {children}
         </div>
     )
