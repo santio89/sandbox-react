@@ -34,7 +34,7 @@ export default function AnimWrapper({ children }) {
               const [widthFrom, widthTo, heightFrom, heightTo] = getTransitionSizes(el, oldCoords, newCoords)
               // set up our steps with our positioning keyframes
               const start = { transform: `translate(${deltaX}px, ${deltaY}px)` }
-              const mid = { transform: `translate(${deltaX * -0.15}px, ${deltaY * -0.15}px)`, offset: 0.5 }
+              const mid = { transform: `translate(${deltaX}px, ${deltaY}px)`, offset: 0 }
               const end = { transform: `translate(0, 0)` }
               // if the dimensions changed, animate them too.
               if (widthFrom !== widthTo) {

@@ -291,7 +291,7 @@ export default function Modal({ callbacks }) {
                             <div className="presets__save">
                                 {user.userId ?
                                     <form onSubmit={(e) => { e.preventDefault(); saveNewPreset(savePresetName, html, css, js) }}>
-                                        <input spellcheck="false" type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} maxLength={30} />
+                                        <input spellCheck="false" type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} maxLength={30} />
                                         <button disabled={savePresetName.trim() === ""} data-saved={saved ? 'saving...' : ''}>Save</button>
                                     </form>
                                     :
