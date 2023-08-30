@@ -978,11 +978,11 @@ button {
 .main__modal .presets__option[disabled] {
   pointer-events: none;
 }
-.main__modal .presets__option:hover, .main__modal .presets__option:focus-visible, .main__modal .presets__option:active {
+.main__modal .presets__option:hover, .main__modal .presets__option:focus-visible, .main__modal .presets__option:focus-within, .main__modal .presets__option:active {
   box-shadow: 0 0 10px 0 var(--main-purple);
-  scale: none;
+  outline: 2px solid var(--main-purple);
 }
-.main__modal .presets__option:hover span {
+.main__modal .presets__option:hover button, .main__modal .presets__option:focus-visible button, .main__modal .presets__option:focus-within button, .main__modal .presets__option:active button {
   opacity: 1;
 }
 .main__modal .presets__option__confirm {
@@ -1012,7 +1012,7 @@ button {
   align-items: center;
   gap: 0.8em;
 }
-.main__modal .presets__option__confirm__buttons span {
+.main__modal .presets__option__confirm__buttons button {
   padding: 4px 2px;
   display: flex;
   justify-content: center;
@@ -1024,12 +1024,13 @@ button {
   line-height: 1;
   border-radius: 2px;
   color: var(--main-purple-variation);
+  cursor: pointer;
 }
-.main__modal .presets__option__confirm__buttons span:hover, .main__modal .presets__option__confirm__buttons span:focus-visible {
+.main__modal .presets__option__confirm__buttons button:hover, .main__modal .presets__option__confirm__buttons button:focus-visible {
   color: rgb(248, 248, 248);
   font-weight: bold;
 }
-.main__modal .presets__option__confirm__buttons span:active {
+.main__modal .presets__option__confirm__buttons button:active {
   color: rgb(248, 248, 248);
   font-weight: bold;
 }
@@ -1057,7 +1058,7 @@ button {
   aspect-ratio: 1;
   width: 20px;
   opacity: 0;
-  transition: 200ms;
+  cursor: pointer;
 }
 .main__modal .presets__option__main__del svg {
   color: var(--main-purple-variation);
@@ -1082,7 +1083,7 @@ button {
   aspect-ratio: 1;
   width: 20px;
   opacity: 0;
-  transition: 200ms;
+  cursor: pointer;
 }
 .main__modal .presets__option__main__edit svg {
   color: var(--main-purple-variation);

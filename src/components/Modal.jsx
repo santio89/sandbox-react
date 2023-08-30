@@ -168,19 +168,26 @@ export default function Modal({ callbacks }) {
                                         (presets?.length > 0 ?
                                             (presets?.map(preset => {
                                                 return (
-                                                    <div role="button" disabled={loaded || saved} className="presets__option" key={preset.id} onClick={() => {
+                                                    <div tabIndex={0} role="button" disabled={loaded || saved} className="presets__option" key={preset.id} onClick={() => {
                                                         setEditName("");
                                                         setEditId(null);
                                                         setDeleteId(null);
                                                         setSelectedId(preset.id);
-                                                    }} >
+                                                    }} onKeyDown={(e) => {
+                                                        if (e.key.toUpperCase() === "ENTER" || e.key === " ") {
+                                                            setEditName("");
+                                                            setEditId(null);
+                                                            setDeleteId(null);
+                                                            setSelectedId(preset.id)
+                                                        }
+                                                    }}>
                                                         {
                                                             selectedId === preset.id && !loaded ?
                                                                 <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                                                                     <span>Load snippet?</span>
                                                                     <span className="presets__option__confirm__buttons">
-                                                                        <span onClick={(e) => { e.stopPropagation(); setPreset(preset.name, preset.html, preset.css, preset.js) }}>Yes</span>
-                                                                        <span onClick={(e) => { e.stopPropagation(); setSelectedId(null) }}>No</span>
+                                                                        <button onClick={(e) => { e.stopPropagation(); setPreset(preset.name, preset.html, preset.css, preset.js) }}>Yes</button>
+                                                                        <button onClick={(e) => { e.stopPropagation(); setSelectedId(null) }}>No</button>
                                                                     </span>
                                                                 </span>
                                                                 :
@@ -196,8 +203,8 @@ export default function Modal({ callbacks }) {
                                                                                 <form onSubmit={(e) => { e.preventDefault(); editSelectedPreset(preset.name, preset.id, editName) }}>
                                                                                     <input type="text" value={editName} onChange={e => { setEditName(e.target.value) }} placeholder="NEW NAME" />
                                                                                     <span className="presets__option__confirm__buttons">
-                                                                                        <span onClick={(e) => { e.stopPropagation(); editSelectedPreset(preset.name, preset.id, editName) }}>Yes</span>
-                                                                                        <span onClick={(e) => { e.stopPropagation(); setEditId(null) }}>No</span>
+                                                                                        <button onClick={(e) => { e.stopPropagation(); editSelectedPreset(preset.name, preset.id, editName) }}>Yes</button>
+                                                                                        <button onClick={(e) => { e.stopPropagation(); setEditId(null) }}>No</button>
                                                                                     </span>
                                                                                 </form>
                                                                             </span>
@@ -206,13 +213,13 @@ export default function Modal({ callbacks }) {
                                                                             <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                                                                                 <span>Delete snippet?</span>
                                                                                 <span className="presets__option__confirm__buttons">
-                                                                                    <span onClick={(e) => { e.stopPropagation(); deleteSelectedPreset(preset.name, preset.id) }}>Yes</span>
-                                                                                    <span onClick={(e) => { e.stopPropagation(); setDeleteId(null) }}>No</span>
+                                                                                    <button onClick={(e) => { e.stopPropagation(); deleteSelectedPreset(preset.name, preset.id) }}>Yes</button>
+                                                                                    <button onClick={(e) => { e.stopPropagation(); setDeleteId(null) }}>No</button>
                                                                                 </span>
                                                                             </span> :
                                                                             <span className="presets__option__main">
                                                                                 <span className="presets__option__main__name">{preset.name}</span>
-                                                                                <span className="presets__option__main__edit" onClick={(e) => {
+                                                                                <button className="presets__option__main__edit" onClick={(e) => {
                                                                                     e.stopPropagation();
                                                                                     setEditId(preset.id);
                                                                                     setEditName("");
@@ -222,8 +229,8 @@ export default function Modal({ callbacks }) {
                                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi-pencil-fill" viewBox="0 0 16 16">
                                                                                         <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
                                                                                     </svg>
-                                                                                </span>
-                                                                                <span className="presets__option__main__del" onClick={(e) => {
+                                                                                </button>
+                                                                                <button className="presets__option__main__del" onClick={(e) => {
                                                                                     e.stopPropagation();
                                                                                     setDeleteId(preset.id);
                                                                                     setEditId(null);
@@ -233,7 +240,7 @@ export default function Modal({ callbacks }) {
                                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi-trash-fill" viewBox="0 0 16 16">
                                                                                         <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
                                                                                     </svg>
-                                                                                </span>
+                                                                                </button>
                                                                             </span>
                                                                         )
                                                                 )
@@ -254,19 +261,26 @@ export default function Modal({ callbacks }) {
                                 (defaultPresets?.length > 0 ?
                                     (defaultPresets?.map(preset => {
                                         return (
-                                            <div role="button" disabled={loaded || saved} className="presets__option" key={preset.id} onClick={() => {
+                                            <div tabIndex={0} role="button" disabled={loaded || saved} className="presets__option" key={preset.id} onClick={() => {
                                                 setEditName("");
                                                 setEditId(null);
                                                 setDeleteId(null);
                                                 setSelectedId(preset.id)
-                                            }} >
+                                            }} onKeyDown={(e) => {
+                                                if (e.key.toUpperCase() === "ENTER" || e.key === " ") {
+                                                    setEditName("");
+                                                    setEditId(null);
+                                                    setDeleteId(null);
+                                                    setSelectedId(preset.id)
+                                                }
+                                            }}>
                                                 {
                                                     selectedId === preset.id && !loaded ?
                                                         <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                                                             <span>Load snippet?</span>
                                                             <span className="presets__option__confirm__buttons">
-                                                                <span onClick={(e) => { e.stopPropagation(); setPreset(preset.name, preset.html, preset.css, preset.js) }}>Yes</span>
-                                                                <span onClick={(e) => { e.stopPropagation(); setSelectedId(null) }}>No</span>
+                                                                <button onClick={(e) => { e.stopPropagation(); setPreset(preset.name, preset.html, preset.css, preset.js) }}>Yes</button>
+                                                                <button onClick={(e) => { e.stopPropagation(); setSelectedId(null) }}>No</button>
                                                             </span>
                                                         </span>
                                                         :
@@ -310,13 +324,6 @@ export default function Modal({ callbacks }) {
         setEditId(null)
         setSavePresetName("")
 
-        const closeModalEsc = (e) => {
-            if (e.key.toUpperCase() === "ESCAPE") {
-                e.preventDefault();
-                closeModal()
-            }
-        }
-
         const closeModalClick = (e) => {
             if (modalActive && e.target.className == "main__modal") {
                 e.preventDefault();
@@ -326,15 +333,13 @@ export default function Modal({ callbacks }) {
 
         if (modalActive) {
             modal.current.show()
-            document.body.addEventListener("keydown", closeModalEsc)
             document.body.addEventListener("click", closeModalClick)
         } else {
             modal.current.close()
-            document.body.removeEventListener("keydown", closeModalEsc)
             document.body.removeEventListener("click", closeModalClick)
         }
 
-        return () => { document.body.removeEventListener("keydown", closeModalEsc); document.body.removeEventListener("click", closeModalClick) }
+        return () => { document.body.removeEventListener("click", closeModalClick) }
 
     }, [modalActive])
 

@@ -1125,12 +1125,16 @@ button {
 
       &:hover,
       &:focus-visible,
+      &:focus-within,
       &:active {
         box-shadow: 0 0 10px 0 var(--main-purple);
-        scale: none
+        outline: 2px solid var(--main-purple)
       }
 
-      &:hover span {
+      &:hover button,
+      &:focus-visible button,
+      &:focus-within button,
+      &:active button {
         opacity: 1;
       }
 
@@ -1163,7 +1167,7 @@ button {
           align-items: center;
           gap: .8em;
 
-          span {
+          button {
             padding: 4px 2px;
             display: flex;
             justify-content: center;
@@ -1175,6 +1179,7 @@ button {
             line-height: 1;
             border-radius: 2px;
             color: var(--main-purple-variation);
+            cursor: pointer;
 
             &:hover,
             &:focus-visible {
@@ -1215,7 +1220,7 @@ button {
           aspect-ratio: 1;
           width: 20px;
           opacity: 0;
-          transition: 200ms;
+          cursor: pointer;
 
           svg {
             color: var(--main-purple-variation);
@@ -1245,7 +1250,7 @@ button {
           aspect-ratio: 1;
           width: 20px;
           opacity: 0;
-          transition: 200ms;
+          cursor: pointer;
 
           svg {
             color: var(--main-purple-variation);
