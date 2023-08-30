@@ -36,7 +36,6 @@ function App() {
       <div ref={rootTheme} className={`root-theme`}>
         <Toaster />
         <BrowserRouter>
-
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
