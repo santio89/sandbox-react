@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Home from "./components/Home";
 import Nav from "./components/Nav";
+import NotFound from "./components/NotFound";
 import './styles/css/prism.css'
 import './styles/css/styles.css'
 import { useRef } from "react";
@@ -16,6 +17,7 @@ function App() {
 
   const Layout = () => (
     <>
+      <Nav rootTheme={rootTheme} />
       <div className="mainContainer">
         <Outlet />
       </div>
@@ -34,11 +36,12 @@ function App() {
       <div ref={rootTheme} className={`root-theme`}>
         <Toaster />
         <BrowserRouter>
-          <Nav rootTheme={rootTheme} />
+
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
             </Route>
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </div>

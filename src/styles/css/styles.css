@@ -13,6 +13,7 @@
   --main-btn-clr: rgb(248, 248, 248);
   --bg-main: rgb(40, 40, 40);
   --bg-code: rgb(80, 80, 80);
+  --size-main-container: 1500px;
 }
 
 * {
@@ -52,8 +53,11 @@ body,
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
+  justify-content: start;
+  align-items: center;
   font-family: monospace, "Courier New", Courier;
   line-height: 1.2;
+  background: var(--bg-main);
 }
 
 .dark-theme {
@@ -106,6 +110,7 @@ button {
 
 /* header */
 .main__header {
+  width: 100%;
   background: linear-gradient(45deg, var(--main-purple), var(--main-red));
   color: var(--clr-nav);
   padding: 3px 8px;
@@ -257,9 +262,9 @@ button {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1500px;
   flex: 1;
   z-index: 1;
+  max-width: var(--size-main-container);
 }
 
 .tabs {
@@ -1292,6 +1297,56 @@ li[data-sonner-toast] {
   justify-content: center;
   align-items: center;
   gap: clamp(1rem, 1rem + 1vw, 2rem);
+}
+
+.notFound {
+  flex: 1;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+.notFound__inner {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: start;
+  gap: 0.5rem;
+  background: rgb(var(--main-white));
+  padding: 2rem;
+  width: clamp(300px, 300px + 10vw, 800px);
+  border-radius: 0.5em;
+  white-space: pre-wrap;
+}
+.notFound__inner h1 {
+  font-size: 2rem;
+  line-height: 1;
+  color: rgb(248, 248, 248);
+  font-size: 3rem;
+}
+.notFound__inner p {
+  color: rgb(248, 248, 248);
+}
+.notFound__inner a {
+  padding: 0.5rem;
+  background: linear-gradient(45deg, var(--main-purple), var(--main-red));
+  border-radius: 0.25em;
+  color: rgb(248, 248, 248);
+  margin-top: 0.5rem;
+  transition: scale 200ms;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  line-height: 1;
+}
+.notFound__inner a:hover {
+  outline: 2px solid var(--main-purple);
+}
+.notFound__inner a:active {
+  outline: 2px solid var(--main-purple);
+  scale: 0.9;
 }
 
 /*# sourceMappingURL=styles.css.map */
