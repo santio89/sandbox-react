@@ -8,13 +8,14 @@ import SplitPane from 'react-split-pane'
 
 export default function Home() {
     const [tabActive, setTabActive] = useState("html")
-    const [clearConfirm, setClearConfirm] = useState(false);
+    const [clearConfirm, setClearConfirm] = useState(false)
     const dispatch = useDispatch()
     const html = useSelector(state => state.html.present.html)
     const css = useSelector(state => state.css.present.css)
     const js = useSelector(state => state.js.present.js)
-    const darkTheme = useSelector(state => state.theme.darkTheme);
+    const darkTheme = useSelector(state => state.theme.darkTheme)
     const loadSnippet = useSelector(state => state.modal.loadSnippet)
+    const modalActive = useSelector(state => state.modal.active)
     const [downloadBlob, setDownloadBlob] = useState("")
     const [downloadUrl, setDownloadUrl] = useState("")
     const [codeOutput, setCodeOutput] = useState("")
@@ -438,6 +439,10 @@ export default function Home() {
                 }
                 setHtml(trimHtml)
                 setPrismContentHtml(trimHtml)
+
+                textareaHtml.current.focus()
+                textareaHtml.current.selectionStart = html.length;
+                textareaHtml.current.selectionEnd = html.length;
                 break;
             }
             case 'css': {
@@ -447,6 +452,10 @@ export default function Home() {
                 }
                 setCss(trimCss)
                 setPrismContentCss(trimCss)
+
+                textareaCss.current.focus()
+                textareaCss.current.selectionStart = css.length;
+                textareaCss.current.selectionEnd = css.length;
                 break;
             }
             case 'js': {
@@ -456,6 +465,10 @@ export default function Home() {
                 }
                 setJs(trimJs)
                 setPrismContentJs(trimJs)
+
+                textareaJs.current.focus()
+                textareaJs.current.selectionStart = js.length;
+                textareaJs.current.selectionEnd = js.length;
                 break;
             }
             default:
@@ -522,6 +535,23 @@ export default function Home() {
     }, [panelBreakpoint, tabActive])
 
     useEffect(() => {
+        const tabShortcut = (e) => {
+            if (modalActive) return
+
+            if (e.code.toUpperCase() === "DIGIT1" && e.altKey && e.shiftKey) {
+                e.preventDefault()
+                setTabActive("html")
+            }
+            else if (e.code.toUpperCase() === "DIGIT2" && e.altKey && e.shiftKey) {
+                e.preventDefault()
+                setTabActive("css")
+            }
+            else if (e.code.toUpperCase() === "DIGIT3" && e.altKey && e.shiftKey) {
+                e.preventDefault()
+                setTabActive("js")
+            }
+        }
+
         const windowPaneResizeFix = () => {
             const containertWidth = document.querySelector(".SplitPane.vertical")?.getBoundingClientRect().width
             const paneWidth = document.querySelector(".Pane.vertical.Pane1")?.getBoundingClientRect().width
@@ -533,7 +563,6 @@ export default function Home() {
             }
         }
 
-
         const paneResizeEvent = () => {
             window.innerWidth < 800 ? setPanelBreakpont(true) : setPanelBreakpont(false)
         }
@@ -544,16 +573,18 @@ export default function Home() {
         }
 
         window.addEventListener("resize", paneEvent)
+        document.addEventListener("keydown", tabShortcut)
 
-        return () => window.removeEventListener("resize", paneEvent)
+        return () => { window.removeEventListener("resize", paneEvent); document.removeEventListener("keydown", tabShortcut) }
     }, [])
+
 
     return (
         <div className="home">
             <div className="tabs">
-                <div className="tabs__option"><button data-active={tabActive === "html"} onClick={() => setTabActive("html")}>HTML</button></div>
-                <div className="tabs__option"><button data-active={tabActive === "css"} onClick={() => setTabActive("css")}>CSS</button></div>
-                <div className="tabs__option"><button data-active={tabActive === "js"} onClick={() => setTabActive("js")}>JS</button></div>
+                <div className="tabs__option"><button title="HTML (alt+shift+1)" data-active={tabActive === "html"} onClick={() => setTabActive("html")}>HTML</button></div>
+                <div className="tabs__option"><button title="CSS (alt+shift+2)" data-active={tabActive === "css"} onClick={() => setTabActive("css")}>CSS</button></div>
+                <div className="tabs__option"><button title="JS (alt+shift+3)" data-active={tabActive === "js"} onClick={() => setTabActive("js")}>JS</button></div>
             </div>
             <div className="mainCode">
                 {panelBreakpoint ?
