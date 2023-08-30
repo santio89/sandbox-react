@@ -1128,7 +1128,8 @@ button {
       &:focus-within,
       &:active {
         box-shadow: 0 0 10px 0 var(--main-purple);
-        outline: 2px solid var(--main-purple)
+        outline: 4px solid var(--main-purple);
+        outline-offset: -2px
       }
 
       &:hover button,

@@ -980,7 +980,8 @@ button {
 }
 .main__modal .presets__option:hover, .main__modal .presets__option:focus-visible, .main__modal .presets__option:focus-within, .main__modal .presets__option:active {
   box-shadow: 0 0 10px 0 var(--main-purple);
-  outline: 2px solid var(--main-purple);
+  outline: 4px solid var(--main-purple);
+  outline-offset: -2px;
 }
 .main__modal .presets__option:hover button, .main__modal .presets__option:focus-visible button, .main__modal .presets__option:focus-within button, .main__modal .presets__option:active button {
   opacity: 1;
