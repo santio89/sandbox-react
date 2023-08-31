@@ -38,9 +38,9 @@ export default function Home() {
     const codeInputJs = useRef(null)
 
     const [textCursor, setTextCursor] = useState(null)
-    const [currentCursorHtml, setCurrentCursorHtml] = useState(textareaHtml?.current?.selectionEnd)
-    const [currentCursorCss, setCurrentCursorCss] = useState(textareaCss?.current?.selectionEnd)
-    const [currentCursorJs, setCurrentCursorJs] = useState(textareaJs?.current?.selectionEnd)
+    const [currentCursorHtml, setCurrentCursorHtml] = useState(textareaHtml?.current?.selectionEnd || 0)
+    const [currentCursorCss, setCurrentCursorCss] = useState(textareaCss?.current?.selectionEnd || 0)
+    const [currentCursorJs, setCurrentCursorJs] = useState(textareaJs?.current?.selectionEnd || 0)
 
     const [panelBreakpoint, setPanelBreakpont] = useState(window.innerWidth < 800 ? true : false)
 
