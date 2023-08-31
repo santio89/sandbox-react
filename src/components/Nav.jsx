@@ -9,6 +9,7 @@ import { setModal, setLoadSnippet } from "../store/actions/modal.action";
 export default function Nav({ rootTheme }) {
   const dispatch = useDispatch();
   const darkTheme = useSelector(state => state.theme.darkTheme);
+  const modalActive = useSelector(state => state.modal.active)
 
   const [newProject, setNewProject] = useState(false)
 
@@ -29,6 +30,20 @@ export default function Nav({ rootTheme }) {
   useEffect(() => {
     rootTheme.current.classList.toggle("light-theme", !darkTheme)
   }, [darkTheme])
+
+  useEffect(() => {
+    /* toggle modal on esc */
+    const modalShortcut = (e) => {
+      if (e.key.toUpperCase() === "ESCAPE") {
+        e.preventDefault();
+        dispatch(setModal(modalActive ? false : true))
+      }
+    }
+
+    document.addEventListener("keydown", modalShortcut)
+
+    return () => { document.removeEventListener("keydown", modalShortcut) }
+  }, [modalActive])
 
   return (
     <header className='main__header'>

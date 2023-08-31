@@ -15,7 +15,6 @@ import { setModal } from "./store/actions/modal.action";
 function App() {
   const dispatch = useDispatch();
   const rootTheme = useRef();
-  const modalActive = useSelector(state => state.modal.active)
 
   const Layout = () => (
     <>
@@ -25,20 +24,6 @@ function App() {
       </div>
     </>
   );
-
-  useEffect(() => {
-    /* toggle modal on esc */
-    const modalShortcut = (e) => {
-      if (e.key.toUpperCase() === "ESCAPE") {
-        e.preventDefault();
-        dispatch(setModal(modalActive ? false : true))
-      }
-    }
-
-    document.addEventListener("keydown", modalShortcut)
-
-    return () => { document.removeEventListener("keydown", modalShortcut) }
-  }, [modalActive])
 
   useEffect(() => {
     let ignore = false;
