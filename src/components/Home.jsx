@@ -466,7 +466,6 @@ export default function Home() {
                 setPrismContentHtml(trimHtml)
 
                 textareaHtml.current.focus()
-                console.log(currentCursorHtml)
                 textareaHtml.current.selectionStart = currentCursorHtml;
                 textareaHtml.current.selectionEnd = currentCursorHtml;
 
