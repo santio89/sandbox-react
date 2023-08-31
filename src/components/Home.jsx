@@ -468,7 +468,6 @@ export default function Home() {
                 textareaHtml.current.focus()
                 textareaHtml.current.selectionStart = currentCursorHtml;
                 textareaHtml.current.selectionEnd = currentCursorHtml;
-
                 break;
             }
             case 'css': {
