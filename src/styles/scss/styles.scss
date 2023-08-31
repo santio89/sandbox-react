@@ -611,6 +611,7 @@ button {
         white-space: -o-pre-wrap;
         white-space: pre-wrap;
         word-wrap: break-word;
+        transition: opacity 200ms;
       }
 
       pre[class*="language-"].light-theme,
@@ -638,6 +639,7 @@ button {
       left: 0;
       height: 100%;
       max-height: 100%;
+      overflow-y: scroll !important;
 
       &.textarea {
         z-index: 1;
@@ -646,7 +648,11 @@ button {
         caret-color: var(--main-white);
         line-height: 1.2;
         tab-size: 2;
+        white-space: -moz-pre-wrap;
+        white-space: -pre-wrap;
+        white-space: -o-pre-wrap;
         white-space: pre-wrap;
+        word-wrap: break-word;
         transition: opacity 200ms;
 
         @media(min-width: 800px) {
@@ -661,7 +667,7 @@ button {
 
       /* width */
       &::-webkit-scrollbar {
-        width: initial
+        width: 8px
       }
 
       /* track */
@@ -681,8 +687,8 @@ button {
 
       &::-webkit-resizer {
         background-color: transparent;
-        background-image: url("/resize-vert.svg");
-        background-repeat: no-repeat;
+        /* background-image: url("/resize-vert.svg");
+        background-repeat: no-repeat; */
       }
 
       /* FIN SCROLLBAR */
@@ -775,8 +781,8 @@ button {
 
       &::-webkit-resizer {
         background-color: transparent;
-        background-image: url("/resize-vert.svg");
-        background-repeat: no-repeat;
+        /* background-image: url("/resize-vert.svg");
+        background-repeat: no-repeat; */
       }
     }
 

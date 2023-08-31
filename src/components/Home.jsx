@@ -29,10 +29,12 @@ export default function Home() {
     const [panelDrag, setPanelDrag] = useState(false)
 
     const iframe = useRef(null)
+    /* textarea: code input */
     const textareaHtml = useRef(null)
     const textareaCss = useRef(null)
     const textareaJs = useRef(null)
 
+    /* codeInput: pre-code input */
     const codeInputHtml = useRef(null)
     const codeInputCss = useRef(null)
     const codeInputJs = useRef(null)
@@ -41,6 +43,9 @@ export default function Home() {
     const [currentCursorHtml, setCurrentCursorHtml] = useState(html?.length || 0)
     const [currentCursorCss, setCurrentCursorCss] = useState(css?.length || 0)
     const [currentCursorJs, setCurrentCursorJs] = useState(js?.length || 0)
+    const [currentScrollHtml, setCurrentScrollHtml] = useState(textareaHtml?.current?.scrollTop || 0)
+    const [currentScrollCss, setCurrentScrollCss] = useState(textareaCss?.current?.scrollTop || 0)
+    const [currentScrollJs, setCurrentScrollJs] = useState(textareaJs?.current?.scrollTop || 0)
 
     const [panelBreakpoint, setPanelBreakpont] = useState(window.innerWidth < 800 ? true : false)
 
@@ -105,12 +110,15 @@ export default function Home() {
         switch (tabActive) {
             case 'html':
                 codeInputHtml.current.scrollTop = textareaHtml.current.scrollTop;
+                setCurrentScrollHtml(textareaHtml.current.scrollTop)
                 break;
             case 'css':
                 codeInputCss.current.scrollTop = textareaCss.current.scrollTop;
+                setCurrentScrollCss(textareaCss.current.scrollTop)
                 break;
             case 'js':
                 codeInputJs.current.scrollTop = textareaJs.current.scrollTop;
+                setCurrentScrollJs(textareaJs.current.scrollTop)
                 break;
             default:
                 return
@@ -287,14 +295,17 @@ export default function Home() {
         switch (tabActive) {
             case 'html': {
                 setCurrentCursorHtml(textareaHtml.current.selectionEnd)
+                setCurrentScrollHtml(textareaHtml.current.scrollTop)
                 break;
             }
             case 'css': {
                 setCurrentCursorCss(textareaCss.current.selectionEnd)
+                setCurrentScrollCss(textareaCss.current.scrollTop)
                 break;
             }
             case 'js': {
                 setCurrentCursorJs(textareaJs.current.selectionEnd)
+                setCurrentScrollJs(textareaJs.current.scrollTop)
                 break;
             }
             default:
@@ -310,19 +321,19 @@ export default function Home() {
             e.preventDefault();
             switch (tabActive) {
                 case 'html': {
-                    const selection = (textareaHtml.current.selectionEnd)
+                    const selection = (textareaHtml.current.selectionEnd - 1)
                     dispatch({ type: "HTML_UNDO" })
                     setTextCursor(selection)
                     break;
                 }
                 case 'css': {
-                    const selection = (textareaCss.current.selectionEnd)
+                    const selection = (textareaCss.current.selectionEnd - 1)
                     dispatch({ type: "CSS_UNDO" })
                     setTextCursor(selection)
                     break;
                 }
                 case 'js': {
-                    const selection = (textareaJs.current.selectionEnd)
+                    const selection = (textareaJs.current.selectionEnd - 1)
                     dispatch({ type: "JS_UNDO" })
                     setTextCursor(selection)
                     break;
@@ -334,19 +345,19 @@ export default function Home() {
             e.preventDefault();
             switch (tabActive) {
                 case 'html': {
-                    const selection = (textareaHtml.current.selectionEnd)
+                    const selection = (textareaHtml.current.selectionEnd + 1)
                     dispatch({ type: "HTML_REDO" })
                     setTextCursor(selection)
                     break;
                 }
                 case 'css': {
-                    const selection = (textareaCss.current.selectionEnd)
+                    const selection = (textareaCss.current.selectionEnd + 1)
                     dispatch({ type: "CSS_REDO" })
                     setTextCursor(selection)
                     break;
                 }
                 case 'js': {
-                    const selection = (textareaJs.current.selectionEnd)
+                    const selection = (textareaJs.current.selectionEnd + 1)
                     dispatch({ type: "JS_REDO" })
                     setTextCursor(selection)
                     break;
@@ -402,6 +413,7 @@ export default function Home() {
                     setPrismContentHtml(html);
                 }
                 setCurrentCursorHtml(textareaHtml.current.selectionEnd)
+                setCurrentScrollHtml(textareaHtml.current.scrollTop)
                 break;
             case 'css':
                 if (css && css[css.length - 1] === "\n") {
@@ -410,6 +422,7 @@ export default function Home() {
                     setPrismContentCss(css);
                 }
                 setCurrentCursorCss(textareaCss.current.selectionEnd)
+                setCurrentScrollCss(textareaCss.current.scrollTop)
                 break;
             case 'js':
                 if (js && js[js.length - 1] === "\n") {
@@ -418,6 +431,7 @@ export default function Home() {
                     setPrismContentJs(js);
                 }
                 setCurrentCursorJs(textareaJs.current.selectionEnd)
+                setCurrentScrollJs(textareaJs.current.scrollTop)
                 break;
             default:
                 return
@@ -466,8 +480,10 @@ export default function Home() {
                 setPrismContentHtml(trimHtml)
 
                 textareaHtml.current.focus()
-                textareaHtml.current.selectionStart = currentCursorHtml;
-                textareaHtml.current.selectionEnd = currentCursorHtml;
+                textareaHtml.current.selectionStart = currentCursorHtml
+                textareaHtml.current.selectionEnd = currentCursorHtml
+                textareaHtml.current.scrollTop = currentScrollHtml
+
                 break;
             }
             case 'css': {
@@ -479,8 +495,10 @@ export default function Home() {
                 setPrismContentCss(trimCss)
 
                 textareaCss.current.focus()
-                textareaCss.current.selectionStart = currentCursorCss;
-                textareaCss.current.selectionEnd = currentCursorCss;
+                textareaCss.current.selectionStart = currentCursorCss
+                textareaCss.current.selectionEnd = currentCursorCss
+                textareaCss.current.scrollTop = currentScrollCss
+
                 break;
             }
             case 'js': {
@@ -492,8 +510,10 @@ export default function Home() {
                 setPrismContentJs(trimJs)
 
                 textareaJs.current.focus()
-                textareaJs.current.selectionStart = currentCursorJs;
-                textareaJs.current.selectionEnd = currentCursorJs;
+                textareaJs.current.selectionStart = currentCursorJs
+                textareaJs.current.selectionEnd = currentCursorJs
+                textareaJs.current.scrollTop = currentScrollJs
+
                 break;
             }
             default:
