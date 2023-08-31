@@ -6,11 +6,9 @@ import NotFound from "./components/NotFound";
 import './styles/css/prism.css'
 import './styles/css/styles.css'
 import { useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { authStateAction } from "./store/actions/auth.action";
 import { Toaster } from 'sonner'
-import { setModal } from "./store/actions/modal.action";
-
 
 function App() {
   const dispatch = useDispatch();
