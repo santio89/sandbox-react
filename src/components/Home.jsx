@@ -404,7 +404,7 @@ export default function Home() {
             }, 1000);
         }
 
-        if (textCursor) {
+        if (textCursor || textCursor === 0) {
             switch (tabActive) {
                 case 'html':
                     textareaHtml.current.selectionStart = textCursor;

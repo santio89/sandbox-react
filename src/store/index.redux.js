@@ -18,16 +18,19 @@ const RootReducer = combineReducers({
         limit: 1000,
         undoType: 'HTML_UNDO',
         redoType: 'HTML_REDO',
+        clearHistoryType: 'HTML_CLEAR'
     }),
     css: undoable(CssReducer, {
         limit: 1000,
         undoType: 'CSS_UNDO',
         redoType: 'CSS_REDO',
+        clearHistoryType: 'CSS_CLEAR'
     }),
     js: undoable(JsReducer, {
         limit: 1000,
         undoType: 'JS_UNDO',
         redoType: 'JS_REDO',
+        clearHistoryType: 'JS_CLEAR'
     }),
     auth: AuthReducer,
     loader: LoaderReducer
