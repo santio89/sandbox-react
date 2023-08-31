@@ -38,6 +38,9 @@ export default function Home() {
     const codeInputJs = useRef(null)
 
     const [textCursor, setTextCursor] = useState(null)
+    const [currentCursorHtml, setCurrentCursorHtml] = useState(textareaHtml?.current?.selectionEnd)
+    const [currentCursorCss, setCurrentCursorCss] = useState(textareaCss?.current?.selectionEnd)
+    const [currentCursorJs, setCurrentCursorJs] = useState(textareaJs?.current?.selectionEnd)
 
     const [panelBreakpoint, setPanelBreakpont] = useState(window.innerWidth < 800 ? true : false)
 
@@ -280,6 +283,25 @@ export default function Home() {
         }
     }
 
+    const setClickCursor = () => {
+        switch (tabActive) {
+            case 'html': {
+                setCurrentCursorHtml(textareaHtml.current.selectionEnd)
+                break;
+            }
+            case 'css': {
+                setCurrentCursorCss(textareaCss.current.selectionEnd)
+                break;
+            }
+            case 'js': {
+                setCurrentCursorJs(textareaJs.current.selectionEnd)
+                break;
+            }
+            default:
+                return
+        }
+    }
+
     const checkInput = (e) => {
         if (e.key.toUpperCase() === "TAB") {
             e.preventDefault();
@@ -379,6 +401,7 @@ export default function Home() {
                 } else {
                     setPrismContentHtml(html);
                 }
+                setCurrentCursorHtml(textareaHtml.current.selectionEnd)
                 break;
             case 'css':
                 if (css && css[css.length - 1] === "\n") {
@@ -386,6 +409,7 @@ export default function Home() {
                 } else {
                     setPrismContentCss(css);
                 }
+                setCurrentCursorCss(textareaCss.current.selectionEnd)
                 break;
             case 'js':
                 if (js && js[js.length - 1] === "\n") {
@@ -393,6 +417,7 @@ export default function Home() {
                 } else {
                     setPrismContentJs(js);
                 }
+                setCurrentCursorJs(textareaJs.current.selectionEnd)
                 break;
             default:
                 return
@@ -441,8 +466,10 @@ export default function Home() {
                 setPrismContentHtml(trimHtml)
 
                 textareaHtml.current.focus()
-                textareaHtml.current.selectionStart = html.length;
-                textareaHtml.current.selectionEnd = html.length;
+                console.log(currentCursorHtml)
+                textareaHtml.current.selectionStart = currentCursorHtml;
+                textareaHtml.current.selectionEnd = currentCursorHtml;
+
                 break;
             }
             case 'css': {
@@ -454,8 +481,8 @@ export default function Home() {
                 setPrismContentCss(trimCss)
 
                 textareaCss.current.focus()
-                textareaCss.current.selectionStart = css.length;
-                textareaCss.current.selectionEnd = css.length;
+                textareaCss.current.selectionStart = currentCursorCss;
+                textareaCss.current.selectionEnd = currentCursorCss;
                 break;
             }
             case 'js': {
@@ -467,8 +494,8 @@ export default function Home() {
                 setPrismContentJs(trimJs)
 
                 textareaJs.current.focus()
-                textareaJs.current.selectionStart = js.length;
-                textareaJs.current.selectionEnd = js.length;
+                textareaJs.current.selectionStart = currentCursorJs;
+                textareaJs.current.selectionEnd = currentCursorJs;
                 break;
             }
             default:
@@ -653,7 +680,7 @@ export default function Home() {
                                     </code>
                                 </pre>
 
-                                <textarea ref={textareaHtml} spellCheck="false" className={`mainCode__input__text ${html === "" && `dim`} textarea`} value={html} onChange={e => setHtml(e.target.value)} onKeyDown={(e) => checkInput(e)} onScroll={() => { syncScroll() }}></textarea>
+                                <textarea ref={textareaHtml} spellCheck="false" className={`mainCode__input__text ${html === "" && `dim`} textarea`} value={html} onChange={e => setHtml(e.target.value)} onKeyDown={(e) => checkInput(e)} onScroll={() => { syncScroll() }} onClick={(e) => { setClickCursor(e) }}></textarea>
                             </div>
 
                             <div className={`mainCode__input__textWrapper ${tabActive !== "css" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
@@ -663,7 +690,7 @@ export default function Home() {
                                     </code>
                                 </pre>
 
-                                <textarea ref={textareaCss} spellCheck="false" className={`mainCode__input__text ${css === "" && `dim`} textarea`} value={css} onChange={e => setCss(e.target.value)} onKeyDown={(e) => checkInput(e)} onScroll={() => { syncScroll() }}></textarea>
+                                <textarea ref={textareaCss} spellCheck="false" className={`mainCode__input__text ${css === "" && `dim`} textarea`} value={css} onChange={e => setCss(e.target.value)} onKeyDown={(e) => checkInput(e)} onScroll={() => { syncScroll() }} onClick={(e) => { setClickCursor(e) }}></textarea>
                             </div>
 
                             <div className={`mainCode__input__textWrapper ${tabActive !== "js" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
@@ -673,7 +700,7 @@ export default function Home() {
                                     </code>
                                 </pre>
 
-                                <textarea ref={textareaJs} spellCheck="false" className={`mainCode__input__text ${js === "" && `dim`} textarea`} value={js} onChange={e => setJs(e.target.value)} onKeyDown={(e) => checkInput(e)} onScroll={() => { syncScroll() }}></textarea>
+                                <textarea ref={textareaJs} spellCheck="false" className={`mainCode__input__text ${js === "" && `dim`} textarea`} value={js} onChange={e => setJs(e.target.value)} onKeyDown={(e) => checkInput(e)} onScroll={() => { syncScroll() }} onClick={(e) => { setClickCursor(e) }}></textarea>
                             </div>
 
                         </div>
@@ -777,7 +804,7 @@ export default function Home() {
                                     </code>
                                 </pre>
 
-                                <textarea ref={textareaHtml} spellCheck="false" className={`mainCode__input__text ${html === "" && `dim`} textarea`} value={html} onChange={e => setHtml(e.target.value)} onKeyDown={(e) => checkInput(e)} onScroll={() => { syncScroll() }}></textarea>
+                                <textarea ref={textareaHtml} spellCheck="false" className={`mainCode__input__text ${html === "" && `dim`} textarea`} value={html} onChange={e => setHtml(e.target.value)} onKeyDown={(e) => checkInput(e)} onScroll={() => { syncScroll() }} onClick={(e) => { setClickCursor(e) }}></textarea>
                             </div>
 
                             <div className={`mainCode__input__textWrapper ${tabActive !== "css" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
@@ -787,7 +814,7 @@ export default function Home() {
                                     </code>
                                 </pre>
 
-                                <textarea ref={textareaCss} spellCheck="false" className={`mainCode__input__text ${css === "" && `dim`} textarea`} value={css} onChange={e => setCss(e.target.value)} onKeyDown={(e) => checkInput(e)} onScroll={() => { syncScroll() }}></textarea>
+                                <textarea ref={textareaCss} spellCheck="false" className={`mainCode__input__text ${css === "" && `dim`} textarea`} value={css} onChange={e => setCss(e.target.value)} onKeyDown={(e) => checkInput(e)} onScroll={() => { syncScroll() }} onClick={(e) => { setClickCursor(e) }}></textarea>
                             </div>
 
                             <div className={`mainCode__input__textWrapper ${tabActive !== "js" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
@@ -797,7 +824,7 @@ export default function Home() {
                                     </code>
                                 </pre>
 
-                                <textarea ref={textareaJs} spellCheck="false" className={`mainCode__input__text ${js === "" && `dim`} textarea`} value={js} onChange={e => setJs(e.target.value)} onKeyDown={(e) => checkInput(e)} onScroll={() => { syncScroll() }}></textarea>
+                                <textarea ref={textareaJs} spellCheck="false" className={`mainCode__input__text ${js === "" && `dim`} textarea`} value={js} onChange={e => setJs(e.target.value)} onKeyDown={(e) => checkInput(e)} onScroll={() => { syncScroll() }} onClick={(e) => { setClickCursor(e) }}></textarea>
                             </div>
 
                         </div>
