@@ -29,7 +29,6 @@ export const signInGoogle = () => {
                 return signInWithPopup(auth, provider)
                     .then((result) => {
                         const user = result.user;
-
                         dispatch({ type: "HTML_CLEAR" })
                         dispatch({ type: "CSS_CLEAR" })
                         dispatch({ type: "JS_CLEAR" })
