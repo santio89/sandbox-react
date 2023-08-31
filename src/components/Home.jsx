@@ -40,12 +40,12 @@ export default function Home() {
     const codeInputJs = useRef(null)
 
     const [textCursor, setTextCursor] = useState(null)
-    const [currentCursorHtml, setCurrentCursorHtml] = useState(html?.length || 0)
-    const [currentCursorCss, setCurrentCursorCss] = useState(css?.length || 0)
-    const [currentCursorJs, setCurrentCursorJs] = useState(js?.length || 0)
-    const [currentScrollHtml, setCurrentScrollHtml] = useState(textareaHtml?.current?.scrollTop || 0)
-    const [currentScrollCss, setCurrentScrollCss] = useState(textareaCss?.current?.scrollTop || 0)
-    const [currentScrollJs, setCurrentScrollJs] = useState(textareaJs?.current?.scrollTop || 0)
+    const [currentCursorHtml, setCurrentCursorHtml] = useState(0)
+    const [currentCursorCss, setCurrentCursorCss] = useState(0)
+    const [currentCursorJs, setCurrentCursorJs] = useState(0)
+    const [currentScrollHtml, setCurrentScrollHtml] = useState(0)
+    const [currentScrollCss, setCurrentScrollCss] = useState(0)
+    const [currentScrollJs, setCurrentScrollJs] = useState(0)
 
     const [panelBreakpoint, setPanelBreakpont] = useState(window.innerWidth < 800 ? true : false)
 
@@ -379,6 +379,25 @@ export default function Home() {
         let timeout = null;
         if (loadSnippet) {
             setCodeOutput(`<body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>`)
+
+            textareaHtml.current.scrollTop = 0
+            textareaCss.current.scrollTop = 0
+            textareaJs.current.scrollTop = 0
+            codeInputHtml.current.scrollTop = 0
+            codeInputCss.current.scrollTop = 0
+            codeInputJs.current.scrollTop = 0
+            textareaHtml.current.selectionStart = 0
+            textareaHtml.current.selectionEnd = 0
+            textareaCss.current.selectionStart = 0
+            textareaCss.current.selectionEnd = 0
+            textareaJs.current.selectionStart = 0
+            textareaJs.current.selectionEnd = 0
+            setCurrentScrollHtml(0)
+            setCurrentScrollCss(0)
+            setCurrentScrollJs(0)
+            setCurrentCursorHtml(0)
+            setCurrentCursorCss(0)
+            setCurrentCursorJs(0)
         } else {
             timeout = setTimeout(() => {
                 setCodeOutput(`<body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>`)
@@ -522,12 +541,6 @@ export default function Home() {
     }, [tabActive])
 
     useEffect(() => {
-        if (loadSnippet) {
-            setClearConfirm(false)
-        }
-    }, [loadSnippet])
-
-    useEffect(() => {
         if (downloadBlob !== "") {
             const newDownloadUrl = window.URL.createObjectURL(downloadBlob);
             setDownloadUrl(newDownloadUrl)
@@ -578,6 +591,12 @@ export default function Home() {
 
         return () => resizeBox.disconnect()
     }, [panelBreakpoint, tabActive])
+
+    useEffect(() => {
+        if (loadSnippet) {
+            setClearConfirm(false)
+        }
+    }, [loadSnippet])
 
     useEffect(() => {
         const tabShortcut = (e) => {
