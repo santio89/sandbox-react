@@ -399,7 +399,20 @@ export default function Home() {
             setCurrentCursorHtml(0)
             setCurrentCursorCss(0)
             setCurrentCursorJs(0)
-            textareaHtml.current.focus()
+
+            switch (tabActive) {
+                case 'html':
+                    textareaHtml.current.focus()
+                    break;
+                case 'css':
+                    textareaCss.current.focus()
+                    break;
+                case 'js':
+                    textareaJs.current.focus()
+                    break;
+                default:
+                    return
+            }
         } else {
             timeout = setTimeout(() => {
                 setCodeOutput(`<body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>`)
