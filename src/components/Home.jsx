@@ -399,6 +399,7 @@ export default function Home() {
             setCurrentCursorHtml(0)
             setCurrentCursorCss(0)
             setCurrentCursorJs(0)
+            textareaHtml.current.focus()
         } else {
             timeout = setTimeout(() => {
                 setCodeOutput(`<body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>`)
