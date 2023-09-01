@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCodeHtml, setCodeCss, setCodeJs } from "../store/actions/code.action";
 import { html_beautify, css_beautify, js_beautify } from "js-beautify";
 import { Link } from "react-router-dom";
+import { setLoadSnippet } from "../store/actions/modal.action";
 import Prism from 'prismjs'
 import SplitPane from 'react-split-pane'
 
@@ -595,6 +596,7 @@ export default function Home() {
     useEffect(() => {
         if (loadSnippet) {
             setClearConfirm(false)
+            dispatch(setLoadSnippet(false))
         }
     }, [loadSnippet])
 
