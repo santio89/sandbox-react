@@ -14,12 +14,13 @@ export default function Modal({ callbacks }) {
     const html = useSelector(state => state.html.present.html)
     const css = useSelector(state => state.css.present.css)
     const js = useSelector(state => state.js.present.js)
-    const presets = useSelector(state => state.preset.presets)
     const defaultPresets = useSelector(state => state.preset.defaultPresets)
     const modalActive = useSelector(state => state.modal.active)
     const user = useSelector(state => state.auth)
     const authLoader = useSelector(state => state.loader.authLoader)
     const presetLoader = useSelector(state => state.loader.presetLoader)
+    const presetsObj = useSelector(state => state.preset.presets)
+    const presets = Object.entries(presetsObj).map((obj) => { return { docId: obj[0], ...obj[1] } })
 
     const { setNewProject } = callbacks;
 
@@ -60,15 +61,15 @@ export default function Modal({ callbacks }) {
         })
     }
 
-    const deleteSelectedPreset = (name, id) => {
-        dispatch(deletePreset(presets, name, id, user.userId))
+    const deleteSelectedPreset = (name, docId, id) => {
+        dispatch(deletePreset(presets, name, docId, id, user.userId))
         setDeleteId(null)
     }
 
-    const editSelectedPreset = (name, id, newName) => {
+    const editSelectedPreset = (name, docId, id, newName) => {
         const trimNewName = String(newName).trim()
         if (trimNewName === "") return
-        dispatch(editPreset(presets, name, id, newName, user.userId))
+        dispatch(editPreset(presets, name, docId, id, newName, user.userId))
         setEditId(null)
     }
 
@@ -200,10 +201,10 @@ export default function Modal({ callbacks }) {
                                                                         (
                                                                             <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                                                                                 <span>Rename snippet?</span>
-                                                                                <form onSubmit={(e) => { e.preventDefault(); editSelectedPreset(preset.name, preset.id, editName) }}>
+                                                                                <form onSubmit={(e) => { e.preventDefault(); editSelectedPreset(preset.name, preset.docId, preset.id, editName) }}>
                                                                                     <input type="text" value={editName} onChange={e => { setEditName(e.target.value) }} placeholder="NEW NAME" />
                                                                                     <span className="presets__option__confirm__buttons">
-                                                                                        <button onClick={(e) => { e.stopPropagation(); editSelectedPreset(preset.name, preset.id, editName) }}>Yes</button>
+                                                                                        <button onClick={(e) => { e.stopPropagation(); editSelectedPreset(preset.name, preset.docId, preset.id, editName) }}>Yes</button>
                                                                                         <button onClick={(e) => { e.stopPropagation(); setEditId(null) }}>No</button>
                                                                                     </span>
                                                                                 </form>
@@ -213,7 +214,7 @@ export default function Modal({ callbacks }) {
                                                                             <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                                                                                 <span>Delete snippet?</span>
                                                                                 <span className="presets__option__confirm__buttons">
-                                                                                    <button onClick={(e) => { e.stopPropagation(); deleteSelectedPreset(preset.name, preset.id) }}>Yes</button>
+                                                                                    <button onClick={(e) => { e.stopPropagation(); deleteSelectedPreset(preset.name, preset.docId, preset.id) }}>Yes</button>
                                                                                     <button onClick={(e) => { e.stopPropagation(); setDeleteId(null) }}>No</button>
                                                                                 </span>
                                                                             </span> :

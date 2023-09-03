@@ -1,5 +1,5 @@
 import { firebaseDb as db } from "../../config/firebase"
-import { ref, set, child, get } from "firebase/database";
+import { ref, set, push, child, get, remove } from "firebase/database";
 import { toast } from "sonner";
 
 export const savePreset = (presets, preset, userId = null, callback) => {
@@ -8,9 +8,7 @@ export const savePreset = (presets, preset, userId = null, callback) => {
     return async dispatch => {
         if (userId) {
             try {
-                await set(ref(db, 'presets/' + userId), {
-                    presets: newPresets
-                });
+                await push(ref(db, 'presets/' + userId), preset);
 
                 dispatch({
                     type: "SET_PRESETS",
@@ -30,7 +28,7 @@ export const savePreset = (presets, preset, userId = null, callback) => {
     }
 }
 
-export const deletePreset = (presets, name, id, userId = null) => {
+export const deletePreset = (presets, name, docId, id, userId = null) => {
     const index = presets.findIndex(preset => preset.id === id);
     presets.splice(index, 1)
 
@@ -38,9 +36,7 @@ export const deletePreset = (presets, name, id, userId = null) => {
 
         if (userId) {
             try {
-                await set(ref(db, 'presets/' + userId), {
-                    presets
-                });
+                await remove(ref(db, 'presets/' + userId + "/" + docId))
 
                 dispatch({
                     type: "SET_PRESETS",
@@ -59,16 +55,15 @@ export const deletePreset = (presets, name, id, userId = null) => {
     }
 }
 
-export const editPreset = (presets, name, id, newName, userId = null) => {
+export const editPreset = (presets, name, docId, id, newName, userId = null) => {
     const index = presets.findIndex(preset => preset.id === id);
     presets[index].name = newName
+    const updatedPreset = presets[index]
 
     return async dispatch => {
         if (userId) {
             try {
-                await set(ref(db, 'presets/' + userId), {
-                    presets
-                });
+                await set(ref(db, 'presets/' + userId + "/" + docId), updatedPreset);
 
                 dispatch({
                     type: "SET_PRESETS",
@@ -98,7 +93,8 @@ export const getPresets = (userId = null) => {
         if (userId) {
             get(child(ref(db), `presets/${userId}`)).then((snapshot) => {
                 if (snapshot.exists()) {
-                    presets = snapshot.val().presets
+                    const presets = snapshot.val()
+
                     dispatch({
                         type: "SET_PRESETS",
                         presets
