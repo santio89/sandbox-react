@@ -5,9 +5,11 @@ import { setThemeReducer } from "../store/actions/theme.action";
 import Modal from "./Modal";
 import { setCodeAll } from "../store/actions/code.action";
 import { setModal, setLoadSnippet } from "../store/actions/modal.action";
+import { useNavigate } from "react-router-dom";
 
 export default function Nav({ rootTheme }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const darkTheme = useSelector(state => state.theme.darkTheme);
   const modalActive = useSelector(state => state.modal.active)
 
@@ -17,6 +19,9 @@ export default function Nav({ rootTheme }) {
     dispatch(setCodeAll("", "", ""))
     dispatch(setLoadSnippet(true))
     setNewProject(false)
+    if (window.location.pathname !== "/") {
+      navigate("/")
+    }
   }
 
   const toggleDarkTheme = () => {

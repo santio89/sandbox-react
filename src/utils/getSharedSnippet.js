@@ -7,8 +7,10 @@ const getSharedSnippet = (userId, snippetId, callback) => {
     get(child(ref(db), `presets/${userId}/${snippetId}`)).then((snapshot) => {
         if (snapshot.exists()) {
             preset = snapshot.val()
-            callback(preset.html, preset.css, preset.js)
-        } 
+            callback(preset)
+        } else {
+            callback(null)
+        }
     }).catch((e) => {
         console.log("error retrieving from db: ", e);
     }).finally(() => {

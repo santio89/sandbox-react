@@ -38,7 +38,7 @@ function App() {
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
-              <Route path="/:userId/:snippetId" element={<Home />} />
+              <Route path="/shared/:userShareId/:snippetShareId" element={<Home sharedSnippetHome={true} />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

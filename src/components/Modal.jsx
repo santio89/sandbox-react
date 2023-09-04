@@ -8,14 +8,17 @@ import { v4 as uuidv4 } from 'uuid';
 import { toast } from "sonner";
 import AnimWrapper from "./AnimWrapper";
 import NoAnimWrapper from "./NoAnimWrapper";
+import { useNavigate } from "react-router-dom";
 
 export default function Modal({ callbacks }) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const html = useSelector(state => state.html.present.html)
     const css = useSelector(state => state.css.present.css)
     const js = useSelector(state => state.js.present.js)
     const defaultPresets = useSelector(state => state.preset.defaultPresets)
     const modalActive = useSelector(state => state.modal.active)
+    const loadSnippet = useSelector(state => state.modal.loadSnippet)
     const user = useSelector(state => state.auth)
     const authLoader = useSelector(state => state.loader.authLoader)
     const presetLoader = useSelector(state => state.loader.presetLoader)
@@ -59,6 +62,11 @@ export default function Modal({ callbacks }) {
         dispatch(setLoadSnippet(true))
         setNewProject(false)
         setLoaded(true)
+
+        if (window.location.pathname !== "/") {
+            navigate("/")
+        }
+
         toast.message('Snippets', {
             description: `Snippet loaded: ${name}`,
         })
@@ -77,7 +85,7 @@ export default function Modal({ callbacks }) {
     }
 
     const shareSnippet = (userId, snippetId) => {
-        navigator.clipboard.writeText(`https://sandbox--code.vercel.app/${userId}/${snippetId}`);
+        navigator.clipboard.writeText(`https://sandbox--code.vercel.app/shared/${userId}/${snippetId}`);
         setShared(true)
     }
 
@@ -455,7 +463,15 @@ export default function Modal({ callbacks }) {
         setSavePresetName("")
     }, [modalOption])
 
+    useEffect(() => {
+        let timeout = null;
 
+        if (loadSnippet) {
+            timeout = setTimeout(dispatch(setLoadSnippet(false)), 1000)
+        }
+
+        return () => { clearTimeout(timeout) }
+    }, [loadSnippet])
 
     return (
         <dialog className="main__modal" ref={modal}>

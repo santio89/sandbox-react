@@ -308,6 +308,61 @@ button {
   flex: 1;
   z-index: 1;
   max-width: var(--size-main-container);
+
+  &__sharedNotFound,
+  &__sharedLoading {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: start;
+    gap: .5rem;
+    background: rgb(var(--main-white));
+    padding: 2rem;
+    border-radius: .5em;
+    white-space: pre-wrap;
+    margin: auto;
+    background: var(--main-black);
+    border: 2px solid var(--main-red);
+
+    h2 {
+      font-size: 2rem;
+      line-height: 1;
+      color: rgb(248, 248, 248);
+      font-size: 3rem;
+    }
+
+    p {
+      color: rgb(248, 248, 248)
+    }
+
+    a {
+      padding: .5rem;
+      background: linear-gradient(45deg, var(--main-purple), var(--main-red));
+      border-radius: .25em;
+      color: rgb(248, 248, 248);
+      margin-top: .5rem;
+      transition: scale 200ms;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: .5rem;
+      line-height: 1;
+
+      &:hover {
+        outline: 2px solid var(--main-purple)
+      }
+
+      &:active {
+        outline: 2px solid var(--main-purple);
+        scale: .9
+      }
+    }
+  }
+
+  &__sharedLoading {
+    border-color: var(--main-purple);
+  }
 }
 
 .tabs {
