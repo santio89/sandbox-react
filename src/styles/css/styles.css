@@ -582,6 +582,8 @@ button {
   white-space: pre-wrap;
   word-wrap: break-word;
   transition: opacity 200ms;
+  pointer-events: none;
+  user-select: none;
 }
 .mainCode__input__textWrapper pre[class*=language-].light-theme,
 .mainCode__input__textWrapper code[class*=language-].light-theme {
