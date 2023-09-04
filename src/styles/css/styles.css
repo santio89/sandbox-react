@@ -1103,6 +1103,7 @@ button {
 .main__modal .presets__option__main__name {
   max-width: 100%;
   word-wrap: break-word;
+  text-align: center;
 }
 .main__modal .presets__option__main__buttons {
   position: absolute;
