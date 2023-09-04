@@ -38,6 +38,7 @@ function App() {
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
+              <Route path="/:userId/:snippetId" element={<Home />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

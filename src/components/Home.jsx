@@ -2,12 +2,14 @@ import { useEffect, useRef, useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { setCodeHtml, setCodeCss, setCodeJs } from "../store/actions/code.action";
 import { html_beautify, css_beautify, js_beautify } from "js-beautify";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { setLoadSnippet } from "../store/actions/modal.action";
+import getSharedSnippet from "../utils/getSharedSnippet";
 import Prism from 'prismjs'
 import SplitPane from 'react-split-pane'
 
 export default function Home() {
+    const { userId, snippetId } = useParams();
     const [tabActive, setTabActive] = useState("html")
     const [clearConfirm, setClearConfirm] = useState(false)
     const dispatch = useDispatch()
@@ -608,10 +610,13 @@ export default function Home() {
     }, [panelBreakpoint, tabActive])
 
     useEffect(() => {
+        let timeout = null;
         if (loadSnippet) {
             setClearConfirm(false)
-            dispatch(setLoadSnippet(false))
+
+            timeout = setTimeout(dispatch(setLoadSnippet(false)), 1000)
         }
+        return () => { clearTimeout(timeout) }
     }, [loadSnippet])
 
     useEffect(() => {
@@ -654,6 +659,18 @@ export default function Home() {
 
         window.addEventListener("resize", paneEvent)
         document.addEventListener("keydown", tabShortcut)
+
+
+
+        if (userId && snippetId) {
+            const setSharedSnippet = (html, css, js) => {
+                dispatch(setLoadSnippet(true))
+                setHtml(html)
+                setCss(css)
+                setJs(js)
+            }
+            getSharedSnippet(userId, snippetId, setSharedSnippet)
+        }
 
         return () => { window.removeEventListener("resize", paneEvent); document.removeEventListener("keydown", tabShortcut) }
     }, [])
