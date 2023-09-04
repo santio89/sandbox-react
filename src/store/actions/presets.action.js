@@ -99,8 +99,6 @@ export const getPresets = (userId = null) => {
                         type: "SET_PRESETS",
                         presets
                     })
-                } else {
-                    console.log("No data available");
                 }
             }).catch((e) => {
                 console.log("error retrieving from db: ", e);

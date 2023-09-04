@@ -8,9 +8,7 @@ const getSharedSnippet = (userId, snippetId, callback) => {
         if (snapshot.exists()) {
             preset = snapshot.val()
             callback(preset.html, preset.css, preset.js)
-        } else {
-            console.log("No data available");
-        }
+        } 
     }).catch((e) => {
         console.log("error retrieving from db: ", e);
     }).finally(() => {
