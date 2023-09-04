@@ -19,8 +19,7 @@ export default function Modal({ callbacks }) {
     const user = useSelector(state => state.auth)
     const authLoader = useSelector(state => state.loader.authLoader)
     const presetLoader = useSelector(state => state.loader.presetLoader)
-    const presetsObj = useSelector(state => state.preset.presets)
-    const presets = Object.entries(presetsObj).map((obj) => { return { docId: obj[0], ...obj[1] } })
+    const presets = useSelector(state => state.preset.presets)
 
     const { setNewProject } = callbacks;
 

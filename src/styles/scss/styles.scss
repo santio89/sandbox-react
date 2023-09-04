@@ -1108,7 +1108,7 @@ button {
     }
 
     &__option {
-      aspect-ratio: 4/3;
+      aspect-ratio: 1/3;
       width: clamp(100px, 100px + 10vw, 180px);
       max-height: 127px;
       background-color: var(--main-purple);
@@ -1156,6 +1156,7 @@ button {
         align-items: center;
         gap: .8em;
         text-align: center;
+        padding: 4px;
 
         input {
           background: none;
@@ -1211,6 +1212,7 @@ button {
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 4px;
 
         &__name {
           max-width: 100%;
@@ -1225,7 +1227,7 @@ button {
           align-items: center;
           gap: 2px;
           width: 100%;
-          padding: 2px;
+          padding: 4px;
 
           button {
             display: flex;
@@ -1253,7 +1255,7 @@ button {
               scale: .9
             }
 
-            &:first-child{
+            &:first-child {
               margin-right: auto;
             }
           }

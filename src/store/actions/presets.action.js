@@ -3,12 +3,13 @@ import { ref, set, push, child, get, remove } from "firebase/database";
 import { toast } from "sonner";
 
 export const savePreset = (presets, preset, userId = null, callback) => {
-    const newPresets = [...presets, preset]
 
     return async dispatch => {
         if (userId) {
             try {
-                await push(ref(db, 'presets/' + userId), preset);
+                const doc = await push(ref(db, 'presets/' + userId), preset);
+                const newPreset = { docId: doc.key, ...preset }
+                const newPresets = [...presets, newPreset]
 
                 dispatch({
                     type: "SET_PRESETS",
@@ -93,7 +94,8 @@ export const getPresets = (userId = null) => {
         if (userId) {
             get(child(ref(db), `presets/${userId}`)).then((snapshot) => {
                 if (snapshot.exists()) {
-                    const presets = snapshot.val()
+                    const presetsObj = snapshot.val()
+                    presets = Object.entries(presetsObj).map((obj) => { return { docId: obj[0], ...obj[1] } })
 
                     dispatch({
                         type: "SET_PRESETS",
