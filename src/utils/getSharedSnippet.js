@@ -1,5 +1,6 @@
 import { firebaseDb as db } from "../config/firebase";
 import { ref, child, get } from "firebase/database";
+import { toast } from "sonner";
 
 const getSharedSnippet = (userId, snippetId, callback) => {
     let preset = null;
@@ -8,6 +9,10 @@ const getSharedSnippet = (userId, snippetId, callback) => {
         if (snapshot.exists()) {
             preset = snapshot.val()
             callback(preset)
+
+            toast.message('Snippets', {
+                description: `Snippet loaded: ${preset.name}`,
+            })
         } else {
             callback(null)
         }
