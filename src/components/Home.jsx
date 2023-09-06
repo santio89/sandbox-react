@@ -598,7 +598,6 @@ export default function Home({ sharedSnippetHome }) {
         const resizeBox = new ResizeObserver(entries => {
             for (let entry of entries) {
                 const cr = entry.contentRect;
-
                 /* don't sync if pane hasn't been resized manually */
                 if (cr.height === 0) return
                 switch (tabActive) {
@@ -617,6 +616,9 @@ export default function Home({ sharedSnippetHome }) {
                 codeInputHtml.current.style.height = cr.height + 12 + "px"
                 codeInputCss.current.style.height = cr.height + 12 + "px"
                 codeInputJs.current.style.height = cr.height + 12 + "px"
+                codeInputHtml.current.style.maxHeight = codeInputHtml.current.style.height
+                codeInputCss.current.style.maxHeight = codeInputCss.current.style.height
+                codeInputJs.current.style.maxHeight = codeInputJs.current.style.height
                 textareaHtml.current.style.height = cr.height + 12 + "px"
                 textareaCss.current.style.height = cr.height + 12 + "px"
                 textareaJs.current.style.height = cr.height + 12 + "px"
