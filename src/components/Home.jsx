@@ -618,16 +618,17 @@ export default function Home({ sharedSnippetHome }) {
                         break;
                 }
 
-                /*resize panel sync:8padding+4border=12px */
-                codeInputHtml.current.style.height = cr.height + 12 + "px"
-                codeInputCss.current.style.height = cr.height + 12 + "px"
-                codeInputJs.current.style.height = cr.height + 12 + "px"
+
+                /*resize panel sync:16padding+4border=20px */
+                codeInputHtml.current.style.height = cr.height + 20 + "px"
+                codeInputCss.current.style.height = cr.height + 20 + "px"
+                codeInputJs.current.style.height = cr.height + 20 + "px"
                 codeInputHtml.current.style.maxHeight = codeInputHtml.current.style.height
                 codeInputCss.current.style.maxHeight = codeInputCss.current.style.height
                 codeInputJs.current.style.maxHeight = codeInputJs.current.style.height
-                textareaHtml.current.style.height = cr.height + 12 + "px"
-                textareaCss.current.style.height = cr.height + 12 + "px"
-                textareaJs.current.style.height = cr.height + 12 + "px"
+                textareaHtml.current.style.height = cr.height + 20 + "px"
+                textareaCss.current.style.height = cr.height + 20 + "px"
+                textareaJs.current.style.height = cr.height + 20 + "px"
             }
         });
 
@@ -864,7 +865,7 @@ export default function Home({ sharedSnippetHome }) {
                                         </div>
                                     </>
                                     :
-                                    <SplitPane split="vertical" minSize={300} defaultSize={"42%"} maxSize={-300} onDragStarted={() => setPanelDrag(true)} onDragFinished={() => setPanelDrag(false)}>
+                                    <SplitPane split="vertical" minSize={300} defaultSize={"42%"} maxSize={-300} onDragStarted={() => {setPanelDrag(true)}} onDragFinished={() => {setPanelDrag(false); Prism.highlightAll()}}>
                                         <div className={`mainCode__input ${panelDrag && "pe-none"}`}>
                                             <div className="mainCode__input__type">
                                                 <span className="mainCode__input__type__active">
@@ -1125,7 +1126,7 @@ export default function Home({ sharedSnippetHome }) {
                                     </div>
                                 </>
                                 :
-                                <SplitPane split="vertical" minSize={300} defaultSize={"42%"} maxSize={-300} onDragStarted={() => setPanelDrag(true)} onDragFinished={() => setPanelDrag(false)}>
+                                <SplitPane split="vertical" minSize={300} defaultSize={"42%"} maxSize={-300} onDragStarted={() => {setPanelDrag(true)}} onDragFinished={() => {setPanelDrag(false); Prism.highlightAll()}}>
                                     <div className={`mainCode__input ${panelDrag && "pe-none"}`}>
                                         <div className="mainCode__input__type">
                                             <span className="mainCode__input__type__active">
