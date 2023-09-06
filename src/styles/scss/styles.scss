@@ -1,7 +1,7 @@
 :root {
   --main-purple: #6b1ff8;
-  --main-purple-variation: rgb(59, 21, 141);
-  --main-red: rgb(211, 29, 83);
+  --main-purple-variation: #3b158d;
+  --main-red: #d31d53;
   --main-white: rgb(248, 248, 248);
   --main-black: rgb(30, 30, 30);
   --main-gray: rgb(80, 80, 80);
@@ -686,7 +686,7 @@ button {
       border-radius: .4rem;
       border: 2px solid rgb(100, 100, 100);
       outline: none;
-      padding: .5rem .5rem 0 .5rem !important;
+      padding: .5rem .5rem 0 2rem !important;
       resize: none;
       background: var(--bg-code);
       color: var(--color-code);
@@ -1624,3 +1624,49 @@ li[data-sonner-toast] {
     }
   }
 }
+
+
+/* code-line-numbers */
+pre[class*="language-"].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+    white-space: pre-wrap;
+}
+
+pre[class*="language-"].line-numbers > code {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.5em;
+    width: 3em; 
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+.line-numbers-rows > span {
+    pointer-events: none;
+    display: block;
+    counter-increment: linenumber;
+}
+
+.line-numbers-rows > span:before {
+    content: counter(linenumber);
+    color: #999;
+    display: block;
+    padding-right: 0.5em;
+    text-align: right;
+}
+/* fin code-line-numbers */

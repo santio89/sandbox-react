@@ -5,8 +5,8 @@ import { html_beautify, css_beautify, js_beautify } from "js-beautify";
 import { Link, useParams } from "react-router-dom";
 import { setLoadSnippet } from "../store/actions/modal.action";
 import getSharedSnippet from "../utils/getSharedSnippet";
-import Prism from 'prismjs'
 import SplitPane from 'react-split-pane'
+import Prism from '../utils/prism.js'
 
 export default function Home({ sharedSnippetHome }) {
     const { userShareId, snippetShareId } = useParams();
@@ -792,7 +792,7 @@ export default function Home({ sharedSnippetHome }) {
                                             </div>
 
                                             <div className={`mainCode__input__textWrapper ${tabActive !== "html" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
-                                                <pre onScroll={() => syncScrollReverse()} className={`mainCode__input__text ${html === "" && `dim pre`}`} aria-hidden="true" ref={codeInputHtml}>
+                                                <pre onScroll={() => syncScrollReverse()} className={`line-numbers mainCode__input__text ${html === "" && `dim pre`}`} aria-hidden="true" ref={codeInputHtml}>
                                                     <code className={`language-html code`}>
                                                         {prismContentHtml}
                                                     </code>
@@ -802,7 +802,7 @@ export default function Home({ sharedSnippetHome }) {
                                             </div>
 
                                             <div className={`mainCode__input__textWrapper ${tabActive !== "css" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
-                                                <pre onScroll={() => syncScrollReverse()} className={`mainCode__input__text ${css === "" && `dim pre`}`} aria-hidden="true" ref={codeInputCss}>
+                                                <pre onScroll={() => syncScrollReverse()} className={`line-numbers mainCode__input__text ${css === "" && `dim pre`}`} aria-hidden="true" ref={codeInputCss}>
                                                     <code className="language-css code">
                                                         {prismContentCss}
                                                     </code>
@@ -812,7 +812,7 @@ export default function Home({ sharedSnippetHome }) {
                                             </div>
 
                                             <div className={`mainCode__input__textWrapper ${tabActive !== "js" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
-                                                <pre onScroll={() => syncScrollReverse()} className={`mainCode__input__text ${js === "" && `dim pre`}`} aria-hidden="true" ref={codeInputJs}>
+                                                <pre onScroll={() => syncScrollReverse()} className={`line-numbers mainCode__input__text ${js === "" && `dim pre`}`} aria-hidden="true" ref={codeInputJs}>
                                                     <code className="language-js code">
                                                         {prismContentJs}
                                                     </code>
@@ -916,7 +916,7 @@ export default function Home({ sharedSnippetHome }) {
                                             </div>
 
                                             <div className={`mainCode__input__textWrapper ${tabActive !== "html" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
-                                                <pre onScroll={() => syncScrollReverse()} className={`mainCode__input__text ${html === "" && `dim pre`}`} aria-hidden="true" ref={codeInputHtml}>
+                                                <pre onScroll={() => syncScrollReverse()} className={`line-numbers mainCode__input__text ${html === "" && `dim pre`}`} aria-hidden="true" ref={codeInputHtml}>
                                                     <code className={`language-html code`} >
                                                         {prismContentHtml}
                                                     </code>
@@ -926,7 +926,7 @@ export default function Home({ sharedSnippetHome }) {
                                             </div>
 
                                             <div className={`mainCode__input__textWrapper ${tabActive !== "css" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
-                                                <pre onScroll={() => syncScrollReverse()} className={`mainCode__input__text ${css === "" && `dim pre`}`} aria-hidden="true" ref={codeInputCss}>
+                                                <pre onScroll={() => syncScrollReverse()} className={`line-numbers mainCode__input__text ${css === "" && `dim pre`}`} aria-hidden="true" ref={codeInputCss}>
                                                     <code className="language-css code">
                                                         {prismContentCss}
                                                     </code>
@@ -936,7 +936,7 @@ export default function Home({ sharedSnippetHome }) {
                                             </div>
 
                                             <div className={`mainCode__input__textWrapper ${tabActive !== "js" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
-                                                <pre onScroll={() => syncScrollReverse()} className={`mainCode__input__text ${js === "" && `dim pre`}`} aria-hidden="true" ref={codeInputJs}>
+                                                <pre onScroll={() => syncScrollReverse()} className={`line-numbers mainCode__input__text ${js === "" && `dim pre`}`} aria-hidden="true" ref={codeInputJs}>
                                                     <code className="language-js code">
                                                         {prismContentJs}
                                                     </code>
@@ -1053,7 +1053,7 @@ export default function Home({ sharedSnippetHome }) {
                                         </div>
 
                                         <div className={`mainCode__input__textWrapper ${tabActive !== "html" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
-                                            <pre onScroll={() => syncScrollReverse()} className={`mainCode__input__text ${html === "" && `dim pre`}`} aria-hidden="true" ref={codeInputHtml}>
+                                            <pre onScroll={() => syncScrollReverse()} className={`line-numbers mainCode__input__text ${html === "" && `dim pre`}`} aria-hidden="true" ref={codeInputHtml}>
                                                 <code className={`language-html code`} >
                                                     {prismContentHtml}
                                                 </code>
@@ -1063,7 +1063,7 @@ export default function Home({ sharedSnippetHome }) {
                                         </div>
 
                                         <div className={`mainCode__input__textWrapper ${tabActive !== "css" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
-                                            <pre onScroll={() => syncScrollReverse()} className={`mainCode__input__text ${css === "" && `dim pre`}`} aria-hidden="true" ref={codeInputCss}>
+                                            <pre onScroll={() => syncScrollReverse()} className={`line-numbers mainCode__input__text ${css === "" && `dim pre`}`} aria-hidden="true" ref={codeInputCss}>
                                                 <code className="language-css code">
                                                     {prismContentCss}
                                                 </code>
@@ -1073,7 +1073,7 @@ export default function Home({ sharedSnippetHome }) {
                                         </div>
 
                                         <div className={`mainCode__input__textWrapper ${tabActive !== "js" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
-                                            <pre onScroll={() => syncScrollReverse()} className={`mainCode__input__text ${js === "" && `dim pre`}`} aria-hidden="true" ref={codeInputJs}>
+                                            <pre onScroll={() => syncScrollReverse()} className={`line-numbers mainCode__input__text ${js === "" && `dim pre`}`} aria-hidden="true" ref={codeInputJs}>
                                                 <code className="language-js code">
                                                     {prismContentJs}
                                                 </code>
@@ -1177,7 +1177,7 @@ export default function Home({ sharedSnippetHome }) {
                                         </div>
 
                                         <div className={`mainCode__input__textWrapper ${tabActive !== "html" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
-                                            <pre onScroll={() => syncScrollReverse()} className={`mainCode__input__text ${html === "" && `dim pre`}`} aria-hidden="true" ref={codeInputHtml}>
+                                            <pre onScroll={() => syncScrollReverse()} className={`line-numbers mainCode__input__text ${html === "" && `dim pre`}`} aria-hidden="true" ref={codeInputHtml}>
                                                 <code className={`language-html code`} >
                                                     {prismContentHtml}
                                                 </code>
@@ -1187,7 +1187,7 @@ export default function Home({ sharedSnippetHome }) {
                                         </div>
 
                                         <div className={`mainCode__input__textWrapper ${tabActive !== "css" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
-                                            <pre onScroll={() => syncScrollReverse()} className={`mainCode__input__text ${css === "" && `dim pre`}`} aria-hidden="true" ref={codeInputCss}>
+                                            <pre onScroll={() => syncScrollReverse()} className={`line-numbers mainCode__input__text ${css === "" && `dim pre`}`} aria-hidden="true" ref={codeInputCss}>
                                                 <code className="language-css code">
                                                     {prismContentCss}
                                                 </code>
@@ -1197,7 +1197,7 @@ export default function Home({ sharedSnippetHome }) {
                                         </div>
 
                                         <div className={`mainCode__input__textWrapper ${tabActive !== "js" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
-                                            <pre onScroll={() => syncScrollReverse()} className={`mainCode__input__text ${js === "" && `dim pre`}`} aria-hidden="true" ref={codeInputJs}>
+                                            <pre onScroll={() => syncScrollReverse()} className={`line-numbers mainCode__input__text ${js === "" && `dim pre`}`} aria-hidden="true" ref={codeInputJs}>
                                                 <code className="language-js code">
                                                     {prismContentJs}
                                                 </code>
