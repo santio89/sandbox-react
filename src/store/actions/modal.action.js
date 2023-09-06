@@ -17,3 +17,13 @@ export const setLoadSnippet = (loadSnippet) => {
         })
     }
 }
+
+export const setCreateNew = (createNew) => {
+
+    return async dispatch => {
+        dispatch({
+            type: "SET_NEW",
+            createNew
+        })
+    }
+}

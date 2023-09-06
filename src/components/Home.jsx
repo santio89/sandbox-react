@@ -18,6 +18,7 @@ export default function Home({ sharedSnippetHome }) {
     const js = useSelector(state => state.js.present.js)
     const darkTheme = useSelector(state => state.theme.darkTheme)
     const loadSnippet = useSelector(state => state.modal.loadSnippet)
+    const createNew = useSelector(state => state.modal.createNew)
     const modalActive = useSelector(state => state.modal.active)
     const [downloadBlob, setDownloadBlob] = useState("")
     const [downloadUrl, setDownloadUrl] = useState("")
@@ -401,6 +402,11 @@ export default function Home({ sharedSnippetHome }) {
 
     useEffect(() => {
         let timeout = null;
+        if (createNew) {
+            setPrismContentHtml("")
+            setPrismContentCss("")
+            setPrismContentJs("")
+        }
         if (loadSnippet) {
             setCodeOutput(`<body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>`)
 
@@ -703,7 +709,6 @@ export default function Home({ sharedSnippetHome }) {
 
         return () => { window.removeEventListener("resize", paneEvent); document.removeEventListener("keydown", tabShortcut) }
     }, [])
-
 
     return (
         <div className="home">

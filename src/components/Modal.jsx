@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setModal, setLoadSnippet } from "../store/actions/modal.action";
+import { setModal, setLoadSnippet, setCreateNew } from "../store/actions/modal.action";
 import { signInGoogle, signOutUser } from "../store/actions/auth.action";
 import { setCodeAll } from "../store/actions/code.action";
 import { savePreset, deletePreset, editPreset } from "../store/actions/presets.action";
@@ -19,6 +19,7 @@ export default function Modal({ callbacks }) {
     const defaultPresets = useSelector(state => state.preset.defaultPresets)
     const modalActive = useSelector(state => state.modal.active)
     const loadSnippet = useSelector(state => state.modal.loadSnippet)
+    const createNew = useSelector(state => state.modal.createNew)
     const user = useSelector(state => state.auth)
     const authLoader = useSelector(state => state.loader.authLoader)
     const presetLoader = useSelector(state => state.loader.presetLoader)
@@ -464,14 +465,19 @@ export default function Modal({ callbacks }) {
     }, [modalOption])
 
     useEffect(() => {
-        let timeout = null;
+        dispatch(setLoadSnippet(false))
 
+        let timeout = null;
         if (loadSnippet) {
             timeout = setTimeout(dispatch(setLoadSnippet(false)), 1000)
         }
 
         return () => { clearTimeout(timeout) }
     }, [loadSnippet])
+
+    useEffect(() => {
+        createNew && dispatch(setCreateNew(false))
+    }, [createNew])
 
     return (
         <dialog className="main__modal" ref={modal}>

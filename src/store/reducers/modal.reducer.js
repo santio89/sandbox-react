@@ -1,6 +1,7 @@
 const initialState = {
     active: false,
     loadSnippet: false,
+    createNew: false,
 }
 
 const CodeReducer = (state = initialState, action) => {
@@ -9,6 +10,8 @@ const CodeReducer = (state = initialState, action) => {
             return { ...state, active: action.active }
         case 'SET_SNIPPET':
             return { ...state, loadSnippet: action.loadSnippet }
+        case 'SET_NEW':
+            return { ...state, createNew: action.createNew }
         default:
             return state
     }
