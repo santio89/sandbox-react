@@ -87,19 +87,16 @@ export default function Home({ sharedSnippetHome }) {
     const beautify = (all = false) => {
         if (all) {
             const beautifyHtml = html_beautify(html, { indent_size: 2, indent_with_tabs: true, space_in_empty_paren: true })
-            const selectionHtml = (textareaHtml.current.selectionEnd)
             setHtml(beautifyHtml)
-            setTextCursor(selectionHtml)
+            setTextCursor(null)
 
             const beautifyCss = css_beautify(css, { indent_size: 2, indent_with_tabs: true, space_in_empty_paren: true })
-            const selectionCss = (textareaCss.current.selectionEnd)
             setCss(beautifyCss)
-            setTextCursor(selectionCss)
+            setTextCursor(null)
 
             const beautifyJs = js_beautify(js, { indent_size: 2, indent_with_tabs: true, space_in_empty_paren: true })
-            const selectionJs = (textareaJs.current.selectionEnd)
             setJs(beautifyJs)
-            setTextCursor(selectionJs)
+            setTextCursor(null)
         } else {
             switch (tabActive) {
                 case 'html': {
@@ -445,7 +442,6 @@ export default function Home({ sharedSnippetHome }) {
             setPrismContentCss("")
             setPrismContentJs("")
             setCodeOutput(`<body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>`)
-            
             textareaHtml.current.scrollTop = 0
             textareaCss.current.scrollTop = 0
             textareaJs.current.scrollTop = 0
@@ -677,9 +673,7 @@ export default function Home({ sharedSnippetHome }) {
     }, [panelBreakpoint, tabActive])
 
     useEffect(() => {
-        if (loadSnippet) {
-            setClearConfirm(false)
-        }
+        loadSnippet && setClearConfirm(false)
     }, [loadSnippet])
 
     useEffect(() => {
