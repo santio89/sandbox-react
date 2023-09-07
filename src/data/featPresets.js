@@ -1905,10 +1905,6 @@ export const snippetExample_5 = {
      <polyline class="st133" points="749.00262,464.39771 749.79279,461.56708 752.13806,463.33813 	"/>
  </g>
  </svg>
- 
-   
- 
- 
  </section>`,
     css: `body {
         height: 100%;
