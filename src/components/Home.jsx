@@ -84,31 +84,48 @@ export default function Home({ sharedSnippetHome }) {
         setClearConfirm(false);
     }
 
-    const beautify = () => {
-        switch (tabActive) {
-            case 'html': {
-                const beautify = html_beautify(html, { indent_size: 2, indent_with_tabs: true, space_in_empty_paren: true })
-                const selection = (textareaHtml.current.selectionEnd)
-                setHtml(beautify)
-                setTextCursor(selection)
-                break;
+    const beautify = (all = false) => {
+        if (all) {
+            const beautifyHtml = html_beautify(html, { indent_size: 2, indent_with_tabs: true, space_in_empty_paren: true })
+            const selectionHtml = (textareaHtml.current.selectionEnd)
+            setHtml(beautifyHtml)
+            setTextCursor(selectionHtml)
+
+            const beautifyCss = css_beautify(css, { indent_size: 2, indent_with_tabs: true, space_in_empty_paren: true })
+            const selectionCss = (textareaCss.current.selectionEnd)
+            setCss(beautifyCss)
+            setTextCursor(selectionCss)
+
+            const beautifyJs = js_beautify(js, { indent_size: 2, indent_with_tabs: true, space_in_empty_paren: true })
+            const selectionJs = (textareaJs.current.selectionEnd)
+            setJs(beautifyJs)
+            setTextCursor(selectionJs)
+        } else {
+            switch (tabActive) {
+                case 'html': {
+                    const beautify = html_beautify(html, { indent_size: 2, indent_with_tabs: true, space_in_empty_paren: true })
+                    const selection = (textareaHtml.current.selectionEnd)
+                    setHtml(beautify)
+                    setTextCursor(selection)
+                    break;
+                }
+                case 'css': {
+                    const beautify = css_beautify(css, { indent_size: 2, indent_with_tabs: true, space_in_empty_paren: true })
+                    const selection = (textareaCss.current.selectionEnd)
+                    setCss(beautify)
+                    setTextCursor(selection)
+                    break;
+                }
+                case 'js': {
+                    const beautify = js_beautify(js, { indent_size: 2, indent_with_tabs: true, space_in_empty_paren: true })
+                    const selection = (textareaJs.current.selectionEnd)
+                    setJs(beautify)
+                    setTextCursor(selection)
+                    break;
+                }
+                default:
+                    return
             }
-            case 'css': {
-                const beautify = css_beautify(css, { indent_size: 2, indent_with_tabs: true, space_in_empty_paren: true })
-                const selection = (textareaCss.current.selectionEnd)
-                setCss(beautify)
-                setTextCursor(selection)
-                break;
-            }
-            case 'js': {
-                const beautify = js_beautify(js, { indent_size: 2, indent_with_tabs: true, space_in_empty_paren: true })
-                const selection = (textareaJs.current.selectionEnd)
-                setJs(beautify)
-                setTextCursor(selection)
-                break;
-            }
-            default:
-                return
         }
     }
 
@@ -403,11 +420,30 @@ export default function Home({ sharedSnippetHome }) {
     useEffect(() => {
         let timeout = null;
         if (createNew) {
+            /* empty prism first to prevent flicker */
             setPrismContentHtml("")
             setPrismContentCss("")
             setPrismContentJs("")
-        }
-        if (loadSnippet) {
+            setCodeOutput(`<body>\n` + "" + `\n</body>\n` + `\n<style>\n` + "" + `\n</style>\n` + `\n<script>\n` + "" + `\n</script>`)
+
+            switch (tabActive) {
+                case 'html':
+                    textareaHtml.current.focus()
+                    break;
+                case 'css':
+                    textareaCss.current.focus()
+                    break;
+                case 'js':
+                    textareaJs.current.focus()
+                    break;
+                default:
+                    return
+            }
+        } else if (loadSnippet) {
+            /* empty prism first to prevent flicker */
+            setPrismContentHtml("")
+            setPrismContentCss("")
+            setPrismContentJs("")
             setCodeOutput(`<body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>`)
 
             textareaHtml.current.scrollTop = 0
@@ -442,6 +478,7 @@ export default function Home({ sharedSnippetHome }) {
                 default:
                     return
             }
+            beautify(true)
         } else {
             timeout = setTimeout(() => {
                 setCodeOutput(`<body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>`)
@@ -865,7 +902,7 @@ export default function Home({ sharedSnippetHome }) {
                                         </div>
                                     </>
                                     :
-                                    <SplitPane split="vertical" minSize={300} defaultSize={"42%"} maxSize={-300} onDragStarted={() => {setPanelDrag(true)}} onDragFinished={() => {setPanelDrag(false); Prism.highlightAll()}}>
+                                    <SplitPane split="vertical" minSize={300} defaultSize={"42%"} maxSize={-300} onDragStarted={() => { setPanelDrag(true) }} onDragFinished={() => { setPanelDrag(false); Prism.highlightAll() }}>
                                         <div className={`mainCode__input ${panelDrag && "pe-none"}`}>
                                             <div className="mainCode__input__type">
                                                 <span className="mainCode__input__type__active">
@@ -1126,7 +1163,7 @@ export default function Home({ sharedSnippetHome }) {
                                     </div>
                                 </>
                                 :
-                                <SplitPane split="vertical" minSize={300} defaultSize={"42%"} maxSize={-300} onDragStarted={() => {setPanelDrag(true)}} onDragFinished={() => {setPanelDrag(false); Prism.highlightAll()}}>
+                                <SplitPane split="vertical" minSize={300} defaultSize={"42%"} maxSize={-300} onDragStarted={() => { setPanelDrag(true) }} onDragFinished={() => { setPanelDrag(false); Prism.highlightAll() }}>
                                     <div className={`mainCode__input ${panelDrag && "pe-none"}`}>
                                         <div className="mainCode__input__type">
                                             <span className="mainCode__input__type__active">
