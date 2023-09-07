@@ -7,6 +7,22 @@ export const savePreset = (presets, preset, userId = null, callback) => {
     return async dispatch => {
         if (userId) {
             try {
+                /* check duplicated name */
+                let exists = false;
+                let existsMany = 0;
+                do {
+                    exists = presets.some(obj => obj.name === preset.name);
+                    if (!exists) continue
+                    exists && existsMany++
+
+                    if (existsMany === 1) {
+                        preset.name += `(${existsMany})`
+                    } else if (existsMany > 1) {
+                        preset.name = preset.name.slice(0, -3) + `(${existsMany})`
+                    }
+                } while (exists)
+                /* end check duplicated name */
+
                 const doc = await push(ref(db, 'presets/' + userId), preset);
                 const newPreset = { docId: doc.key, ...preset }
                 const newPresets = [...presets, newPreset]
