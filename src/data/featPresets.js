@@ -2569,7 +2569,7 @@ export const snippetExample_6 = {
 		<div class="bottom"></div>
 	</div>
 	<div class="ball"></div>
-</div>
+    </div>
 
 </div>`,
     css: `*{
