@@ -445,7 +445,7 @@ export default function Home({ sharedSnippetHome }) {
             setPrismContentCss("")
             setPrismContentJs("")
             setCodeOutput(`<body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>`)
-
+            
             textareaHtml.current.scrollTop = 0
             textareaCss.current.scrollTop = 0
             textareaJs.current.scrollTop = 0
