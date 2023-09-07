@@ -1,4 +1,4 @@
-import { snippetExample_1, snippetExample_2, snippetExample_3, snippetExample_4 } from "../../data/featPresets"
+import { snippetExample_1, snippetExample_2, snippetExample_3, snippetExample_4, snippetExample_5, snippetExample_6 } from "../../data/featPresets"
 
 const initialState = {
   presets: [],
@@ -26,6 +26,18 @@ const initialState = {
       html: snippetExample_4.html,
       css: snippetExample_4.css,
       js: snippetExample_4.js
+    },
+    {
+      name: 'heart-svg', id: "testid05",
+      html: snippetExample_5.html,
+      css: snippetExample_5.css,
+      js: snippetExample_5.js
+    },
+    {
+      name: 'mario-mouse', id: "testid06",
+      html: snippetExample_6.html,
+      css: snippetExample_6.css,
+      js: snippetExample_6.js
     }
   ]
 }
