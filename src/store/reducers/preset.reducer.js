@@ -34,7 +34,7 @@ const initialState = {
       js: snippetExample_5.js
     },
     {
-      name: 'mario-mouse', id: "testid06",
+      name: 'cube', id: "testid06",
       html: snippetExample_6.html,
       css: snippetExample_6.css,
       js: snippetExample_6.js

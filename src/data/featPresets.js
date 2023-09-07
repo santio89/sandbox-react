@@ -10,8 +10,8 @@ export const snippetExample_1 = {
   
   html {
     --btn-shadow-length: 30px;
-    --btn-shadow-color: pink;
-    --btn-color: magenta
+    --btn-shadow-color: white;
+    --btn-color: crimson
   }
   
   body {
@@ -328,130 +328,117 @@ export const snippetExample_3 = {
       <div class="shape-blob one"></div>
       <div class="shape-blob two"></div>
   </div>`,
-    css: `html {
-      --main-color: hotpink;
-      --sec-color: navy
-  }
-  
-  body {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-  }
-  
-  .alt-theme {
-      --main-color: aqua;
-      --sec-color: black
-  }
-  
-  .container {
-      background: lightblue;
-      background: linear-gradient(45deg, var(--main-color), var(--sec-color));
-      min-height: 100vh;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
-  }
-  
-  .shape-blob {
-      background: linear-gradient(45deg, var(--main-color), var(--sec-color));
-      height: 200px;
-      width: 200px;
-      border-radius: 30% 50% 20% 40%;
-      animation:
-          transform 20s ease-in-out infinite both alternate,
-          movement_one 40s ease-in-out infinite both;
-      opacity: .7;
-      position: absolute;
-      left: 70%;
-      top: 50%;
-      opacity: .4
-  }
-  
-  .shape-blob.one {
-      height: 500px;
-      width: 500px;
-      left: -200px;
-      top: -150px;
-      transform: rotate(-180deg);
-      animation: transform 30s ease-in-out infinite both alternate, movement_two 60s ease-in-out infinite both;
-  }
-  
-  .shape-blob.two {
-      height: 350px;
-      width: 350px;
-      left: 500px;
-      top: -150px;
-      transform: rotate(-180deg);
-      animation: transform 30s ease-in-out infinite both alternate, movement_two 60s ease-in-out infinite both;
-  }
-  
-  @keyframes transform {
-  
-      0%,
-      100% {
-          border-radius: 33% 67% 70% 30% / 30% 30% 70% 70%;
-      }
-  
-      20% {
-          border-radius: 37% 63% 51% 49% / 37% 65% 35% 63%;
-      }
-  
-      40% {
-          border-radius: 36% 64% 64% 36% / 64% 48% 52% 36%;
-      }
-  
-      60% {
-          border-radius: 37% 63% 51% 49% / 30% 30% 70% 70%;
-      }
-  
-      80% {
-          border-radius: 40% 60% 42% 58% / 41% 51% 49% 59%;
-      }
-  }
-  
-  
-  @keyframes movement_one {
-  
-      0%,
-      100% {
-          transform: none;
-      }
-  
-      50% {
-          transform: translate(50%, 20%) rotateY(10deg) scale(1.2);
-      }
-  }
-  
-  @keyframes movement_two {
-  
-      0%,
-      500% {
-          transform: none;
-      }
-  
-      50% {
-          transform: translate(50%, 20%) rotate(-200deg) scale(1.2);
-      }
-  }
-  
-  h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 5em;
-      letter-spacing: 2px;
-      font-weight: 900;
-      color: white;
-      line-height: .9em;
-      position: relative;
-      z-index: 4;
-      text-shadow: 2px 3px 15px rgba(0, 0, 0, .15);
-  }`,
-    js: `document.body.addEventListener("click", () => {
-      document.body.classList.toggle("alt-theme")
-  })`
+    css: `* {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    html {
+        --main-color: hotpink;
+        --sec-color: navy
+    }
+    
+    .container {
+        background: lightblue;
+        background: var(--main-color);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        transition: 500ms;
+        cursor: pointer;
+    }
+    
+    .shape-blob {
+        background: var(--sec-color);
+        height: 200px;
+        width: 200px;
+        border-radius: 30% 50% 20% 40%;
+        animation:
+            transform 20s ease-in-out infinite both alternate,
+            movement_one 40s ease-in-out infinite both;
+        position: absolute;
+        left: 70%;
+        top: 50%;
+        opacity: .5;
+        transition: 500ms;
+    }
+    
+    .shape-blob.one {
+        height: 500px;
+        width: 500px;
+        left: -200px;
+        top: -150px;
+        transform: rotate(-180deg);
+        animation: transform 30s ease-in-out infinite both alternate, movement_two 60s ease-in-out infinite both;
+    }
+    
+    .shape-blob.two {
+        height: 350px;
+        width: 350px;
+        left: 500px;
+        top: -150px;
+        transform: rotate(-180deg);
+        animation: transform 30s ease-in-out infinite both alternate, movement_two 60s ease-in-out infinite both;
+    }
+    
+    @keyframes transform {
+    
+        0%,
+        100% {
+            border-radius: 33% 67% 70% 30% / 30% 30% 70% 70%;
+        }
+    
+        20% {
+            border-radius: 37% 63% 51% 49% / 37% 65% 35% 63%;
+        }
+    
+        40% {
+            border-radius: 36% 64% 64% 36% / 64% 48% 52% 36%;
+        }
+    
+        60% {
+            border-radius: 37% 63% 51% 49% / 30% 30% 70% 70%;
+        }
+    
+        80% {
+            border-radius: 40% 60% 42% 58% / 41% 51% 49% 59%;
+        }
+    }
+    
+    
+    @keyframes movement_one {
+    
+        0%,
+        100% {
+            transform: none;
+        }
+    
+        50% {
+            transform: translate(50%, 20%) rotateY(10deg) scale(1.2);
+        }
+    }
+    
+    @keyframes movement_two {
+    
+        0%,
+        500% {
+            transform: none;
+        }
+    
+        50% {
+            transform: translate(50%, 20%) rotate(-200deg) scale(1.2);
+        }
+    }`,
+    js: `document.querySelector(".container").addEventListener("click", () => {
+        const genRandom = () => Math.floor(Math.random() * (255 - 0 + 1) + 0);
+        document.documentElement.style.setProperty("--main-color", "rgb(" + genRandom() + ", " + genRandom() + ", " + genRandom() + ")")
+        document.documentElement.style.setProperty("--sec-color", "rgb(" + genRandom() + ", " + genRandom() + ", " + genRandom() + ")")
+    })`
 }
 
 export const snippetExample_4 = {
@@ -2569,208 +2556,204 @@ export const snippetExample_5 = {
     js: ``
 }
 export const snippetExample_6 = {
-    html: `<div class="polygon">
-    <span class="bullet bullet--1"></span>
-    <span class="bullet bullet--2"></span>
-    <span class="bullet bullet--3"></span>
-    <span class="bullet bullet--4"></span>
-    <span class="bullet bullet--5"></span>
-    <span class="bullet bullet--6"></span>
-    <span class="bullet bullet--7"></span>
-    <span class="bullet bullet--8"></span>
-    <span class="bullet bullet--9"></span>
-    <span class="bullet bullet--10"></span>
-  </div>`,
-    css: `.polygon {
-        overflow: hidden;
-        width: 800px;
-        height: 400px;
-        margin: 0 auto;
-        background: url('https://images5.alphacoders.com/445/445906.jpg');
-        background-size: cover;
-        background-position: center center;
-        cursor: url('http://findicons.com/files/icons/385/game_stars/64/mario.png')
-            32
-            32,
-          pointer;
-        position: relative;
-      }
-      
-      .bullet {
-        height: 70px;
-        width: 70px;
-        margin-right: 5px;
-        margin-top: 15px;
-        position: absolute;
-        top: -50%;
-        left: 0;
-        background: url('http://findicons.com/files/icons/2258/addictive_flavour/48/super_mario_rocket.png');
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
-      }
-      
-      .polygon .bullet:hover {
-        border-radius: 0;
+    html: `<div class="scene">
+	<div class="floor"></div>
+	<div class="cube">
+		<div class="front"></div>
+		<div class="back"></div>
+		<div class="left"></div>
+		<div class="right"></div>
+		<div class="top">
+			<div class="ballshadow"></div>
+		</div>
+		<div class="bottom"></div>
+	</div>
+	<div class="ball"></div>
+</div>
+
+</div>`,
+    css: `*{
         margin: 0;
-        height: 400px;
-        width: 800px;
-        z-index: 999;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background: #ff0000;
-        cursor: default;
-        animation: anime1 0s !important;
-        animation: anime2 0s !important;
-        animation: anime3 0s !important;
-        animation: anime4 0s !important;
-        animation: anime5 0s !important;
-        animation: anime6 0s !important;
-        animation: anime7 0s !important;
-        animation: anime8 0s !important;
-      }
-      
-      .polygon .bullet:hover:before {
-        content: "BAMMM!";
-        width: 600px;
-        color: #ffffff;
-      }
-      
-      .polygon:hover .bullet--1 {
-        animation: anime1 6s 0s linear infinite;
-      }
-      
-      .polygon:hover .bullet--2 {
-        animation: anime2 4s 2s linear infinite;
-      }
-      
-      .polygon:hover .bullet--3 {
-        animation: anime3 3s 3s linear infinite;
-      }
-      
-      .polygon:hover .bullet--4 {
-        animation: anime4 6s 4s linear infinite;
-      }
-      
-      .polygon:hover .bullet--5 {
-        animation: anime5 4s 5s linear infinite;
-      }
-      
-      .polygon:hover .bullet--6 {
-        animation: anime2 3s 6s linear infinite;
-      }
-      
-      .polygon:hover .bullet--7 {
-        animation: anime7 2s 8s linear infinite;
-      }
-      
-      .polygon:hover .bullet--8 {
-        animation: anime4 5s 8s linear infinite;
-      }
-      
-      .polygon:hover .bullet--9 {
-        animation: anime8 3s 9s linear infinite;
-      }
-      
-      .polygon:hover .bullet--10 {
-        animation: anime6 4s 10s linear infinite;
-      }
-      
-      @-webkit-keyframes anime1 {
-        0% {
-          top: 260px;
-          left: 110%;
+        padding: 0;
+        box-sizing: border-box
         }
-      
-        100% {
-          top: 260px;
-          right: 110%;
+        
+        :root {
+            --boxColor: #0ff7;
+            --rotatespeed: 30s;
+            --bounceSpeed: 2s
         }
-      }
-      
-      @-webkit-keyframes anime2 {
-        0% {
-          top: 50px;
-          left: 110%;
+        
+        body {
+            background-color: #000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 75px;
+            perspective: 10em;
+            perspective-origin: 50% calc(50% - 2em);
         }
-      
-        100% {
-          top: 50px;
-          right: 110%;
+        
+        .scene {
+            position: relative;
+            transform-style: preserve-3d;
+            animation: sceneRotate var(--rotatespeed) infinite linear;
         }
-      }
-      
-      @-webkit-keyframes anime3 {
-        0% {
-          top: 150px;
-          left: 110%;
+        
+        @keyframes sceneRotate {
+            to {
+                transform: rotateY(360deg);
+            }
         }
-      
-        100% {
-          top: 200px;
-          right: 110%;
+        
+        .ball {
+            width: 1em;
+            height: 1em;
+            border-radius: 50%;
+            background: lightblue;
+        
+            position: absolute;
+            left: -.5em;
+            bottom: 1em;
+            background-image: radial-gradient(circle at top, lightblue, #000);
+            animation:
+                ballbounch var(--bounceSpeed) infinite ease-out,
+                sceneRotate var(--rotatespeed) infinite linear reverse;
         }
-      }
-      
-      @-webkit-keyframes anime4 {
-        0% {
-          top: 300px;
-          left: 110%;
+        
+        @keyframes ballbounch {
+        
+            0%,
+            100% {
+                bottom: 0.5em;
+            }
+        
+            50% {
+                bottom: 3em;
+                animation-timing-function: ease-in;
+            }
         }
-      
-        100% {
-          top: 200px;
-          right: 110%;
+        
+        
+        
+        .ballshadow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(#0007, #0000 50%);
+            animation: ballshadow var(--bounceSpeed) infinite ease-in
         }
-      }
-      
-      @-webkit-keyframes anime5 {
-        0% {
-          top: 150px;
-          left: 110%;
+        
+        @keyframes ballshadow {
+        
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        
+            50% {
+                transform: scale(2);
+                opacity: 0.5;
+                animation-timing-function: ease-in;
+            }
         }
-      
-        100% {
-          top: 150px;
-          right: 110%;
+        
+        
+        
+        .cube {
+            width: 2em;
+            height: 2em;
+            transform-style: preserve-3d;
+        
+            position: absolute;
+            bottom: -1em;
+            left: -1em;
+            animation: cubeheight var(--bounceSpeed) infinite ease-in
         }
-      }
-      
-      @-webkit-keyframes anime6 {
-        0% {
-          top: 50px;
-          left: 110%;
+        
+        @keyframes cubeheight {
+        
+            0%,
+            8%,
+            93%,
+            100% {
+        
+                height: 1.5em;
+            }
+        
+            8%,
+            93% {
+                height: 2em;
+            }
         }
-      
-        100% {
-          top: 250px;
-          right: 110%;
+        
+        
+        
+        
+        
+        .left,
+        .right,
+        .front,
+        .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--boxColor);
+            box-shadow: 0 0 0.5em #000a inset;
+        
         }
-      }
-      
-      @-webkit-keyframes anime7 {
-        0% {
-          top: 300px;
-          left: 110%;
+        
+        .front {
+            transform: translateZ(1em);
         }
-      
-        100% {
-          top: 0;
-          right: 110%;
+        
+        .right {
+            transform: rotateY(90deg) translateZ(1em);
         }
-      }
-      
-      @-webkit-keyframes anime8 {
-        0% {
-          top: 0;
-          left: 110%;
+        
+        .back {
+            transform: rotateY(180deg) translateZ(1em);
         }
-      
-        100% {
-          top: 300px;
-          right: 110%;
+        
+        .left {
+            transform: rotateY(270deg) translateZ(1em);
         }
-      }`,
+        
+        .top {
+            position: absolute;
+            width: 2em;
+            height: 2em;
+            background: var(--boxColor);
+            transform: translateY(-50%) rotateX(90deg);
+            box-shadow: 0 0 0.5em #000a inset;
+        
+        }
+        
+        .bottom {
+            position: absolute;
+            width: 2em;
+            height: 2em;
+            background: var(--boxColor);
+            transform: translateY(-50%) rotateX(90deg);
+        }
+        
+        
+        
+        .floor {
+            position: absolute;
+            top: 1em;
+            transform: translate(-50%, -50%) rotateX(90deg);
+            width: 15em;
+            height: 15em;
+            background-image:
+                radial-gradient(#0000, #000 75%),
+                repeating-conic-gradient(from 45deg,
+                    #111 0deg 90deg,
+                    #222 90deg 180deg);
+            background-size: 1em 1em;
+            background-size: 100%, 1em 1em;
+        }`,
     js: ``
 }
