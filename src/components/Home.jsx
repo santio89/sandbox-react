@@ -1285,8 +1285,6 @@ export default function Home({ sharedSnippetHome }) {
                         </div>
                     </>
                 )
-
-
             }
         </div>
     )
