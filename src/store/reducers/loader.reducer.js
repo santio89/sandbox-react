@@ -2,6 +2,7 @@ const initialState = {
     authLoader: false,
     presetLoader: true,
     defaultPresetLoader: true,
+    updateDisplayNameLoader: false,
 }
 
 
@@ -22,6 +23,11 @@ const LoaderReducer = (state = initialState, action) => {
             return {
                 ...state,
                 defaultPresetLoader: action.defaultPresetLoader,
+            }
+        case "SET_DISPLAY_NAME_LOADER":
+            return {
+                ...state,
+                updateDisplayNameLoader: action.updateDisplayNameLoader,
             }
         default:
             return state

@@ -1,5 +1,5 @@
 import { firebaseAuth as auth, firebaseGoogleProvider as provider } from "../../config/firebase"
-import { signInWithPopup, signOut, setPersistence, browserLocalPersistence, onAuthStateChanged } from "firebase/auth";
+import { signInWithPopup, signOut, setPersistence, browserLocalPersistence, onAuthStateChanged, updateProfile } from "firebase/auth";
 import { getPresets } from "./presets.action";
 import { setCodeAll } from "./code.action";
 import { toast } from 'sonner'
@@ -95,5 +95,36 @@ export const signOutUser = () => {
                 authLoader: false
             });
         });
+    }
+}
+
+export const updateDisplayName = (newDisplayName) => {
+
+    return async dispatch => {
+        dispatch({
+            type: "SET_DISPLAY_NAME_LOADER",
+            updateDisplayNameLoader: true
+        });
+
+        updateProfile(auth.currentUser, {
+            displayName: newDisplayName
+        }).then(() => {
+            dispatch({
+                type: "UPDATE_DISPLAY_NAME",
+                displayName: newDisplayName
+            })
+            toast.message('Auth', {
+                description: `Username updated: ${newDisplayName}`,
+            })
+        }).catch((e) => {
+            console.log("error updating username: ", e)
+            toast.error('Error updating username')
+        }).finally(() => {
+            dispatch({
+                type: "SET_DISPLAY_NAME_LOADER",
+                updateDisplayNameLoader: false
+            });
+        })
+
     }
 }

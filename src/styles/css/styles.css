@@ -1028,6 +1028,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: scale 200ms;
 }
 .main__modal .presets__profile__userInfo__data__text__line__btnContainer button:not(.editName) {
   aspect-ratio: 1;
@@ -1041,6 +1042,13 @@ button {
 }
 .main__modal .presets__profile__userInfo__data__text__line__btnContainer button:not(.editName):hover, .main__modal .presets__profile__userInfo__data__text__line__btnContainer button:not(.editName):focus-visible {
   background: var(--main-purple);
+}
+.main__modal .presets__profile__userInfo__data__text__line__btnContainer button:active {
+  scale: 0.9;
+}
+.main__modal .presets__profile__userInfo__data__text__line__btnContainer button[disabled] {
+  filter: grayscale(1);
+  scale: 1;
 }
 .main__modal .presets__profile__userInfo__data__signOut {
   cursor: pointer;
@@ -1346,7 +1354,6 @@ button {
 .loader {
   color: var(--main-purple);
   font-size: 10px;
-  margin: 100px auto;
   width: 1em;
   height: 1em;
   border-radius: 50%;
@@ -1357,6 +1364,10 @@ button {
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
+}
+
+.presets__profile__userInfo__data .loader {
+  font-size: 2px;
 }
 
 @-webkit-keyframes load4 {

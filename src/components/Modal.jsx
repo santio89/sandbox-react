@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setModal, setLoadSnippet, setCreateNew } from "../store/actions/modal.action";
-import { signInGoogle, signOutUser } from "../store/actions/auth.action";
+import { signInGoogle, signOutUser, updateDisplayName } from "../store/actions/auth.action";
 import { setCodeAll } from "../store/actions/code.action";
 import { savePreset, deletePreset, editPreset } from "../store/actions/presets.action";
 import { v4 as uuidv4 } from 'uuid';
@@ -24,6 +24,7 @@ export default function Modal({ callbacks }) {
     const authLoader = useSelector(state => state.loader.authLoader)
     const presetLoader = useSelector(state => state.loader.presetLoader)
     const defaultPresetLoader = useSelector(state => state.loader.defaultPresetLoader)
+    const displayNameLoader = useSelector(state => state.loader.updateDisplayNameLoader)
     const presets = useSelector(state => state.preset.presets)
     const [displayNameMode, setDisplayNameMode] = useState(false)
     const [newDisplayName, setNewDisplayName] = useState(user?.displayName || "")
@@ -59,6 +60,10 @@ export default function Modal({ callbacks }) {
 
     const closeModal = () => {
         dispatch(setModal(false))
+    }
+
+    const sendUpdateDisplayName = (name) => {
+        dispatch(updateDisplayName(name))
     }
 
     const setPreset = (name, html, css, js) => {
@@ -150,32 +155,39 @@ export default function Modal({ callbacks }) {
                                         <div className="presets__profile__userInfo__data__text__line">
                                             <span>• </span>
                                             {displayNameMode ?
-                                                <input value={newDisplayName} type="text" onChange={(e) => setNewDisplayName(e.target.value)} />
+                                                <form id="updateDisplayName" onSubmit={(e) => {
+                                                    e.preventDefault();
+                                                    newDisplayName.trim() !== user.displayName && newDisplayName.trim() !== "" && sendUpdateDisplayName(newDisplayName.trim())
+                                                }}>
+                                                    <input spellCheck="false" maxLength={50} value={newDisplayName} type="text" onChange={(e) => setNewDisplayName(e.target.value)} />
+                                                </form>
                                                 :
                                                 <span>{user.displayName}</span>
                                             }
                                             <span className="presets__profile__userInfo__data__text__line__btnContainer">
-                                                {displayNameMode ?
-                                                    <>
-                                                        <button onClick={() => setDisplayNameMode(false)}>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-x-lg" viewBox="0 0 16 16">
-                                                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
-                                                            </svg>
-                                                        </button>
-                                                        <button onClick={()=>{}}>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-check-lg" viewBox="0 0 16 16">
-                                                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
-                                                            </svg>
-                                                        </button>
-                                                    </>
+                                                {displayNameMode && !displayNameLoader ?
+                                                    (
+                                                        <>
+                                                            <button onClick={() => { setDisplayNameMode(false), setNewDisplayName("") }}>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-x-lg" viewBox="0 0 16 16">
+                                                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                                                                </svg>
+                                                            </button>
+                                                            <button form="updateDisplayName" disabled={newDisplayName.trim() === user.displayName || newDisplayName.trim() === ""}>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-check-lg" viewBox="0 0 16 16">
+                                                                    <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+                                                                </svg>
+                                                            </button>
+                                                        </>
+                                                    )
                                                     :
-                                                    <>
-                                                        <button className="editName" onClick={() => setDisplayNameMode(true)}>
+                                                    (displayNameLoader ? <div className="loader">Loading...</div>
+                                                        : <button title="Rename user" className="editName" onClick={() => setDisplayNameMode(true)}>
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi-pencil-fill" viewBox="0 0 16 16">
                                                                 <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
                                                             </svg>
                                                         </button>
-                                                    </>
+                                                    )
                                                 }
 
                                             </span>
@@ -245,7 +257,7 @@ export default function Modal({ callbacks }) {
                                                                             <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                                                                                 <span>Rename snippet?</span>
                                                                                 <form onSubmit={(e) => { e.preventDefault(); editSelectedPreset(preset.name, preset.docId, preset.id, editName) }}>
-                                                                                    <input type="text" value={editName} onChange={e => { setEditName(e.target.value) }} placeholder="NEW NAME" />
+                                                                                    <input spellCheck={false} type="text" value={editName} onChange={e => { setEditName(e.target.value) }} maxLength={30} placeholder="NEW NAME" />
                                                                                     <span className="presets__option__confirm__buttons">
                                                                                         <button onClick={(e) => { e.stopPropagation(); editSelectedPreset(preset.name, preset.docId, preset.id, editName) }}>Yes</button>
                                                                                         <button onClick={(e) => { e.stopPropagation(); setEditId(null) }}>No</button>
@@ -514,6 +526,18 @@ export default function Modal({ callbacks }) {
     useEffect(() => {
         createNew && dispatch(setCreateNew(false))
     }, [createNew])
+
+    useEffect(() => {
+        displayNameMode && setNewDisplayName(user?.displayName || "")
+    }, [displayNameMode])
+
+    useEffect(() => {
+        !displayNameLoader && setDisplayNameMode(false)
+    }, [displayNameLoader])
+
+    useEffect(() => {
+        setNewDisplayName("");
+    }, [])
 
     return (
         <dialog className="main__modal" ref={modal}>
