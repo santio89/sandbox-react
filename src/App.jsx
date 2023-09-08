@@ -8,6 +8,7 @@ import './styles/css/styles.css'
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { authStateAction } from "./store/actions/auth.action";
+import { getDefaultPresets } from "./store/actions/presets.action";
 import { Toaster } from 'sonner'
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
   useEffect(() => {
     let ignore = false;
     !ignore && dispatch(authStateAction())
-
+    /* !ignore && dispatch(getDefaultPresets()) */
     return () => { ignore = true };
   }, [])
 

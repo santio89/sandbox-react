@@ -1,6 +1,7 @@
 const initialState = {
     authLoader: false,
     presetLoader: true,
+    defaultPresetLoader: true,
 }
 
 
@@ -16,6 +17,11 @@ const LoaderReducer = (state = initialState, action) => {
             return {
                 ...state,
                 presetLoader: action.presetLoader,
+            }
+        case "SET_DEFAULT_PRESET_LOADER":
+            return {
+                ...state,
+                defaultPresetLoader: action.defaultPresetLoader,
             }
         default:
             return state

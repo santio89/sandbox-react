@@ -23,6 +23,7 @@ export default function Modal({ callbacks }) {
     const user = useSelector(state => state.auth)
     const authLoader = useSelector(state => state.loader.authLoader)
     const presetLoader = useSelector(state => state.loader.presetLoader)
+    const defaultPresetLoader = useSelector(state => state.loader.defaultPresetLoader)
     const presets = useSelector(state => state.preset.presets)
 
     const { setNewProject } = callbacks;
@@ -305,46 +306,63 @@ export default function Modal({ callbacks }) {
                     case 'featuredSnippets':
                         return <NoAnimWrapper>
                             {
-                                (defaultPresets?.length > 0 ?
-                                    (defaultPresets?.map(preset => {
-                                        return (
-                                            <div tabIndex={0} role="button" disabled={loaded || saved} className="presets__option" key={preset.id} onClick={() => {
-                                                setEditName("");
-                                                setEditId(null);
-                                                setDeleteId(null);
-                                                setSelectedId(preset.id)
-                                            }} onKeyDown={(e) => {
-                                                if (e.key.toUpperCase() === "ENTER" || e.key === " ") {
+                                defaultPresetLoader ? <div className="loader">Loading...</div> :
+                                    (defaultPresets?.length > 0 ?
+                                        (defaultPresets?.map(preset => {
+                                            return (
+                                                <div tabIndex={0} role="button" disabled={loaded || saved} className="presets__option" key={preset.id} onClick={() => {
                                                     setEditName("");
                                                     setEditId(null);
                                                     setDeleteId(null);
                                                     setSelectedId(preset.id)
-                                                }
-                                            }}>
-                                                {
-                                                    selectedId === preset.id && !loaded ?
-                                                        <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
-                                                            <span>Load snippet?</span>
-                                                            <span className="presets__option__confirm__buttons">
-                                                                <button onClick={(e) => { e.stopPropagation(); setPreset(preset.name, preset.html, preset.css, preset.js) }}>Yes</button>
-                                                                <button onClick={(e) => { e.stopPropagation(); setSelectedId(null) }}>No</button>
-                                                            </span>
-                                                        </span>
-                                                        :
-                                                        (selectedId === preset.id && loaded ?
+                                                }} onKeyDown={(e) => {
+                                                    if (e.key.toUpperCase() === "ENTER" || e.key === " ") {
+                                                        setEditName("");
+                                                        setEditId(null);
+                                                        setDeleteId(null);
+                                                        setSelectedId(preset.id)
+                                                    }
+                                                }}>
+                                                    {
+                                                        selectedId === preset.id && !loaded ?
                                                             <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
-                                                                <span>Snippet loaded!</span>
+                                                                <span>Load snippet?</span>
+                                                                <span className="presets__option__confirm__buttons">
+                                                                    <button onClick={(e) => { e.stopPropagation(); setPreset(preset.name, preset.html, preset.css, preset.js) }}>Yes</button>
+                                                                    <button onClick={(e) => { e.stopPropagation(); setSelectedId(null) }}>No</button>
+                                                                </span>
                                                             </span>
                                                             :
-                                                            <span className="presets__option__main">
-                                                                <span className="presets__option__main__name">{preset.name}</span>
-                                                            </span>
-                                                        )
-                                                }
-                                            </div>
-                                        )
-                                    })) :
-                                    <div className="presets__noSnippet">No featured snippets saved</div>)
+                                                            (selectedId === preset.id && loaded ?
+                                                                <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
+                                                                    <span>Snippet loaded!</span>
+                                                                </span>
+                                                                :
+                                                                (shareId === preset.id && shared ?
+                                                                    <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
+                                                                        <span>Share link copied to clipboard!</span>
+                                                                    </span> :
+                                                                    <span className="presets__option__main">
+                                                                        <span className="presets__option__main__name">{preset.name}</span>
+                                                                        <span className="presets__option__main__buttons">
+                                                                            <button className="presets__option__main__share" onClick={(e) => {
+                                                                                e.stopPropagation();
+                                                                                setShareId(preset.id);
+                                                                                shareSnippet(user.userId, preset.docId)
+                                                                            }} title="Copy share link to clipboard">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-share-fill" viewBox="0 0 16 16">
+                                                                                    <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
+                                                                                </svg>
+                                                                            </button>
+                                                                        </span>
+                                                                    </span>
+                                                                )
+                                                            )
+                                                    }
+                                                </div>
+                                            )
+                                        })) :
+                                        <div className="presets__noSnippet">No featured snippets saved</div>)
                             }
                         </NoAnimWrapper>
                     case 'saveSnippet':
@@ -466,13 +484,6 @@ export default function Modal({ callbacks }) {
 
     useEffect(() => {
         loadSnippet && dispatch(setLoadSnippet(false))
-
-        /*       let timeout = null;
-              if (loadSnippet) {
-                  timeout = setTimeout(dispatch(setLoadSnippet(false)), 1000)
-              }
-      
-              return () => { clearTimeout(timeout) } */
     }, [loadSnippet])
 
     useEffect(() => {

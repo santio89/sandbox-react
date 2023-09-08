@@ -23,7 +23,7 @@ export const savePreset = (presets, preset, userId = null, callback) => {
                 } while (exists)
                 /* end check duplicated name */
 
-                const doc = await push(ref(db, 'presets/' + userId), preset);
+                const doc = await push(ref(db, 'snippets//' + userId), preset);
                 const newPreset = { docId: doc.key, ...preset }
                 const newPresets = [...presets, newPreset]
 
@@ -53,7 +53,7 @@ export const deletePreset = (presets, name, docId, id, userId = null) => {
 
         if (userId) {
             try {
-                await remove(ref(db, 'presets/' + userId + "/" + docId))
+                await remove(ref(db, 'snippets/' + userId + "/" + docId))
 
                 dispatch({
                     type: "SET_PRESETS",
@@ -80,7 +80,7 @@ export const editPreset = (presets, name, docId, id, newName, userId = null) => 
     return async dispatch => {
         if (userId) {
             try {
-                await set(ref(db, 'presets/' + userId + "/" + docId), updatedPreset);
+                await set(ref(db, 'snippets/' + userId + "/" + docId), updatedPreset);
 
                 dispatch({
                     type: "SET_PRESETS",
@@ -108,7 +108,7 @@ export const getPresets = (userId = null) => {
             presetLoader: true
         });
         if (userId) {
-            get(child(ref(db), `presets/${userId}`)).then((snapshot) => {
+            get(child(ref(db), `snippets//${userId}`)).then((snapshot) => {
                 if (snapshot.exists()) {
                     const presetsObj = snapshot.val()
                     presets = Object.entries(presetsObj).map((obj) => { return { docId: obj[0], ...obj[1] } })
@@ -136,5 +136,36 @@ export const getPresets = (userId = null) => {
                 presetLoader: false
             });
         }
+    }
+}
+
+export const getDefaultPresets = () => {
+    let defaultPresets = []
+
+    return async dispatch => {
+        dispatch({
+            type: "SET_DEFAULT_PRESET_LOADER",
+            defaultPresetLoader: true
+        });
+
+        get(child(ref(db), `snippets/featured`)).then((snapshot) => {
+            if (snapshot.exists()) {
+                const presetsObj = snapshot.val()
+                defaultPresets = Object.entries(presetsObj).map((obj) => { return { docId: obj[0], ...obj[1] } })
+
+                dispatch({
+                    type: "SET_DEFAULT_PRESETS",
+                    defaultPresets
+                })
+            }
+        }).catch((e) => {
+            console.log("error retrieving from db: ", e);
+        }).finally(() => {
+            dispatch({
+                type: "SET_DEFAULT_PRESET_LOADER",
+                defaultPresetLoader: false
+            });
+        });
+
     }
 }
