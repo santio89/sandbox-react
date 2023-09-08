@@ -27,7 +27,7 @@ function App() {
   useEffect(() => {
     let ignore = false;
     !ignore && dispatch(authStateAction())
-    /* !ignore && dispatch(getDefaultPresets()) */
+    !ignore && dispatch(getDefaultPresets())
     return () => { ignore = true };
   }, [])
 
