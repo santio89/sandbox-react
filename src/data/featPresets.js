@@ -434,7 +434,9 @@ export const snippetExample_3 = {
             transform: translate(50%, 20%) rotate(-200deg) scale(1.2);
         }
     }`,
-    js: `document.documentElement.style.setProperty("--main-color", "rgb(" + genRandom() + ", " + genRandom() + ", " + genRandom() + ")")
+    js: `document.querySelector(".container").addEventListener("click", () => {
+        const genRandom = () => Math.floor(Math.random() * (255 - 0 + 1) + 0);
+        document.documentElement.style.setProperty("--main-color", "rgb(" + genRandom() + ", " + genRandom() + ", " + genRandom() + ")")
         document.documentElement.style.setProperty("--sec-color", "rgb(" + genRandom() + ", " + genRandom() + ", " + genRandom() + ")")
     })`
 }
