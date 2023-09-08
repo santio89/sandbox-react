@@ -1009,6 +1009,9 @@ button {
 .main__modal .presets__profile__userInfo__data__text__line > span:first-child {
   color: var(--main-purple);
 }
+.main__modal .presets__profile__userInfo__data__text__line > span:nth-child(2) {
+  flex: 1;
+}
 .main__modal .presets__profile__userInfo__data__text__line input {
   background: none;
   outline: none;

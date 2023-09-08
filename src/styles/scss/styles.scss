@@ -1152,7 +1152,10 @@ button {
               align-items: center;
 
               >span:first-child {
-                color: var(--main-purple)
+                color: var(--main-purple);
+              }
+              >span:nth-child(2){
+                flex:1
               }
 
               input {
