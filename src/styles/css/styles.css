@@ -961,6 +961,7 @@ button {
   justify-content: center;
   align-items: center;
   font-size: 1rem;
+  flex: 1;
 }
 .main__modal .presets__profile__userInfo {
   display: flex;
@@ -969,6 +970,8 @@ button {
   flex-direction: column;
   gap: 1rem;
   color: var(--main-white);
+  flex: 1;
+  max-width: 400px;
 }
 .main__modal .presets__profile__userInfo__data {
   word-break: break-all;
@@ -979,7 +982,7 @@ button {
   gap: 1rem;
 }
 .main__modal .presets__profile__userInfo__data__img {
-  /* flex: 1; */
+  flex: 1/2;
   display: flex;
   justify-content: center;
   align-items: center;
