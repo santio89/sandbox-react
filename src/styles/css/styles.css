@@ -1004,9 +1004,43 @@ button {
 .main__modal .presets__profile__userInfo__data__text__line {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .main__modal .presets__profile__userInfo__data__text__line > span:first-child {
   color: var(--main-purple);
+}
+.main__modal .presets__profile__userInfo__data__text__line input {
+  background: none;
+  outline: none;
+  border: none;
+  box-shadow: 0 1px 0 0 var(--main-purple);
+}
+.main__modal .presets__profile__userInfo__data__text__line__btnContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1em;
+  gap: 0.5em;
+}
+.main__modal .presets__profile__userInfo__data__text__line__btnContainer button {
+  cursor: pointer;
+  color: var(--main-gray-op);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main__modal .presets__profile__userInfo__data__text__line__btnContainer button:not(.editName) {
+  aspect-ratio: 1;
+  width: 18px;
+  border-radius: 50%;
+  background: var(--main-gray-op);
+  color: var(--main-white);
+}
+.main__modal .presets__profile__userInfo__data__text__line__btnContainer button:not(.editName) svg.bi-x-lg {
+  scale: 0.8;
+}
+.main__modal .presets__profile__userInfo__data__text__line__btnContainer button:not(.editName):hover, .main__modal .presets__profile__userInfo__data__text__line__btnContainer button:not(.editName):focus-visible {
+  background: var(--main-purple);
 }
 .main__modal .presets__profile__userInfo__data__signOut {
   cursor: pointer;
@@ -1276,6 +1310,7 @@ button {
   width: 65px;
   height: 40px;
   text-align: left;
+  white-space: pre-wrap;
 }
 .main__modal .presets__tabs__btn:hover, .main__modal .presets__tabs__btn:focus-visible {
   font-weight: bold;

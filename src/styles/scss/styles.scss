@@ -1149,9 +1149,50 @@ button {
             &__line {
               display: flex;
               justify-content: center;
+              align-items: center;
 
               >span:first-child {
                 color: var(--main-purple)
+              }
+
+              input {
+                background: none;
+                outline: none;
+                border: none;
+                box-shadow: 0 1px 0 0 var(--main-purple)
+              }
+
+              &__btnContainer {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-left: 1em;
+                gap: .5em;
+
+                button {
+                  cursor: pointer;
+                  color: var(--main-gray-op);
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+
+                  &:not(.editName) {
+                    aspect-ratio: 1;
+                    width: 18px;
+                    border-radius: 50%;
+                    background: var(--main-gray-op);
+                    color: var(--main-white);
+
+                    svg.bi-x-lg {
+                      scale: .8
+                    }
+
+                    &:hover,
+                    &:focus-visible {
+                      background: var(--main-purple);
+                    }
+                  }
+                }
               }
             }
 
@@ -1474,6 +1515,7 @@ button {
         width: 65px;
         height: 40px;
         text-align: left;
+        white-space: pre-wrap;
 
         &:hover,
         &:focus-visible {

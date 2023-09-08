@@ -25,6 +25,8 @@ export default function Modal({ callbacks }) {
     const presetLoader = useSelector(state => state.loader.presetLoader)
     const defaultPresetLoader = useSelector(state => state.loader.defaultPresetLoader)
     const presets = useSelector(state => state.preset.presets)
+    const [displayNameMode, setDisplayNameMode] = useState(false)
+    const [newDisplayName, setNewDisplayName] = useState(user?.displayName || "")
 
     const { setNewProject } = callbacks;
 
@@ -146,20 +148,43 @@ export default function Modal({ callbacks }) {
                                     </div>
                                     <div className="presets__profile__userInfo__data__text">
                                         <div className="presets__profile__userInfo__data__text__line">
-                                            <span>• </span><span>{user.displayName}</span>
+                                            <span>• </span>
+                                            {displayNameMode ?
+                                                <input value={newDisplayName} type="text" onChange={(e) => setNewDisplayName(e.target.value)} />
+                                                :
+                                                <span>{user.displayName}</span>
+                                            }
+                                            <span className="presets__profile__userInfo__data__text__line__btnContainer">
+                                                {displayNameMode ?
+                                                    <>
+                                                        <button onClick={() => setDisplayNameMode(false)}>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-x-lg" viewBox="0 0 16 16">
+                                                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                                                            </svg>
+                                                        </button>
+                                                        <button onClick={()=>{}}>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-check-lg" viewBox="0 0 16 16">
+                                                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+                                                            </svg>
+                                                        </button>
+                                                    </>
+                                                    :
+                                                    <>
+                                                        <button className="editName" onClick={() => setDisplayNameMode(true)}>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi-pencil-fill" viewBox="0 0 16 16">
+                                                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                                                            </svg>
+                                                        </button>
+                                                    </>
+                                                }
+
+                                            </span>
                                         </div>
                                         <div className="presets__profile__userInfo__data__text__line">
                                             <span>• </span><span>{user.email}</span>
                                         </div>
                                     </div>
                                 </div>
-                                <button className="presets__profile__userInfo__data presets__profile__userInfo__data__signOut" onClick={() => { signOutCurrentUser() }}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-box-arrow-right" viewBox="0 0 16 16">
-                                        <path fillRule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
-                                        <path fillRule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
-                                    </svg>
-                                    <span>Sign out</span>
-                                </button>
                             </div>
                             :
                             (authLoader ?
@@ -525,6 +550,13 @@ export default function Modal({ callbacks }) {
                             <button className={`presets__tabs__btn ${snippetTab === "mySnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("mySnippets") }}>My{`\n`}snippets</button>
                             <button className={`presets__tabs__btn ${snippetTab === "saveSnippet" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("saveSnippet") }}>Save{`\n`}snippet</button>
                             <button className={`presets__tabs__btn ${snippetTab === "featuredSnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("featuredSnippets") }}>Featured{`\n`}snippets</button>
+                        </div>
+                    </>
+                }
+                {modalOption === "profile" && user.userId &&
+                    <>
+                        <div className="presets__tabs">
+                            <button className={`presets__tabs__btn `} onClick={() => { signOutCurrentUser() }}>Sign out</button>
                         </div>
                     </>
                 }
