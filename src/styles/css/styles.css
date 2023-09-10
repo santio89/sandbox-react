@@ -556,6 +556,7 @@ button {
   border-radius: 0.5rem;
   border: 2px solid rgb(100, 100, 100);
   background: var(--bg-code);
+  color: var(--main-purple);
 }
 .mainCode__output {
   flex: 1;
