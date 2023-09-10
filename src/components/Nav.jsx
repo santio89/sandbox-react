@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setThemeReducer } from "../store/actions/theme.action";
 import Modal from "./Modal";
 import { setCodeAll } from "../store/actions/code.action";
-import { setModal, setLoadSnippet, setCreateNew } from "../store/actions/modal.action";
+import { setModal, setCreateNew } from "../store/actions/modal.action";
 import { useNavigate } from "react-router-dom";
 
 export default function Nav({ rootTheme }) {
@@ -18,7 +18,6 @@ export default function Nav({ rootTheme }) {
   const startNewProject = () => {
     dispatch(setCodeAll("", "", ""))
     dispatch(setCreateNew(true))
-    dispatch(setLoadSnippet(true))
     setNewProject(false)
     if (window.location.pathname !== "/") {
       navigate("/")

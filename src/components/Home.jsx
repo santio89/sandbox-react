@@ -15,6 +15,7 @@ export default function Home({ sharedSnippetHome }) {
     const [tabActive, setTabActive] = useState("html")
     const [clearConfirm, setClearConfirm] = useState(false)
     const dispatch = useDispatch()
+    const user = useSelector(state => state.auth)
     const html = useSelector(state => state.html.present.html)
     const css = useSelector(state => state.css.present.css)
     const js = useSelector(state => state.js.present.js)
@@ -177,6 +178,23 @@ export default function Home({ sharedSnippetHome }) {
     useEffect(() => {
         let timeout = null;
         if (createNew || loadSnippet) {
+            /* clear undo-redo stack */
+            let modelHtml = editorHtml?.current?.getModel();
+            let modelCss = editorCss?.current?.getModel();
+            let modelJs = editorJs?.current?.getModel();
+            if (modelHtml) {
+                modelHtml.setValue("")
+                modelHtml.setValue(html)
+            }
+            if (modelCss) {
+                modelCss.setValue("")
+                modelCss.setValue(css)
+            }
+            if (modelJs) {
+                modelJs.setValue("")
+                modelJs.setValue(js)
+            }
+
             editorHtml?.current?.getAction('editor.action.formatDocument')?.run()
             editorCss?.current?.getAction('editor.action.formatDocument')?.run()
             editorJs?.current?.getAction('editor.action.formatDocument')?.run()
@@ -254,6 +272,10 @@ export default function Home({ sharedSnippetHome }) {
     }, [loadSnippet])
 
     useEffect(() => {
+        createNew && setClearConfirm(false)
+    }, [createNew])
+
+    useEffect(() => {
         if (sharedSnippetHome) {
             setSharedLoading(true)
             const setShared = (snippet) => {
@@ -274,6 +296,32 @@ export default function Home({ sharedSnippetHome }) {
 
         sharedSnippet && setShared(sharedSnippet.html, sharedSnippet.css, sharedSnippet.js)
     }, [sharedSnippet])
+
+    useEffect(() => {
+        /* clear undo-redo stack */
+        let modelHtml = editorHtml?.current?.getModel();
+        let modelCss = editorCss?.current?.getModel();
+        let modelJs = editorJs?.current?.getModel();
+
+        if (!user.userId) {
+            if (modelHtml) modelHtml.setValue("");
+            if (modelCss) modelCss.setValue("");
+            if (modelJs) modelJs.setValue("");
+        } else {
+            if (modelHtml) {
+                modelHtml.setValue("")
+                modelHtml.setValue(html)
+            }
+            if (modelCss) {
+                modelCss.setValue("")
+                modelCss.setValue(css)
+            }
+            if (modelJs) {
+                modelJs.setValue("")
+                modelJs.setValue(js)
+            }
+        }
+    }, [user])
 
     useEffect(() => {
         const tabShortcut = (e) => {

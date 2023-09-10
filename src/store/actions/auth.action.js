@@ -3,15 +3,13 @@ import { ref, uploadBytes, getDownloadURL } from "@firebase/storage";
 import { signInWithPopup, signOut, setPersistence, browserLocalPersistence, onAuthStateChanged, updateProfile } from "firebase/auth";
 import { getPresets } from "./presets.action";
 import { setCodeAll } from "./code.action";
+import { setCreateNew } from "./modal.action";
 import { toast } from 'sonner'
 
 export const authStateAction = () => {
 
     return async dispatch => {
         onAuthStateChanged(auth, (user) => {
-            dispatch({ type: "HTML_CLEAR" })
-            dispatch({ type: "CSS_CLEAR" })
-            dispatch({ type: "JS_CLEAR" })
             dispatch(getPresets(user?.uid))
         })
     }
@@ -30,9 +28,6 @@ export const signInGoogle = () => {
                 return signInWithPopup(auth, provider)
                     .then((result) => {
                         const user = result.user;
-                        dispatch({ type: "HTML_CLEAR" })
-                        dispatch({ type: "CSS_CLEAR" })
-                        dispatch({ type: "JS_CLEAR" })
 
                         dispatch({
                             type: "SIGN_IN",
@@ -77,9 +72,8 @@ export const signOutUser = () => {
 
         signOut(auth).then(() => {
             dispatch(setCodeAll("", "", ""))
-            dispatch({ type: "HTML_CLEAR" })
-            dispatch({ type: "CSS_CLEAR" })
-            dispatch({ type: "JS_CLEAR" })
+            dispatch(setCodeAll("", "", ""))
+            dispatch(setCreateNew(true))
 
             dispatch({
                 type: "SIGN_OUT",
