@@ -41,3 +41,28 @@ export const setCodeAll = (html, css, js) => {
         })
     }
 }
+
+export const setLineHighlight = (lineHighlight) => {
+    return async dispatch => {
+        dispatch({
+            type: "SET_LINE_HIGHLIGHT",
+            lineHighlight: lineHighlight
+        })
+    }
+}
+export const setMinimap = (a) => {
+    return async dispatch => {
+        dispatch({
+            type: "SET_MINIMAP",
+            minimap: a
+        })
+    }
+}
+export const setWordWrap = (wordWrap) => {
+    return async dispatch => {
+        dispatch({
+            type: "SET_WORD_WRAP",
+            wordWrap: wordWrap
+        })
+    }
+}

@@ -548,15 +548,6 @@ button {
 
         &.active-on {
           color: var(--main-red);
-
-          &:hover {
-            color: var(--main-purple);
-          }
-
-          &:active {
-            color: var(--main-purple);
-            scale: .9
-          }
         }
       }
 
@@ -639,7 +630,7 @@ button {
       border-radius: .5rem;
       border: 2px solid rgb(100, 100, 100);
       background: var(--bg-code);
-      color: var(--main-purple)
+      color: var(--main-purple);
     }
   }
 

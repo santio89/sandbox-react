@@ -7,6 +7,11 @@ const initialStateCss = {
 const initialStateJs = {
     js: ``,
 }
+const initialStateEditorSettings = {
+    lineHighlight: false,
+    minimap: false,
+    wordWrap: 'off'
+}
 
 export const HtmlReducer = (state = initialStateHtml, action) => {
     switch (action.type) {
@@ -28,6 +33,18 @@ export const JsReducer = (state = initialStateJs, action) => {
     switch (action.type) {
         case 'SET_JS':
             return { ...state, js: action.js }
+        default:
+            return state
+    }
+}
+export const editorReducer = (state = initialStateEditorSettings, action) => {
+    switch (action.type) {
+        case 'SET_LINE_HIGHLIGHT':
+            return { ...state, lineHighlight: action.lineHighlight }
+        case 'SET_MINIMAP':
+            return { ...state, minimap: action.minimap }
+        case 'SET_WORD_WRAP':
+            return { ...state, wordWrap: action.wordWrap }
         default:
             return state
     }
