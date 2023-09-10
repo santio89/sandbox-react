@@ -479,13 +479,13 @@ button {
   color: var(--main-red);
   scale: 0.9;
 }
-.mainCode__input__type__iconBtn.minimap-on {
+.mainCode__input__type__iconBtn.active-on {
   color: var(--main-red);
 }
-.mainCode__input__type__iconBtn.minimap-on:hover {
+.mainCode__input__type__iconBtn.active-on:hover {
   color: var(--main-purple);
 }
-.mainCode__input__type__iconBtn.minimap-on:active {
+.mainCode__input__type__iconBtn.active-on:active {
   color: var(--main-purple);
   scale: 0.9;
 }

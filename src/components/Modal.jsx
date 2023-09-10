@@ -520,14 +520,7 @@ export default function Modal({ callbacks }) {
     }, [modalOption])
 
     useEffect(() => {
-        let timeout = null;
-        if (loadSnippet) {
-            timeout = setTimeout(() => {
-                dispatch(setLoadSnippet(false))
-            }, 0)
-        }
-
-        return () => { clearTimeout(timeout) }
+        loadSnippet && dispatch(setLoadSnippet(false))
     }, [loadSnippet])
 
     useEffect(() => {

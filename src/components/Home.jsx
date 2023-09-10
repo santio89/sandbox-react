@@ -29,6 +29,8 @@ export default function Home({ sharedSnippetHome }) {
     const [downloadCode, setDownloadCode] = useState(false)
     const [sharedSnippet, setSharedSnippet] = useState(null)
     const [sharedLoading, setSharedLoading] = useState(false)
+    const [minimap, setMinimap] = useState(false)
+    const [wordWrap, setWordWrap] = useState("on")
 
     const [panelDrag, setPanelDrag] = useState(false)
 
@@ -38,15 +40,14 @@ export default function Home({ sharedSnippetHome }) {
     const editorCss = useRef(null);
     const editorJs = useRef(null);
 
-    const [minimap, setMinimap] = useState(false)
 
     const [panelBreakpoint, setPanelBreakpont] = useState(window.innerWidth < 800 ? true : false)
 
     const monacoOptions = {
         minimap: { enabled: minimap },
-        wordWrap: "on",
+        wordWrap: wordWrap,
         renderLineHighlight: "none",
-        scrollbar: { verticalScrollbarSize: "12px" },
+        scrollbar: { verticalScrollbarSize: "12px", horizontalScrollbarSize: "12px" },
         padding: { top: 8, bottom: 0 },
         glyphMargin: false
     }
@@ -65,6 +66,10 @@ export default function Home({ sharedSnippetHome }) {
 
     const toggleMinimap = () => {
         setMinimap(minimap => !minimap)
+    }
+
+    const toggleWordWrap = () => {
+        setWordWrap(wordWrap => wordWrap === "on" ? setWordWrap("off") : setWordWrap("on"))
     }
 
     const focusCurrentTab = () => {
@@ -185,6 +190,21 @@ export default function Home({ sharedSnippetHome }) {
             editorJs.current.getAction('editor.action.formatDocument').run()
             setCodeOutput(`<body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>`)
             focusCurrentTab()
+
+            const startSelection = {
+                endColumn: 1,
+                endLineNumber: 1,
+                positionColumn: 1,
+                positionLineNumber: 1,
+                selectionStartColumn: 1,
+                selectionStartLineNumber: 1,
+                startColumn: 1,
+                startLineNumber: 1,
+            }
+
+            editorHtml.current.setSelection(startSelection)
+            editorCss.current.setSelection(startSelection)
+            editorJs.current.setSelection(startSelection)
         } else {
             timeout = setTimeout(() => {
                 setCodeOutput(`<body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>`)
@@ -379,6 +399,20 @@ export default function Home({ sharedSnippetHome }) {
                                                         </button>
                                                 }
                                                 {
+                                                    <button className={`mainCode__input__type__iconBtn ${minimap && "active-on"}`} title="Toggle minimap" onClick={() => { toggleMinimap() }}>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-fullscreen" viewBox="0 0 16 16">
+                                                            <path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z" />
+                                                        </svg>
+                                                    </button>
+                                                }
+                                                {
+                                                    <button className={`mainCode__input__type__iconBtn ${wordWrap === "on" && "active-on"}`} title="Toggle line wrap" onClick={() => { toggleWordWrap() }}>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-text-wrap" viewBox="0 0 16 16">
+                                                            <path fillRule="evenodd" d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5Zm0 4a.5.5 0 0 1 .5-.5h9a2.5 2.5 0 0 1 0 5h-1.293l.647.646a.5.5 0 0 1-.708.708l-1.5-1.5a.5.5 0 0 1 0-.708l1.5-1.5a.5.5 0 0 1 .708.708l-.647.646H11.5a1.5 1.5 0 0 0 0-3h-9a.5.5 0 0 1-.5-.5Zm0 4a.5.5 0 0 1 .5-.5H7a.5.5 0 0 1 0 1H2.5a.5.5 0 0 1-.5-.5Z" />
+                                                        </svg>
+                                                    </button>
+                                                }
+                                                {
                                                     clearConfirm ?
                                                         <span className="mainCode__input__type__clearConfirm">
                                                             <span>Clear?</span>
@@ -485,9 +519,16 @@ export default function Home({ sharedSnippetHome }) {
                                                         </button>
                                                 }
                                                 {
-                                                    <button className={`mainCode__input__type__iconBtn ${minimap && "minimap-on"}`} title="Toggle minimap" onClick={() => { toggleMinimap() }}>
+                                                    <button className={`mainCode__input__type__iconBtn ${minimap && "active-on"}`} title="Toggle minimap" onClick={() => { toggleMinimap() }}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-fullscreen" viewBox="0 0 16 16">
                                                             <path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z" />
+                                                        </svg>
+                                                    </button>
+                                                }
+                                                {
+                                                    <button className={`mainCode__input__type__iconBtn ${wordWrap === "on" && "active-on"}`} title="Toggle line wrap" onClick={() => { toggleWordWrap() }}>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-text-wrap" viewBox="0 0 16 16">
+                                                            <path fillRule="evenodd" d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5Zm0 4a.5.5 0 0 1 .5-.5h9a2.5 2.5 0 0 1 0 5h-1.293l.647.646a.5.5 0 0 1-.708.708l-1.5-1.5a.5.5 0 0 1 0-.708l1.5-1.5a.5.5 0 0 1 .708.708l-.647.646H11.5a1.5 1.5 0 0 0 0-3h-9a.5.5 0 0 1-.5-.5Zm0 4a.5.5 0 0 1 .5-.5H7a.5.5 0 0 1 0 1H2.5a.5.5 0 0 1-.5-.5Z" />
                                                         </svg>
                                                     </button>
                                                 }
