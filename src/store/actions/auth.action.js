@@ -57,8 +57,6 @@ export const signInGoogle = () => {
                     authLoader: false
                 });
             });
-
-
     }
 }
 
