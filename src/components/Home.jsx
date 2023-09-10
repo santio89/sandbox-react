@@ -98,15 +98,15 @@ export default function Home({ sharedSnippetHome }) {
         switch (tabActive) {
             case 'html':
                 editorHtml?.current?.focus()
-                editorHtml?.current?.getAction('editor.action.quickCommand').run()
+                editorHtml?.current?.getAction('editor.action.quickCommand')?.run()
                 break;
             case 'css':
                 editorCss?.current?.focus()
-                editorCss?.current?.getAction('editor.action.quickCommand').run()
+                editorCss?.current?.getAction('editor.action.quickCommand')?.run()
                 break;
             case 'js':
                 editorJs?.current?.focus()
-                editorJs?.current?.getAction('editor.action.quickCommand').run()
+                editorJs?.current?.getAction('editor.action.quickCommand')?.run()
                 break;
             default:
                 return
@@ -177,9 +177,9 @@ export default function Home({ sharedSnippetHome }) {
     useEffect(() => {
         let timeout = null;
         if (createNew || loadSnippet) {
-            editorHtml.current.getAction('editor.action.formatDocument').run()
-            editorCss.current.getAction('editor.action.formatDocument').run()
-            editorJs.current.getAction('editor.action.formatDocument').run()
+            editorHtml?.current?.getAction('editor.action.formatDocument')?.run()
+            editorCss?.current?.getAction('editor.action.formatDocument')?.run()
+            editorJs?.current?.getAction('editor.action.formatDocument')?.run()
             setCodeOutput(`<body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>`)
             focusCurrentTab()
 
@@ -194,9 +194,9 @@ export default function Home({ sharedSnippetHome }) {
                 startLineNumber: 1,
             }
 
-            editorHtml.current.setSelection(startSelection)
-            editorCss.current.setSelection(startSelection)
-            editorJs.current.setSelection(startSelection)
+            editorHtml?.current?.setSelection(startSelection)
+            editorCss?.current?.setSelection(startSelection)
+            editorJs?.current?.setSelection(startSelection)
         } else {
             timeout = setTimeout(() => {
                 setCodeOutput(`<body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>`)

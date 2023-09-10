@@ -23,7 +23,7 @@ export const savePreset = (presets, preset, userId = null, callback) => {
                 } while (exists)
                 /* end check duplicated name */
 
-                const doc = await push(ref(db, 'snippets//' + userId), preset);
+                const doc = await push(ref(db, 'snippets/' + userId), preset);
                 const newPreset = { docId: doc.key, ...preset }
                 const newPresets = [...presets, newPreset]
 
@@ -149,7 +149,7 @@ export const getDefaultPresets = () => {
         });
 
         get(child(ref(db), `snippets/featured`)).then((snapshot) => {
-           /*  if (snapshot.exists()) {
+            if (snapshot.exists()) {
                 const presetsObj = snapshot.val()
                 defaultPresets = Object.entries(presetsObj).map((obj) => { return { docId: obj[0], ...obj[1] } })
 
@@ -157,7 +157,7 @@ export const getDefaultPresets = () => {
                     type: "SET_DEFAULT_PRESETS",
                     defaultPresets
                 })
-            } */
+            }
         }).catch((e) => {
             console.log("error retrieving from db: ", e);
         }).finally(() => {
