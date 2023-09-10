@@ -472,7 +472,7 @@ button {
   transition: 200ms;
   cursor: pointer;
 }
-.mainCode__input__type__iconBtn:hover {
+.mainCode__input__type__iconBtn:hover, .mainCode__input__type__iconBtn:focus-visible {
   color: var(--main-red);
 }
 .mainCode__input__type__iconBtn:active {
@@ -593,9 +593,12 @@ button {
   align-items: center;
   color: var(--main-purple);
   transition: 200ms;
+  outline: none;
+  border: none;
 }
-.mainCode__output__type__btnWrapper button:hover,
-.mainCode__output__type__btnWrapper a:hover {
+.mainCode__output__type__btnWrapper button:hover, .mainCode__output__type__btnWrapper button:focus-visible,
+.mainCode__output__type__btnWrapper a:hover,
+.mainCode__output__type__btnWrapper a:focus-visible {
   color: var(--main-red);
 }
 .mainCode__output__type__btnWrapper button:active,

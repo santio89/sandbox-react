@@ -31,6 +31,7 @@ export default function Home({ sharedSnippetHome }) {
     const [sharedLoading, setSharedLoading] = useState(false)
     const [minimap, setMinimap] = useState(false)
     const [wordWrap, setWordWrap] = useState("on")
+    const [lineHighlight, setLineHighlight] = useState(false)
 
     const [panelDrag, setPanelDrag] = useState(false)
 
@@ -46,10 +47,13 @@ export default function Home({ sharedSnippetHome }) {
     const monacoOptions = {
         minimap: { enabled: minimap },
         wordWrap: wordWrap,
-        renderLineHighlight: "none",
+        renderLineHighlight: lineHighlight,
         scrollbar: { verticalScrollbarSize: "12px", horizontalScrollbarSize: "12px" },
-        padding: { top: 8, bottom: 0 },
-        glyphMargin: false
+        padding: { top: 8, bottom: 8 },
+        glyphMargin: false,
+        fixedOverflowWidgets: true,
+        folding: false,
+        scrollBeyondLastLine: false
     }
 
     const setHtml = (html) => {
@@ -70,6 +74,10 @@ export default function Home({ sharedSnippetHome }) {
 
     const toggleWordWrap = () => {
         setWordWrap(wordWrap => wordWrap === "on" ? setWordWrap("off") : setWordWrap("on"))
+    }
+
+    const toggleLineHighlight = () => {
+        setLineHighlight(lineHighlight => lineHighlight === "all" ? "none" : "all")
     }
 
     const focusCurrentTab = () => {
@@ -99,22 +107,6 @@ export default function Home({ sharedSnippetHome }) {
             case 'js':
                 editorJs?.current?.focus()
                 editorJs?.current?.getAction('editor.action.quickCommand').run()
-                break;
-            default:
-                return
-        }
-    }
-
-    const formatCode = () => {
-        switch (tabActive) {
-            case 'html':
-                editorHtml.current.getAction('editor.action.formatDocument').run()
-                break;
-            case 'css':
-                editorCss.current.getAction('editor.action.formatDocument').run()
-                break;
-            case 'js':
-                editorJs.current.getAction('editor.action.formatDocument').run()
                 break;
             default:
                 return
@@ -377,13 +369,6 @@ export default function Home({ sharedSnippetHome }) {
                                                     </button>
                                                 }
                                                 {
-                                                    <button className="mainCode__input__type__iconBtn" title="Format code" onClick={() => { formatCode() }}>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-asterisk" viewBox="0 0 16 16">
-                                                            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z" />
-                                                        </svg>
-                                                    </button>
-                                                }
-                                                {
                                                     copyClipboard ?
                                                         <button className="mainCode__input__type__iconBtn" title="Copy to clipboard" onClick={() => { copyToClipboard() }}>
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi clipboard-check-fill" viewBox="0 0 16 16">
@@ -397,6 +382,13 @@ export default function Home({ sharedSnippetHome }) {
                                                                 <path fillRule="evenodd" d="M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Zm-5 0A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm-2 0h1v1A2.5 2.5 0 0 0 6.5 5h3A2.5 2.5 0 0 0 12 2.5v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z" />
                                                             </svg>
                                                         </button>
+                                                }
+                                                {
+                                                    <button className={`mainCode__input__type__iconBtn ${lineHighlight && "active-on"}`} title="Toggle line highlight" onClick={() => { toggleLineHighlight() }}>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-asterisk" viewBox="0 0 16 16">
+                                                            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z" />
+                                                        </svg>
+                                                    </button>
                                                 }
                                                 {
                                                     <button className={`mainCode__input__type__iconBtn ${minimap && "active-on"}`} title="Toggle minimap" onClick={() => { toggleMinimap() }}>
@@ -497,13 +489,6 @@ export default function Home({ sharedSnippetHome }) {
                                                     </button>
                                                 }
                                                 {
-                                                    <button className="mainCode__input__type__iconBtn" title="Format code" onClick={() => { formatCode() }}>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-asterisk" viewBox="0 0 16 16">
-                                                            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z" />
-                                                        </svg>
-                                                    </button>
-                                                }
-                                                {
                                                     copyClipboard ?
                                                         <button className="mainCode__input__type__iconBtn" title="Copy to clipboard" onClick={() => { copyToClipboard() }}>
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi clipboard-check-fill" viewBox="0 0 16 16">
@@ -517,6 +502,13 @@ export default function Home({ sharedSnippetHome }) {
                                                                 <path fillRule="evenodd" d="M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Zm-5 0A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm-2 0h1v1A2.5 2.5 0 0 0 6.5 5h3A2.5 2.5 0 0 0 12 2.5v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z" />
                                                             </svg>
                                                         </button>
+                                                }
+                                                {
+                                                    <button className={`mainCode__input__type__iconBtn ${lineHighlight === "all" && "active-on"}`} title="Toggle line highlight" onClick={() => { toggleLineHighlight() }}>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-asterisk" viewBox="0 0 16 16">
+                                                            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z" />
+                                                        </svg>
+                                                    </button>
                                                 }
                                                 {
                                                     <button className={`mainCode__input__type__iconBtn ${minimap && "active-on"}`} title="Toggle minimap" onClick={() => { toggleMinimap() }}>

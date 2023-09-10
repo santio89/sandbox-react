@@ -536,7 +536,8 @@ button {
         transition: 200ms;
         cursor: pointer;
 
-        &:hover {
+        &:hover,
+        &:focus-visible {
           color: var(--main-red);
         }
 
@@ -676,8 +677,11 @@ button {
           align-items: center;
           color: var(--main-purple);
           transition: 200ms;
+          outline: none;
+          border: none;
 
-          &:hover {
+          &:hover,
+          &:focus-visible {
             color: var(--main-red);
           }
 
