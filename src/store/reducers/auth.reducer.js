@@ -30,6 +30,11 @@ const AuthReducer = (state = initialState, action) => {
                 ...state,
                 displayName: action.displayName,
             }
+        case "UPDATE_AVATAR":
+            return {
+                ...state,
+                avatar: action.avatar,
+            }
         default:
             return state
     }

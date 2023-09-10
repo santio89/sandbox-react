@@ -1,4 +1,5 @@
-import { firebaseAuth as auth, firebaseGoogleProvider as provider } from "../../config/firebase"
+import { firebaseAuth as auth, firebaseGoogleProvider as provider, firebaseStorage } from "../../config/firebase"
+import { ref, uploadBytes, getDownloadURL } from "@firebase/storage";
 import { signInWithPopup, signOut, setPersistence, browserLocalPersistence, onAuthStateChanged, updateProfile } from "firebase/auth";
 import { getPresets } from "./presets.action";
 import { setCodeAll } from "./code.action";
@@ -126,5 +127,44 @@ export const updateDisplayName = (newDisplayName) => {
             });
         })
 
+    }
+}
+
+export const updateAvatar = (userId, file) => {
+    return async dispatch => {
+        dispatch({
+            type: "SET_AVATAR_LOADER",
+            updateAvatarLoader: true
+        });
+
+        try {
+            const storageRef = ref(firebaseStorage, `avatars/${userId}`);
+
+            uploadBytes(storageRef, file).then((snapshot) => {
+                getDownloadURL(snapshot.ref).then((url) => {
+                    updateProfile(auth.currentUser, {
+                        photoURL: url
+                    }).then(() => {
+                        dispatch({
+                            type: "UPDATE_AVATAR",
+                            avatar: url
+                        })
+                        dispatch({
+                            type: "SET_AVATAR_LOADER",
+                            updateAvatarLoader: false
+                        });
+                    }).catch((e) => {
+                        console.log("error updating avatar: ", e)
+                        toast.error("Error updating avatar")
+                    })
+                }).catch((e) => {
+                    console.log("error retrieving avatar url: ", e)
+                    toast.error("Error retrieving avatar url")
+                });
+            });
+        } catch (e) {
+            console.log("error uploading avatar: ", e)
+            toast.error("Error uploading avatar")
+        }
     }
 }

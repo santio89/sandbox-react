@@ -1,4 +1,4 @@
-export const setAuthLoader = (authLoader) => {
+/* export const setAuthLoader = (authLoader) => {
 
     return async dispatch => {
         dispatch({
@@ -27,3 +27,22 @@ export const setDefaultPresetLoader = (defaultPresetLoader) => {
         })
     }
 }
+
+export const renamePresetLoader = (renamePresetLoader) => {
+
+    return async dispatch => {
+        dispatch({
+            type: "SET_RENAME_PRESET_LOADER",
+            renamePresetLoader
+        })
+    }
+}
+export const deletePresetLoader = (deletePresetLoader) => {
+
+    return async dispatch => {
+        dispatch({
+            type: "SET_DELETE_PRESET_LOADER",
+            deletePresetLoader
+        })
+    }
+} */

@@ -52,6 +52,11 @@ export const deletePreset = (presets, name, docId, id, userId = null) => {
     return async dispatch => {
 
         if (userId) {
+            dispatch({
+                type: "SET_DELETE_PRESET_LOADER",
+                deletePresetLoader: true
+            });
+
             try {
                 await remove(ref(db, 'snippets/' + userId + "/" + docId))
 
@@ -59,6 +64,12 @@ export const deletePreset = (presets, name, docId, id, userId = null) => {
                     type: "SET_PRESETS",
                     presets
                 })
+
+                dispatch({
+                    type: "SET_DELETE_PRESET_LOADER",
+                    deletePresetLoader: false
+                });
+
                 toast.message('Snippets', {
                     description: `Snippet deleted: ${name}`,
                 })
@@ -79,6 +90,11 @@ export const editPreset = (presets, name, docId, id, newName, userId = null) => 
 
     return async dispatch => {
         if (userId) {
+            dispatch({
+                type: "SET_RENAME_PRESET_LOADER",
+                renamePresetLoader: true
+            });
+
             try {
                 await set(ref(db, 'snippets/' + userId + "/" + docId), updatedPreset);
 
@@ -86,6 +102,12 @@ export const editPreset = (presets, name, docId, id, newName, userId = null) => 
                     type: "SET_PRESETS",
                     presets
                 })
+
+                dispatch({
+                    type: "SET_RENAME_PRESET_LOADER",
+                    renamePresetLoader: false
+                });
+
                 toast.message('Snippets', {
                     description: `Snippet renamed: ${name} ➔ ${newName}`,
                 })

@@ -852,11 +852,33 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  aspect-ratio: 1;
 }
 .main__modal .presets__profile__userInfo__data__img img {
+  aspect-ratio: 1;
   border-radius: 50%;
   width: 100px;
   object-fit: cover;
+}
+.main__modal .presets__profile__userInfo__data__img input[type=file] {
+  display: none;
+}
+.main__modal .presets__profile__userInfo__data__img__upload {
+  position: absolute;
+  bottom: -12px;
+  right: -12px;
+  margin: auto;
+  color: var(--main-gray-op);
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  cursor: pointer;
+}
+.main__modal .presets__profile__userInfo__data__img__upload:hover, .main__modal .presets__profile__userInfo__data__img__upload:focus-visible {
+  color: var(--main-purple);
 }
 .main__modal .presets__profile__userInfo__data__text {
   flex: 1;
@@ -898,6 +920,9 @@ button {
   justify-content: center;
   align-items: center;
   transition: scale 200ms;
+}
+.main__modal .presets__profile__userInfo__data__text__line__btnContainer button:hover, .main__modal .presets__profile__userInfo__data__text__line__btnContainer button:focus-visible {
+  color: var(--main-purple);
 }
 .main__modal .presets__profile__userInfo__data__text__line__btnContainer button:not(.editName) {
   aspect-ratio: 1;
@@ -1238,6 +1263,17 @@ button {
 
 .presets__profile__userInfo__data .loader {
   font-size: 2px;
+  margin: 0;
+}
+
+.presets__profile__userInfo__data__img .loader {
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+}
+
+.presets__option .loader {
+  font-size: 5px;
   margin: 0;
 }
 

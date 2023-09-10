@@ -2,7 +2,10 @@ const initialState = {
     authLoader: false,
     presetLoader: true,
     defaultPresetLoader: true,
+    renamePresetLoader: false,
+    deletePresetLoader: false,
     updateDisplayNameLoader: false,
+    updateAvatarLoader: false,
 }
 
 
@@ -28,6 +31,21 @@ const LoaderReducer = (state = initialState, action) => {
             return {
                 ...state,
                 updateDisplayNameLoader: action.updateDisplayNameLoader,
+            }
+        case "SET_AVATAR_LOADER":
+            return {
+                ...state,
+                updateAvatarLoader: action.updateAvatarLoader,
+            }
+        case "SET_RENAME_PRESET_LOADER":
+            return {
+                ...state,
+                renamePresetLoader: action.renamePresetLoader,
+            }
+        case "SET_DELETE_PRESET_LOADER":
+            return {
+                ...state,
+                deletePresetLoader: action.deletePresetLoader,
             }
         default:
             return state

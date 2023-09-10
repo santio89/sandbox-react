@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setModal, setLoadSnippet, setCreateNew } from "../store/actions/modal.action";
-import { signInGoogle, signOutUser, updateDisplayName } from "../store/actions/auth.action";
+import { signInGoogle, signOutUser, updateDisplayName, updateAvatar } from "../store/actions/auth.action";
 import { setCodeAll } from "../store/actions/code.action";
 import { savePreset, deletePreset, editPreset } from "../store/actions/presets.action";
 import { v4 as uuidv4 } from 'uuid';
@@ -24,10 +24,14 @@ export default function Modal({ callbacks }) {
     const authLoader = useSelector(state => state.loader.authLoader)
     const presetLoader = useSelector(state => state.loader.presetLoader)
     const defaultPresetLoader = useSelector(state => state.loader.defaultPresetLoader)
+    const renamePresetLoader = useSelector(state => state.loader.renamePresetLoader)
+    const deletePresetLoader = useSelector(state => state.loader.deletePresetLoader)
     const displayNameLoader = useSelector(state => state.loader.updateDisplayNameLoader)
+    const updateAvatarLoader = useSelector(state => state.loader.updateAvatarLoader)
     const presets = useSelector(state => state.preset.presets)
     const [displayNameMode, setDisplayNameMode] = useState(false)
     const [newDisplayName, setNewDisplayName] = useState(user?.displayName || "")
+    const [picUpload, setPicUpload] = useState(null)
 
     const { setNewProject } = callbacks;
 
@@ -38,8 +42,6 @@ export default function Modal({ callbacks }) {
     const [selectedId, setSelectedId] = useState(null);
     const [shareId, setShareId] = useState(null)
     const [loaded, setLoaded] = useState(false)
-    const [renamed, setRenamed] = useState(false)
-    const [deleted, setDeleted] = useState(false)
     const [shared, setShared] = useState(false)
 
     const [savePresetName, setSavePresetName] = useState("");
@@ -83,14 +85,12 @@ export default function Modal({ callbacks }) {
 
     const deleteSelectedPreset = (name, docId, id) => {
         dispatch(deletePreset(presets, name, docId, id, user.userId))
-        setDeleted(true)
     }
 
     const editSelectedPreset = (name, docId, id, newName) => {
         const trimNewName = String(newName).trim()
         if (trimNewName === "") return
         dispatch(editPreset(presets, name, docId, id, newName, user.userId))
-        setRenamed(true)
     }
 
     const shareSnippet = (userId, snippetId) => {
@@ -150,6 +150,22 @@ export default function Modal({ callbacks }) {
                                 <div className="presets__profile__userInfo__data">
                                     <div className="presets__profile__userInfo__data__img">
                                         <img src={user.avatar} alt="profile image" />
+                                        <input type="file" id="picUpload" name="picUpload" accept="image/png, image/jpeg"
+                                            onChange={(e) => {
+                                                setPicUpload(e.currentTarget.files[0]);
+                                            }} />
+                                        {
+                                            updateAvatarLoader ?
+                                                <div className="loader"></div>
+                                                :
+                                                <label htmlFor="picUpload" className="presets__profile__userInfo__data__img__upload" title="Upload avatar">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-upload" viewBox="0 0 16 16">
+                                                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                                        <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+                                                    </svg>
+                                                </label>
+                                        }
+
                                     </div>
                                     <div className="presets__profile__userInfo__data__text">
                                         <div className="presets__profile__userInfo__data__text__line">
@@ -224,7 +240,7 @@ export default function Modal({ callbacks }) {
                                         (presets?.length > 0 ?
                                             (presets?.map(preset => {
                                                 return (
-                                                    <div tabIndex={0} role="button" disabled={loaded || renamed || shared || saved || deleted} className="presets__option" key={preset.id} onClick={() => {
+                                                    <div tabIndex={0} role="button" disabled={loaded || renamePresetLoader || shared || saved || deletePresetLoader} className="presets__option" key={preset.id} onClick={() => {
                                                         setEditName("");
                                                         setEditId(null);
                                                         setDeleteId(null);
@@ -252,7 +268,7 @@ export default function Modal({ callbacks }) {
                                                                         <span>Snippet loaded!</span>
                                                                     </span>
                                                                     :
-                                                                    editId === preset.id && !renamed ?
+                                                                    editId === preset.id && !renamePresetLoader ?
                                                                         (
                                                                             <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                                                                                 <span>Rename snippet?</span>
@@ -265,11 +281,9 @@ export default function Modal({ callbacks }) {
                                                                                 </form>
                                                                             </span>
                                                                         ) :
-                                                                        (editId === preset.id && renamed ?
-                                                                            <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
-                                                                                <span>Snippet renamed!</span>
-                                                                            </span> :
-                                                                            (deleteId === preset.id && !deleted ?
+                                                                        (editId === preset.id && renamePresetLoader ?
+                                                                            <div className="loader">Loading...</div> :
+                                                                            (deleteId === preset.id && !deletePresetLoader ?
                                                                                 <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                                                                                     <span>Delete snippet?</span>
                                                                                     <span className="presets__option__confirm__buttons">
@@ -277,10 +291,8 @@ export default function Modal({ callbacks }) {
                                                                                         <button onClick={(e) => { e.stopPropagation(); setDeleteId(null) }}>No</button>
                                                                                     </span>
                                                                                 </span> :
-                                                                                (deleteId === preset.id && deleted ?
-                                                                                    <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
-                                                                                        <span>Snippet deleted!</span>
-                                                                                    </span> :
+                                                                                (deleteId === preset.id && deletePresetLoader ?
+                                                                                    <div className="loader">Loading...</div> :
                                                                                     (shareId === preset.id && shared ?
                                                                                         <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                                                                                             <span>Share link copied to clipboard!</span>
@@ -477,28 +489,12 @@ export default function Modal({ callbacks }) {
     }, [loaded])
 
     useEffect(() => {
-        let timeout = null;
-        if (renamed) {
-            timeout = setTimeout(() => {
-                setRenamed(false)
-                setEditId(null)
-            }, 1000)
-        }
-
-        return () => { clearTimeout(timeout) }
-    }, [renamed])
+        !renamePresetLoader && setEditId(null)
+    }, [renamePresetLoader])
 
     useEffect(() => {
-        let timeout = null;
-        if (deleted) {
-            timeout = setTimeout(() => {
-                setDeleted(false)
-                setDeleteId(null)
-            }, 1000)
-        }
-
-        return () => { clearTimeout(timeout) }
-    }, [deleted])
+        !deletePresetLoader && setDeleteId(null)
+    }, [deletePresetLoader])
 
     useEffect(() => {
         let timeout = null;
@@ -516,6 +512,8 @@ export default function Modal({ callbacks }) {
         setSelectedId(null)
         setDeleteId(null)
         setEditId(null)
+        setDisplayNameMode(false)
+        setPicUpload(null)
         setSavePresetName("")
     }, [modalOption])
 
@@ -529,6 +527,7 @@ export default function Modal({ callbacks }) {
 
     useEffect(() => {
         displayNameMode && setNewDisplayName(user?.displayName || "")
+        !displayNameMode && setNewDisplayName("");
     }, [displayNameMode])
 
     useEffect(() => {
@@ -536,8 +535,12 @@ export default function Modal({ callbacks }) {
     }, [displayNameLoader])
 
     useEffect(() => {
-        setNewDisplayName("");
-    }, [])
+        !picUpload && setPicUpload(null)
+    }, [updateAvatarLoader])
+
+    useEffect(() => {
+        picUpload && dispatch(updateAvatar(user.userId, picUpload))
+    }, [picUpload])
 
     return (
         <dialog className="main__modal" ref={modal}>
