@@ -622,6 +622,7 @@ button {
 
     &__textWrapper {
       flex: 1;
+      min-width: 300px;
       display: flex;
       flex-direction: column;
       position: relative;
@@ -637,8 +638,6 @@ button {
   &__output {
     flex: 1;
     min-width: 300px;
-    width: 100%;
-    max-width: 100%;
     height: clamp(min(1080px, 74dvh), 74dvh, 1080px);
     height: clamp(min(1080px, 74vh), 74vh, 1080px);
     display: flex;
@@ -711,10 +710,9 @@ button {
       transition: opacity 200ms;
       width: 100%;
       max-width: 100%;
-      max-height: 100%;
-      overflow: hidden;
       height: 420px;
       max-height: 582px;
+      overflow: hidden;
 
       @media(min-width: 800px) {
         height: 100%;
