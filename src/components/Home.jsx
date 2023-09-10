@@ -38,10 +38,12 @@ export default function Home({ sharedSnippetHome }) {
     const editorCss = useRef(null);
     const editorJs = useRef(null);
 
+    const [minimap, setMinimap] = useState(false)
+
     const [panelBreakpoint, setPanelBreakpont] = useState(window.innerWidth < 800 ? true : false)
 
     const monacoOptions = {
-        minimap: { enabled: false },
+        minimap: { enabled: minimap },
         wordWrap: "on",
         renderLineHighlight: "none",
         scrollbar: { verticalScrollbarSize: "12px" },
@@ -61,6 +63,10 @@ export default function Home({ sharedSnippetHome }) {
         dispatch(setCodeJs(js))
     }
 
+    const toggleMinimap = () => {
+        setMinimap(minimap => !minimap)
+    }
+
     const focusCurrentTab = () => {
         switch (tabActive) {
             case 'html':
@@ -75,16 +81,19 @@ export default function Home({ sharedSnippetHome }) {
         }
     }
 
-    const showContextMenu = () => {
+    const showCommandPalette = () => {
         switch (tabActive) {
             case 'html':
-                editorHtml.current.getAction('editor.action.showContextMenu').run()
+                editorHtml?.current?.focus()
+                editorHtml?.current?.getAction('editor.action.quickCommand').run()
                 break;
             case 'css':
-                editorCss.current.getAction('editor.action.showContextMenu').run()
+                editorCss?.current?.focus()
+                editorCss?.current?.getAction('editor.action.quickCommand').run()
                 break;
             case 'js':
-                editorJs.current.getAction('editor.action.showContextMenu').run()
+                editorJs?.current?.focus()
+                editorJs?.current?.getAction('editor.action.quickCommand').run()
                 break;
             default:
                 return
@@ -341,33 +350,33 @@ export default function Home({ sharedSnippetHome }) {
                                             <span className="mainCode__input__type__btnWrapper">
 
                                                 {
-                                                    <button className="mainCode__input__type__format" title="Format code" onClick={() => { formatCode() }}>
+                                                    <button className="mainCode__input__type__iconBtn" title="Open command palette" onClick={() => { showCommandPalette() }}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-code" viewBox="0 0 16 16">
                                                             <path d="M5.854 4.854a.5.5 0 1 0-.708-.708l-3.5 3.5a.5.5 0 0 0 0 .708l3.5 3.5a.5.5 0 0 0 .708-.708L2.707 8l3.147-3.146zm4.292 0a.5.5 0 0 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5a.5.5 0 0 1-.708-.708L13.293 8l-3.147-3.146z" />
                                                         </svg>
                                                     </button>
                                                 }
                                                 {
+                                                    <button className="mainCode__input__type__iconBtn" title="Format code" onClick={() => { formatCode() }}>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-asterisk" viewBox="0 0 16 16">
+                                                            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z" />
+                                                        </svg>
+                                                    </button>
+                                                }
+                                                {
                                                     copyClipboard ?
-                                                        <button className="mainCode__input__type__clip" title="Copy to clipboard" onClick={() => { copyToClipboard() }}>
+                                                        <button className="mainCode__input__type__iconBtn" title="Copy to clipboard" onClick={() => { copyToClipboard() }}>
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi clipboard-check-fill" viewBox="0 0 16 16">
                                                                 <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z" />
                                                                 <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z" />
                                                             </svg>
                                                         </button>
                                                         :
-                                                        <button className="mainCode__input__type__clip" title="Copy to clipboard" onClick={() => { copyToClipboard() }}>
+                                                        <button className="mainCode__input__type__iconBtn" title="Copy to clipboard" onClick={() => { copyToClipboard() }}>
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-clipboard-fill" viewBox="0 0 16 16">
                                                                 <path fillRule="evenodd" d="M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Zm-5 0A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm-2 0h1v1A2.5 2.5 0 0 0 6.5 5h3A2.5 2.5 0 0 0 12 2.5v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z" />
                                                             </svg>
                                                         </button>
-                                                }
-                                                {
-                                                    <button className="mainCode__input__type__contextMenu" title="Open context menu" onClick={() => { showContextMenu() }}>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-asterisk" viewBox="0 0 16 16">
-                                                            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z" />
-                                                        </svg>
-                                                    </button>
                                                 }
                                                 {
                                                     clearConfirm ?
@@ -447,31 +456,38 @@ export default function Home({ sharedSnippetHome }) {
                                             <span className="mainCode__input__type__btnWrapper">
 
                                                 {
-                                                    <button className="mainCode__input__type__format" title="Format code" onClick={() => { formatCode() }}>
+                                                    <button className="mainCode__input__type__iconBtn" title="Open command palette" onClick={() => { showCommandPalette() }}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-code" viewBox="0 0 16 16">
                                                             <path d="M5.854 4.854a.5.5 0 1 0-.708-.708l-3.5 3.5a.5.5 0 0 0 0 .708l3.5 3.5a.5.5 0 0 0 .708-.708L2.707 8l3.147-3.146zm4.292 0a.5.5 0 0 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5a.5.5 0 0 1-.708-.708L13.293 8l-3.147-3.146z" />
                                                         </svg>
                                                     </button>
                                                 }
                                                 {
+                                                    <button className="mainCode__input__type__iconBtn" title="Format code" onClick={() => { formatCode() }}>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-asterisk" viewBox="0 0 16 16">
+                                                            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z" />
+                                                        </svg>
+                                                    </button>
+                                                }
+                                                {
                                                     copyClipboard ?
-                                                        <button className="mainCode__input__type__clip" title="Copy to clipboard" onClick={() => { copyToClipboard() }}>
+                                                        <button className="mainCode__input__type__iconBtn" title="Copy to clipboard" onClick={() => { copyToClipboard() }}>
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi clipboard-check-fill" viewBox="0 0 16 16">
                                                                 <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z" />
                                                                 <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z" />
                                                             </svg>
                                                         </button>
                                                         :
-                                                        <button className="mainCode__input__type__clip" title="Copy to clipboard" onClick={() => { copyToClipboard() }}>
+                                                        <button className="mainCode__input__type__iconBtn" title="Copy to clipboard" onClick={() => { copyToClipboard() }}>
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-clipboard-fill" viewBox="0 0 16 16">
                                                                 <path fillRule="evenodd" d="M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Zm-5 0A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm-2 0h1v1A2.5 2.5 0 0 0 6.5 5h3A2.5 2.5 0 0 0 12 2.5v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z" />
                                                             </svg>
                                                         </button>
                                                 }
                                                 {
-                                                    <button className="mainCode__input__type__contextMenu" title="Open context menu" onClick={() => { showContextMenu() }}>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-asterisk" viewBox="0 0 16 16">
-                                                            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z" />
+                                                    <button className={`mainCode__input__type__iconBtn ${minimap && "minimap-on"}`} title="Toggle minimap" onClick={() => { toggleMinimap() }}>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-fullscreen" viewBox="0 0 16 16">
+                                                            <path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z" />
                                                         </svg>
                                                     </button>
                                                 }

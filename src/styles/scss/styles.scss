@@ -528,8 +528,7 @@ button {
         gap: .5rem;
       }
 
-      &__format,
-      &__contextMenu {
+      &__iconBtn {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -545,23 +544,18 @@ button {
           color: var(--main-red);
           scale: .9
         }
-      }
 
-      &__clip {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: var(--main-purple);
-        transition: 200ms;
-        cursor: pointer;
-
-        &:hover {
+        &.minimap-on {
           color: var(--main-red);
-        }
 
-        &:active {
-          color: var(--main-red);
-          scale: .9
+          &:hover {
+            color: var(--main-purple);
+          }
+
+          &:active {
+            color: var(--main-purple);
+            scale: .9
+          }
         }
       }
 

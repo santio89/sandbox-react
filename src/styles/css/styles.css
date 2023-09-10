@@ -464,7 +464,7 @@ button {
   align-items: center;
   gap: 0.5rem;
 }
-.mainCode__input__type__format, .mainCode__input__type__contextMenu {
+.mainCode__input__type__iconBtn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -472,26 +472,21 @@ button {
   transition: 200ms;
   cursor: pointer;
 }
-.mainCode__input__type__format:hover, .mainCode__input__type__contextMenu:hover {
+.mainCode__input__type__iconBtn:hover {
   color: var(--main-red);
 }
-.mainCode__input__type__format:active, .mainCode__input__type__contextMenu:active {
+.mainCode__input__type__iconBtn:active {
   color: var(--main-red);
   scale: 0.9;
 }
-.mainCode__input__type__clip {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.mainCode__input__type__iconBtn.minimap-on {
+  color: var(--main-red);
+}
+.mainCode__input__type__iconBtn.minimap-on:hover {
   color: var(--main-purple);
-  transition: 200ms;
-  cursor: pointer;
 }
-.mainCode__input__type__clip:hover {
-  color: var(--main-red);
-}
-.mainCode__input__type__clip:active {
-  color: var(--main-red);
+.mainCode__input__type__iconBtn.minimap-on:active {
+  color: var(--main-purple);
   scale: 0.9;
 }
 .mainCode__input__type__clearConfirm {
