@@ -1922,7 +1922,6 @@ export const snippetExample_5 = {
         -webkit-box-align: center;
             -ms-flex-align: center;
                 align-items: center;
-        
         background-color: #371B1B;
       }
       

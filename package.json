@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@formkit/auto-animate": "^0.7.0",
+    "@monaco-editor/react": "^4.5.2",
     "firebase": "^10.2.0",
-    "js-beautify": "^1.14.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.2",

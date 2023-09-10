@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Home from "./components/Home";
 import Nav from "./components/Nav";
 import NotFound from "./components/NotFound";
-import './styles/css/prism.css'
 import './styles/css/styles.css'
 import { useRef } from "react";
 import { useDispatch } from "react-redux";

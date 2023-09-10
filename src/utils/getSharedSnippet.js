@@ -5,7 +5,7 @@ import { toast } from "sonner";
 const getSharedSnippet = (userId, snippetId, callback) => {
     let preset = null;
 
-    get(child(ref(db), `presets/${userId}/${snippetId}`)).then((snapshot) => {
+    get(child(ref(db), `snippets/${userId}/${snippetId}`)).then((snapshot) => {
         if (snapshot.exists()) {
             preset = snapshot.val()
             callback(preset)
