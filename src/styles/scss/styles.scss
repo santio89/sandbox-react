@@ -622,21 +622,46 @@ button {
 
     &__textWrapper {
       flex: 1;
+      width: 100%;
       min-width: 300px;
       display: flex;
       flex-direction: column;
       position: relative;
-      max-height: 582px;
+      height: clamp(min(1080px, 74dvh), 74dvh, 1080px);
+      height: clamp(min(1080px, 74vh), 74vh, 1080px);
       overflow: hidden;
-      border-radius: .5rem;
-      border: 2px solid rgb(100, 100, 100);
-      background: var(--bg-code);
       color: var(--main-purple);
+
+      @media(min-width: 800px) {
+        min-width: initial;
+      }
+
+      &__inner {
+        display: flex;
+        height: 420px;
+        max-height: 582px;
+        overflow: hidden;
+        border-radius: .5rem;
+        border: 2px solid rgb(100, 100, 100);
+        background: var(--bg-code);
+
+        @media(min-width: 800px) {
+          height: 100%;
+          resize: vertical;
+        }
+
+        &::-webkit-resizer {
+          background-color: transparent;
+          /* background-image: url("/resize-vert.svg");
+          background-repeat: no-repeat; */
+        }
+      }
     }
   }
 
   &__output {
     flex: 1;
+    width: 100%;
     min-width: 300px;
     height: clamp(min(1080px, 74dvh), 74dvh, 1080px);
     height: clamp(min(1080px, 74vh), 74vh, 1080px);

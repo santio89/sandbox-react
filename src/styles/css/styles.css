@@ -541,19 +541,44 @@ button {
 }
 .mainCode__input__textWrapper {
   flex: 1;
+  width: 100%;
   min-width: 300px;
   display: flex;
   flex-direction: column;
   position: relative;
+  height: clamp(min(1080px, 74dvh), 74dvh, 1080px);
+  height: clamp(min(1080px, 74vh), 74vh, 1080px);
+  overflow: hidden;
+  color: var(--main-purple);
+}
+@media (min-width: 800px) {
+  .mainCode__input__textWrapper {
+    min-width: initial;
+  }
+}
+.mainCode__input__textWrapper__inner {
+  display: flex;
+  height: 420px;
   max-height: 582px;
   overflow: hidden;
   border-radius: 0.5rem;
   border: 2px solid rgb(100, 100, 100);
   background: var(--bg-code);
-  color: var(--main-purple);
+}
+@media (min-width: 800px) {
+  .mainCode__input__textWrapper__inner {
+    height: 100%;
+    resize: vertical;
+  }
+}
+.mainCode__input__textWrapper__inner::-webkit-resizer {
+  background-color: transparent;
+  /* background-image: url("/resize-vert.svg");
+  background-repeat: no-repeat; */
 }
 .mainCode__output {
   flex: 1;
+  width: 100%;
   min-width: 300px;
   height: clamp(min(1080px, 74dvh), 74dvh, 1080px);
   height: clamp(min(1080px, 74vh), 74vh, 1080px);
