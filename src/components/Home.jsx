@@ -518,7 +518,7 @@ export default function Home({ sharedSnippetHome }) {
                                             </span>
                                         </div>
                                         <div className={`mainCode__output__iframeWrapper ${codeOutput === ("" || `<body>\n` + "" + `\n</body>\n` + `\n<style>\n` + "" + `\n</style>\n` + `\n<script>\n` + "" + `\n</script>`) && `dim`}`}>
-                                            <iframe srcDoc={codeOutput} allow="fullscreen" ref={iframe} className="mainCode__output__iframe" title="Output">
+                                            <iframe sandbox="allow-forms allow-modals allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-downloads allow-presentation" srcDoc={`<html>${codeOutput}</html>`} allow="fullscreen; accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share" ref={iframe} className="mainCode__output__iframe" title="Output" name="output">
                                             </iframe>
                                         </div>
                                     </div>
@@ -644,7 +644,7 @@ export default function Home({ sharedSnippetHome }) {
                                             </span>
                                         </div>
                                         <div className={`mainCode__output__iframeWrapper ${codeOutput === ("" || `<body>\n` + "" + `\n</body>\n` + `\n<style>\n` + "" + `\n</style>\n` + `\n<script>\n` + "" + `\n</script>`) && `dim`}`}>
-                                            <iframe srcDoc={codeOutput} allow="fullscreen; accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share" ref={iframe} className="mainCode__output__iframe" title="Output" name="output">
+                                            <iframe sandbox="allow-forms allow-modals allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-downloads allow-presentation" srcDoc={`<html>${codeOutput}</html>`} allow="fullscreen; accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share" ref={iframe} className="mainCode__output__iframe" title="Output" name="output">
                                             </iframe>
                                         </div>
                                     </div>
