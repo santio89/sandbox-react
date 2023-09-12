@@ -348,13 +348,15 @@ export default function Home({ sharedSnippetHome }) {
         }
 
         const windowPaneResizeFix = () => {
-            const containertWidth = document.querySelector(".SplitPane.vertical")?.getBoundingClientRect().width
-            const paneWidth = document.querySelector(".Pane.vertical.Pane1")?.getBoundingClientRect().width
-            const paneStyleWidth = document.querySelector(".Pane.vertical.Pane1")?.style.width
+            const paneElem = document.querySelector(".Pane.vertical.Pane1")
+            const containerElem = document.querySelector(".SplitPane.vertical")
+            const paneWidth = paneElem?.getBoundingClientRect().width
+            const paneStyleWidth = paneElem?.style.width
+            const containertWidth = containerElem?.getBoundingClientRect().width
 
 
             if (String(paneStyleWidth).endsWith("px")) {
-                document.querySelector(".Pane.vertical.Pane1").style.width = (paneWidth / containertWidth) * 100 + "%"
+                paneElem.style.width = (paneWidth / containertWidth) * 100 + "%"
             }
         }
 
@@ -367,12 +369,23 @@ export default function Home({ sharedSnippetHome }) {
             windowPaneResizeFix()
         }
 
+        const defaultSizeEvent = () => {
+            const panelElem = document.querySelector(".Pane.vertical.Pane1")
+            panelElem.style.width = "42%"
+        }
+
+        const resizer = document.querySelector(".Resizer.vertical")
         window.addEventListener("resize", paneEvent)
         document.addEventListener("keydown", tabShortcut)
+        resizer.addEventListener("dblclick", defaultSizeEvent)
 
         editorHtml?.current?.focus()
 
-        return () => { window.removeEventListener("resize", paneEvent); document.removeEventListener("keydown", tabShortcut) }
+        return () => {
+            window?.removeEventListener("resize", paneEvent)
+            document?.removeEventListener("keydown", tabShortcut)
+            resizer?.addEventListener("dblclick", defaultSizeEvent)
+        }
     }, [])
 
     return (
