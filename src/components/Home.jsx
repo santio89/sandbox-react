@@ -331,26 +331,16 @@ export default function Home({ sharedSnippetHome }) {
     }, [user])
 
     useEffect(() => {
-        const paneResizeEvent = () => {
-            window.innerWidth < 800 ? setPanelBreakpont(true) : setPanelBreakpont(false)
-        }
-
-        const windowPaneResizeFix = () => {
+        const windowPaneResizeEvent = () => {
             const paneElem = splitPane.current?.pane1
             const containerElem = splitPane.current?.splitPane
             const paneWidth = paneElem?.getBoundingClientRect()?.width
             const paneStyleWidth = paneElem?.style?.width
             const containertWidth = containerElem?.getBoundingClientRect()?.width
 
-
             if (String(paneStyleWidth).endsWith("px")) {
                 paneElem.style.width = (paneWidth / containertWidth) * 100 + "%"
             }
-        }
-
-        const paneEvent = () => {
-            paneResizeEvent()
-            splitPane.current && windowPaneResizeFix()
         }
 
         const defaultSizeEvent = () => {
@@ -358,18 +348,23 @@ export default function Home({ sharedSnippetHome }) {
             if (paneElem) paneElem.style.width = "42%"
         }
 
-
         const resizer = document.querySelector(".Resizer.vertical")
-        if (splitPane.current) resizer?.addEventListener("dblclick", defaultSizeEvent)
-        window.addEventListener("resize", paneEvent)
+        if (splitPane.current) {
+            resizer?.addEventListener("dblclick", defaultSizeEvent)
+            window.addEventListener("resize", windowPaneResizeEvent)
+        }
 
         return () => {
             resizer?.removeEventListener("dblclick", defaultSizeEvent)
-            window.removeEventListener("resize", paneEvent)
+            window.removeEventListener("resize", windowPaneResizeEvent)
         }
     }, [splitPane.current])
 
     useEffect(() => {
+        const paneResizeEvent = () => {
+            window.innerWidth < 800 ? setPanelBreakpont(true) : setPanelBreakpont(false)
+        }
+
         const tabShortcut = (e) => {
             if (modalActive) return
 
@@ -387,10 +382,12 @@ export default function Home({ sharedSnippetHome }) {
             }
         }
 
+        window.addEventListener("resize", paneResizeEvent)
         document?.addEventListener("keydown", tabShortcut)
         editorHtml?.current?.focus()
 
         return () => {
+            window.removeEventListener("resize", paneResizeEvent)
             document?.removeEventListener("keydown", tabShortcut)
         }
     }, [])
