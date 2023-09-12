@@ -811,8 +811,8 @@ button {
     align-items: stretch;
     background: var(--main-purple-variation);
     border-radius: 1em;
-    width: clamp(300px, 300px + 40vw, 800px);
-    aspect-ratio: 5/4;
+    width: clamp(300px, 300px + 30vw, 800px);
+    aspect-ratio: 4/3;
     min-height: min(500px, 80%);
     background: var(--main-purple-variation);
     max-width: 100%;
@@ -904,7 +904,6 @@ button {
     overflow-x: hidden;
     padding-inline: min(20%, 5rem);
     padding-block: min(10%, 2rem);
-    overflow: hidden;
 
     div[role=button].presets__noSnippet {
       cursor: pointer;
@@ -1449,7 +1448,6 @@ button {
   }
 
   &::backdrop {
-    background: rgba(40, 40, 40, .4);
     background: transparent;
   }
 }
