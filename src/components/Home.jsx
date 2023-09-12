@@ -524,7 +524,7 @@ export default function Home({ sharedSnippetHome }) {
                                             </span>
                                         </div>
                                         <div className={`mainCode__output__iframeWrapper ${html === "" && css === "" && js === "" && `dim`}`}>
-                                            <iframe src={codeOutput} sandbox="allow-forms allow-modals allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-downloads allow-presentation" allow="fullscreen; accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share" ref={iframe} className="mainCode__output__iframe" title="Output" name="output">
+                                            <iframe src={codeOutput} allow="fullscreen; accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share" ref={iframe} className="mainCode__output__iframe" title="Output" name="output">
                                             </iframe>
                                         </div>
                                     </div>
@@ -649,7 +649,7 @@ export default function Home({ sharedSnippetHome }) {
                                             </span>
                                         </div>
                                         <div className={`mainCode__output__iframeWrapper ${html === "" && css === "" && js === "" && `dim`}`}>
-                                            <iframe src={codeOutput} sandbox="allow-forms allow-modals allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-downloads allow-presentation" allow="fullscreen; accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share" ref={iframe} className="mainCode__output__iframe" title="Output" name="output">
+                                            <iframe src={codeOutput} allow="fullscreen; accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share" ref={iframe} className="mainCode__output__iframe" title="Output" name="output">
                                             </iframe>
                                         </div>
                                     </div>
