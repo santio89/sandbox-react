@@ -383,12 +383,12 @@ export default function Home({ sharedSnippetHome }) {
         }
 
         window.addEventListener("resize", paneResizeEvent)
-        document?.addEventListener("keydown", tabShortcut)
+        document.addEventListener("keydown", tabShortcut)
         editorHtml?.current?.focus()
 
         return () => {
             window.removeEventListener("resize", paneResizeEvent)
-            document?.removeEventListener("keydown", tabShortcut)
+            document.removeEventListener("keydown", tabShortcut)
         }
     }, [])
 
