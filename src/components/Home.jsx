@@ -384,7 +384,7 @@ export default function Home({ sharedSnippetHome }) {
         return () => {
             window?.removeEventListener("resize", paneEvent)
             document?.removeEventListener("keydown", tabShortcut)
-            resizer?.addEventListener("dblclick", defaultSizeEvent)
+            resizer?.removeEventListener("dblclick", defaultSizeEvent)
         }
     }, [])
 
