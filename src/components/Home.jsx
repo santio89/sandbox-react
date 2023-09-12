@@ -375,9 +375,9 @@ export default function Home({ sharedSnippetHome }) {
         }
 
         const resizer = document.querySelector(".Resizer.vertical")
-        window.addEventListener("resize", paneEvent)
-        document.addEventListener("keydown", tabShortcut)
-        resizer.addEventListener("dblclick", defaultSizeEvent)
+        window?.addEventListener("resize", paneEvent)
+        document?.addEventListener("keydown", tabShortcut)
+        resizer?.addEventListener("dblclick", defaultSizeEvent)
 
         editorHtml?.current?.focus()
 
