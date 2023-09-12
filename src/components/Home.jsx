@@ -31,6 +31,8 @@ export default function Home({ sharedSnippetHome }) {
     const [sharedSnippet, setSharedSnippet] = useState(null)
     const [sharedLoading, setSharedLoading] = useState(false)
 
+
+
     const lineHighlight = useSelector(state => state.editor.lineHighlight)
     const minimap = useSelector(state => state.editor.minimap)
     const wordWrap = useSelector(state => state.editor.wordWrap)
@@ -197,7 +199,11 @@ export default function Home({ sharedSnippetHome }) {
             editorHtml?.current?.getAction('editor.action.formatDocument')?.run()
             editorCss?.current?.getAction('editor.action.formatDocument')?.run()
             editorJs?.current?.getAction('editor.action.formatDocument')?.run()
-            setCodeOutput(`<body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>`)
+
+            const codeString = `<!DOCTYPE html><html><body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script></html>`
+            const blob = new Blob([codeString], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            setCodeOutput(url)
             focusCurrentTab()
 
             const startSelection = {
@@ -216,7 +222,10 @@ export default function Home({ sharedSnippetHome }) {
             editorJs?.current?.setSelection(startSelection)
         } else {
             timeout = setTimeout(() => {
-                setCodeOutput(`<body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script>`)
+                const codeString = `<!DOCTYPE html><html><body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script></html>`
+                const blob = new Blob([codeString], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                setCodeOutput(url)
             }, 1000);
         }
 
@@ -509,7 +518,6 @@ export default function Home({ sharedSnippetHome }) {
                                                             </svg>
                                                         </Link>
                                                 }
-
                                                 <button className="mainCode__output__type__full" title="Fullscreen" onClick={() => { setFullscreen() }}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-arrows-fullscreen" viewBox="0 0 16 16">
                                                         <path fillRule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z" />
@@ -518,7 +526,7 @@ export default function Home({ sharedSnippetHome }) {
                                             </span>
                                         </div>
                                         <div className={`mainCode__output__iframeWrapper ${codeOutput === ("" || `<body>\n` + "" + `\n</body>\n` + `\n<style>\n` + "" + `\n</style>\n` + `\n<script>\n` + "" + `\n</script>`) && `dim`}`}>
-                                            <iframe sandbox="allow-forms allow-modals allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-downloads allow-presentation" srcDoc={`<!DOCTYPE html><html>${codeOutput}</html>`} allow="fullscreen; accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share" ref={iframe} className="mainCode__output__iframe" title="Output" name="output">
+                                            <iframe src={codeOutput} sandbox="allow-forms allow-modals allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-downloads allow-presentation" allow="fullscreen; accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share" ref={iframe} className="mainCode__output__iframe" title="Output" name="output">
                                             </iframe>
                                         </div>
                                     </div>
@@ -532,7 +540,6 @@ export default function Home({ sharedSnippetHome }) {
                                                 <span>{tabActive.toUpperCase()}</span>
                                             </span>
                                             <span className="mainCode__input__type__btnWrapper">
-
                                                 {
                                                     <button className="mainCode__input__type__iconBtn" title="Open command palette" onClick={() => { showCommandPalette() }}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-code" viewBox="0 0 16 16">
@@ -644,7 +651,7 @@ export default function Home({ sharedSnippetHome }) {
                                             </span>
                                         </div>
                                         <div className={`mainCode__output__iframeWrapper ${codeOutput === ("" || `<body>\n` + "" + `\n</body>\n` + `\n<style>\n` + "" + `\n</style>\n` + `\n<script>\n` + "" + `\n</script>`) && `dim`}`}>
-                                            <iframe sandbox="allow-forms allow-modals allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-downloads allow-presentation" srcDoc={`<!DOCTYPE html><html>${codeOutput}</html>`} allow="fullscreen; accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share" ref={iframe} className="mainCode__output__iframe" title="Output" name="output">
+                                            <iframe src={codeOutput} sandbox="allow-forms allow-modals allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-downloads allow-presentation" allow="fullscreen; accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share" ref={iframe} className="mainCode__output__iframe" title="Output" name="output">
                                             </iframe>
                                         </div>
                                     </div>
