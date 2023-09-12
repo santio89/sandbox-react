@@ -41,6 +41,7 @@ export default function Home({ sharedSnippetHome }) {
     const editorHtml = useRef(null);
     const editorCss = useRef(null);
     const editorJs = useRef(null);
+    const splitPane = useRef()
 
     const [panelBreakpoint, setPanelBreakpont] = useState(window.innerWidth < 800 ? true : false)
 
@@ -330,6 +331,45 @@ export default function Home({ sharedSnippetHome }) {
     }, [user])
 
     useEffect(() => {
+        const paneResizeEvent = () => {
+            window.innerWidth < 800 ? setPanelBreakpont(true) : setPanelBreakpont(false)
+        }
+
+        const windowPaneResizeFix = () => {
+            const paneElem = splitPane.current?.pane1
+            const containerElem = splitPane.current?.splitPane
+            const paneWidth = paneElem?.getBoundingClientRect()?.width
+            const paneStyleWidth = paneElem?.style?.width
+            const containertWidth = containerElem?.getBoundingClientRect()?.width
+
+
+            if (String(paneStyleWidth).endsWith("px")) {
+                paneElem.style.width = (paneWidth / containertWidth) * 100 + "%"
+            }
+        }
+
+        const paneEvent = () => {
+            paneResizeEvent()
+            splitPane.current && windowPaneResizeFix()
+        }
+
+        const defaultSizeEvent = () => {
+            const paneElem = splitPane.current?.pane1
+            if (paneElem) paneElem.style.width = "42%"
+        }
+
+
+        const resizer = document.querySelector(".Resizer.vertical")
+        if (splitPane.current) resizer?.addEventListener("dblclick", defaultSizeEvent)
+        window.addEventListener("resize", paneEvent)
+
+        return () => {
+            resizer?.removeEventListener("dblclick", defaultSizeEvent)
+            window.removeEventListener("resize", paneEvent)
+        }
+    }, [splitPane.current])
+
+    useEffect(() => {
         const tabShortcut = (e) => {
             if (modalActive) return
 
@@ -347,44 +387,11 @@ export default function Home({ sharedSnippetHome }) {
             }
         }
 
-        const windowPaneResizeFix = () => {
-            const paneElem = document.querySelector(".Pane.vertical.Pane1")
-            const containerElem = document.querySelector(".SplitPane.vertical")
-            const paneWidth = paneElem?.getBoundingClientRect().width
-            const paneStyleWidth = paneElem?.style.width
-            const containertWidth = containerElem?.getBoundingClientRect().width
-
-
-            if (String(paneStyleWidth).endsWith("px")) {
-                paneElem.style.width = (paneWidth / containertWidth) * 100 + "%"
-            }
-        }
-
-        const paneResizeEvent = () => {
-            window.innerWidth < 800 ? setPanelBreakpont(true) : setPanelBreakpont(false)
-        }
-
-        const paneEvent = () => {
-            paneResizeEvent()
-            windowPaneResizeFix()
-        }
-
-        const defaultSizeEvent = () => {
-            const panelElem = document.querySelector(".Pane.vertical.Pane1")
-            panelElem.style.width = "42%"
-        }
-
-        const resizer = document.querySelector(".Resizer.vertical")
-        window?.addEventListener("resize", paneEvent)
         document?.addEventListener("keydown", tabShortcut)
-        resizer?.addEventListener("dblclick", defaultSizeEvent)
-
         editorHtml?.current?.focus()
 
         return () => {
-            window?.removeEventListener("resize", paneEvent)
             document?.removeEventListener("keydown", tabShortcut)
-            resizer?.removeEventListener("dblclick", defaultSizeEvent)
         }
     }, [])
 
@@ -543,7 +550,7 @@ export default function Home({ sharedSnippetHome }) {
                                     </div>
                                 </>
                                 :
-                                <SplitPane split="vertical" minSize={300} defaultSize={"42%"} maxSize={-300} onDragStarted={() => { setPanelDrag(true) }} onDragFinished={() => { setPanelDrag(false); }}>
+                                <SplitPane ref={splitPane} split="vertical" minSize={300} defaultSize={"42%"} maxSize={-300} onDragStarted={() => { setPanelDrag(true) }} onDragFinished={() => { setPanelDrag(false); }}>
                                     <div className={`mainCode__input ${panelDrag && "pe-none"}`}>
                                         <div className="mainCode__input__type">
                                             <span className="mainCode__input__type__active">
