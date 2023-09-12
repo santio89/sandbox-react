@@ -796,8 +796,9 @@ button {
   border-top: none;
   background: var(--main-black);
   overflow-x: hidden;
-  padding-inline: min(8%, 5rem);
-  padding-block: min(8%, 1rem);
+  padding-inline: min(20%, 5rem);
+  padding-block: min(10%, 2rem);
+  overflow: hidden;
   /* INICIO SCROLLBAR */
   scrollbar-width: thin;
   scrollbar-color: var(--main-gray) var(--bg-main);
