@@ -31,8 +31,6 @@ export default function Home({ sharedSnippetHome }) {
     const [sharedSnippet, setSharedSnippet] = useState(null)
     const [sharedLoading, setSharedLoading] = useState(false)
 
-
-
     const lineHighlight = useSelector(state => state.editor.lineHighlight)
     const minimap = useSelector(state => state.editor.minimap)
     const wordWrap = useSelector(state => state.editor.wordWrap)
@@ -525,7 +523,7 @@ export default function Home({ sharedSnippetHome }) {
                                                 </button>
                                             </span>
                                         </div>
-                                        <div className={`mainCode__output__iframeWrapper ${codeOutput === ("" || `<body>\n` + "" + `\n</body>\n` + `\n<style>\n` + "" + `\n</style>\n` + `\n<script>\n` + "" + `\n</script>`) && `dim`}`}>
+                                        <div className={`mainCode__output__iframeWrapper ${html === "" && css === "" && js === "" && `dim`}`}>
                                             <iframe src={codeOutput} sandbox="allow-forms allow-modals allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-downloads allow-presentation" allow="fullscreen; accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share" ref={iframe} className="mainCode__output__iframe" title="Output" name="output">
                                             </iframe>
                                         </div>
@@ -603,7 +601,7 @@ export default function Home({ sharedSnippetHome }) {
                                             </span>
                                         </div>
 
-                                        <div className={`mainCode__input__textWrapper ${tabActive !== "html" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
+                                        <div className={`mainCode__input__textWrapper ${tabActive !== "html" && "d-none"} ${darkTheme ? "code-dark" : "code-light"} ${html === "" && css === "" && js === "" && `dim`}`}>
                                             <div className="mainCode__input__textWrapper__inner">
                                                 <Editor onMount={(e) => editorHtml.current = e} options={monacoOptions} defaultLanguage="html" value={html} onChange={e => setHtml(e)} theme={darkTheme ? "vs-dark" : "vs-light"} />
                                             </div>
@@ -650,7 +648,7 @@ export default function Home({ sharedSnippetHome }) {
                                                 </button>
                                             </span>
                                         </div>
-                                        <div className={`mainCode__output__iframeWrapper ${codeOutput === ("" || `<body>\n` + "" + `\n</body>\n` + `\n<style>\n` + "" + `\n</style>\n` + `\n<script>\n` + "" + `\n</script>`) && `dim`}`}>
+                                        <div className={`mainCode__output__iframeWrapper ${html === "" && css === "" && js === "" && `dim`}`}>
                                             <iframe src={codeOutput} sandbox="allow-forms allow-modals allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-downloads allow-presentation" allow="fullscreen; accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share" ref={iframe} className="mainCode__output__iframe" title="Output" name="output">
                                             </iframe>
                                         </div>
