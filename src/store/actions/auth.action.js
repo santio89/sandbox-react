@@ -91,7 +91,7 @@ export const signOutUser = () => {
     }
 }
 
-export const updateDisplayName = (newDisplayName) => {
+export const updateDisplayName = (displayName, newDisplayName) => {
 
     return async dispatch => {
         dispatch({
@@ -106,8 +106,8 @@ export const updateDisplayName = (newDisplayName) => {
                 type: "UPDATE_DISPLAY_NAME",
                 displayName: newDisplayName
             })
-            toast.message('Auth', {
-                description: `Username updated: ${newDisplayName}`,
+            toast.message('Profile', {
+                description: `User renamed: ${displayName} ➔ ${newDisplayName}`,
             })
         }).catch((e) => {
             console.log("error updating username: ", e)
@@ -140,6 +140,9 @@ export const updateAvatar = (userId, file) => {
                         dispatch({
                             type: "UPDATE_AVATAR",
                             avatar: url
+                        })
+                        toast.message('Profile', {
+                            description: `User avatar updated`,
                         })
                         dispatch({
                             type: "SET_AVATAR_LOADER",

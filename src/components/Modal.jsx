@@ -64,8 +64,8 @@ export default function Modal({ callbacks }) {
         dispatch(setModal(false))
     }
 
-    const sendUpdateDisplayName = (name) => {
-        dispatch(updateDisplayName(name))
+    const sendUpdateDisplayName = (newDisplayName) => {
+        dispatch(updateDisplayName(user.displayName, newDisplayName))
     }
 
     const setPreset = (name, html, css, js) => {
