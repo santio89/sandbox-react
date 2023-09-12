@@ -41,7 +41,10 @@ export default function Home({ sharedSnippetHome }) {
     const editorHtml = useRef(null);
     const editorCss = useRef(null);
     const editorJs = useRef(null);
-    const splitPane = useRef()
+    const htmlWrapper = useRef(null);
+    const cssWrapper = useRef(null);
+    const jsWrapper = useRef(null);
+    const splitPane = useRef(null)
 
     const [panelBreakpoint, setPanelBreakpont] = useState(window.innerWidth < 800 ? true : false)
 
@@ -346,6 +349,9 @@ export default function Home({ sharedSnippetHome }) {
         const defaultSizeEvent = () => {
             const paneElem = splitPane.current?.pane1
             if (paneElem) paneElem.style.width = "42%"
+            htmlWrapper.current.style.height = "100%"
+            cssWrapper.current.style.height = "100%"
+            jsWrapper.current.style.height = "100%"
         }
 
         const resizer = document.querySelector(".Resizer.vertical")
@@ -495,19 +501,19 @@ export default function Home({ sharedSnippetHome }) {
                                             </span>
                                         </div>
                                         <div className={`mainCode__input__textWrapper ${tabActive !== "html" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
-                                            <div className="mainCode__input__textWrapper__inner">
+                                            <div ref={htmlWrapper} className="mainCode__input__textWrapper__inner">
                                                 <Editor onMount={(e) => editorHtml.current = e} options={monacoOptions} defaultLanguage="html" value={html} onChange={e => setHtml(e)} theme={darkTheme ? "vs-dark" : "vs-light"} />
                                             </div>
                                         </div>
 
                                         <div className={`mainCode__input__textWrapper ${tabActive !== "css" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
-                                            <div className="mainCode__input__textWrapper__inner">
+                                            <div ref={cssWrapper} className="mainCode__input__textWrapper__inner">
                                                 <Editor onMount={(e) => editorCss.current = e} options={monacoOptions} defaultLanguage="css" value={css} onChange={e => setCss(e)} theme={darkTheme ? "vs-dark" : "vs-light"} />
                                             </div>
                                         </div>
 
                                         <div className={`mainCode__input__textWrapper ${tabActive !== "js" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
-                                            <div className="mainCode__input__textWrapper__inner">
+                                            <div ref={jsWrapper} className="mainCode__input__textWrapper__inner">
                                                 <Editor onMount={(e) => editorJs.current = e} options={monacoOptions} defaultLanguage="javascript" value={js} onChange={e => setJs(e)} theme={darkTheme ? "vs-dark" : "vs-light"} />
                                             </div>
                                         </div>
@@ -619,19 +625,19 @@ export default function Home({ sharedSnippetHome }) {
                                         </div>
 
                                         <div className={`mainCode__input__textWrapper ${tabActive !== "html" && "d-none"} ${darkTheme ? "code-dark" : "code-light"} ${html === "" && css === "" && js === "" && `dim`}`}>
-                                            <div className="mainCode__input__textWrapper__inner">
+                                            <div ref={htmlWrapper} className="mainCode__input__textWrapper__inner">
                                                 <Editor onMount={(e) => editorHtml.current = e} options={monacoOptions} defaultLanguage="html" value={html} onChange={e => setHtml(e)} theme={darkTheme ? "vs-dark" : "vs-light"} />
                                             </div>
                                         </div>
 
                                         <div className={`mainCode__input__textWrapper ${tabActive !== "css" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
-                                            <div className="mainCode__input__textWrapper__inner">
+                                            <div ref={cssWrapper} className="mainCode__input__textWrapper__inner">
                                                 <Editor onMount={(e) => editorCss.current = e} options={monacoOptions} defaultLanguage="css" value={css} onChange={e => setCss(e)} theme={darkTheme ? "vs-dark" : "vs-light"} />
                                             </div>
                                         </div>
 
                                         <div className={`mainCode__input__textWrapper ${tabActive !== "js" && "d-none"} ${darkTheme ? "code-dark" : "code-light"}`}>
-                                            <div className="mainCode__input__textWrapper__inner">
+                                            <div ref={jsWrapper} className="mainCode__input__textWrapper__inner">
                                                 <Editor onMount={(e) => editorJs.current = e} options={monacoOptions} defaultLanguage="javascript" value={js} onChange={e => setJs(e)} theme={darkTheme ? "vs-dark" : "vs-light"} />
                                             </div>
                                         </div>
