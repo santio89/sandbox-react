@@ -360,41 +360,6 @@ export default function Home({ sharedSnippetHome }) {
         }
     }, [splitPane.current])
 
-    /*     useEffect(() => {
-            const resizeBox = new ResizeObserver(entries => {
-                for (let entry of entries) {
-                    const cr = entry.contentRect;
-    
-                    if (cr.height === 0) return
-                    switch (tabActive) {
-                        case 'html':
-                            if (String(editorHtml?.current?.style?.height) === "") return
-                            break;
-                        case 'css':
-                            if (String(editorCss?.current?.style?.height) === "") return
-                            break;
-                        case 'js':
-                            if (String(editorJs?.current?.style?.height) === "") return
-                            break;
-                    }
-    
-    
-                    editorHtml.current.style.height = cr.height + 20 + "px"
-                    editorCss.current.style.height = cr.height + 20 + "px"
-                    editorJs.current.style.height = cr.height + 20 + "px"
-                    editorHtml.current.style.maxHeight = editorHtml.current.style.height
-                    editorCss.current.style.maxHeight = editorCss.current.style.height
-                    editorJs.current.style.maxHeight = editorJs.current.style.height
-                }
-            });
-    
-            editorHtml.current && resizeBox.observe(editorHtml.current)
-            editorCss.current && resizeBox.observe(editorCss.current)
-            editorJs.current && resizeBox.observe(editorJs.current)
-    
-            return () => resizeBox.disconnect()
-        }, [panelBreakpoint, tabActive, editorHtml, editorCss, editorJs]) */
-
     useEffect(() => {
         const paneResizeEvent = () => {
             window.innerWidth < 800 ? setPanelBreakpont(true) : setPanelBreakpont(false)
