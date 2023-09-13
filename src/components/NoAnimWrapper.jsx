@@ -1,4 +1,4 @@
-export default function AnimWrapper({ children }) {
+export default function NoAnimWrapper({ children }) {
 
     return (
         <div className="animWrapper">
