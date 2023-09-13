@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import AnimWrapper from "./AnimWrapper";
 import NoAnimWrapper from "./NoAnimWrapper";
 import { useNavigate } from "react-router-dom";
+import Draggable from "react-draggable";
 
 export default function Modal({ callbacks }) {
     const dispatch = useDispatch();
@@ -35,7 +36,8 @@ export default function Modal({ callbacks }) {
 
     const { setNewProject } = callbacks;
 
-    const modal = useRef()
+    const modal = useRef(null)
+    const modalDrag = useRef(null)
 
     const [deleteId, setDeleteId] = useState(null);
     const [editId, setEditId] = useState(null)
@@ -545,50 +547,52 @@ export default function Modal({ callbacks }) {
 
     return (
         <dialog className="main__modal" ref={modal}>
-            <div className="main__modal__inner">
-                <div className="main__modal__header">
-                    <span>{modalTitle()}</span>
-                    <div className="main__modal__header__buttons">
-                        <button className={`${modalOption === "snippets" && "modalOptionActive"}`} onClick={() => { setSnippetTab(user.userId ? "mySnippets" : "featuredSnippets"); setModalOption("snippets") }}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-stickies-fill" viewBox="0 0 16 16">
-                                <path d="M0 1.5V13a1 1 0 0 0 1 1V1.5a.5.5 0 0 1 .5-.5H14a1 1 0 0 0-1-1H1.5A1.5 1.5 0 0 0 0 1.5z" />
-                                <path d="M3.5 2A1.5 1.5 0 0 0 2 3.5v11A1.5 1.5 0 0 0 3.5 16h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 16 9.586V3.5A1.5 1.5 0 0 0 14.5 2h-11zm6 8.5a1 1 0 0 1 1-1h4.396a.25.25 0 0 1 .177.427l-5.146 5.146a.25.25 0 0 1-.427-.177V10.5z" />
-                            </svg>
-                        </button>
-                        <button className={`${modalOption === "profile" && "modalOptionActive"}`} onClick={() => { setModalOption("profile") }}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-person-fill" viewBox="0 0 16 16">
-                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
-                            </svg>
-                        </button>
-                        <button className="modalClose" onClick={() => { closeModal() }}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="x-lg" viewBox="0 0 16 16">
-                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                <div className="main__modal__content">
-                    <div className="main__modal__content__innerWrapper">
-                        {modalContent()}
-                    </div>
-                </div>
-                {modalOption === "snippets" &&
-                    <>
-                        <div className="presets__tabs">
-                            <button className={`presets__tabs__btn ${snippetTab === "mySnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("mySnippets") }}>My{`\n`}snippets</button>
-                            <button className={`presets__tabs__btn ${snippetTab === "saveSnippet" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("saveSnippet") }}>Save{`\n`}snippet</button>
-                            <button className={`presets__tabs__btn ${snippetTab === "featuredSnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("featuredSnippets") }}>Featured{`\n`}snippets</button>
+            <Draggable nodeRef={modalDrag} handle=".main__modal__header" bounds={"parent"}>
+                <div ref={modalDrag} className="main__modal__inner">
+                    <div className="main__modal__header">
+                        <span>{modalTitle()}</span>
+                        <div className="main__modal__header__buttons">
+                            <button className={`${modalOption === "snippets" && "modalOptionActive"}`} onClick={() => { setSnippetTab(user.userId ? "mySnippets" : "featuredSnippets"); setModalOption("snippets") }}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-stickies-fill" viewBox="0 0 16 16">
+                                    <path d="M0 1.5V13a1 1 0 0 0 1 1V1.5a.5.5 0 0 1 .5-.5H14a1 1 0 0 0-1-1H1.5A1.5 1.5 0 0 0 0 1.5z" />
+                                    <path d="M3.5 2A1.5 1.5 0 0 0 2 3.5v11A1.5 1.5 0 0 0 3.5 16h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 16 9.586V3.5A1.5 1.5 0 0 0 14.5 2h-11zm6 8.5a1 1 0 0 1 1-1h4.396a.25.25 0 0 1 .177.427l-5.146 5.146a.25.25 0 0 1-.427-.177V10.5z" />
+                                </svg>
+                            </button>
+                            <button className={`${modalOption === "profile" && "modalOptionActive"}`} onClick={() => { setModalOption("profile") }}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-person-fill" viewBox="0 0 16 16">
+                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                </svg>
+                            </button>
+                            <button className="modalClose" onClick={() => { closeModal() }}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                                </svg>
+                            </button>
                         </div>
-                    </>
-                }
-                {modalOption === "profile" && user.userId &&
-                    <>
-                        <div className="presets__tabs">
-                            <button className={`presets__tabs__btn `} onClick={() => { signOutCurrentUser() }}>Sign out</button>
+                    </div>
+                    <div className="main__modal__content">
+                        <div className="main__modal__content__innerWrapper">
+                            {modalContent()}
                         </div>
-                    </>
-                }
-            </div>
+                    </div>
+                    {modalOption === "snippets" &&
+                        <>
+                            <div className="presets__tabs">
+                                <button className={`presets__tabs__btn ${snippetTab === "mySnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("mySnippets") }}>My{`\n`}snippets</button>
+                                <button className={`presets__tabs__btn ${snippetTab === "saveSnippet" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("saveSnippet") }}>Save{`\n`}snippet</button>
+                                <button className={`presets__tabs__btn ${snippetTab === "featuredSnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("featuredSnippets") }}>Featured{`\n`}snippets</button>
+                            </div>
+                        </>
+                    }
+                    {modalOption === "profile" && user.userId &&
+                        <>
+                            <div className="presets__tabs">
+                                <button className={`presets__tabs__btn `} onClick={() => { signOutCurrentUser() }}>Sign out</button>
+                            </div>
+                        </>
+                    }
+                </div>
+            </Draggable>
         </dialog>
     )
 }
