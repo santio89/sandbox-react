@@ -37,6 +37,7 @@ export default function Home({ sharedSnippetHome }) {
 
     const [panelDrag, setPanelDrag] = useState(false)
     const iframe = useRef(null)
+    const iframeWrapper = useRef(null)
 
     const editorHtml = useRef(null);
     const editorCss = useRef(null);
@@ -352,9 +353,11 @@ export default function Home({ sharedSnippetHome }) {
             htmlWrapper.current.style.height = "100%"
             cssWrapper.current.style.height = "100%"
             jsWrapper.current.style.height = "100%"
+            iframeWrapper.current.style.height = "100%"
         }
 
         const resizer = document.querySelector(".Resizer.vertical")
+
         if (splitPane.current) {
             resizer?.addEventListener("dblclick", defaultSizeEvent)
             window.addEventListener("resize", windowPaneResizeEvent)
@@ -546,7 +549,7 @@ export default function Home({ sharedSnippetHome }) {
                                                 </button>
                                             </span>
                                         </div>
-                                        <div className={`mainCode__output__iframeWrapper ${html === "" && css === "" && js === "" && `dim`}`}>
+                                        <div ref={iframeWrapper} className={`mainCode__output__iframeWrapper ${html === "" && css === "" && js === "" && `dim`}`}>
                                             <iframe src={codeOutput} allow="fullscreen; accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share" ref={iframe} className="mainCode__output__iframe" title="Output" name="output">
                                             </iframe>
                                         </div>
@@ -671,7 +674,7 @@ export default function Home({ sharedSnippetHome }) {
                                                 </button>
                                             </span>
                                         </div>
-                                        <div className={`mainCode__output__iframeWrapper ${html === "" && css === "" && js === "" && `dim`}`}>
+                                        <div ref={iframeWrapper} className={`mainCode__output__iframeWrapper ${html === "" && css === "" && js === "" && `dim`}`}>
                                             <iframe src={codeOutput} allow="fullscreen; accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share" ref={iframe} className="mainCode__output__iframe" title="Output" name="output">
                                             </iframe>
                                         </div>
