@@ -812,7 +812,6 @@ button {
     flex-direction: column;
     justify-content: start;
     align-items: stretch;
-    background: var(--main-purple-variation);
     border-radius: 1em;
     aspect-ratio: 4/3;
     width: clamp(300px, 300px + 30vw, 800px);
@@ -1142,10 +1141,12 @@ button {
         fill: var(--main-purple-variation);
         padding: 1em;
         transition: 200ms;
-        background: var(--main-gray);
+        background: linear-gradient(45deg, var(--main-purple), var(--main-red));
         border-radius: .4em;
         cursor: pointer;
         font-weight: bold;
+        transition: scale 200ms;
+        border: 2px solid var(--main-purple);
 
         svg {
           fill: inherit
@@ -1153,16 +1154,14 @@ button {
 
         &:hover,
         &:focus-visible {
-          color: var(--main-purple);
-          fill: var(--main-purple);
-          background: var(--main-purple-variation);
+          outline: 4px solid var(--main-purple);
+          outline-offset: -2px
         }
 
         &:active {
           scale: .9;
-          color: var(--main-purple);
-          fill: var(--main-purple);
-          background: var(--main-purple-variation);
+          outline: 4px solid var(--main-purple);
+          outline-offset: -2px
         }
       }
     }
@@ -1573,11 +1572,11 @@ button {
 /* fin loader */
 
 li[data-sonner-toast] {
-  background: var(--main-purple-variation) !important;
-  border-color: var(--main-purple) !important;
+  background: linear-gradient(45deg, var(--main-purple), var(--main-red)) !important;
+  border-color: var(--main-purple-variation) !important;
   color: rgb(248, 248, 248) !important;
-  word-break: break-all;
-  white-space: pre-wrap;
+  word-break: break-all !important;
+  white-space: pre-wrap !important;
 }
 
 .animWrapper {
