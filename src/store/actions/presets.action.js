@@ -180,6 +180,9 @@ export const getDefaultPresets = () => {
                 const presetsObj = snapshot.val()
                 defaultPresets = Object.entries(presetsObj).map((obj) => { return { docId: obj[0], ...obj[1] } })
 
+                /* reverse (last added is first shown) */
+                defaultPresets.reverse()
+
                 dispatch({
                     type: "SET_DEFAULT_PRESETS",
                     defaultPresets
