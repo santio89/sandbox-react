@@ -885,6 +885,18 @@ button {
 .main__modal .presets__profile__userInfo__data__img input[type=file] {
   display: none;
 }
+.main__modal .presets__profile__userInfo__data__img__uploadImgLabel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.main__modal .presets__profile__userInfo__data__img__uploadImgLabel:hover + label {
+  color: var(--main-purple);
+}
+.main__modal .presets__profile__userInfo__data__img__uploadImgLabel:active {
+  color: var(--main-purple);
+}
 .main__modal .presets__profile__userInfo__data__img__upload {
   position: absolute;
   bottom: -12px;
@@ -899,6 +911,9 @@ button {
   cursor: pointer;
 }
 .main__modal .presets__profile__userInfo__data__img__upload:hover, .main__modal .presets__profile__userInfo__data__img__upload:focus-visible {
+  color: var(--main-purple);
+}
+.main__modal .presets__profile__userInfo__data__img__upload:active {
   color: var(--main-purple);
 }
 .main__modal .presets__profile__userInfo__data__text {

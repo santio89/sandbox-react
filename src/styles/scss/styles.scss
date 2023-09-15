@@ -995,7 +995,7 @@ button {
             background: var(--main-purple-variation);
             border-radius: 50%;
             outline: 2px solid var(--main-purple);
-
+            
             img {
               aspect-ratio: 1;
               border-radius: 50%;
@@ -1005,6 +1005,21 @@ button {
 
             input[type=file] {
               display: none;
+            }
+
+            &__uploadImgLabel {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              cursor: pointer;
+
+              &:hover+label {
+                color: var(--main-purple)
+              }
+
+              &:active {
+                color: var(--main-purple);
+              }
             }
 
             &__upload {
@@ -1022,6 +1037,10 @@ button {
 
               &:hover,
               &:focus-visible {
+                color: var(--main-purple)
+              }
+
+              &:active {
                 color: var(--main-purple)
               }
             }

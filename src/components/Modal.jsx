@@ -151,11 +151,11 @@ export default function Modal({ callbacks }) {
                             <div className="presets__profile__userInfo">
                                 <div className="presets__profile__userInfo__data">
                                     <div className="presets__profile__userInfo__data__img">
-                                        <img src={user.avatar} alt="profile image" />
                                         <input type="file" id="picUpload" name="picUpload" accept="image/png, image/jpeg"
                                             onChange={(e) => {
                                                 setPicUpload(e.currentTarget.files[0]);
                                             }} />
+                                        <label className="presets__profile__userInfo__data__img__uploadImgLabel" htmlFor="picUpload" title="Upload avatar"><img src={user.avatar} alt="profile image" /></label>
                                         {
                                             updateAvatarLoader ?
                                                 <div className="loader"></div>
