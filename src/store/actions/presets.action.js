@@ -23,7 +23,7 @@ export const savePreset = (presets, preset, userId = null, callback) => {
                 } while (exists)
                 /* end check duplicated name */
 
-                preset.timestamp = timestamp
+                preset.createdAt = timestamp
 
                 const doc = await push(ref(db, 'snippets/' + userId), preset);
                 const newPreset = { docId: doc.key, ...preset }
