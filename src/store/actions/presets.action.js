@@ -27,7 +27,7 @@ export const savePreset = (presets, preset, userId = null, callback) => {
 
                 const doc = await push(ref(db, 'snippets/' + userId), preset);
                 const newPreset = { docId: doc.key, ...preset }
-                const newPresets = [...presets, newPreset]
+                const newPresets = [newPreset, ...presets]
 
                 dispatch({
                     type: "SET_PRESETS",
@@ -136,6 +136,9 @@ export const getPresets = (userId = null) => {
                 if (snapshot.exists()) {
                     const presetsObj = snapshot.val()
                     presets = Object.entries(presetsObj).map((obj) => { return { docId: obj[0], ...obj[1] } })
+
+                    /* reverse (last added is first shown) */
+                    presets.reverse()
 
                     dispatch({
                         type: "SET_PRESETS",
