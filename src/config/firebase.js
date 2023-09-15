@@ -1,7 +1,7 @@
 import { getAnalytics } from "firebase/analytics";
 import { getStorage } from "firebase/storage";
 import { getAuth, GoogleAuthProvider } from 'firebase/auth'
-import { getDatabase } from "firebase/database";
+import { getDatabase, serverTimestamp } from "firebase/database";
 import { initializeApp } from 'firebase/app';
 
 export const firebaseConfig = {
@@ -21,3 +21,4 @@ export const firebaseAnalytics = getAnalytics(firebaseApp);
 export const firebaseAuth = getAuth(firebaseApp)
 export const firebaseDb = getDatabase(firebaseApp)
 export const firebaseGoogleProvider = new GoogleAuthProvider();
+export const timestamp = serverTimestamp()

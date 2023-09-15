@@ -1,4 +1,4 @@
-import { firebaseDb as db } from "../../config/firebase"
+import { firebaseDb as db, timestamp } from "../../config/firebase"
 import { ref, set, push, child, get, remove } from "firebase/database";
 import { toast } from "sonner";
 
@@ -22,6 +22,8 @@ export const savePreset = (presets, preset, userId = null, callback) => {
                     }
                 } while (exists)
                 /* end check duplicated name */
+
+                preset.timestamp = timestamp
 
                 const doc = await push(ref(db, 'snippets/' + userId), preset);
                 const newPreset = { docId: doc.key, ...preset }
