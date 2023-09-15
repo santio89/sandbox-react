@@ -547,7 +547,7 @@ export default function Modal({ callbacks }) {
 
     return (
         <dialog className="main__modal" ref={modal}>
-            <Draggable nodeRef={modalDrag} handle=".main__modal__header" bounds={"parent"}>
+            <Draggable nodeRef={modalDrag} handle=".main__modal__header" bounds={"parent"} cancel="button">
                 <div ref={modalDrag} className="main__modal__inner">
                     <div className="main__modal__header">
                         <span>{modalTitle()}</span>
