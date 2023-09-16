@@ -823,6 +823,7 @@ button {
 
   &__header {
     background: var(--main-purple-variation);
+    background: linear-gradient(45deg, var(--main-purple-variation), var(--main-red), var(--main-purple-variation));
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -991,14 +992,17 @@ button {
             align-items: center;
             position: relative;
             aspect-ratio: 1;
-            background: var(--main-purple-variation);
+            background-color: var(--main-purple-variation);
+            background-image: linear-gradient(45deg, var(--main-purple), var(--main-red));
+            padding: 2px;
             border-radius: 50%;
-            outline: 2px solid var(--main-purple);
+            overflow: hidden;
+            width: 120px;
 
             img {
+              width: 100%;
               aspect-ratio: 1;
               border-radius: 50%;
-              width: 120px;
               object-fit: cover;
             }
 
@@ -1363,6 +1367,8 @@ button {
         outline: none;
         border: none;
         border-bottom: 2px solid var(--main-purple);
+        border-image: linear-gradient(45deg, var(--main-purple), var(--main-red));
+        border-image-slice: 1;
         color: var(--main-white);
         text-align: center;
         max-width: 90%;
