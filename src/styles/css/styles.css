@@ -719,9 +719,8 @@ button {
   justify-content: start;
   align-items: stretch;
   border-radius: 1em;
-  aspect-ratio: 4/3;
-  width: clamp(300px, 300px + 30vw, 800px);
-  min-height: min(500px, 80%);
+  aspect-ratio: 7/5;
+  width: clamp(300px, 300px + 30vw, 600px);
   background: var(--main-purple-variation);
   max-width: 100%;
   overflow: hidden;
@@ -1027,17 +1026,16 @@ button {
   outline-offset: -2px;
 }
 .main__modal .presets__option {
-  aspect-ratio: 4/3;
-  width: clamp(100px, 100px + 8vw, 180px);
-  min-height: 128px;
-  background-color: var(--main-purple);
-  background-image: linear-gradient(45deg, var(--main-purple), var(--main-red));
-  border: 2px solid var(--main-purple);
+  aspect-ratio: 7/5;
+  width: clamp(100px, 100px + 8vw, 150px);
+  background-color: var(--main-gray);
+  border-top: 4px solid var(--main-purple);
+  border-image: linear-gradient(45deg, var(--main-purple), var(--main-red));
+  border-image-slice: 1;
+  border-radius: 0 0 0.4em 0.4em;
   cursor: pointer;
   color: rgb(248, 248, 248);
-  font-weight: bold;
-  font-size: clamp(1rem, 1rem + 0.5vw, 1.2rem);
-  border-radius: 0.4em;
+  font-size: 1rem;
   padding: 2px;
   display: flex;
   justify-content: center;
@@ -1049,9 +1047,7 @@ button {
   pointer-events: none;
 }
 .main__modal .presets__option:hover, .main__modal .presets__option:focus-visible, .main__modal .presets__option:focus-within, .main__modal .presets__option:active {
-  box-shadow: 0 0 10px 0 var(--main-purple);
-  outline: 3px solid var(--main-purple);
-  outline-offset: -2px;
+  box-shadow: 0 -2px 4px 0 var(--main-purple), 0px 2px 4px 0 var(--main-red);
 }
 .main__modal .presets__option:hover button, .main__modal .presets__option:focus-visible button, .main__modal .presets__option:focus-within button, .main__modal .presets__option:active button {
   opacity: 1;
@@ -1097,11 +1093,11 @@ button {
   line-height: 1;
   border-radius: 2px;
   color: var(--main-purple-variation);
+  font-weight: bold;
   cursor: pointer;
 }
 .main__modal .presets__option__confirm__buttons button:hover, .main__modal .presets__option__confirm__buttons button:focus-visible {
   color: rgb(248, 248, 248);
-  font-weight: bold;
 }
 .main__modal .presets__option__confirm__buttons button:active {
   color: rgb(248, 248, 248);
@@ -1167,43 +1163,45 @@ button {
 .main__modal .presets__save form {
   display: flex;
   flex-direction: column;
+  align-items: center;
   flex: 1;
-  gap: 1rem;
+  gap: 2rem;
   max-width: 100%;
 }
 .main__modal .presets__save input {
   background: transparent;
-  font-size: clamp(1.1rem, 1.1rem + 4vw, 2.4rem);
-  font-weight: bold;
+  font-family: var(--font-primary);
+  font-size: clamp(1rem, 1rem + 4vw, 1.8rem);
   outline: none;
   border: none;
   border-bottom: 2px solid var(--main-purple);
   color: var(--main-white);
   text-align: center;
+  max-width: 90%;
+  font-weight: bold;
+  line-height: 1.4;
 }
 .main__modal .presets__save input::placeholder {
   color: rgb(180, 180, 180);
+  font-weight: normal;
 }
 .main__modal .presets__save button {
   align-self: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.4em 0.8em;
+  padding: 0.2em 0.4em;
   border-radius: 0.2em;
   width: clamp(60px, 60px + 2vw, 80px);
   outline: none;
-  border: none;
+  border: 1px solid var(--main-purple);
   font-weight: bold;
   background-color: var(--main-purple);
   background-image: linear-gradient(45deg, var(--main-purple), var(--main-red));
-  background-size: 300%;
-  background-position: 0% 50%;
   color: var(--main-btn-clr);
   font-size: clamp(1.1rem, 1.1rem + 2vw, 1.2rem);
   cursor: pointer;
   transition: 200ms;
-  border: 1px solid var(--main-purple);
   position: relative;
 }
 .main__modal .presets__save button::after {
@@ -1213,7 +1211,7 @@ button {
   right: -150%;
   translate: 0 -50%;
   color: var(--main-purple);
-  transition: 200ms;
+  transition: scale 200ms;
   font-weight: normal;
 }
 .main__modal .presets__save button:hover, .main__modal .presets__save button:focus-visible {

@@ -813,9 +813,8 @@ button {
     justify-content: start;
     align-items: stretch;
     border-radius: 1em;
-    aspect-ratio: 4/3;
-    width: clamp(300px, 300px + 30vw, 800px);
-    min-height: min(500px, 80%);
+    aspect-ratio: 7/5;
+    width: clamp(300px, 300px + 30vw, 600px);
     background: var(--main-purple-variation);
     max-width: 100%;
     overflow: hidden;
@@ -995,7 +994,7 @@ button {
             background: var(--main-purple-variation);
             border-radius: 50%;
             outline: 2px solid var(--main-purple);
-            
+
             img {
               aspect-ratio: 1;
               border-radius: 50%;
@@ -1186,17 +1185,16 @@ button {
     }
 
     &__option {
-      aspect-ratio: 4/3;
-      width: clamp(100px, 100px + 8vw, 180px);
-      min-height: 128px;
-      background-color: var(--main-purple);
-      background-image: linear-gradient(45deg, var(--main-purple), var(--main-red));
-      border: 2px solid var(--main-purple);
+      aspect-ratio: 7/5;
+      width: clamp(100px, 100px + 8vw, 150px);
+      background-color: var(--main-gray);
+      border-top: 4px solid var(--main-purple);
+      border-image: linear-gradient(45deg, var(--main-purple), var(--main-red));
+      border-image-slice: 1;
+      border-radius: 0 0 .4em .4em;
       cursor: pointer;
       color: rgb(248, 248, 248);
-      font-weight: bold;
-      font-size: clamp(1rem, 1rem + .5vw, 1.2rem);
-      border-radius: .4em;
+      font-size: 1rem;
       padding: 2px;
       display: flex;
       justify-content: center;
@@ -1212,9 +1210,8 @@ button {
       &:focus-visible,
       &:focus-within,
       &:active {
-        box-shadow: 0 0 10px 0 var(--main-purple);
-        outline: 3px solid var(--main-purple);
-        outline-offset: -2px
+        box-shadow: 0 -2px 4px 0 var(--main-purple),
+          0px 2px 4px 0 var(--main-red);
       }
 
       &:hover button,
@@ -1267,12 +1264,12 @@ button {
             line-height: 1;
             border-radius: 2px;
             color: var(--main-purple-variation);
+            font-weight: bold;
             cursor: pointer;
 
             &:hover,
             &:focus-visible {
               color: rgb(248, 248, 248);
-              font-weight: bold;
             }
 
             &:active {
@@ -1353,23 +1350,28 @@ button {
       form {
         display: flex;
         flex-direction: column;
+        align-items: center;
         flex: 1;
-        gap: 1rem;
+        gap: 2rem;
         max-width: 100%;
       }
 
       input {
         background: transparent;
-        font-size: clamp(1.1rem, 1.1rem + 4vw, 2.4rem);
-        font-weight: bold;
+        font-family: var(--font-primary);
+        font-size: clamp(1rem, 1rem + 4vw, 1.8rem);
         outline: none;
         border: none;
         border-bottom: 2px solid var(--main-purple);
         color: var(--main-white);
         text-align: center;
+        max-width: 90%;
+        font-weight: bold;
+        line-height: 1.4;
 
         &::placeholder {
           color: rgb(180, 180, 180);
+          font-weight: normal;
         }
       }
 
@@ -1378,21 +1380,18 @@ button {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: .4em .8em;
+        padding: .2em .4em;
         border-radius: .2em;
         width: clamp(60px, 60px + 2vw, 80px);
         outline: none;
-        border: none;
+        border: 1px solid var(--main-purple);
         font-weight: bold;
         background-color: var(--main-purple);
         background-image: linear-gradient(45deg, var(--main-purple), var(--main-red));
-        background-size: 300%;
-        background-position: 0% 50%;
         color: var(--main-btn-clr);
         font-size: clamp(1.1rem, 1.1rem + 2vw, 1.2rem);
         cursor: pointer;
         transition: 200ms;
-        border: 1px solid var(--main-purple);
         position: relative;
 
         &::after {
@@ -1402,7 +1401,7 @@ button {
           right: -150%;
           translate: 0 -50%;
           color: var(--main-purple);
-          transition: 200ms;
+          transition: scale 200ms;
           font-weight: normal;
         }
 
