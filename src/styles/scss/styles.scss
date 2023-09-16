@@ -1191,7 +1191,7 @@ button {
     &__option {
       aspect-ratio: 7/5;
       width: clamp(100px, 100px + 8vw, 150px);
-      background-color: var(--main-gray);
+      background-color: var(--main-gray-op);
       border-top: 4px solid var(--main-purple);
       border-image: linear-gradient(45deg, var(--main-purple), var(--main-red));
       border-image-slice: 1;
