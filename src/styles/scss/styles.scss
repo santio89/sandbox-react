@@ -905,7 +905,7 @@ button {
     background: var(--main-black);
     overflow-x: hidden;
     padding-inline: min(20%, 5rem);
-    padding-block: min(10%, 2rem);
+    padding-block: min(10%, 2.5rem);
 
     div[role=button].presets__noSnippet {
       cursor: pointer;
@@ -996,7 +996,6 @@ button {
             background-image: linear-gradient(45deg, var(--main-purple), var(--main-red));
             padding: 2px;
             border-radius: 50%;
-            overflow: hidden;
             width: 120px;
 
             img {
@@ -1189,7 +1188,7 @@ button {
     }
 
     &__option {
-      aspect-ratio: 7/5;
+      aspect-ratio: 8/5;
       width: clamp(100px, 100px + 8vw, 150px);
       background-color: var(--main-gray-op);
       border-top: 4px solid var(--main-purple);
