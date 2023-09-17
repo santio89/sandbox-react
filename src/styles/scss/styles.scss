@@ -814,7 +814,8 @@ button {
     align-items: stretch;
     border-radius: 1em;
     aspect-ratio: 7/5;
-    width: clamp(300px, 300px + 30vw, 600px);
+    width: clamp(300px, 300px + 30vw, 720px);
+    min-height: 420px;
     background: var(--main-purple-variation);
     max-width: 100%;
     overflow: hidden;
