@@ -7,7 +7,7 @@ import LoaderReducer from "./reducers/loader.reducer";
 import { HtmlReducer, CssReducer, JsReducer, editorReducer } from "./reducers/code.reducer";
 import thunk from "redux-thunk";
 import { persistReducer, persistStore } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import localforage from "localforage";
 import undoable from "redux-undo"
 
 const RootReducer = combineReducers({
@@ -30,7 +30,7 @@ const RootReducer = combineReducers({
 
 const persistConfig = {
     key: 'root',
-    storage: storage,
+    storage: localforage,
     whitelist: ["theme", "html", "css", "js", "editor", "auth"],
     timeout: 0,
 }
