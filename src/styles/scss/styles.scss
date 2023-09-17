@@ -905,7 +905,7 @@ button {
     background: var(--main-black);
     overflow-x: hidden;
     padding-inline: min(20%, 5rem);
-    padding-block: min(10%, 1rem);
+    padding-block: min(10%, 2rem);
 
     div[role=button].presets__noSnippet {
       cursor: pointer;
