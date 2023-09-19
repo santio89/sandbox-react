@@ -5,7 +5,9 @@
   --main-purple-variation: #3b158d;
   --main-red: #d31d53;
   --main-white: rgb(248, 248, 248);
+  --main-white-op: rgb(248, 248, 248, .5);
   --main-black: rgb(30, 30, 30);
+  --main-black-op: rgb(30, 30, 30, .5);
   --main-gray: rgb(80, 80, 80);
   --main-gray-op: rgb(100, 100, 100, .5);
 
@@ -75,7 +77,9 @@ body,
   --main-purple-variation: rgb(59, 21, 141);
   --main-red: rgb(210, 28, 83);
   --main-white: rgb(248, 248, 248);
+  --main-white-op: rgb(248, 248, 248, .5);
   --main-black: rgb(30, 30, 30);
+  --main-black-op: rgb(30, 30, 30, .5);
   --main-gray: rgb(80, 80, 80);
   --main-gray-op: rgb(100, 100, 100, .5);
 
@@ -94,7 +98,9 @@ body,
   --main-purple: rgb(107, 31, 248);
   --main-red: rgb(210, 28, 83);
   --main-white: rgb(30, 30, 30);
+  --main-white-op: rgb(30, 30, 30, .5);
   --main-black: rgb(248, 248, 248);
+  --main-black-op: rgb(248, 248, 248, .5);
   --main-gray: rgb(220, 220, 220);
 
   --clr-nav: rgb(248, 248, 248);
@@ -1238,9 +1244,21 @@ button {
           border: none;
           border-bottom: 1px dashed var(--main-purple-variation);
           text-align: center;
+          font-weight: bold;
+          transition: background-color 200ms;
+          color: var(--main-white);
+
+          &:not(:placeholder-shown) {
+            background-color: var(--main-gray-op);
+          }
+
+          &:focus {
+            background-color: var(--main-gray-op);
+          }
 
           &::placeholder {
-            color: rgb(180, 180, 180);
+            font-weight: normal;
+            color: var(--main-white-op)
           }
         }
 
@@ -1261,13 +1279,13 @@ button {
             font-size: .94em;
             line-height: 1;
             border-radius: 2px;
-            font-weight: bold;
             cursor: pointer;
             color: rgb(248, 248, 248);
 
             &:hover,
             &:focus-visible {
               color: var(--main-red);
+              font-weight: bold;
             }
 
             &:active {
@@ -1331,7 +1349,6 @@ button {
             align-items: center;
             aspect-ratio: 1;
             width: 20px;
-            /* opacity: 0; */
             cursor: pointer;
 
             svg {
@@ -1372,7 +1389,7 @@ button {
         flex-direction: column;
         align-items: center;
         flex: 1;
-        gap: 2rem;
+        gap: 1.5rem;
         max-width: 100%;
       }
 
@@ -1385,15 +1402,25 @@ button {
         border-bottom: 2px solid var(--main-purple);
         border-image: linear-gradient(45deg, var(--main-purple), var(--main-red));
         border-image-slice: 1;
-        color: var(--main-white);
         text-align: center;
         max-width: 90%;
         font-weight: bold;
         line-height: 1.4;
+        color: var(--main-white);
+        border-radius: .2em .2em 0 0;
+        transition: background-color 200ms;
+
+        &:not(:placeholder-shown) {
+          background-color: var(--main-gray-op);
+        }
+
+        &:focus {
+          background-color: var(--main-gray-op);
+        }
 
         &::placeholder {
-          color: rgb(180, 180, 180);
           font-weight: normal;
+          color: var(--main-white-op)
         }
       }
 
