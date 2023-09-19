@@ -443,6 +443,13 @@ export default function Modal({ callbacks }) {
         }
 
         if (modalActive) {
+            setModalOption("snippets")
+            setSnippetTab(user.userId ? "mySnippets" : "featuredSnippets")
+            setSelectedId(null)
+            setDeleteId(null)
+            setEditId(null)
+            setSavePresetName("")
+
             try {
                 document.startViewTransition(() => {
                     modal.current.show()
@@ -463,13 +470,6 @@ export default function Modal({ callbacks }) {
 
             document.body.removeEventListener("click", closeModalClick)
         }
-
-        setModalOption("snippets")
-        setSnippetTab(user.userId ? "mySnippets" : "featuredSnippets")
-        setSelectedId(null)
-        setDeleteId(null)
-        setEditId(null)
-        setSavePresetName("")
 
         return () => { document.body.removeEventListener("click", closeModalClick) }
 
