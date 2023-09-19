@@ -450,10 +450,24 @@ export default function Modal({ callbacks }) {
         }
 
         if (modalActive) {
-            modal.current.show()
+            try {
+                document.startViewTransition(() => {
+                    modal.current.show()
+                });
+            } catch {
+                modal.current.show()
+            }
+
             document.body.addEventListener("click", closeModalClick)
         } else {
-            modal.current.close()
+            try {
+                document.startViewTransition(() => {
+                    modal.current.close()
+                });
+            } catch {
+                modal.current.close()
+            }
+
             document.body.removeEventListener("click", closeModalClick)
         }
 
