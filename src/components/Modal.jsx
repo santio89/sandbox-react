@@ -336,7 +336,7 @@ export default function Modal({ callbacks }) {
                                                                                                     setDeleteId(null);
                                                                                                     setSelectedId(preset.id)
                                                                                                 }
-                                                                                            }}><span>{preset.name}</span></span>
+                                                                                            }} title="Load snippet"><span>{preset.name}</span></span>
                                                                                         </span>
                                                                                     )
                                                                                 )
