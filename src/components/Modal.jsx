@@ -101,9 +101,9 @@ export default function Modal({ callbacks }) {
             exchangeItems(id, dragId)
         }
 
-        dragItem.style.opacity = '1';
-        targetItem.style.outline = 'none';
-        setDragItem(null);
+        dragItem.style.opacity = '1'
+        targetItem.style.outline = 'none'
+        setDragItem(null)
         setDragId(null)
     }
 
@@ -111,6 +111,8 @@ export default function Modal({ callbacks }) {
         e.preventDefault();
         e.target.style.opacity = '1'
         e.target.style.outline = 'none'
+        setDragItem(null);
+        setDragId(null)
     }
 
     const signInWithGoogle = () => {
