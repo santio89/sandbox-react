@@ -77,10 +77,20 @@ export default function Modal({ callbacks }) {
     const handleDragOver = e => {
         e.preventDefault();
         e.dataTransfer.dropEffect = 'move';
-        /*   const targetItem = e.target;
-          if (targetItem !== dragItem && targetItem.classList.contains('presets__option')) {
-              targetItem.style.outline = '2px dotted var(--main-purple)'
-          } */
+
+        const targetItem = e.target;
+        if (targetItem !== dragItem && targetItem.classList.contains('presets__option')) {
+            targetItem.style.outline = '2px dotted var(--main-purple)'
+        }
+    }
+
+    const handleDragLeave = e => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        const targetItem = e.target;
+        if (targetItem !== dragItem && targetItem.classList.contains('presets__option')) {
+            targetItem.style.outline = 'none'
+        }
     }
 
     // Drop event handler
@@ -91,7 +101,8 @@ export default function Modal({ callbacks }) {
             exchangeItems(id, dragId)
         }
 
-        dragItem.style.opacity = '';
+        dragItem.style.opacity = '1';
+        dragItem.style.outline = 'none';
         setDragItem(null);
         setDragId(null)
     }
@@ -284,7 +295,7 @@ export default function Modal({ callbacks }) {
                                         (presets?.length > 0 ?
                                             (presets?.map(preset => {
                                                 return (
-                                                    <div draggable onDragStart={(e) => handleDragStart(e, preset.id)} onDragOver={handleDragOver} onDrop={(e) => handleDrop(e, preset.id)} className={`presets__option ${dragItem && "dragged"}`} key={preset.id} >
+                                                    <div draggable onDragStart={(e) => handleDragStart(e, preset.id)} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={(e) => handleDrop(e, preset.id)} className={`presets__option ${dragItem && "dragged"}`} key={preset.id} >
                                                         {
                                                             selectedId === preset.id && !loaded ?
                                                                 <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
