@@ -1210,6 +1210,10 @@ button {
       overflow: hidden;
       position: relative;
 
+      &.dragged *{
+        pointer-events: none;
+      }
+
       &:hover,
       &:focus-visible,
       &:focus-within,

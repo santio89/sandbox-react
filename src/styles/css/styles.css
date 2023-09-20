@@ -1051,6 +1051,9 @@ button {
   overflow: hidden;
   position: relative;
 }
+.main__modal .presets__option.dragged * {
+  pointer-events: none;
+}
 .main__modal .presets__option:hover, .main__modal .presets__option:focus-visible, .main__modal .presets__option:focus-within, .main__modal .presets__option:active {
   box-shadow: 0 -2px 4px 0 var(--main-purple), 0px 2px 4px 0 var(--main-red);
 }
