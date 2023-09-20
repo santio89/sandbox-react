@@ -1210,7 +1210,7 @@ button {
       overflow: hidden;
       position: relative;
 
-      &.dragged *{
+      &.dragged * {
         pointer-events: none;
       }
 
@@ -1335,6 +1335,11 @@ button {
             word-wrap: break-word;
             font-weight: bold;
             text-shadow: 1px 1px 0 var(--main-purple-variation);
+          }
+
+          &:focus-visible {
+            outline: none;
+            box-shadow: 0 0 8px 0 var(--main-red) inset
           }
         }
 

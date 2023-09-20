@@ -80,7 +80,7 @@ export default function Modal({ callbacks }) {
 
         const targetItem = e.target;
         if (targetItem !== dragItem && targetItem.classList.contains('presets__option')) {
-            targetItem.style.outline = '2px dotted var(--main-purple)'
+            targetItem.style.outline = '2px dashed var(--main-purple)'
         }
     }
 
@@ -102,9 +102,15 @@ export default function Modal({ callbacks }) {
         }
 
         dragItem.style.opacity = '1';
-        dragItem.style.outline = 'none';
+        targetItem.style.outline = 'none';
         setDragItem(null);
         setDragId(null)
+    }
+
+    const handleDragEnd = e => {
+        e.preventDefault();
+        e.target.style.opacity = '1'
+        e.target.style.outline = 'none'
     }
 
     const signInWithGoogle = () => {
@@ -295,7 +301,7 @@ export default function Modal({ callbacks }) {
                                         (presets?.length > 0 ?
                                             (presets?.map(preset => {
                                                 return (
-                                                    <div draggable onDragStart={(e) => handleDragStart(e, preset.id)} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={(e) => handleDrop(e, preset.id)} className={`presets__option ${dragItem && "dragged"}`} key={preset.id} >
+                                                    <div draggable onDragStart={(e) => handleDragStart(e, preset.id)} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={(e) => handleDrop(e, preset.id)} onDragEnd={handleDragEnd} className={`presets__option ${dragItem && "dragged"}`} key={preset.id} >
                                                         {
                                                             selectedId === preset.id && !loaded ?
                                                                 <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>

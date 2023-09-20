@@ -1155,6 +1155,10 @@ button {
   font-weight: bold;
   text-shadow: 1px 1px 0 var(--main-purple-variation);
 }
+.main__modal .presets__option__main__name:focus-visible {
+  outline: none;
+  box-shadow: 0 0 8px 0 var(--main-red) inset;
+}
 .main__modal .presets__option__main__buttons {
   background-color: var(--main-gray-op);
   display: flex;
