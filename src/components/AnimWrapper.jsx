@@ -22,7 +22,9 @@ export default function AnimWrapper({ children }) {
           { opacity: 0 },
         ]
       }
-      if (action === 'remain') {
+
+      /* remain - verif default pos (prevents initial anim bug when old coords arent updated) */
+      if (action === 'remain' && (JSON.stringify(oldCoords) !== '{"top":0,"left":0,"width":0,"height":0}')) {
         // for items that remain, calculate the delta
         // from their old position to their new position
         const deltaX = oldCoords.left - newCoords.left
@@ -51,7 +53,7 @@ export default function AnimWrapper({ children }) {
       // it the chosen keyframes.
       return new KeyframeEffect(el, keyframes, { duration: 400, easing: 'ease-in-out' })
     })
-  }, [parentAnim])
+  }, [parentAnim, children])
 
   return (
     <div ref={parentAnim} className="animWrapper">

@@ -1424,6 +1424,8 @@ li[data-sonner-toast] {
   justify-content: center;
   align-items: center;
   gap: clamp(0.5rem, 0.5rem + 1vw, 2rem);
+  transition: none !important;
+  animation: none !important;
 }
 
 .notFound {

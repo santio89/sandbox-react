@@ -1658,6 +1658,8 @@ li[data-sonner-toast] {
   justify-content: center;
   align-items: center;
   gap: clamp(.5rem, .5rem + 1vw, 2rem);
+  transition: none !important;
+  animation: none !important;
 }
 
 .notFound {
