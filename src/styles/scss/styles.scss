@@ -1210,6 +1210,10 @@ button {
       overflow: hidden;
       position: relative;
 
+      &.dragged * {
+        pointer-events: none;
+      }
+
       &:hover,
       &:focus-visible,
       &:focus-within,
@@ -1331,6 +1335,11 @@ button {
             word-wrap: break-word;
             font-weight: bold;
             text-shadow: 1px 1px 0 var(--main-purple-variation);
+          }
+
+          &:focus-visible {
+            outline: none;
+            box-shadow: 0 0 8px 0 var(--main-red) inset
           }
         }
 
@@ -1654,6 +1663,8 @@ li[data-sonner-toast] {
   justify-content: center;
   align-items: center;
   gap: clamp(.5rem, .5rem + 1vw, 2rem);
+  transition: none !important;
+  animation: none !important;
 }
 
 .notFound {

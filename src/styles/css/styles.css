@@ -1051,6 +1051,9 @@ button {
   overflow: hidden;
   position: relative;
 }
+.main__modal .presets__option.dragged * {
+  pointer-events: none;
+}
 .main__modal .presets__option:hover, .main__modal .presets__option:focus-visible, .main__modal .presets__option:focus-within, .main__modal .presets__option:active {
   box-shadow: 0 -2px 4px 0 var(--main-purple), 0px 2px 4px 0 var(--main-red);
 }
@@ -1151,6 +1154,10 @@ button {
   word-wrap: break-word;
   font-weight: bold;
   text-shadow: 1px 1px 0 var(--main-purple-variation);
+}
+.main__modal .presets__option__main__name:focus-visible {
+  outline: none;
+  box-shadow: 0 0 8px 0 var(--main-red) inset;
 }
 .main__modal .presets__option__main__buttons {
   background-color: var(--main-gray-op);
@@ -1421,6 +1428,8 @@ li[data-sonner-toast] {
   justify-content: center;
   align-items: center;
   gap: clamp(0.5rem, 0.5rem + 1vw, 2rem);
+  transition: none !important;
+  animation: none !important;
 }
 
 .notFound {

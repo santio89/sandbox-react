@@ -2,7 +2,7 @@ import { firebaseDb as db, timestamp } from "../../config/firebase"
 import { ref, set, push, child, get, remove } from "firebase/database";
 import { toast } from "sonner";
 
-export const savePreset = (presets, preset, userId = null, callback) => {
+export const savePreset = (presets, preset, index, userId = null, callback) => {
 
     return async dispatch => {
         if (userId) {
@@ -28,6 +28,8 @@ export const savePreset = (presets, preset, userId = null, callback) => {
                 const doc = await push(ref(db, 'snippets/' + userId), preset);
                 const newPreset = { docId: doc.key, ...preset }
                 const newPresets = [newPreset, ...presets]
+                /* save index file */
+                dispatch(setPresetsIndex(index, userId, preset.id))
 
                 dispatch({
                     type: "SET_PRESETS",
@@ -125,13 +127,16 @@ export const editPreset = (presets, name, docId, id, newName, userId = null) => 
 
 export const getPresets = (userId = null) => {
     let presets = []
+    let index = []
 
     return async dispatch => {
         dispatch({
             type: "SET_PRESET_LOADER",
             presetLoader: true
         });
+
         if (userId) {
+            /* get presets */
             get(child(ref(db), `snippets/${userId}`)).then((snapshot) => {
                 if (snapshot.exists()) {
                     const presetsObj = snapshot.val()
@@ -139,15 +144,31 @@ export const getPresets = (userId = null) => {
 
                     /* reverse (last added is first shown) */
                     presets.reverse()
+                }
+            }).catch((e) => {
+                console.log("error retrieving from db: ", e);
+            })
 
-                    dispatch({
-                        type: "SET_PRESETS",
-                        presets
-                    })
+            /* get index */
+            get(child(ref(db), `snippets/index/${userId}`)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    index = snapshot.val()
+                } else {
+                    /* generate index */
+                    index = presets.map(preset => preset.id)
                 }
             }).catch((e) => {
                 console.log("error retrieving from db: ", e);
             }).finally(() => {
+                /* after fetching, dispatch */
+                dispatch({
+                    type: "SET_PRESETS",
+                    presets
+                })
+                dispatch({
+                    type: "SET_PRESETS_INDEX",
+                    presetsIndex: index
+                })
                 dispatch({
                     type: "SET_PRESET_LOADER",
                     presetLoader: false
@@ -198,4 +219,30 @@ export const getDefaultPresets = () => {
         });
 
     }
+}
+
+export const setPresetsIndex = (index, userId = null, presetId = null) => {
+    return async dispatch => {
+        if (userId) {
+            let newIndex = [...index]
+            if (presetId) {
+                newIndex = [...index, presetId]
+            }
+
+            try {
+                /* dispatch first (instant feedback) */
+                dispatch({
+                    type: "SET_PRESETS_INDEX",
+                    presetsIndex: newIndex
+                })
+                /* save index file */
+                await set(ref(db, 'snippets/index/' + userId), newIndex)
+            } catch {
+                console.log("error saving index")
+            }
+        } else {
+            toast.error("Sign in")
+        }
+    }
+
 }

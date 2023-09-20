@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setModal, setLoadSnippet, setCreateNew } from "../store/actions/modal.action";
 import { signInGoogle, signOutUser, updateDisplayName, updateAvatar } from "../store/actions/auth.action";
 import { setCodeAll } from "../store/actions/code.action";
-import { savePreset, deletePreset, editPreset } from "../store/actions/presets.action";
+import { savePreset, deletePreset, editPreset, setPresetsIndex } from "../store/actions/presets.action";
 import { v4 as uuidv4 } from 'uuid';
 import { toast } from "sonner";
 import AnimWrapper from "./AnimWrapper";
@@ -18,6 +18,8 @@ export default function Modal({ callbacks }) {
     const css = useSelector(state => state.css.present.css)
     const js = useSelector(state => state.js.present.js)
     const defaultPresets = useSelector(state => state.preset.defaultPresets)
+    const presets = useSelector(state => state.preset.presets)
+    const index = useSelector(state => state.preset.presetsIndex)
     const modalActive = useSelector(state => state.modal.active)
     const loadSnippet = useSelector(state => state.modal.loadSnippet)
     const createNew = useSelector(state => state.modal.createNew)
@@ -29,7 +31,6 @@ export default function Modal({ callbacks }) {
     const deletePresetLoader = useSelector(state => state.loader.deletePresetLoader)
     const displayNameLoader = useSelector(state => state.loader.updateDisplayNameLoader)
     const updateAvatarLoader = useSelector(state => state.loader.updateAvatarLoader)
-    const presets = useSelector(state => state.preset.presets)
     const [displayNameMode, setDisplayNameMode] = useState(false)
     const [newDisplayName, setNewDisplayName] = useState(user?.displayName || "")
     const [picUpload, setPicUpload] = useState(null)
@@ -52,7 +53,65 @@ export default function Modal({ callbacks }) {
     const [snippetTab, setSnippetTab] = useState(user.userId ? "mySnippets" : "featuredSnippets")
     const [modalOption, setModalOption] = useState("snippets")
 
+    const [dragItem, setDragItem] = useState(null)
+    const [dragId, setDragId] = useState(null)
+    const exchangeItems = (id1, id2) => {
+        const newIndex = [...index]
+        const ind1 = newIndex.findIndex(id => id === id1)
+        const ind2 = newIndex.findIndex(id => id === id2)
+        newIndex[ind1] = id2;
+        newIndex[ind2] = id1
 
+        dispatch(setPresetsIndex(newIndex, user.userId))
+    }
+    // Drag start event handler
+    const handleDragStart = (e, id) => {
+        setDragItem(e.target)
+        setDragId(id)
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', id);
+        e.target.style.opacity = '0.5';
+    }
+
+    // Drag over event handler
+    const handleDragOver = e => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+
+        const targetItem = e.target;
+        if (targetItem !== dragItem && targetItem.classList.contains('presets__option')) {
+            targetItem.style.outline = '2px dashed var(--main-purple)'
+        }
+    }
+
+    const handleDragLeave = e => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        const targetItem = e.target;
+        if (targetItem !== dragItem && targetItem.classList.contains('presets__option')) {
+            targetItem.style.outline = 'none'
+        }
+    }
+
+    // Drop event handler
+    const handleDrop = (e, id) => {
+        e.preventDefault();
+        const targetItem = e.target;
+        if (id !== dragId && targetItem.classList.contains('presets__option')) {
+            exchangeItems(id, dragId)
+        }
+
+        dragItem.style.opacity = '1';
+        targetItem.style.outline = 'none';
+        setDragItem(null);
+        setDragId(null)
+    }
+
+    const handleDragEnd = e => {
+        e.preventDefault();
+        e.target.style.opacity = '1'
+        e.target.style.outline = 'none'
+    }
 
     const signInWithGoogle = () => {
         dispatch(signInGoogle())
@@ -127,7 +186,7 @@ export default function Modal({ callbacks }) {
             trimJs = trimJs.slice(0, -1);
         }
 
-        dispatch(savePreset(presets, { id, name, html: trimHtml, css: trimCss, js: trimJs }, user.userId, noSave))
+        dispatch(savePreset(presets, { id, name, html: trimHtml, css: trimCss, js: trimJs }, index, user.userId, noSave))
         setSavePresetName("")
     }
 
@@ -242,7 +301,7 @@ export default function Modal({ callbacks }) {
                                         (presets?.length > 0 ?
                                             (presets?.map(preset => {
                                                 return (
-                                                    <div className="presets__option" key={preset.id} >
+                                                    <div draggable onDragStart={(e) => handleDragStart(e, preset.id)} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={(e) => handleDrop(e, preset.id)} onDragEnd={handleDragEnd} className={`presets__option ${dragItem && "dragged"}`} key={preset.id} >
                                                         {
                                                             selectedId === preset.id && !loaded ?
                                                                 <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
@@ -559,6 +618,32 @@ export default function Modal({ callbacks }) {
     useEffect(() => {
         picUpload && dispatch(updateAvatar(user.userId, picUpload))
     }, [picUpload])
+
+    useEffect(() => {
+        function mapOrder(presets, order, key) {
+            const array = [...presets]
+            array.sort(function (a, b) {
+                const A = a[key]
+                const B = b[key];
+
+                if (order.indexOf(A) > order.indexOf(B)) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+
+            });
+
+            return array;
+        }
+
+        const orderedPresets = mapOrder(presets, index, 'id');
+        dispatch({
+            type: "SET_PRESETS",
+            presets: orderedPresets
+        })
+
+    }, [index])
 
     return (
         <dialog className="main__modal" ref={modal}>
