@@ -356,6 +356,7 @@ export default function Home({ sharedSnippetHome }) {
             iframeWrapper.current.style.height = "100%"
         }
 
+        /* no ref provided */
         const resizer = document.querySelector(".Resizer.vertical")
 
         if (splitPane.current) {

@@ -132,7 +132,7 @@ export const getPresets = (userId = null) => {
             presetLoader: true
         });
         if (userId) {
-            get(child(ref(db), `snippets//${userId}`)).then((snapshot) => {
+            get(child(ref(db), `snippets/${userId}`)).then((snapshot) => {
                 if (snapshot.exists()) {
                     const presetsObj = snapshot.val()
                     presets = Object.entries(presetsObj).map((obj) => { return { docId: obj[0], ...obj[1] } })

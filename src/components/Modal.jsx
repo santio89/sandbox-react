@@ -541,7 +541,6 @@ export default function Modal({ callbacks }) {
 
     useEffect(() => {
         createNew && dispatch(setCreateNew(false))
-        /*    document.querySelector() */
     }, [createNew])
 
     useEffect(() => {
