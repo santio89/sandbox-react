@@ -207,7 +207,9 @@ export default function Home({ sharedSnippetHome }) {
             const blob = new Blob([codeString], { type: 'text/html' });
             const url = URL.createObjectURL(blob);
             setCodeOutput(url)
-            focusCurrentTab()
+
+            /* focus tab if new */
+            createNew && focusCurrentTab()
 
             const startSelection = {
                 endColumn: 1,
