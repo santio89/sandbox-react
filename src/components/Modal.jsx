@@ -66,6 +66,7 @@ export default function Modal({ callbacks }) {
     }
     // Drag start event handler
     const handleDragStart = (e, id) => {
+        if (e.type === "touchstart") return
         setDragItem(e.target)
         setDragId(id)
         e.dataTransfer.effectAllowed = 'move';
@@ -303,7 +304,7 @@ export default function Modal({ callbacks }) {
                                         (presets?.length > 0 ?
                                             (presets?.map(preset => {
                                                 return (
-                                                    <div draggable onDragStart={(e) => handleDragStart(e, preset.id)} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={(e) => handleDrop(e, preset.id)} onDragEnd={handleDragEnd} className={`presets__option ${dragItem && "dragged"}`} key={preset.id} onTouchStart={(e) => handleDragStart(e, preset.id)} onTouchEnd={()=>{handleDragEnd}}>
+                                                    <div draggable onDragStart={(e) => handleDragStart(e, preset.id)} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={(e) => handleDrop(e, preset.id)} onDragEnd={handleDragEnd} className={`presets__option ${dragItem && "dragged"}`} key={preset.id} onTouchEnd={(e)=>handleDrop(e, preset.id)}>
                                                         {
                                                             selectedId === preset.id && !loaded ?
                                                                 <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
