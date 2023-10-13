@@ -66,7 +66,6 @@ export default function Modal({ callbacks }) {
     }
     // Drag start event handler
     const handleDragStart = (e, id) => {
-        if (e.type === "touchstart") return
         setDragItem(e.target)
         setDragId(id)
         e.dataTransfer.effectAllowed = 'move';
