@@ -303,7 +303,7 @@ export default function Modal({ callbacks }) {
                                         (presets?.length > 0 ?
                                             (presets?.map(preset => {
                                                 return (
-                                                    <div draggable onDragStart={(e) => handleDragStart(e, preset.id)} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={(e) => handleDrop(e, preset.id)} onDragEnd={handleDragEnd} className={`presets__option ${dragItem && "dragged"}`} key={preset.id} >
+                                                    <div draggable onDragStart={(e) => handleDragStart(e, preset.id)} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={(e) => handleDrop(e, preset.id)} onDragEnd={handleDragEnd} className={`presets__option ${dragItem && "dragged"}`} key={preset.id} onTouchEnd={()=>{handleDragEnd}}>
                                                         {
                                                             selectedId === preset.id && !loaded ?
                                                                 <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
