@@ -4,7 +4,6 @@ import { setModal, setLoadSnippet, setCreateNew } from "../store/actions/modal.a
 import { signInGoogle, signOutUser, updateDisplayName, updateAvatar } from "../store/actions/auth.action";
 import { setCodeAll } from "../store/actions/code.action";
 import { savePreset, deletePreset, editPreset, setPresetsIndex } from "../store/actions/presets.action";
-import { v4 as uuidv4 } from 'uuid';
 import { toast } from "sonner";
 import AnimWrapper from "./AnimWrapper";
 import NoAnimWrapper from "./NoAnimWrapper";
@@ -172,7 +171,7 @@ export default function Modal({ callbacks }) {
         if (name === "") {
             return
         }
-        const id = uuidv4();
+        const id = window.crypto.randomUUID();
 
         let trimHtml = html;
         let trimCss = css;

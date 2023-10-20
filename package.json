@@ -25,8 +25,7 @@
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.2",
     "redux-undo": "^1.1.0",
-    "sonner": "^0.7.0",
-    "uuid": "^9.0.0"
+    "sonner": "^0.7.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
