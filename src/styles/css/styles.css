@@ -818,6 +818,8 @@ button {
 }
 .main__modal__content div[role=button].presets__noSnippet {
   cursor: pointer;
+  text-align: center;
+  text-wrap: balance;
 }
 .main__modal__content div[role=button].presets__noSnippet:hover, .main__modal__content div[role=button].presets__noSnippet:focus-visible {
   color: var(--main-purple);
@@ -1073,6 +1075,7 @@ button {
   align-items: center;
   gap: 0.8em;
   text-align: center;
+  text-wrap: balance;
   padding: 4px;
 }
 .main__modal .presets__option__confirm input {
@@ -1082,6 +1085,7 @@ button {
   border: none;
   border-bottom: 1px dashed var(--main-purple-variation);
   text-align: center;
+  text-wrap: balance;
   font-weight: bold;
   transition: background-color 200ms;
   color: var(--main-white);
@@ -1154,6 +1158,7 @@ button {
 .main__modal .presets__option__main__name > span {
   max-width: 100%;
   text-align: center;
+  text-wrap: balance;
   word-wrap: break-word;
   font-weight: bold;
   text-shadow: 1px 1px 0 var(--main-purple-variation);
@@ -1221,6 +1226,7 @@ button {
   border-image: linear-gradient(45deg, var(--main-purple), var(--main-red));
   border-image-slice: 1;
   text-align: center;
+  text-wrap: balance;
   max-width: 90%;
   font-weight: bold;
   line-height: 1.4;
