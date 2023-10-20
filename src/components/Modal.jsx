@@ -509,6 +509,8 @@ export default function Modal({ callbacks }) {
             setDeleteId(null)
             setEditId(null)
             setSavePresetName("")
+            setDragItem(null)
+            setDragId(null)
 
             try {
                 document.startViewTransition(() => {
@@ -540,6 +542,8 @@ export default function Modal({ callbacks }) {
         setDeleteId(null)
         setEditId(null)
         setSavePresetName("")
+        setDragItem(null)
+        setDragId(null)
     }, [snippetTab])
 
     useEffect(() => {
@@ -593,6 +597,8 @@ export default function Modal({ callbacks }) {
         setDisplayNameMode(false)
         setPicUpload(null)
         setSavePresetName("")
+        setDragItem(null)
+        setDragId(null)
     }, [modalOption])
 
     useEffect(() => {

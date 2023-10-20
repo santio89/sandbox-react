@@ -37,6 +37,7 @@ html {
   /* width */
   ::-webkit-scrollbar {
     width: 8px;
+    height: 8px;
   }
 
   /* track */
@@ -934,6 +935,7 @@ button {
     /* width */
     &::-webkit-scrollbar {
       width: 4px;
+      height: 4px;
     }
 
     /* track */
@@ -1209,6 +1211,7 @@ button {
       align-items: center;
       overflow: hidden;
       position: relative;
+      touch-action: none;
 
       &.dragged * {
         pointer-events: none;

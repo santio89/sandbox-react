@@ -36,6 +36,7 @@ html {
 }
 html ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 html ::-webkit-scrollbar-track {
   background: var(--bg-main);
@@ -826,6 +827,7 @@ button {
 }
 .main__modal__content::-webkit-scrollbar {
   width: 4px;
+  height: 4px;
 }
 .main__modal__content::-webkit-scrollbar-thumb {
   background: var(--main-purple-variation);
@@ -1050,6 +1052,7 @@ button {
   align-items: center;
   overflow: hidden;
   position: relative;
+  touch-action: none;
 }
 .main__modal .presets__option.dragged * {
   pointer-events: none;
