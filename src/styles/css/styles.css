@@ -1140,6 +1140,7 @@ button {
 }
 .main__modal .presets__option__main__feat {
   font-size: 0.8em;
+  font-weight: bold;
   text-align: right;
   text-overflow: ellipsis;
   overflow: hidden;
