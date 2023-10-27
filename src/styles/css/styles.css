@@ -1138,14 +1138,22 @@ button {
   align-items: center;
   padding-top: 0;
 }
+.main__modal .presets__option__main__feat {
+  font-size: 0.8em;
+  text-align: right;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 80%;
+  white-space: nowrap;
+}
 .main__modal .presets__option__main__name {
   flex: 1;
   min-width: 100%;
   max-width: 100%;
   display: flex;
+  flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  flex-flow: row wrap;
   padding: 4px;
   cursor: pointer;
 }
