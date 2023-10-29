@@ -8,7 +8,7 @@ const initialStateJs = {
     js: ``,
 }
 const initialStateEditorSettings = {
-    lineHighlight: true,
+    lineHighlight: "all",
     minimap: true,
     wordWrap: 'on'
 }
