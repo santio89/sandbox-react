@@ -8,9 +8,9 @@ const initialStateJs = {
     js: ``,
 }
 const initialStateEditorSettings = {
-    lineHighlight: "all",
-    minimap: true,
-    wordWrap: 'on'
+    lineHighlight: "none",
+    minimap: false,
+    wordWrap: 'off'
 }
 
 export const HtmlReducer = (state = initialStateHtml, action) => {
