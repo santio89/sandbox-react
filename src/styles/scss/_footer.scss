@@ -1,0 +1,10 @@
+/* footer */
+.main__footer {
+  background: color-mix(in srgb, var(--main-purple) 8%, black);
+  color: var(--clr-nav);
+  padding: .2rem;
+  font-size: .8rem;
+  display: flex;
+  justify-content: end;
+}
+/* fin footer */

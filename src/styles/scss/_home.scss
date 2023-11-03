@@ -1,0 +1,515 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+  z-index: 1;
+  max-width: var(--size-main-container);
+
+  &__sharedNotFound,
+  &__sharedLoading {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: start;
+    gap: .5rem;
+    background: rgb(var(--main-white));
+    padding: 2rem;
+    border-radius: .5em;
+    white-space: pre-wrap;
+    margin: auto;
+    background: var(--main-black);
+    border: 2px solid var(--main-red);
+
+    h2 {
+      line-height: 1;
+      color: var(--main-white);
+      font-size: 3rem;
+    }
+
+    p {
+      color: var(--main-white)
+    }
+
+    a {
+      padding: .5rem;
+      background: linear-gradient(45deg, var(--main-purple), var(--main-red));
+      border-radius: .25em;
+      color: rgb(248, 248, 248);
+      margin-top: .5rem;
+      transition: scale 200ms;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: .5rem;
+      line-height: 1;
+
+      &:hover {
+        outline: 2px solid var(--main-purple)
+      }
+
+      &:active {
+        outline: 2px solid var(--main-purple);
+        scale: .9
+      }
+    }
+  }
+
+  &__sharedLoading {
+    border-color: var(--main-purple);
+  }
+}
+
+.tabs {
+  display: flex;
+  gap: clamp(.2rem, .2rem + 2vw, 2rem);
+  justify-content: center;
+  padding: 1rem;
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .4em .8em;
+    border-radius: .2em;
+    width: clamp(60px, 60px + 2vw, 80px);
+    outline: none;
+    border: none;
+    font-weight: bold;
+    background-color: var(--main-purple);
+    background-image: linear-gradient(45deg, var(--main-purple), var(--main-red));
+    background-size: 300%;
+    background-position: 50% 50%;
+    color: var(--main-btn-clr);
+    font-size: clamp(1.1rem, 1.1rem + 2vw, 1.2rem);
+    cursor: pointer;
+    transition: 200ms;
+    border: 1px solid var(--main-red);
+    text-shadow: 1px 1px 0 rgb(40, 40, 40);
+
+    &:hover,
+    &:focus-visible {
+      box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
+      background-position: 0% 50%;
+      border: 1px solid var(--main-purple);
+    }
+
+    &:active {
+      box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
+      background-position: 0% 50%;
+      border: 1px solid var(--main-purple);
+      scale: .94
+    }
+
+    &[data-active=true] {
+      box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
+      background-position: 0% 50%;
+      border: 1px solid var(--main-purple);
+    }
+  }
+}
+
+.mainCode {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  gap: 2rem;
+
+  @media(min-width: 800px) {
+    flex-direction: row;
+    gap: 0;
+  }
+
+  .NoSplitPane {
+    @media(min-width: 800px) {
+      display: none !important;
+    }
+  }
+
+  .SplitPane.vertical {
+    flex-grow: 1;
+    padding: 1rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media(max-width: 799px) {
+      display: none !important;
+    }
+  }
+
+  .Pane.vertical {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .Pane1.vertical {
+    min-width: 300px;
+  }
+
+  .Resizer.vertical {
+    cursor: col-resize;
+    width: 2rem;
+    height: 100%;
+    position: relative;
+
+    &::after {
+      content: "↔";
+      aspect-ratio: 1;
+      width: 1rem;
+      font-size: 2rem;
+      position: absolute;
+      left: calc(50% - 1px);
+      top: 50%;
+      translate: -50% -50%;
+      color: var(--main-purple);
+      pointer-events: none;
+      opacity: .5
+    }
+
+    &:active::after {
+      opacity: 1
+    }
+  }
+
+  &__input {
+    min-width: 300px;
+    width: 100%;
+    max-width: 100%;
+    height: 420px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    @media(min-width: 800px) {
+      flex: 1;
+      min-height: min(1080px, 74dvh);
+      min-height: min(1080px, 74vh);
+      height: clamp(min(1080px, 74dvh), 74dvh, 1080px);
+      height: clamp(min(1080px, 74vh), 74vh, 1080px);
+    }
+
+    &__type {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .5rem;
+
+      &__active {
+        color: var(--main-white);
+        font-weight: bold;
+
+        span:first-child {
+          padding-right: 0;
+        }
+
+        span:last-child {
+          padding-left: 0;
+          color: var(--main-purple);
+          text-shadow: 0 0 4px var(--main-purple);
+        }
+      }
+
+      &__btnWrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: .5rem;
+      }
+
+      &__iconBtn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--main-purple);
+        transition: 200ms;
+        cursor: pointer;
+
+        &:hover,
+        &:focus-visible {
+          color: var(--main-red);
+        }
+
+        &:active {
+          color: var(--main-red);
+          scale: .9
+        }
+
+        &.active-on {
+          color: var(--main-red);
+        }
+      }
+
+      &__clearConfirm {
+        color: var(--main-red);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-inline: .4rem;
+        gap: 4px;
+
+        &__buttons {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 4px;
+
+          button {
+            cursor: pointer;
+            width: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: .94em;
+            background: var(--main-gray);
+            padding: 0;
+            transition: none;
+
+            &:hover,
+            &:focus-visible {
+              background: var(--main-red);
+              color: rgb(248, 248, 248);
+            }
+
+            &:active {
+              color: rgb(248, 248, 248);
+              background: var(--main-red);
+              scale: .9
+            }
+          }
+        }
+      }
+
+      &__clear {
+        cursor: pointer;
+        color: var(--main-red);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: .8rem;
+        transition: 200ms;
+
+        &:hover,
+        &:focus-visible {
+          background: var(--main-red)
+        }
+
+        &:active {
+          background: var(--main-red);
+          scale: .9
+        }
+
+        &__buttons {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: .4rem;
+        }
+      }
+    }
+
+    &__textWrapper {
+      flex: 1;
+      width: 100%;
+      min-width: 300px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      height: clamp(min(1080px, 74dvh), 74dvh, 1080px);
+      height: clamp(min(1080px, 74vh), 74vh, 1080px);
+      overflow: hidden;
+      color: var(--main-purple);
+
+      @media(min-width: 800px) {
+        min-width: initial;
+      }
+
+      &__inner {
+        display: flex;
+        height: 420px;
+        max-height: 582px;
+        min-height: 150px;
+        overflow: hidden;
+        border-radius: .5rem;
+        border: 2px solid rgb(100, 100, 100);
+        background: var(--bg-code);
+
+        @media(min-width: 800px) {
+          height: 100%;
+          resize: vertical;
+        }
+
+        &::-webkit-resizer {
+          background-color: transparent;
+          /* background-image: url("/resize-vert.svg");
+          background-repeat: no-repeat; */
+        }
+      }
+    }
+  }
+
+  &__output {
+    flex: 1;
+    width: 100%;
+    min-width: 300px;
+    height: clamp(min(1080px, 74dvh), 74dvh, 1080px);
+    height: clamp(min(1080px, 74vh), 74vh, 1080px);
+    display: flex;
+    flex-direction: column;
+
+    @media(min-width: 800px) {
+      min-width: initial;
+    }
+
+    &__type {
+      color: var(--main-white);
+      font-weight: bold;
+      padding: .5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &__btnWrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: .5rem;
+
+        button,
+        a {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: var(--main-purple);
+          transition: 200ms;
+          outline: none;
+          border: none;
+
+          &:hover,
+          &:focus-visible {
+            color: var(--main-red);
+          }
+
+          &:active {
+            color: var(--main-red);
+            scale: .9
+          }
+        }
+      }
+
+      &__full {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: .8rem;
+
+        svg {
+          color: var(--main-red);
+          fill: var(--main-red);
+        }
+
+        &:hover,
+        &:active {
+          background-color: var(--main-red);
+        }
+      }
+    }
+
+    &__iframeWrapper {
+      border-radius: .5rem;
+      border: 2px solid rgb(100, 100, 100);
+      display: flex;
+      background: white;
+      transition: opacity 200ms;
+      width: 100%;
+      max-width: 100%;
+      height: 420px;
+      max-height: 582px;
+      min-height: 150px;
+      overflow: hidden;
+
+      @media(min-width: 800px) {
+        height: 100%;
+        resize: vertical;
+      }
+
+      &::-webkit-resizer {
+        background-color: transparent;
+        /* background-image: url("/resize-vert.svg");
+        background-repeat: no-repeat; */
+      }
+    }
+
+    &__iframe {
+      border-radius: .2em;
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+      max-height: 100%;
+      border: none;
+      outline: none;
+    }
+  }
+}
+
+.dim {
+  opacity: .4;
+  color: transparent !important;
+}
+
+.dim * {
+  color: transparent !important
+}
+
+.clr-red {
+  color: var(--main-red) !important
+}
+
+.moon-fill {
+  color: rgb(40, 40, 40);
+}
+
+.sun-fill {
+  color: rgb(248, 248, 248);
+}
+
+.diamond-fill {
+  color: var(--main-black)
+}
+
+.d-none {
+  display: none;
+}
+
+.pe-none {
+  pointer-events: none;
+}
+
+li[data-sonner-toast] {
+  background: linear-gradient(45deg, var(--main-purple), var(--main-red)) !important;
+  border-color: var(--main-purple-variation) !important;
+  color: rgb(248, 248, 248) !important;
+  word-break: break-all !important;
+  white-space: pre-wrap !important;
+}
+
+.animWrapper {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(.5rem, .5rem + 1vw, 2rem);
+  transition: none !important;
+  animation: none !important;
+}

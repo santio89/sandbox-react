@@ -1,0 +1,142 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* INICIO SCROLLBAR */
+  scrollbar-width: thin;
+  scrollbar-color: var(--main-purple) var(--bg-main);
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  /* track */
+  ::-webkit-scrollbar-track {
+    background: var(--bg-main)
+  }
+
+  /* handle */
+  ::-webkit-scrollbar-thumb {
+    background: var(--main-purple);
+  }
+
+  /* FIN SCROLLBAR */
+
+  ::selection {
+    color: var(--main-purple-variation);
+    background: var(--main-purple);
+  }
+}
+
+body,
+#root,
+.root-theme {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  font-family: var(--font-primary);
+  line-height: 1.2;
+  background: var(--bg-main);
+}
+
+.dark-theme {
+  --main-purple: rgb(107, 31, 248);
+  --main-purple-variation: rgb(59, 21, 141);
+  --main-red: rgb(210, 28, 83);
+  --main-white: rgb(248, 248, 248);
+  --main-white-op: rgb(248, 248, 248, .5);
+  --main-black: rgb(30, 30, 30);
+  --main-black-op: rgb(30, 30, 30, .5);
+  --main-gray: rgb(80, 80, 80);
+  --main-gray-op: rgb(100, 100, 100, .5);
+
+  --clr-nav: rgb(248, 248, 248);
+
+  --color-code: rgb(248, 248, 248);
+
+  --main-btn-bg: rgb(107, 31, 248);
+  --main-btn-clr: rgb(248, 248, 248);
+
+  --bg-main: rgb(40, 40, 40);
+  --bg-code: #1e1e1e;
+}
+
+.light-theme {
+  --main-purple: rgb(107, 31, 248);
+  --main-red: rgb(210, 28, 83);
+  --main-white: rgb(30, 30, 30);
+  --main-white-op: rgb(30, 30, 30, .5);
+  --main-black: rgb(248, 248, 248);
+  --main-black-op: rgb(248, 248, 248, .5);
+  --main-gray: rgb(220, 220, 220);
+
+  --clr-nav: rgb(248, 248, 248);
+
+  --color-code: rgb(30, 30, 30);
+
+  --main-btn-bg: rgb(107, 31, 248);
+  --main-btn-clr: rgb(248, 248, 248);
+
+  --bg-main: rgb(238, 238, 238);
+  --bg-code: #fffffe;
+}
+
+a,
+button,
+textarea,
+input {
+  font: inherit;
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none;
+  border: none;
+  background: none;
+}
+
+.mainContainer {
+  width: 100%;
+  background: var(--bg-main);
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("/icon.svg");
+    background-repeat: no-repeat;
+    background-position: 0% -20%;
+    background-size: max(600px, 50%);
+    z-index: 0;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("/icon.svg");
+    background-repeat: no-repeat;
+    background-position: 0% -20%;
+    background-size: max(600px, 50%);
+    z-index: 0;
+    transform: rotate(180deg);
+  }
+}

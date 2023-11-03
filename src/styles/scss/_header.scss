@@ -1,0 +1,127 @@
+/* header */
+.main__header {
+  width: 100%;
+  background: linear-gradient(45deg, var(--main-purple), var(--main-red));
+  color: var(--clr-nav);
+  padding: 3px 8px;
+  font-size: .8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+
+  nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__site {
+    font-weight: normal;
+    font-size: .8rem;
+    text-shadow: 1px 1px 0 rgb(40, 40, 40);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+      font: inherit;
+    }
+
+    &:focus-visible {
+      outline: 1px solid var(--main-red);
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    >div button {
+      background: none;
+      outline: none;
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      border-radius: 50%;
+      padding: 2px;
+      transition: 200ms;
+      color: var(--main-black);
+
+      svg {
+        fill: var(--main-black);
+      }
+
+      &:hover,
+      &:focus-visible {
+        filter: drop-shadow(0 0 4px var(--main-black));
+      }
+
+      &:active {
+        filter: drop-shadow(0 0 4px var(--main-black));
+        scale: .9
+      }
+
+      &.create-new {
+        color: var(--main-red);
+        background: var(--main-black);
+        border-radius: 0;
+
+        svg {
+          fill: var(--main-red);
+        }
+      }
+    }
+  }
+
+
+  .new-project {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--main-white);
+
+    &-confirm {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2px;
+
+      &-btns {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2px;
+
+        button {
+          cursor: pointer;
+          border-radius: 0;
+          padding: 0;
+          border-radius: 0;
+          width: 28px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transition: none;
+          filter: none;
+          color: var(--main-white);
+          background: var(--main-gray);
+
+          &:hover,
+          &:focus-visible {
+            background: var(--main-purple);
+          }
+        }
+      }
+    }
+  }
+}
+
+/* fin header */

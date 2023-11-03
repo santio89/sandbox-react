@@ -116,6 +116,37 @@ button {
   background: none;
 }
 
+.mainContainer {
+  width: 100%;
+  background: var(--bg-main);
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mainContainer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/icon.svg");
+  background-repeat: no-repeat;
+  background-position: 0% -20%;
+  background-size: max(600px, 50%);
+  z-index: 0;
+}
+.mainContainer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/icon.svg");
+  background-repeat: no-repeat;
+  background-position: 0% -20%;
+  background-size: max(600px, 50%);
+  z-index: 0;
+  transform: rotate(180deg);
+}
+
 /* header */
 .main__header {
   width: 100%;
@@ -235,37 +266,6 @@ button {
 }
 
 /* fin footer */
-.mainContainer {
-  width: 100%;
-  background: var(--bg-main);
-  position: relative;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.mainContainer::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("/icon.svg");
-  background-repeat: no-repeat;
-  background-position: 0% -20%;
-  background-size: max(600px, 50%);
-  z-index: 0;
-}
-.mainContainer::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("/icon.svg");
-  background-repeat: no-repeat;
-  background-position: 0% -20%;
-  background-size: max(600px, 50%);
-  z-index: 0;
-  transform: rotate(180deg);
-}
-
 .home {
   display: flex;
   flex-direction: column;
@@ -703,6 +703,34 @@ button {
 
 .diamond-fill {
   color: var(--main-black);
+}
+
+.d-none {
+  display: none;
+}
+
+.pe-none {
+  pointer-events: none;
+}
+
+li[data-sonner-toast] {
+  background: linear-gradient(45deg, var(--main-purple), var(--main-red)) !important;
+  border-color: var(--main-purple-variation) !important;
+  color: rgb(248, 248, 248) !important;
+  word-break: break-all !important;
+  white-space: pre-wrap !important;
+}
+
+.animWrapper {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(0.5rem, 0.5rem + 1vw, 2rem);
+  transition: none !important;
+  animation: none !important;
 }
 
 /* modal */
@@ -1336,14 +1364,6 @@ button {
 }
 
 /* fin modal */
-.d-none {
-  display: none;
-}
-
-.pe-none {
-  pointer-events: none;
-}
-
 /* loader */
 .loader {
   color: var(--main-purple);
@@ -1377,32 +1397,6 @@ button {
   margin: 0;
 }
 
-@-webkit-keyframes load4 {
-  0%, 100% {
-    box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
-  }
-  12.5% {
-    box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
-  }
-  25% {
-    box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
-  }
-  37.5% {
-    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
-  }
-  50% {
-    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
-  }
-  62.5% {
-    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
-  }
-  75% {
-    box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
-  }
-  87.5% {
-    box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
-  }
-}
 @keyframes load4 {
   0%, 100% {
     box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
@@ -1430,26 +1424,6 @@ button {
   }
 }
 /* fin loader */
-li[data-sonner-toast] {
-  background: linear-gradient(45deg, var(--main-purple), var(--main-red)) !important;
-  border-color: var(--main-purple-variation) !important;
-  color: rgb(248, 248, 248) !important;
-  word-break: break-all !important;
-  white-space: pre-wrap !important;
-}
-
-.animWrapper {
-  flex: 1;
-  width: 100%;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-  gap: clamp(0.5rem, 0.5rem + 1vw, 2rem);
-  transition: none !important;
-  animation: none !important;
-}
-
 .notFound {
   flex: 1;
   display: flex;
