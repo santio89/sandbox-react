@@ -713,14 +713,7 @@ button {
   pointer-events: none;
 }
 
-li[data-sonner-toast] {
-  background: linear-gradient(45deg, var(--main-purple), var(--main-red)) !important;
-  border-color: var(--main-purple-variation) !important;
-  color: rgb(248, 248, 248) !important;
-  word-break: break-all !important;
-  white-space: pre-wrap !important;
-}
-
+/* auto-animate-wrapper */
 .animWrapper {
   flex: 1;
   width: 100%;
@@ -731,6 +724,15 @@ li[data-sonner-toast] {
   gap: clamp(0.5rem, 0.5rem + 1vw, 2rem);
   transition: none !important;
   animation: none !important;
+}
+
+/* sonner-toast-wrapper */
+li[data-sonner-toast] {
+  background: linear-gradient(45deg, var(--main-purple), var(--main-red)) !important;
+  border-color: var(--main-purple-variation) !important;
+  color: rgb(248, 248, 248) !important;
+  word-break: break-all !important;
+  white-space: pre-wrap !important;
 }
 
 /* modal */
