@@ -40,6 +40,7 @@ export const savePreset = (presets, preset, index, userId = null, callback) => {
                     description: `Snippet saved: ${preset.name}`,
                 })
             } catch (e) {
+                callback()
                 console.log("error saving to db: ", e)
                 toast.error('Error saving snippet')
             }
@@ -78,6 +79,10 @@ export const deletePreset = (presets, name, docId, id, userId = null) => {
                     description: `Snippet deleted: ${name}`,
                 })
             } catch (e) {
+                dispatch({
+                    type: "SET_DELETE_PRESET_LOADER",
+                    deletePresetLoader: false
+                });
                 console.log("error saving to db: ", e)
                 toast.error('Error deleting snippet')
             }
@@ -116,6 +121,10 @@ export const editPreset = (presets, name, docId, id, newName, userId = null) => 
                     description: `Snippet renamed: ${name} ➔ ${newName}`,
                 })
             } catch (e) {
+                dispatch({
+                    type: "SET_RENAME_PRESET_LOADER",
+                    renamePresetLoader: false
+                });
                 console.log("error saving to db: ", e)
                 toast.error('Error renaming snippet')
             }

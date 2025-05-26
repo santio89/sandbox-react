@@ -33,6 +33,8 @@ export default function Modal({ callbacks }) {
     const [displayNameMode, setDisplayNameMode] = useState(false)
     const [newDisplayName, setNewDisplayName] = useState(user?.displayName || "")
     const [picUpload, setPicUpload] = useState(null)
+    const [currentSnippet, setCurrentSnippet] = useState(null)
+    const [saveTab, setSaveTab] = useState(currentSnippet ? "current" : "new")
 
     const { setNewProject } = callbacks;
 
@@ -485,13 +487,20 @@ export default function Modal({ callbacks }) {
                                 {user.userId ?
                                     <>
                                         <div className="save-tabs">
-                                            <button>Current</button>
-                                            <button data-active="true">New</button>
+                                            <button onClick={() => setSaveTab("current")} data-active={saveTab === "current"}>Current</button>
+                                            <button onClick={() => setSaveTab("new")} data-active={saveTab === "new"}>New</button>
                                         </div>
-                                        <form onSubmit={(e) => { e.preventDefault(); saveNewPreset(savePresetName, html, css, js) }}>
-                                            <input spellCheck="false" type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} maxLength={30} />
-                                            <button disabled={savePresetName.trim() === ""} data-saved={saved ? 'saving...' : ''}>Save</button>
-                                        </form>
+                                        {
+                                            saveTab === "current" ?
+                                                <form onSubmit={(e) => { e.preventDefault(); saveNewPreset(savePresetName, html, css, js) }}>
+                                                    <input spellCheck="false" type="text" placeholder="SNIPPET NAME" value={"CURRENT SNIPPET"} disabled />
+                                                    <button /* disabled={savePresetName.trim() === ""} */ data-saved={saved ? 'saving...' : ''}>Save current</button>
+                                                </form> :
+                                                <form onSubmit={(e) => { e.preventDefault(); saveNewPreset(savePresetName, html, css, js) }}>
+                                                    <input spellCheck="false" type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} maxLength={30} />
+                                                    <button disabled={savePresetName.trim() === ""} data-saved={saved ? 'saving...' : ''}>Save new</button>
+                                                </form>
+                                        }
                                     </>
 
                                     :
@@ -554,7 +563,7 @@ export default function Modal({ callbacks }) {
         setDragId(null)
     }, [snippetTab])
 
-    useEffect(() => {
+    /* useEffect(() => {
         let timeout = null;
         if (saved) {
             timeout = setTimeout(() => {
@@ -564,7 +573,7 @@ export default function Modal({ callbacks }) {
 
         return () => { clearTimeout(timeout) }
 
-    }, [saved])
+    }, [saved]) */
 
     useEffect(() => {
         let timeout = null;

@@ -1325,7 +1325,6 @@ li[data-sonner-toast] {
   align-items: center;
   padding: 0.2em 0.4em;
   border-radius: 0.2em;
-  width: clamp(60px, 60px + 2vw, 80px);
   outline: none;
   border: 1px solid var(--main-purple);
   font-weight: bold;
