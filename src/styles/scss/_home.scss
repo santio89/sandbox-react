@@ -506,7 +506,8 @@
 }
 
 /* auto-animate-wrapper */
-.animWrapper {
+.animWrapper,
+.noAnimWrapper {
   flex: 1;
   width: 100%;
   display: flex;
@@ -516,6 +517,10 @@
   gap: clamp(0.5rem, 0.5rem + 1vw, 2rem);
   transition: none !important;
   animation: none !important;
+}
+
+.noAnimWrapper {
+  flex-flow: column nowrap;
 }
 
 /* sonner-toast-wrapper */

@@ -415,7 +415,7 @@ export default function Modal({ callbacks }) {
                             }
                         </AnimWrapper >
                     case 'featuredSnippets':
-                        return <NoAnimWrapper>
+                        return <AnimWrapper>
                             {
                                 defaultPresetLoader ? <div className="loader">Loading...</div> :
                                     (defaultPresets?.length > 0 ?
@@ -478,15 +478,22 @@ export default function Modal({ callbacks }) {
                                         })) :
                                         <div className="presets__noSnippet">No featured snippets saved</div>)
                             }
-                        </NoAnimWrapper>
+                        </AnimWrapper>
                     case 'saveSnippet':
                         return <NoAnimWrapper>
                             <div className="presets__save">
                                 {user.userId ?
-                                    <form onSubmit={(e) => { e.preventDefault(); saveNewPreset(savePresetName, html, css, js) }}>
-                                        <input spellCheck="false" type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} maxLength={30} />
-                                        <button disabled={savePresetName.trim() === ""} data-saved={saved ? 'saving...' : ''}>Save</button>
-                                    </form>
+                                    <>
+                                        <div className="save-tabs">
+                                            <button>Current</button>
+                                            <button data-active="true">New</button>
+                                        </div>
+                                        <form onSubmit={(e) => { e.preventDefault(); saveNewPreset(savePresetName, html, css, js) }}>
+                                            <input spellCheck="false" type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} maxLength={30} />
+                                            <button disabled={savePresetName.trim() === ""} data-saved={saved ? 'saving...' : ''}>Save</button>
+                                        </form>
+                                    </>
+
                                     :
                                     <div role="button" onClick={() => setModalOption("profile")} className="presets__noSnippet">Sign in to save your snippets</div>}
                             </div>

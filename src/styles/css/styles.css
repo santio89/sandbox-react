@@ -722,7 +722,8 @@ button {
 }
 
 /* auto-animate-wrapper */
-.animWrapper {
+.animWrapper,
+.noAnimWrapper {
   flex: 1;
   width: 100%;
   display: flex;
@@ -732,6 +733,10 @@ button {
   gap: clamp(0.5rem, 0.5rem + 1vw, 2rem);
   transition: none !important;
   animation: none !important;
+}
+
+.noAnimWrapper {
+  flex-flow: column nowrap;
 }
 
 /* sonner-toast-wrapper */
@@ -880,7 +885,7 @@ li[data-sonner-toast] {
   width: 100%;
   min-height: 100%;
   display: flex;
-  flex-flow: row wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: clamp(1rem, 1rem + 1vw, 2rem);
@@ -1255,9 +1260,31 @@ li[data-sonner-toast] {
   flex: 1;
   max-width: 100%;
 }
+.main__modal .presets__save .save-tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.main__modal .presets__save .save-tabs button {
+  font-weight: normal;
+  width: unset;
+  filter: grayscale(1);
+  font-size: 1rem;
+}
+.main__modal .presets__save .save-tabs button:hover, .main__modal .presets__save .save-tabs button:focus-visible, .main__modal .presets__save .save-tabs button:active {
+  filter: grayscale(0);
+}
+.main__modal .presets__save .save-tabs button[data-active=true] {
+  box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
+  background-position: 0% 50%;
+  border: 1px solid var(--main-purple);
+  filter: grayscale(0);
+}
 .main__modal .presets__save form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   flex: 1;
   gap: 1.5rem;
@@ -1345,29 +1372,33 @@ li[data-sonner-toast] {
   cursor: pointer;
   padding: 4px;
   color: rgb(248, 248, 248);
-  transition: none;
-  border-radius: 0 2px 2px 0;
   background: var(--main-gray-op);
+  border-radius: 0 2px 2px 0;
   width: 66px;
   height: 40px;
   text-align: left;
   white-space: pre-wrap;
+  filter: grayscale(1);
+  transition: 200ms;
+  font-size: 0.75rem;
 }
 .main__modal .presets__tabs__btn:hover, .main__modal .presets__tabs__btn:focus-visible {
   font-weight: bold;
   background-color: var(--main-purple-variation);
   color: rgb(248, 248, 248);
+  filter: grayscale(0);
 }
 .main__modal .presets__tabs__btn:active {
-  scale: none;
   font-weight: bold;
   background-color: var(--main-purple-variation);
   color: rgb(248, 248, 248);
+  filter: grayscale(0);
 }
 .main__modal .presets__tabs__btn--active {
   font-weight: bold;
   background-color: var(--main-purple-variation);
   color: rgb(248, 248, 248);
+  filter: grayscale(0);
 }
 .main__modal::backdrop {
   background: transparent;

@@ -1,7 +1,7 @@
 export default function NoAnimWrapper({ children }) {
 
     return (
-        <div className="animWrapper">
+        <div className="noAnimWrapper">
             {children}
         </div>
     )
