@@ -4,6 +4,7 @@ import { setModal, setLoadSnippet, setCreateNew } from "../store/actions/modal.a
 import { signInGoogle, signOutUser, updateDisplayName, updateAvatar } from "../store/actions/auth.action";
 import { setCodeAll } from "../store/actions/code.action";
 import { savePreset, deletePreset, editPreset, setPresetsIndex } from "../store/actions/presets.action";
+import { setCurrentSnippet } from "../store/actions/theme.action";
 import { toast } from "sonner";
 import AnimWrapper from "./AnimWrapper";
 import NoAnimWrapper from "./NoAnimWrapper";
@@ -33,7 +34,10 @@ export default function Modal({ callbacks }) {
     const [displayNameMode, setDisplayNameMode] = useState(false)
     const [newDisplayName, setNewDisplayName] = useState(user?.displayName || "")
     const [picUpload, setPicUpload] = useState(null)
-    const [currentSnippet, setCurrentSnippet] = useState(null)
+    /* const [currentSnippet, setCurrentSnippet] = useState(null) */
+
+    const currentSnippet = useSelector(state => state.theme.currentSnippet)
+
     const [saveTab, setSaveTab] = useState(currentSnippet ? "current" : "new")
 
     const { setNewProject } = callbacks;
@@ -139,7 +143,7 @@ export default function Modal({ callbacks }) {
         dispatch(setLoadSnippet(true))
         setNewProject(false)
         setLoaded(true)
-        setCurrentSnippet({ id: preset.id, name: preset.name })
+        dispatch(setCurrentSnippet({ id: preset.id, name: preset.name }))
 
         if (window.location.pathname !== "/") {
             navigate("/")
@@ -228,7 +232,7 @@ export default function Modal({ callbacks }) {
         /* end check duplicated name */
 
         dispatch(savePreset(presets, { id, name, html: trimHtml, css: trimCss, js: trimJs }, index, user.userId, noSave, true))
-        setCurrentSnippet({ id, name })
+        dispatch(setCurrentSnippet({ id, name }))
         setSavePresetName("")
     }
 
@@ -255,7 +259,7 @@ export default function Modal({ callbacks }) {
         }
 
         dispatch(savePreset(presets, { id: preset.id, name: preset.name, html: trimHtml, css: trimCss, js: trimJs }, index, user.userId, noSave, false))
-        setCurrentSnippet({ id: preset.id, name: preset.name })
+        dispatch(setCurrentSnippet({ id: preset.id, name: preset.name }))
         setSavePresetName("")
     }
 
@@ -694,7 +698,7 @@ export default function Modal({ callbacks }) {
     }, [loadSnippet])
 
     useEffect(() => {
-        createNew && setCurrentSnippet(null)
+        createNew && dispatch(setCurrentSnippet(null))
         createNew && dispatch(setCreateNew(false))
     }, [createNew])
 
@@ -741,6 +745,7 @@ export default function Modal({ callbacks }) {
 
     }, [index])
 
+    
     return (
         <dialog className="main__modal" ref={modal}>
             <Draggable nodeRef={modalDrag} handle=".main__modal__header" bounds={"parent"} cancel="button">
