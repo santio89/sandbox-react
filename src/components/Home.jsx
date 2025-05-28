@@ -31,7 +31,7 @@ export default function Home({ sharedSnippetHome }) {
     const [downloadCode, setDownloadCode] = useState(false)
     const [sharedSnippet, setSharedSnippet] = useState(null)
     const [sharedLoading, setSharedLoading] = useState(true)
-
+    const currentSnippet = useSelector(state => state.theme.currentSnippet)
     const lineHighlight = useSelector(state => state.editor.lineHighlight)
     const minimap = useSelector(state => state.editor.minimap)
     const wordWrap = useSelector(state => state.editor.wordWrap)
@@ -436,6 +436,7 @@ export default function Home({ sharedSnippetHome }) {
                             <div className="tabs__option"><button title="CSS (alt+shift+2)" data-active={tabActive === "css"} onClick={() => setTabActive("css")}>CSS</button></div>
                             <div className="tabs__option"><button title="JS (alt+shift+3)" data-active={tabActive === "js"} onClick={() => setTabActive("js")}>JS</button></div>
                         </div>
+                        <div className="currentSnippet">{currentSnippet.name && `Current snippet: ${currentSnippet.name}`}</div>
                         <div className="mainCode">
                             {panelBreakpoint ?
                                 <>

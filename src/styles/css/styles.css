@@ -322,10 +322,19 @@ button {
   border-color: var(--main-purple);
 }
 
+.currentSnippet {
+  font-size: 1rem;
+  line-height: 1;
+  height: 1rem;
+  color: var(--main-white);
+  padding-inline: 1rem;
+}
+
 .tabs {
   display: flex;
   gap: clamp(0.2rem, 0.2rem + 2vw, 2rem);
   justify-content: center;
+  padding-inline: 1rem;
   padding-top: 2rem;
   padding-bottom: 1rem;
 }

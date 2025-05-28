@@ -9,7 +9,6 @@ const getSharedSnippet = (userId, snippetId, callback) => {
         if (snapshot.exists()) {
             preset = snapshot.val()
             callback(preset)
-
             toast.message('Snippets', {
                 description: `Snippet loaded: ${preset.name}`,
             })
