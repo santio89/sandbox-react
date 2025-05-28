@@ -697,6 +697,10 @@ export default function Modal({ callbacks }) {
     }, [modalOption])
 
     useEffect(() => {
+        currentSnippet && setSaveTab(currentSnippet?.id ? "current" : "new")
+    }, [currentSnippet])
+
+    useEffect(() => {
         loadSnippet && dispatch(setLoadSnippet(false))
     }, [loadSnippet])
 
