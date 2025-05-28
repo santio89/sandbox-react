@@ -155,6 +155,10 @@ export default function Modal({ callbacks }) {
 
     const deleteSelectedPreset = (name, id) => {
         dispatch(deletePreset(presets, name, id, user.userId))
+
+        if (currentSnippet && currentSnippet.id === id) {
+            dispatch(setCurrentSnippet({ id: null, userId: null, name: "" }))
+        }
     }
 
     const editSelectedPreset = (name, id, newName) => {
