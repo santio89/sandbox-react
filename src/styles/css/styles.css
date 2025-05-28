@@ -1034,6 +1034,7 @@ li[data-sonner-toast] {
 .main__modal .presets__profile__userInfo__data__text__line__btnContainer button[disabled] {
   filter: grayscale(1);
   scale: 1;
+  pointer-events: none;
 }
 .main__modal .presets__profile__userInfo__data__signOut {
   cursor: pointer;

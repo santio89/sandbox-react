@@ -339,6 +339,7 @@
                   &[disabled] {
                     filter: grayscale(1);
                     scale: 1;
+                    pointer-events: none;
                   }
                 }
               }

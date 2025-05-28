@@ -34,7 +34,6 @@ export default function Modal({ callbacks }) {
     const [displayNameMode, setDisplayNameMode] = useState(false)
     const [newDisplayName, setNewDisplayName] = useState(user?.displayName || "")
     const [picUpload, setPicUpload] = useState(null)
-    /* const [currentSnippet, setCurrentSnippet] = useState(null) */
 
     const currentSnippet = useSelector(state => state.theme.currentSnippet)
 
@@ -557,14 +556,14 @@ export default function Modal({ callbacks }) {
                                 {user.userId ?
                                     <>
                                         <div className="save-tabs">
-                                            <button onClick={() => setSaveTab("current")} data-active={saveTab === "current"} disabled={!currentSnippet}>Current</button>
+                                            <button onClick={() => setSaveTab("current")} data-active={saveTab === "current"} disabled={!currentSnippet.id}>Current</button>
                                             <button onClick={() => setSaveTab("new")} data-active={saveTab === "new"}>New</button>
                                         </div>
                                         {
                                             saveTab === "current" ?
                                                 <form onSubmit={(e) => { e.preventDefault(); saveCurrentPreset(currentSnippet, html, css, js) }}>
                                                     <input spellCheck="false" type="text" placeholder="SNIPPET NAME" value={currentSnippet.name} disabled />
-                                                    <button disabled={!currentSnippet} data-saved={saved ? 'saving...' : ''}>Save current</button>
+                                                    <button disabled={!currentSnippet.id || defaultPresets.some((defaultPreset) => defaultPreset.id === currentSnippet.id)} data-saved={saved ? 'saving...' : ''}>Save current</button>
                                                 </form> :
                                                 <form onSubmit={(e) => { e.preventDefault(); saveNewPreset(savePresetName, html, css, js) }}>
                                                     <input spellCheck="false" type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} maxLength={30} />
@@ -592,7 +591,7 @@ export default function Modal({ callbacks }) {
         if (modalActive) {
             setModalOption("snippets")
             setSnippetTab(user.userId ? "mySnippets" : "featuredSnippets")
-            setSaveTab((currentSnippet ? "current" : "new"))
+            setSaveTab(currentSnippet.id ? "current" : "new")
             setSelectedId(null)
             setDeleteId(null)
             setEditId(null)
@@ -634,7 +633,7 @@ export default function Modal({ callbacks }) {
         setDragId(null)
 
         if (snippetTab === "saveSnippet") {
-            setSaveTab(currentSnippet ? "current" : "new")
+            setSaveTab(currentSnippet.id ? "current" : "new")
         }
     }, [snippetTab])
 
@@ -745,7 +744,7 @@ export default function Modal({ callbacks }) {
 
     }, [index])
 
-    
+
     return (
         <dialog className="main__modal" ref={modal}>
             <Draggable nodeRef={modalDrag} handle=".main__modal__header" bounds={"parent"} cancel="button">
