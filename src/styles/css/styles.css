@@ -1298,7 +1298,7 @@ li[data-sonner-toast] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex: 1;
+  /* flex: 1; */
   gap: 1.5rem;
   max-width: 100%;
 }
