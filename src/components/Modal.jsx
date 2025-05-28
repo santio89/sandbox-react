@@ -142,7 +142,7 @@ export default function Modal({ callbacks }) {
         dispatch(setLoadSnippet(true))
         setNewProject(false)
         setLoaded(true)
-        dispatch(setCurrentSnippet({ id: preset.id, name: preset.name }))
+        dispatch(setCurrentSnippet({ id: preset.id, userId: preset.userId, name: preset.name }))
 
         if (window.location.pathname !== "/") {
             navigate("/")
@@ -230,8 +230,8 @@ export default function Modal({ callbacks }) {
         } while (exists)
         /* end check duplicated name */
 
-        dispatch(savePreset(presets, { id, name, html: trimHtml, css: trimCss, js: trimJs }, index, user.userId, noSave, true))
-        dispatch(setCurrentSnippet({ id, name }))
+        dispatch(savePreset(presets, { id, userId: user.userId, name, html: trimHtml, css: trimCss, js: trimJs }, index, user.userId, noSave, true))
+        dispatch(setCurrentSnippet({ id, userId: user.userId, name }))
         setSavePresetName("")
     }
 
@@ -258,7 +258,7 @@ export default function Modal({ callbacks }) {
         }
 
         dispatch(savePreset(presets, { id: preset.id, name: preset.name, html: trimHtml, css: trimCss, js: trimJs }, index, user.userId, noSave, false))
-        dispatch(setCurrentSnippet({ id: preset.id, name: preset.name }))
+        dispatch(setCurrentSnippet({ id: preset.id, userId: preset.userId, name: preset.name }))
         setSavePresetName("")
     }
 
@@ -563,7 +563,7 @@ export default function Modal({ callbacks }) {
                                             saveTab === "current" ?
                                                 <form onSubmit={(e) => { e.preventDefault(); saveCurrentPreset(currentSnippet, html, css, js) }}>
                                                     <input spellCheck="false" type="text" placeholder="SNIPPET NAME" value={currentSnippet.name} disabled />
-                                                    <button disabled={!currentSnippet.id || defaultPresets.some((defaultPreset) => defaultPreset.id === currentSnippet.id)} data-saved={saved ? 'saving...' : ''}>Save current</button>
+                                                    <button disabled={!currentSnippet.id || currentSnippet.userId != user.userId || defaultPresets.some((defaultPreset) => defaultPreset.id === currentSnippet.id)} data-saved={saved ? 'saving...' : ''}>Save current</button>
                                                 </form> :
                                                 <form onSubmit={(e) => { e.preventDefault(); saveNewPreset(savePresetName, html, css, js) }}>
                                                     <input spellCheck="false" type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} maxLength={30} />

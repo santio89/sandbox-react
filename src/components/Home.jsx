@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { setCodeHtml, setCodeCss, setCodeJs, setLineHighlight, setMinimap, setWordWrap } from "../store/actions/code.action";
+import { setCurrentSnippet } from "../store/actions/theme.action";
 import { Link, useParams } from "react-router-dom";
 import { setLoadSnippet } from "../store/actions/modal.action";
 import getSharedSnippet from "../utils/getSharedSnippet";
@@ -303,6 +304,7 @@ export default function Home({ sharedSnippetHome }) {
     useEffect(() => {
         const setShared = (html, css, js) => {
             dispatch(setLoadSnippet(true))
+            dispatch(setCurrentSnippet({ id: sharedSnippet.id, userId: sharedSnippet.userId, name: sharedSnippet.name }))
             setHtml(html)
             setCss(css)
             setJs(js)
