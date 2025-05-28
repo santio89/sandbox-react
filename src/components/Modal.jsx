@@ -135,7 +135,6 @@ export default function Modal({ callbacks }) {
     }
 
     const setPreset = (preset) => {
-        console.log(preset)
         dispatch(setCodeAll(preset.html, preset.css, preset.js))
         dispatch(setLoadSnippet(true))
         setNewProject(false)

@@ -7,19 +7,24 @@ export const savePreset = (presets, preset, index, userId = null, callback, isNe
     return async dispatch => {
         if (userId) {
             try {
-                preset.createdAt = timestamp
 
                 const customRef = ref(db, 'snippets/' + userId + '/' + preset.id);
                 await set(customRef, preset);
 
-                let newPreset = { ...preset }
+
                 let newPresets = []
 
                 if (isNew) {
+                    preset.createdAt = timestamp
+                    const newPreset = { ...preset }
+
                     newPresets = [newPreset, ...presets]
                     /* save index file */
                     dispatch(setPresetsIndex(index, userId, preset.id))
                 } else {
+                    preset.updatedAt = timestamp
+                    const newPreset = { ...preset }
+
                     const ind = presets.findIndex(oldPreset => oldPreset.id === preset.id);
                     presets[ind] = newPreset
                     newPresets = [...presets]
@@ -205,7 +210,7 @@ export const getDefaultPresets = () => {
             if (snapshot.exists()) {
                 const presetsObj = snapshot.val()
                 defaultPresets = Object.entries(presetsObj).map((obj) => { return { ...obj[1] } })
-                
+
                 /* reverse (last added is first shown) */
                 defaultPresets.reverse()
 

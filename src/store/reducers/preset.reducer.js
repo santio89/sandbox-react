@@ -2,7 +2,8 @@ const initialState = {
   presets: [],
   defaultPresets: [
   ],
-  presetsIndex: []
+  presetsIndex: [],
+  currentSnippet: null
 }
 
 const PresetReducer = (state = initialState, action) => {
@@ -13,6 +14,8 @@ const PresetReducer = (state = initialState, action) => {
       return { ...state, defaultPresets: action.defaultPresets }
     case 'SET_PRESETS_INDEX':
       return { ...state, presetsIndex: action.presetsIndex }
+    case 'SET_CURRENT_SNIPPET':
+      return { ...state, currentSnippet: action.currentSnippet }
     default:
       return state
   }
