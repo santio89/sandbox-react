@@ -591,7 +591,7 @@ export default function Modal({ callbacks }) {
         if (modalActive) {
             setModalOption("snippets")
             setSnippetTab(user.userId ? "mySnippets" : "featuredSnippets")
-            setSaveTab(currentSnippet.id ? "current" : "new")
+            setSaveTab(currentSnippet?.id ? "current" : "new")
             setSelectedId(null)
             setDeleteId(null)
             setEditId(null)
@@ -633,7 +633,7 @@ export default function Modal({ callbacks }) {
         setDragId(null)
 
         if (snippetTab === "saveSnippet") {
-            setSaveTab(currentSnippet.id ? "current" : "new")
+            setSaveTab(currentSnippet?.id ? "current" : "new")
         }
     }, [snippetTab])
 
