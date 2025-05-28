@@ -311,7 +311,7 @@ button {
   gap: 0.5rem;
   line-height: 1;
 }
-.home__sharedNotFound a:hover, .home__sharedLoading a:hover {
+.home__sharedNotFound a:hover, .home__sharedNotFound a:focus-visible, .home__sharedLoading a:hover, .home__sharedLoading a:focus-visible {
   outline: 2px solid var(--main-purple);
 }
 .home__sharedNotFound a:active, .home__sharedLoading a:active {
