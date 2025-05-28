@@ -562,8 +562,8 @@ export default function Modal({ callbacks }) {
                                         {
                                             saveTab === "current" ?
                                                 <form onSubmit={(e) => { e.preventDefault(); saveCurrentPreset(currentSnippet, html, css, js) }}>
-                                                    <input spellCheck="false" type="text" placeholder="SNIPPET NAME" value={currentSnippet.name} disabled />
-                                                    <button disabled={!currentSnippet?.id || currentSnippet.userId != user.userId || defaultPresets.some((defaultPreset) => defaultPreset.id === currentSnippet?.id)} data-saved={saved ? 'saving...' : ''}>Save current</button>
+                                                    <input spellCheck="false" type="text" placeholder="SNIPPET NAME" value={currentSnippet?.name} disabled />
+                                                    <button disabled={!currentSnippet?.id || currentSnippet?.userId != user.userId || defaultPresets.some((defaultPreset) => defaultPreset.id === currentSnippet?.id)} data-saved={saved ? 'saving...' : ''}>Save current</button>
                                                 </form> :
                                                 <form onSubmit={(e) => { e.preventDefault(); saveNewPreset(savePresetName, html, css, js) }}>
                                                     <input spellCheck="false" type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} maxLength={30} />
