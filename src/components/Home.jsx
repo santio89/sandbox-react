@@ -29,7 +29,7 @@ export default function Home({ sharedSnippetHome }) {
     const [copyClipboard, setCopyClipboard] = useState(false)
     const [downloadCode, setDownloadCode] = useState(false)
     const [sharedSnippet, setSharedSnippet] = useState(null)
-    const [sharedLoading, setSharedLoading] = useState(false)
+    const [sharedLoading, setSharedLoading] = useState(true)
 
     const lineHighlight = useSelector(state => state.editor.lineHighlight)
     const minimap = useSelector(state => state.editor.minimap)
@@ -290,12 +290,13 @@ export default function Home({ sharedSnippetHome }) {
 
     useEffect(() => {
         if (sharedSnippetHome) {
-            setSharedLoading(true)
             const setShared = (snippet) => {
                 setSharedSnippet(snippet)
                 setSharedLoading(false)
             }
             getSharedSnippet(userShareId, snippetShareId, setShared)
+        } else {
+            setSharedLoading(false)
         }
     }, [sharedSnippetHome])
 

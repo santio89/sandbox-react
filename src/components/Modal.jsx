@@ -56,6 +56,7 @@ export default function Modal({ callbacks }) {
 
     const [dragItem, setDragItem] = useState(null)
     const [dragId, setDragId] = useState(null)
+
     const exchangeItems = (id1, id2) => {
         const newIndex = [...index]
         const ind1 = newIndex.findIndex(id => id === id1)
@@ -65,6 +66,7 @@ export default function Modal({ callbacks }) {
 
         dispatch(setPresetsIndex(newIndex, user.userId))
     }
+
     // Drag start event handler
     const handleDragStart = (e, id) => {
         setDragItem(e.target)
@@ -132,29 +134,50 @@ export default function Modal({ callbacks }) {
         dispatch(updateDisplayName(user.displayName, newDisplayName))
     }
 
-    const setPreset = (name, html, css, js) => {
-        dispatch(setCodeAll(html, css, js))
+    const setPreset = (preset) => {
+        console.log(preset)
+        dispatch(setCodeAll(preset.html, preset.css, preset.js))
         dispatch(setLoadSnippet(true))
         setNewProject(false)
         setLoaded(true)
+        setCurrentSnippet({ id: preset.id, name: preset.name })
 
         if (window.location.pathname !== "/") {
             navigate("/")
         }
 
         toast.message('Snippets', {
-            description: `Snippet loaded: ${name}`,
+            description: `Snippet loaded: ${preset.name}`,
         })
     }
 
-    const deleteSelectedPreset = (name, docId, id) => {
-        dispatch(deletePreset(presets, name, docId, id, user.userId))
+    const deleteSelectedPreset = (name, id) => {
+        dispatch(deletePreset(presets, name, id, user.userId))
     }
 
-    const editSelectedPreset = (name, docId, id, newName) => {
-        const trimNewName = String(newName).trim()
-        if (trimNewName === "") return
-        dispatch(editPreset(presets, name, docId, id, newName, user.userId))
+    const editSelectedPreset = (name, id, newName) => {
+        newName = String(newName).trim()
+        if (name === newName || newName === "") {
+            return
+        }
+
+        /* check duplicated name */
+        let exists = false;
+        let existsMany = 0;
+        do {
+            exists = presets.some(obj => obj.name === newName);
+            if (!exists) continue
+            exists && existsMany++
+
+            if (existsMany === 1) {
+                newName += `(${existsMany})`
+            } else if (existsMany > 1) {
+                newName = newName.slice(0, -3) + `(${existsMany})`
+            }
+        } while (exists)
+        /* end check duplicated name */
+
+        dispatch(editPreset(presets, name, id, newName, user.userId))
     }
 
     const shareSnippet = (userId, snippetId) => {
@@ -169,7 +192,7 @@ export default function Modal({ callbacks }) {
     const saveNewPreset = (name, html, css, js) => {
         setSaved(true)
 
-        name = name.trim()
+        name = String(name).trim()
         if (name === "") {
             return
         }
@@ -189,7 +212,51 @@ export default function Modal({ callbacks }) {
             trimJs = trimJs.slice(0, -1);
         }
 
-        dispatch(savePreset(presets, { id, name, html: trimHtml, css: trimCss, js: trimJs }, index, user.userId, noSave))
+        /* check duplicated name */
+        let exists = false;
+        let existsMany = 0;
+        do {
+            exists = presets.some(obj => obj.name === name);
+            if (!exists) continue
+            exists && existsMany++
+
+            if (existsMany === 1) {
+                name += `(${existsMany})`
+            } else if (existsMany > 1) {
+                name = name.slice(0, -3) + `(${existsMany})`
+            }
+        } while (exists)
+        /* end check duplicated name */
+
+        dispatch(savePreset(presets, { id, name, html: trimHtml, css: trimCss, js: trimJs }, index, user.userId, noSave, true))
+        setCurrentSnippet({ id, name })
+        setSavePresetName("")
+    }
+
+    const saveCurrentPreset = (preset, html, css, js) => {
+        setSaved(true)
+
+        preset.name = preset.name.trim()
+        if (preset.name === "") {
+            return
+        }
+
+        let trimHtml = html;
+        let trimCss = css;
+        let trimJs = js;
+
+        while (trimHtml && trimHtml[trimHtml.length - 1] === "\n") {
+            trimHtml = trimHtml.slice(0, -1);
+        }
+        while (trimCss && trimCss[trimCss.length - 1] === "\n") {
+            trimCss = trimCss.slice(0, -1);
+        }
+        while (trimJs && trimJs[trimJs.length - 1] === "\n") {
+            trimJs = trimJs.slice(0, -1);
+        }
+
+        dispatch(savePreset(presets, { id: preset.id, name: preset.name, html: trimHtml, css: trimCss, js: trimJs }, index, user.userId, noSave, false))
+        setCurrentSnippet({ id: preset.id, name: preset.name })
         setSavePresetName("")
     }
 
@@ -310,7 +377,7 @@ export default function Modal({ callbacks }) {
                                                                 <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                                                                     <span>Load snippet?</span>
                                                                     <span className="presets__option__confirm__buttons">
-                                                                        <button onClick={(e) => { e.stopPropagation(); setPreset(preset.name, preset.html, preset.css, preset.js) }}>Yes</button>
+                                                                        <button onClick={(e) => { e.stopPropagation(); setPreset(preset) }}>Yes</button>
                                                                         <button onClick={(e) => { e.stopPropagation(); setSelectedId(null) }}>No</button>
                                                                     </span>
                                                                 </span>
@@ -324,10 +391,10 @@ export default function Modal({ callbacks }) {
                                                                         (
                                                                             <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                                                                                 <span>Rename snippet?</span>
-                                                                                <form onSubmit={(e) => { e.preventDefault(); editSelectedPreset(preset.name, preset.docId, preset.id, editName) }}>
+                                                                                <form onSubmit={(e) => { e.preventDefault(); editSelectedPreset(preset.name, preset.id, editName) }}>
                                                                                     <input spellCheck={false} type="text" value={editName} onChange={e => { setEditName(e.target.value) }} maxLength={30} placeholder="NEW NAME" />
                                                                                     <span className="presets__option__confirm__buttons">
-                                                                                        <button onClick={(e) => { e.stopPropagation(); editSelectedPreset(preset.name, preset.docId, preset.id, editName) }}>Yes</button>
+                                                                                        <button onClick={(e) => { e.stopPropagation(); editSelectedPreset(preset.name, preset.id, editName) }}>Yes</button>
                                                                                         <button onClick={(e) => { e.stopPropagation(); setEditId(null) }}>No</button>
                                                                                     </span>
                                                                                 </form>
@@ -339,7 +406,7 @@ export default function Modal({ callbacks }) {
                                                                                 <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                                                                                     <span>Delete snippet?</span>
                                                                                     <span className="presets__option__confirm__buttons">
-                                                                                        <button onClick={(e) => { e.stopPropagation(); deleteSelectedPreset(preset.name, preset.docId, preset.id) }}>Yes</button>
+                                                                                        <button onClick={(e) => { e.stopPropagation(); deleteSelectedPreset(preset.name, preset.id) }}>Yes</button>
                                                                                         <button onClick={(e) => { e.stopPropagation(); setDeleteId(null) }}>No</button>
                                                                                     </span>
                                                                                 </span> :
@@ -355,7 +422,7 @@ export default function Modal({ callbacks }) {
                                                                                                 <button className="presets__option__main__share" onClick={(e) => {
                                                                                                     e.stopPropagation();
                                                                                                     setShareId(preset.id);
-                                                                                                    shareSnippet(user.userId, preset.docId)
+                                                                                                    shareSnippet(user.userId, preset.id)
                                                                                                 }} title="Copy share link to clipboard">
                                                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" className="bi-share-fill" viewBox="0 0 16 16">
                                                                                                         <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
@@ -429,7 +496,7 @@ export default function Modal({ callbacks }) {
                                                             <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                                                                 <span>Load snippet?</span>
                                                                 <span className="presets__option__confirm__buttons">
-                                                                    <button onClick={(e) => { e.stopPropagation(); setPreset(preset.name, preset.html, preset.css, preset.js) }}>Yes</button>
+                                                                    <button onClick={(e) => { e.stopPropagation(); setPreset(preset) }}>Yes</button>
                                                                     <button onClick={(e) => { e.stopPropagation(); setSelectedId(null) }}>No</button>
                                                                 </span>
                                                             </span>
@@ -448,7 +515,7 @@ export default function Modal({ callbacks }) {
                                                                             <button className="presets__option__main__share" onClick={(e) => {
                                                                                 e.stopPropagation();
                                                                                 setShareId(preset.id);
-                                                                                shareSnippet("featured", preset.docId)
+                                                                                shareSnippet("featured", preset.id)
                                                                             }} title="Copy share link to clipboard">
                                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" className="bi-share-fill" viewBox="0 0 16 16">
                                                                                     <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
@@ -487,14 +554,14 @@ export default function Modal({ callbacks }) {
                                 {user.userId ?
                                     <>
                                         <div className="save-tabs">
-                                            <button onClick={() => setSaveTab("current")} data-active={saveTab === "current"}>Current</button>
+                                            <button onClick={() => setSaveTab("current")} data-active={saveTab === "current"} disabled={!currentSnippet}>Current</button>
                                             <button onClick={() => setSaveTab("new")} data-active={saveTab === "new"}>New</button>
                                         </div>
                                         {
                                             saveTab === "current" ?
-                                                <form onSubmit={(e) => { e.preventDefault(); saveNewPreset(savePresetName, html, css, js) }}>
-                                                    <input spellCheck="false" type="text" placeholder="SNIPPET NAME" value={"CURRENT SNIPPET"} disabled />
-                                                    <button /* disabled={savePresetName.trim() === ""} */ data-saved={saved ? 'saving...' : ''}>Save current</button>
+                                                <form onSubmit={(e) => { e.preventDefault(); saveCurrentPreset(currentSnippet, html, css, js) }}>
+                                                    <input spellCheck="false" type="text" placeholder="SNIPPET NAME" value={currentSnippet.name} disabled />
+                                                    <button disabled={!currentSnippet} data-saved={saved ? 'saving...' : ''}>Save current</button>
                                                 </form> :
                                                 <form onSubmit={(e) => { e.preventDefault(); saveNewPreset(savePresetName, html, css, js) }}>
                                                     <input spellCheck="false" type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} maxLength={30} />
@@ -522,6 +589,7 @@ export default function Modal({ callbacks }) {
         if (modalActive) {
             setModalOption("snippets")
             setSnippetTab(user.userId ? "mySnippets" : "featuredSnippets")
+            setSaveTab((currentSnippet ? "current" : "new"))
             setSelectedId(null)
             setDeleteId(null)
             setEditId(null)
@@ -561,6 +629,10 @@ export default function Modal({ callbacks }) {
         setSavePresetName("")
         setDragItem(null)
         setDragId(null)
+
+        if (snippetTab === "saveSnippet") {
+            setSaveTab(currentSnippet ? "current" : "new")
+        }
     }, [snippetTab])
 
     /* useEffect(() => {
@@ -623,6 +695,7 @@ export default function Modal({ callbacks }) {
     }, [loadSnippet])
 
     useEffect(() => {
+        createNew && setCurrentSnippet(null)
         createNew && dispatch(setCreateNew(false))
     }, [createNew])
 

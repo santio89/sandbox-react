@@ -2,34 +2,28 @@ import { firebaseDb as db, timestamp } from "../../config/firebase"
 import { ref, set, push, child, get, remove } from "firebase/database";
 import { toast } from "sonner";
 
-export const savePreset = (presets, preset, index, userId = null, callback) => {
+export const savePreset = (presets, preset, index, userId = null, callback, isNew = true) => {
 
     return async dispatch => {
         if (userId) {
             try {
-                /* check duplicated name */
-                let exists = false;
-                let existsMany = 0;
-                do {
-                    exists = presets.some(obj => obj.name === preset.name);
-                    if (!exists) continue
-                    exists && existsMany++
-
-                    if (existsMany === 1) {
-                        preset.name += `(${existsMany})`
-                    } else if (existsMany > 1) {
-                        preset.name = preset.name.slice(0, -3) + `(${existsMany})`
-                    }
-                } while (exists)
-                /* end check duplicated name */
-
                 preset.createdAt = timestamp
 
-                const doc = await push(ref(db, 'snippets/' + userId), preset);
-                const newPreset = { docId: doc.key, ...preset }
-                const newPresets = [newPreset, ...presets]
-                /* save index file */
-                dispatch(setPresetsIndex(index, userId, preset.id))
+                const customRef = ref(db, 'snippets/' + userId + '/' + preset.id);
+                await set(customRef, preset);
+
+                let newPreset = { ...preset }
+                let newPresets = []
+
+                if (isNew) {
+                    newPresets = [newPreset, ...presets]
+                    /* save index file */
+                    dispatch(setPresetsIndex(index, userId, preset.id))
+                } else {
+                    const ind = presets.findIndex(oldPreset => oldPreset.id === preset.id);
+                    presets[ind] = newPreset
+                    newPresets = [...presets]
+                }
 
                 dispatch({
                     type: "SET_PRESETS",
@@ -50,7 +44,7 @@ export const savePreset = (presets, preset, index, userId = null, callback) => {
     }
 }
 
-export const deletePreset = (presets, name, docId, id, userId = null) => {
+export const deletePreset = (presets, name, id, userId = null) => {
     const index = presets.findIndex(preset => preset.id === id);
     presets.splice(index, 1)
 
@@ -63,7 +57,7 @@ export const deletePreset = (presets, name, docId, id, userId = null) => {
             });
 
             try {
-                await remove(ref(db, 'snippets/' + userId + "/" + docId))
+                await remove(ref(db, 'snippets/' + userId + "/" + id))
 
                 dispatch({
                     type: "SET_PRESETS",
@@ -92,7 +86,7 @@ export const deletePreset = (presets, name, docId, id, userId = null) => {
     }
 }
 
-export const editPreset = (presets, name, docId, id, newName, userId = null) => {
+export const editPreset = (presets, name, id, newName, userId = null) => {
     const index = presets.findIndex(preset => preset.id === id);
     presets[index].name = newName
     const updatedPreset = presets[index]
@@ -105,7 +99,8 @@ export const editPreset = (presets, name, docId, id, newName, userId = null) => 
             });
 
             try {
-                await set(ref(db, 'snippets/' + userId + "/" + docId), updatedPreset);
+                updatedPreset.updatedAt = timestamp;
+                await set(ref(db, 'snippets/' + userId + "/" + id), updatedPreset);
 
                 dispatch({
                     type: "SET_PRESETS",
@@ -149,7 +144,8 @@ export const getPresets = (userId = null) => {
             get(child(ref(db), `snippets/${userId}`)).then((snapshot) => {
                 if (snapshot.exists()) {
                     const presetsObj = snapshot.val()
-                    presets = Object.entries(presetsObj).map((obj) => { return { docId: obj[0], ...obj[1] } })
+
+                    presets = Object.entries(presetsObj).map((obj) => { return { ...obj[1] } })
 
                     /* reverse (last added is first shown) */
                     presets.reverse()
@@ -208,8 +204,8 @@ export const getDefaultPresets = () => {
         get(child(ref(db), `snippets/featured`)).then((snapshot) => {
             if (snapshot.exists()) {
                 const presetsObj = snapshot.val()
-                defaultPresets = Object.entries(presetsObj).map((obj) => { return { docId: obj[0], ...obj[1] } })
-
+                defaultPresets = Object.entries(presetsObj).map((obj) => { return { ...obj[1] } })
+                
                 /* reverse (last added is first shown) */
                 defaultPresets.reverse()
 
@@ -253,5 +249,4 @@ export const setPresetsIndex = (index, userId = null, presetId = null) => {
             toast.error("Sign in")
         }
     }
-
 }
