@@ -100,9 +100,14 @@ export default function Home({ sharedSnippetHome }) {
                 break;
         }
 
-        /* e.addCommand(monaco.KeyCode.KeyZ | monaco.KeyMod.Alt, () => {
-            toggleWordWrap();
-        }); */
+        /* add word wrap command */
+        e.addCommand(monaco.KeyCode.KeyZ | monaco.KeyMod.Alt, () => {
+            const options = e.getOptions();
+            /* get the value for word wrap */
+            const currentWordWrap = options._values[143].isViewportWrapping;
+
+            currentWordWrap ? dispatch(setWordWrap("off")) : dispatch(setWordWrap("on"))
+        });
     }
 
     const focusCurrentTab = () => {
@@ -154,7 +159,7 @@ export default function Home({ sharedSnippetHome }) {
         }
         setClearConfirm(false);
     }
-    
+
     const enableClear = () => {
         switch (tabActive) {
             case 'html':
