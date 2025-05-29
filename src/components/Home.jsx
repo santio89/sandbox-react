@@ -63,6 +63,28 @@ export default function Home({ sharedSnippetHome }) {
         scrollBeyondLastLine: false,
     }
 
+    const handleEditorMount = (e) => {
+        switch (tabActive) {
+            case 'html':
+                editorHtml.current = e
+                break;
+            case 'css':
+                editorCss.current = e
+                break;
+            case 'js':
+                editorJs.current = e
+                break;
+        }
+
+        /* add word wrap command */
+        /* e.addCommand(monaco.KeyCode.KeyZ | monaco.KeyMod.Alt, () => {
+            const options = e.getOptions();
+            const currentWordWrap = options._values[147].isViewportWrapping;
+
+            currentWordWrap ? dispatch(setWordWrap("off")) : dispatch(setWordWrap("on"))
+        }); */
+    }
+
     const setHtml = (html) => {
         dispatch(setCodeHtml(html))
     }
@@ -102,29 +124,6 @@ export default function Home({ sharedSnippetHome }) {
                 editorJs?.current?.getAction('editor.action.formatDocument').run();
                 break;
         }
-    }
-
-    const handleEditorMount = (e) => {
-        switch (tabActive) {
-            case 'html':
-                editorHtml.current = e
-                break;
-            case 'css':
-                editorCss.current = e
-                break;
-            case 'js':
-                editorJs.current = e
-                break;
-        }
-
-        /* add word wrap command */
-        e.addCommand(monaco.KeyCode.KeyZ | monaco.KeyMod.Alt, () => {
-            const options = e.getOptions();
-            /* get the value for word wrap */
-            const currentWordWrap = options._values[147].isViewportWrapping;
-
-            currentWordWrap ? dispatch(setWordWrap("off")) : dispatch(setWordWrap("on"))
-        });
     }
 
     const focusCurrentTab = () => {
