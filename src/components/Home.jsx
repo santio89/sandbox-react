@@ -25,7 +25,7 @@ export default function Home({ sharedSnippetHome }) {
     const loadSnippet = useSelector(state => state.modal.loadSnippet)
     const createNew = useSelector(state => state.modal.createNew)
     const modalActive = useSelector(state => state.modal.active)
-    const [downloadBlob, setDownloadBlob] = useState("")
+    /* const [downloadBlob, setDownloadBlob] = useState("") */
     const [downloadUrl, setDownloadUrl] = useState("")
     const [codeOutput, setCodeOutput] = useState("")
     const [copyClipboard, setCopyClipboard] = useState(false)
@@ -279,8 +279,9 @@ export default function Home({ sharedSnippetHome }) {
     }, [html, css, js])
 
     useEffect(() => {
-        const newBlob = new Blob([codeOutput], { type: 'text/html' });
-        setDownloadBlob(newBlob)
+        /* const newBlob = new Blob([codeOutput], { type: 'text/html' });
+        setDownloadBlob(newBlob) */
+        setDownloadUrl(codeOutput)
     }, [codeOutput])
 
     useEffect(() => {
@@ -310,7 +311,7 @@ export default function Home({ sharedSnippetHome }) {
         focusCurrentTab()
     }, [tabActive])
 
-    useEffect(() => {
+    /* useEffect(() => {
         if (downloadBlob !== "") {
             const newDownloadUrl = window.URL.createObjectURL(downloadBlob);
             setDownloadUrl(newDownloadUrl)
@@ -319,7 +320,7 @@ export default function Home({ sharedSnippetHome }) {
         return () => {
             window.URL.revokeObjectURL(downloadUrl)
         }
-    }, [downloadBlob])
+    }, [downloadBlob]) */
 
     useEffect(() => {
         loadSnippet && setClearConfirm(false)
