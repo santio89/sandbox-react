@@ -260,7 +260,7 @@ export default function Modal({ callbacks }) {
             trimJs = trimJs.slice(0, -1);
         }
 
-        dispatch(savePreset(presets, { id: preset.id, userId: user.userId, name: preset.name, html: trimHtml, css: trimCss, js: trimJs }, index, user.userId, noSave, false))
+        dispatch(savePreset(presets, { id: preset.id, userId: preset.userId, name: preset.name, html: trimHtml, css: trimCss, js: trimJs }, index, user.userId, noSave, false))
         dispatch(setCurrentSnippet({ id: preset.id, userId: preset.userId, name: preset.name }))
         setSavePresetName("")
     }
