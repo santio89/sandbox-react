@@ -903,7 +903,7 @@ li[data-sonner-toast] {
   gap: clamp(1rem, 1rem + 1vw, 2rem);
 }
 .main__modal .presets__noSnippet {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: var(--main-white);
 }
 .main__modal .presets__profile {
@@ -1066,7 +1066,7 @@ li[data-sonner-toast] {
   fill: var(--main-white);
 }
 .main__modal .presets__profile__googleBtn {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
@@ -1079,7 +1079,6 @@ li[data-sonner-toast] {
   background: linear-gradient(45deg, var(--main-purple), var(--main-red));
   border-radius: 0.4em;
   cursor: pointer;
-  font-weight: bold;
   transition: scale 200ms;
   border: 2px solid var(--main-purple);
 }

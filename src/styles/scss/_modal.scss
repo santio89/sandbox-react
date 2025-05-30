@@ -173,7 +173,7 @@
 
   .presets {
     &__noSnippet {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       color: var(--main-white);
     }
 
@@ -372,7 +372,7 @@
       }
 
       &__googleBtn {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         display: flex;
         flex-flow: column wrap;
         justify-content: center;
@@ -385,7 +385,6 @@
         background: linear-gradient(45deg, var(--main-purple), var(--main-red));
         border-radius: 0.4em;
         cursor: pointer;
-        font-weight: bold;
         transition: scale 200ms;
         border: 2px solid var(--main-purple);
 
