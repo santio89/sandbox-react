@@ -236,7 +236,6 @@ export default function Modal({ callbacks }) {
 
         dispatch(savePreset(presets, { id, userId: user.userId, name, html: trimHtml, css: trimCss, js: trimJs }, index, user.userId, noSave, true))
         dispatch(setCurrentSnippet({ id, userId: user.userId, name }))
-        setSavePresetName("")
     }
 
     const saveCurrentPreset = (preset, html, css, js) => {
@@ -272,6 +271,8 @@ export default function Modal({ callbacks }) {
                 return "Profile"
             case "snippets":
                 return "Snippets"
+            case "saveSnippet":
+                return "Save snippet"
             default:
                 return "Snippets"
         }
@@ -667,17 +668,9 @@ export default function Modal({ callbacks }) {
         }
     }, [snippetTab])
 
-    /* useEffect(() => {
-        let timeout = null;
-        if (saved) {
-            timeout = setTimeout(() => {
-                setSaved(false)
-            }, 1000)
-        }
-
-        return () => { clearTimeout(timeout) }
-
-    }, [saved]) */
+    useEffect(() => {
+        savePresetName !== "" && setSavePresetName("")
+    }, [saveTab])
 
     useEffect(() => {
         let timeout = null;
