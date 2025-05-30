@@ -198,7 +198,7 @@ button {
   cursor: pointer;
   border-radius: 50%;
   padding: 2px;
-  transition: 200ms;
+  transition: 200ms ease;
   color: var(--main-black);
 }
 .main__header__buttons > div button svg {
@@ -303,7 +303,7 @@ button {
   border-radius: 0.25em;
   color: rgb(248, 248, 248);
   margin-top: 0.5rem;
-  transition: scale 200ms;
+  transition: scale 200ms ease;
   font-weight: bold;
   display: flex;
   justify-content: center;
@@ -492,7 +492,7 @@ button {
   justify-content: center;
   align-items: center;
   color: var(--main-purple);
-  transition: 200ms;
+  transition: 200ms ease;
   cursor: pointer;
 }
 .mainCode__input__type__iconBtn:hover, .mainCode__input__type__iconBtn:focus-visible {
@@ -547,7 +547,7 @@ button {
   justify-content: center;
   align-items: center;
   gap: 0.8rem;
-  transition: 200ms;
+  transition: 200ms ease;
 }
 .mainCode__input__type__clear:hover, .mainCode__input__type__clear:focus-visible {
   background: var(--main-red);
@@ -639,7 +639,7 @@ button {
   justify-content: center;
   align-items: center;
   color: var(--main-purple);
-  transition: 200ms;
+  transition: 200ms ease;
   outline: none;
   border: none;
 }
@@ -672,7 +672,7 @@ button {
   border: 2px solid rgb(100, 100, 100);
   display: flex;
   background: white;
-  transition: opacity 200ms;
+  transition: opacity 200ms ease;
   width: 100%;
   max-width: 100%;
   height: 420px;
@@ -819,7 +819,7 @@ li[data-sonner-toast] {
   cursor: pointer;
   border-radius: 50%;
   padding: 0.5rem;
-  transition: 200ms;
+  transition: 200ms ease;
   aspect-ratio: 1;
   fill: var(--main-purple);
   background: rgba(20, 20, 20, 0.4);
@@ -1026,7 +1026,7 @@ li[data-sonner-toast] {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: scale 200ms;
+  transition: scale 200ms ease;
 }
 .main__modal .presets__profile__userInfo__data__text__line__btnContainer button:hover, .main__modal .presets__profile__userInfo__data__text__line__btnContainer button:focus-visible {
   color: var(--main-purple);
@@ -1079,12 +1079,11 @@ li[data-sonner-toast] {
   color: rgb(248, 248, 248);
   fill: var(--main-purple-variation);
   padding: 1em;
-  transition: 200ms;
   background: linear-gradient(45deg, var(--main-purple), var(--main-red));
   border-radius: 0.4em;
   cursor: pointer;
-  transition: scale 200ms;
   border: 2px solid var(--main-purple);
+  transition: 200ms ease;
 }
 .main__modal .presets__profile__googleBtn svg {
   fill: inherit;
@@ -1146,7 +1145,7 @@ li[data-sonner-toast] {
   text-align: center;
   text-wrap: balance;
   font-weight: bold;
-  transition: background-color 200ms;
+  transition: background-color 200ms ease;
   color: var(--main-white);
 }
 .main__modal .presets__option__confirm input:not(:placeholder-shown) {
@@ -1323,7 +1322,7 @@ li[data-sonner-toast] {
   line-height: 1.4;
   color: var(--main-white);
   border-radius: 0.2em 0.2em 0 0;
-  transition: background-color 200ms;
+  transition: background-color 200ms ease;
 }
 .main__modal .presets__save input:not(:placeholder-shown) {
   background-color: var(--main-gray-op);
@@ -1350,18 +1349,18 @@ li[data-sonner-toast] {
   color: var(--main-btn-clr);
   font-size: clamp(1.125rem, 1.125rem + 2vw, 1.25rem);
   cursor: pointer;
-  transition: 200ms;
+  transition: 200ms ease;
   position: relative;
 }
 .main__modal .presets__save button::after {
   content: attr(data-saved);
+  font-weight: normal;
   position: absolute;
   top: 50%;
   right: -150%;
   translate: 0 -50%;
   color: var(--main-purple);
-  transition: scale 200ms;
-  font-weight: normal;
+  transition: scale 200ms ease;
 }
 .main__modal .presets__save button:hover, .main__modal .presets__save button:focus-visible {
   box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
@@ -1386,17 +1385,17 @@ li[data-sonner-toast] {
 }
 .main__modal .presets__tabs__btn {
   cursor: pointer;
+  font-size: 0.75rem;
+  text-align: left;
+  white-space: pre-wrap;
   padding: 4px;
   color: rgb(248, 248, 248);
   background: var(--main-gray-op);
   border-radius: 0 2px 2px 0;
   width: 66px;
   height: 40px;
-  text-align: left;
-  white-space: pre-wrap;
   filter: grayscale(1);
-  transition: 200ms;
-  font-size: 0.75rem;
+  transition: 200ms ease;
 }
 .main__modal .presets__tabs__btn:hover, .main__modal .presets__tabs__btn:focus-visible {
   font-weight: bold;
@@ -1515,7 +1514,7 @@ li[data-sonner-toast] {
   border-radius: 0.25em;
   color: rgb(248, 248, 248);
   margin-top: 0.5rem;
-  transition: scale 200ms;
+  transition: scale 200ms ease;
   font-weight: bold;
   display: flex;
   justify-content: center;

@@ -63,7 +63,7 @@
         cursor: pointer;
         border-radius: 50%;
         padding: 0.5rem;
-        transition: 200ms;
+        transition: 200ms ease;
         aspect-ratio: 1;
         fill: var(--main-purple);
         background: rgba(20, 20, 20, 0.4);
@@ -310,7 +310,7 @@
                   display: flex;
                   justify-content: center;
                   align-items: center;
-                  transition: scale 200ms;
+                  transition: scale 200ms ease;
 
                   &:hover,
                   &:focus-visible {
@@ -381,12 +381,11 @@
         color: rgb(248, 248, 248);
         fill: var(--main-purple-variation);
         padding: 1em;
-        transition: 200ms;
         background: linear-gradient(45deg, var(--main-purple), var(--main-red));
         border-radius: 0.4em;
         cursor: pointer;
-        transition: scale 200ms;
         border: 2px solid var(--main-purple);
+        transition: 200ms ease;
 
         svg {
           fill: inherit;
@@ -464,7 +463,7 @@
           text-align: center;
           text-wrap: balance;
           font-weight: bold;
-          transition: background-color 200ms;
+          transition: background-color 200ms ease;
           color: var(--main-white);
 
           &:not(:placeholder-shown) {
@@ -677,7 +676,7 @@
         line-height: 1.4;
         color: var(--main-white);
         border-radius: 0.2em 0.2em 0 0;
-        transition: background-color 200ms;
+        transition: background-color 200ms ease;
 
         &:not(:placeholder-shown) {
           background-color: var(--main-gray-op);
@@ -712,18 +711,18 @@
         color: var(--main-btn-clr);
         font-size: clamp(1.125rem, 1.125rem + 2vw, 1.25rem);
         cursor: pointer;
-        transition: 200ms;
+        transition: 200ms ease;
         position: relative;
 
         &::after {
           content: attr(data-saved);
+          font-weight: normal;
           position: absolute;
           top: 50%;
           right: -150%;
           translate: 0 -50%;
           color: var(--main-purple);
-          transition: scale 200ms;
-          font-weight: normal;
+          transition: scale 200ms ease;
         }
 
         &:hover,
@@ -755,17 +754,17 @@
 
       &__btn {
         cursor: pointer;
+        font-size: 0.75rem;
+        text-align: left;
+        white-space: pre-wrap;
         padding: 4px;
         color: rgb(248, 248, 248);
         background: var(--main-gray-op);
         border-radius: 0 2px 2px 0;
         width: 66px;
         height: 40px;
-        text-align: left;
-        white-space: pre-wrap;
         filter: grayscale(1);
-        transition: 200ms;
-        font-size: 0.75rem;
+        transition: 200ms ease;
 
         &:hover,
         &:focus-visible {
