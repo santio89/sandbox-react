@@ -353,7 +353,7 @@ button {
   background-size: 300%;
   background-position: 50% 50%;
   color: var(--main-btn-clr);
-  font-size: clamp(1.1rem, 1.1rem + 2vw, 1.2rem);
+  font-size: clamp(1.125rem, 1.125rem + 2vw, 1.25rem);
   cursor: pointer;
   transition: 200ms;
   border: 1px solid var(--main-red);
@@ -1066,7 +1066,7 @@ li[data-sonner-toast] {
   fill: var(--main-white);
 }
 .main__modal .presets__profile__googleBtn {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   display: flex;
   flex-flow: column wrap;
   justify-content: center;

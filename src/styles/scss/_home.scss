@@ -45,7 +45,8 @@
       gap: 0.5rem;
       line-height: 1;
 
-      &:hover, &:focus-visible {
+      &:hover,
+      &:focus-visible {
         outline: 2px solid var(--main-purple);
       }
 
@@ -96,7 +97,7 @@
     background-size: 300%;
     background-position: 50% 50%;
     color: var(--main-btn-clr);
-    font-size: clamp(1.1rem, 1.1rem + 2vw, 1.2rem);
+    font-size: clamp(1.125rem, 1.125rem + 2vw, 1.25rem);
     cursor: pointer;
     transition: 200ms;
     border: 1px solid var(--main-red);
