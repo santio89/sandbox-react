@@ -345,9 +345,9 @@ export default function Home({ sharedSnippetHome }) {
         const setShared = (sharedSnippet) => {
             dispatch(setLoadSnippet(true))
             dispatch(setCurrentSnippet(sharedSnippet))
-            setHtml(html)
-            setCss(css)
-            setJs(js)
+            setHtml(sharedSnippet.html)
+            setCss(sharedSnippet.css)
+            setJs(sharedSnippet.js)
         }
 
         sharedSnippet && setShared(sharedSnippet)
