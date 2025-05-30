@@ -355,25 +355,29 @@ button {
   color: var(--main-btn-clr);
   font-size: clamp(1.125rem, 1.125rem + 2vw, 1.25rem);
   cursor: pointer;
-  transition: 200ms;
   border: 1px solid var(--main-red);
   text-shadow: 1px 1px 0 rgb(40, 40, 40);
+  filter: grayscale(0.5);
+  transition: 200ms ease;
 }
 .tabs button:hover, .tabs button:focus-visible {
   box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
   background-position: 0% 50%;
   border: 1px solid var(--main-purple);
+  filter: grayscale(0);
 }
 .tabs button:active {
   box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
   background-position: 0% 50%;
   border: 1px solid var(--main-purple);
-  scale: 0.94;
+  scale: 0.95;
+  filter: grayscale(0);
 }
 .tabs button[data-active=true] {
   box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
   background-position: 0% 50%;
   border: 1px solid var(--main-purple);
+  filter: grayscale(0);
 }
 
 .mainCode {
@@ -521,7 +525,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.94em;
+  font-size: 0.95em;
   background: var(--main-gray);
   padding: 0;
   transition: none;
@@ -1169,7 +1173,7 @@ li[data-sonner-toast] {
   min-width: 48px;
   max-width: 48px;
   font-weight: normal;
-  font-size: 0.94em;
+  font-size: 0.95em;
   line-height: 1;
   border-radius: 2px;
   cursor: pointer;
@@ -1364,7 +1368,7 @@ li[data-sonner-toast] {
 }
 .main__modal .presets__save button:active {
   box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
-  scale: 0.94;
+  scale: 0.95;
 }
 .main__modal .presets__save button[disabled] {
   border: 1px solid rgb(60, 60, 60);
