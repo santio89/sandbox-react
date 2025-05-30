@@ -363,7 +363,6 @@ export default function Modal({ callbacks }) {
                                 </button>
                             )
                         }
-
                     </div>
                 </>
             case "snippets":
@@ -581,6 +580,33 @@ export default function Modal({ callbacks }) {
                             </div>
                         </NoAnimWrapper>
                 }
+                break;
+            case "saveSnippet":
+                return <NoAnimWrapper>
+                    <div className="presets__save">
+                        {user.userId ?
+                            <>
+                                <div className="save-tabs">
+                                    <button onClick={() => setSaveTab("current")} data-active={saveTab === "current"} disabled={!currentSnippet?.id}>Current</button>
+                                    <button onClick={() => setSaveTab("new")} data-active={saveTab === "new"}>New</button>
+                                </div>
+                                {
+                                    saveTab === "current" ?
+                                        <form onSubmit={(e) => { e.preventDefault(); saveCurrentPreset(currentSnippet, html, css, js) }}>
+                                            <input spellCheck="false" type="text" placeholder="SNIPPET NAME" value={currentSnippet?.name} disabled />
+                                            <button disabled={!currentSnippet?.id || currentSnippet?.userId != user.userId || defaultPresets.some((defaultPreset) => defaultPreset.id === currentSnippet?.id)} data-saved={saved ? 'saving...' : ''}>Save current</button>
+                                        </form> :
+                                        <form onSubmit={(e) => { e.preventDefault(); saveNewPreset(savePresetName, html, css, js) }}>
+                                            <input spellCheck="false" type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} maxLength={30} />
+                                            <button disabled={savePresetName.trim() === ""} data-saved={saved ? 'saving...' : ''}>Save new</button>
+                                        </form>
+                                }
+                            </>
+
+                            :
+                            <div role="button" onClick={() => setModalOption("profile")} className="presets__noSnippet">Sign in to save your snippets</div>}
+                    </div>
+                </NoAnimWrapper>
         }
     }
 
@@ -760,10 +786,16 @@ export default function Modal({ callbacks }) {
                     <div className="main__modal__header">
                         <span>{modalTitle()}</span>
                         <div className="main__modal__header__buttons">
-                            <button className={`${modalOption === "snippets" && "modalOptionActive"}`} onClick={() => { setSnippetTab(user.userId ? "mySnippets" : "featuredSnippets"); setModalOption("snippets") }}>
+                            <button className={`${modalOption === "snippets" && "modalOptionActive"}`} onClick={() => { setModalOption("snippets") }}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi-stickies-fill" viewBox="0 0 16 16">
                                     <path d="M0 1.5V13a1 1 0 0 0 1 1V1.5a.5.5 0 0 1 .5-.5H14a1 1 0 0 0-1-1H1.5A1.5 1.5 0 0 0 0 1.5z" />
                                     <path d="M3.5 2A1.5 1.5 0 0 0 2 3.5v11A1.5 1.5 0 0 0 3.5 16h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 16 9.586V3.5A1.5 1.5 0 0 0 14.5 2h-11zm6 8.5a1 1 0 0 1 1-1h4.396a.25.25 0 0 1 .177.427l-5.146 5.146a.25.25 0 0 1-.427-.177V10.5z" />
+                                </svg>
+                            </button>
+                            <button className={`${modalOption === "saveSnippet" && "modalOptionActive"}`} onClick={() => { setModalOption("saveSnippet") }}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-floppy-fill" viewBox="0 0 16 16">
+                                    <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0H3v5.5A1.5 1.5 0 0 0 4.5 7h7A1.5 1.5 0 0 0 13 5.5V0h.086a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5H14v-5.5A1.5 1.5 0 0 0 12.5 9h-9A1.5 1.5 0 0 0 2 10.5V16h-.5A1.5 1.5 0 0 1 0 14.5z" />
+                                    <path d="M3 16h10v-5.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5zm9-16H4v5.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5zM9 1h2v4H9z" />
                                 </svg>
                             </button>
                             <button className={`${modalOption === "profile" && "modalOptionActive"}`} onClick={() => { setModalOption("profile") }}>
@@ -787,7 +819,6 @@ export default function Modal({ callbacks }) {
                         <>
                             <div className="presets__tabs">
                                 <button className={`presets__tabs__btn ${snippetTab === "mySnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("mySnippets") }}>My{`\n`}snippets</button>
-                                <button className={`presets__tabs__btn ${snippetTab === "saveSnippet" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("saveSnippet") }}>Save{`\n`}snippet</button>
                                 <button className={`presets__tabs__btn ${snippetTab === "featuredSnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("featuredSnippets") }}>Featured{`\n`}snippets</button>
                             </div>
                         </>
