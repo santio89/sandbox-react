@@ -66,6 +66,7 @@
         transition: 200ms;
         aspect-ratio: 1;
         fill: var(--main-purple);
+        background: rgba(20, 20, 20, 0.4);
 
         svg {
           fill: inherit;
@@ -77,13 +78,13 @@
         &:hover,
         &:focus-visible {
           fill: rgb(248, 248, 248);
-          background: rgba(20, 20, 20, 0.4);
+          background: rgba(20, 20, 20, 0.6);
         }
 
         &:active {
           fill: rgb(248, 248, 248);
           scale: 0.9;
-          background: rgba(20, 20, 20, 0.4);
+          background: rgba(20, 20, 20, 0.6);
         }
 
         &[disabled] {
@@ -98,7 +99,7 @@
 
         &.modalOptionActive {
           fill: rgb(248, 248, 248);
-          background: rgba(20, 20, 20, 0.4);
+          background: rgba(20, 20, 20, 0.6);
         }
       }
     }
@@ -119,6 +120,7 @@
     overflow-x: hidden;
     padding-inline: min(20%, 5rem);
     padding-block: min(10%, 2.5rem);
+    scrollbar-gutter: stable both-edges;
 
     div[role="button"].presets__noSnippet {
       cursor: pointer;

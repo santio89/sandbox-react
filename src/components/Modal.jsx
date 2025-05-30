@@ -10,6 +10,7 @@ import AnimWrapper from "./AnimWrapper";
 import NoAnimWrapper from "./NoAnimWrapper";
 import { useNavigate } from "react-router-dom";
 import Draggable from "react-draggable";
+import { objectEquality } from "../utils/objectEquality"
 
 export default function Modal({ callbacks }) {
     const dispatch = useDispatch();
@@ -142,7 +143,7 @@ export default function Modal({ callbacks }) {
         dispatch(setLoadSnippet(true))
         setNewProject(false)
         setLoaded(true)
-        dispatch(setCurrentSnippet({ id: preset.id, userId: preset.userId, name: preset.name }))
+        dispatch(setCurrentSnippet(preset))
 
         if (window.location.pathname !== "/") {
             navigate("/")
@@ -157,7 +158,7 @@ export default function Modal({ callbacks }) {
         dispatch(deletePreset(presets, name, id, user.userId))
 
         if (currentSnippet && currentSnippet.id === id) {
-            dispatch(setCurrentSnippet({ id: null, userId: null, name: "" }))
+            dispatch(setCurrentSnippet(null))
         }
     }
 
@@ -184,6 +185,9 @@ export default function Modal({ callbacks }) {
         /* end check duplicated name */
 
         dispatch(editPreset(presets, name, id, newName, user.userId))
+        if (currentSnippet.id === id) {
+            dispatch(setCurrentSnippet({ ...currentSnippet, name: newName }))
+        }
     }
 
     const shareSnippet = (userId, snippetId) => {
@@ -208,15 +212,15 @@ export default function Modal({ callbacks }) {
         let trimCss = css;
         let trimJs = js;
 
-        while (trimHtml && trimHtml[trimHtml.length - 1] === "\n") {
-            trimHtml = trimHtml.slice(0, -1);
-        }
-        while (trimCss && trimCss[trimCss.length - 1] === "\n") {
-            trimCss = trimCss.slice(0, -1);
-        }
-        while (trimJs && trimJs[trimJs.length - 1] === "\n") {
-            trimJs = trimJs.slice(0, -1);
-        }
+        /*    while (trimHtml && trimHtml[trimHtml.length - 1] === "\n") {
+               trimHtml = trimHtml.slice(0, -1);
+           }
+           while (trimCss && trimCss[trimCss.length - 1] === "\n") {
+               trimCss = trimCss.slice(0, -1);
+           }
+           while (trimJs && trimJs[trimJs.length - 1] === "\n") {
+               trimJs = trimJs.slice(0, -1);
+           } */
 
         /* check duplicated name */
         let exists = false;
@@ -234,35 +238,36 @@ export default function Modal({ callbacks }) {
         } while (exists)
         /* end check duplicated name */
 
-        dispatch(savePreset(presets, { id, userId: user.userId, name, html: trimHtml, css: trimCss, js: trimJs }, index, user.userId, noSave, true))
-        dispatch(setCurrentSnippet({ id, userId: user.userId, name }))
+        const newPreset = { id, userId: user.userId, name, html: trimHtml, css: trimCss, js: trimJs }
+
+        dispatch(savePreset(presets, newPreset, index, user.userId, noSave, true))
+        dispatch(setCurrentSnippet(newPreset))
     }
 
     const saveCurrentPreset = (preset, html, css, js) => {
-        setSaved(true)
-
-        preset.name = preset.name.trim()
-        if (preset.name === "") {
-            return
-        }
-
         let trimHtml = html;
         let trimCss = css;
         let trimJs = js;
 
-        while (trimHtml && trimHtml[trimHtml.length - 1] === "\n") {
-            trimHtml = trimHtml.slice(0, -1);
-        }
-        while (trimCss && trimCss[trimCss.length - 1] === "\n") {
-            trimCss = trimCss.slice(0, -1);
-        }
-        while (trimJs && trimJs[trimJs.length - 1] === "\n") {
-            trimJs = trimJs.slice(0, -1);
-        }
+        /*      while (trimHtml && trimHtml[trimHtml.length - 1] === "\n") {
+                 trimHtml = trimHtml.slice(0, -1);
+             }
+             while (trimCss && trimCss[trimCss.length - 1] === "\n") {
+                 trimCss = trimCss.slice(0, -1);
+             }
+             while (trimJs && trimJs[trimJs.length - 1] === "\n") {
+                 trimJs = trimJs.slice(0, -1);
+             } */
 
-        dispatch(savePreset(presets, { id: preset.id, userId: preset.userId, name: preset.name, html: trimHtml, css: trimCss, js: trimJs }, index, user.userId, noSave, false))
-        dispatch(setCurrentSnippet({ id: preset.id, userId: preset.userId, name: preset.name }))
-        setSavePresetName("")
+        const newPreset = { id: preset.id, userId: preset.userId, name: preset.name, html: trimHtml, css: trimCss, js: trimJs }
+
+        if (objectEquality(preset, newPreset)) {
+            return
+        } else {
+            setSaved(true)
+            dispatch(savePreset(presets, newPreset, index, user.userId, noSave, false))
+            dispatch(setCurrentSnippet(newPreset))
+        }
     }
 
     const modalTitle = () => {
@@ -554,32 +559,6 @@ export default function Modal({ callbacks }) {
                                         <div className="presets__noSnippet">No featured snippets saved</div>)
                             }
                         </AnimWrapper>
-                    case 'saveSnippet':
-                        return <NoAnimWrapper>
-                            <div className="presets__save">
-                                {user.userId ?
-                                    <>
-                                        <div className="save-tabs">
-                                            <button onClick={() => setSaveTab("current")} data-active={saveTab === "current"} disabled={!currentSnippet?.id}>Current</button>
-                                            <button onClick={() => setSaveTab("new")} data-active={saveTab === "new"}>New</button>
-                                        </div>
-                                        {
-                                            saveTab === "current" ?
-                                                <form onSubmit={(e) => { e.preventDefault(); saveCurrentPreset(currentSnippet, html, css, js) }}>
-                                                    <input spellCheck="false" type="text" placeholder="SNIPPET NAME" value={currentSnippet?.name} disabled />
-                                                    <button disabled={!currentSnippet?.id || currentSnippet?.userId != user.userId || defaultPresets.some((defaultPreset) => defaultPreset.id === currentSnippet?.id)} data-saved={saved ? 'saving...' : ''}>Save current</button>
-                                                </form> :
-                                                <form onSubmit={(e) => { e.preventDefault(); saveNewPreset(savePresetName, html, css, js) }}>
-                                                    <input spellCheck="false" type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} maxLength={30} />
-                                                    <button disabled={savePresetName.trim() === ""} data-saved={saved ? 'saving...' : ''}>Save new</button>
-                                                </form>
-                                        }
-                                    </>
-
-                                    :
-                                    <div role="button" onClick={() => setModalOption("profile")} className="presets__noSnippet">Sign in to save your snippets</div>}
-                            </div>
-                        </NoAnimWrapper>
                 }
                 break;
             case "saveSnippet":

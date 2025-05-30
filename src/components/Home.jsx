@@ -79,7 +79,6 @@ export default function Home({ sharedSnippetHome }) {
         /* add word wrap command */
         e.addCommand(monaco.KeyCode.KeyZ | monaco.KeyMod.Alt, () => {
             const options = e.getOptions();
-            console.log(options)
             const currentWordWrap = options._values[147].isViewportWrapping;
 
             currentWordWrap ? dispatch(setWordWrap("off")) : dispatch(setWordWrap("on"))
@@ -241,9 +240,9 @@ export default function Home({ sharedSnippetHome }) {
                 modelJs.setValue(js)
             }
 
-            editorHtml?.current?.getAction('editor.action.formatDocument')?.run()
+            /* editorHtml?.current?.getAction('editor.action.formatDocument')?.run()
             editorCss?.current?.getAction('editor.action.formatDocument')?.run()
-            editorJs?.current?.getAction('editor.action.formatDocument')?.run()
+            editorJs?.current?.getAction('editor.action.formatDocument')?.run() */
 
             const codeString = `<!DOCTYPE html><html><body>\n` + html + `\n</body>\n` + `\n<style>\n` + css + `\n</style>\n` + `\n<script>\n` + js + `\n</script></html>`
             const blob = new Blob([codeString], { type: 'text/html' });
@@ -343,15 +342,15 @@ export default function Home({ sharedSnippetHome }) {
     }, [sharedSnippetHome])
 
     useEffect(() => {
-        const setShared = (html, css, js) => {
+        const setShared = (sharedSnippet) => {
             dispatch(setLoadSnippet(true))
-            dispatch(setCurrentSnippet({ id: sharedSnippet.id, userId: sharedSnippet.userId, name: sharedSnippet.name }))
+            dispatch(setCurrentSnippet(sharedSnippet))
             setHtml(html)
             setCss(css)
             setJs(js)
         }
 
-        sharedSnippet && setShared(sharedSnippet.html, sharedSnippet.css, sharedSnippet.js)
+        sharedSnippet && setShared(sharedSnippet)
     }, [sharedSnippet])
 
     useEffect(() => {

@@ -818,6 +818,7 @@ li[data-sonner-toast] {
   transition: 200ms;
   aspect-ratio: 1;
   fill: var(--main-purple);
+  background: rgba(20, 20, 20, 0.4);
 }
 .main__modal__header__buttons button svg {
   fill: inherit;
@@ -827,12 +828,12 @@ li[data-sonner-toast] {
 }
 .main__modal__header__buttons button:hover, .main__modal__header__buttons button:focus-visible {
   fill: rgb(248, 248, 248);
-  background: rgba(20, 20, 20, 0.4);
+  background: rgba(20, 20, 20, 0.6);
 }
 .main__modal__header__buttons button:active {
   fill: rgb(248, 248, 248);
   scale: 0.9;
-  background: rgba(20, 20, 20, 0.4);
+  background: rgba(20, 20, 20, 0.6);
 }
 .main__modal__header__buttons button[disabled] {
   pointer-events: none;
@@ -844,7 +845,7 @@ li[data-sonner-toast] {
 }
 .main__modal__header__buttons button.modalOptionActive {
   fill: rgb(248, 248, 248);
-  background: rgba(20, 20, 20, 0.4);
+  background: rgba(20, 20, 20, 0.6);
 }
 .main__modal__content {
   flex: 1;
@@ -861,6 +862,7 @@ li[data-sonner-toast] {
   overflow-x: hidden;
   padding-inline: min(20%, 5rem);
   padding-block: min(10%, 2.5rem);
+  scrollbar-gutter: stable both-edges;
   /* INICIO SCROLLBAR */
   scrollbar-width: thin;
   scrollbar-color: var(--main-gray) var(--bg-main);
