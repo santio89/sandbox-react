@@ -4,6 +4,19 @@
   box-sizing: border-box;
 }
 
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-group(*) {
+  animation-duration: 200ms;
+  animation-timing-function: ease;
+}
+
+:root {
+  interpolate-size: allow-keywords;
+}
+
 html {
   /* INICIO SCROLLBAR */
   scrollbar-width: thin;
@@ -17,7 +30,7 @@ html {
 
   /* track */
   ::-webkit-scrollbar-track {
-    background: var(--bg-main)
+    background: var(--bg-main);
   }
 
   /* handle */
@@ -53,11 +66,11 @@ body,
   --main-purple-variation: rgb(59, 21, 141);
   --main-red: rgb(210, 28, 83);
   --main-white: rgb(248, 248, 248);
-  --main-white-op: rgb(248, 248, 248, .5);
+  --main-white-op: rgb(248, 248, 248, 0.5);
   --main-black: rgb(30, 30, 30);
-  --main-black-op: rgb(30, 30, 30, .5);
+  --main-black-op: rgb(30, 30, 30, 0.5);
   --main-gray: rgb(80, 80, 80);
-  --main-gray-op: rgb(100, 100, 100, .5);
+  --main-gray-op: rgb(100, 100, 100, 0.5);
 
   --clr-nav: rgb(248, 248, 248);
 
@@ -74,9 +87,9 @@ body,
   --main-purple: rgb(107, 31, 248);
   --main-red: rgb(210, 28, 83);
   --main-white: rgb(30, 30, 30);
-  --main-white-op: rgb(30, 30, 30, .5);
+  --main-white-op: rgb(30, 30, 30, 0.5);
   --main-black: rgb(248, 248, 248);
-  --main-black-op: rgb(248, 248, 248, .5);
+  --main-black-op: rgb(248, 248, 248, 0.5);
   --main-gray: rgb(220, 220, 220);
 
   --clr-nav: rgb(248, 248, 248);
