@@ -560,7 +560,8 @@
           }
 
           &:is(:hover, :focus-visible) span {
-            text-shadow: 1px 1px 0 var(--main-red);
+            color: var(--main-red);
+            font-weight: bold;
           }
 
           > span {
@@ -568,8 +569,6 @@
             text-align: center;
             text-wrap: balance;
             word-wrap: break-word;
-            font-weight: bold;
-            text-shadow: 1px 1px 0 var(--main-purple-variation);
           }
 
           &:focus-visible {

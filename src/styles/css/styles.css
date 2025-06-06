@@ -1241,15 +1241,14 @@ li[data-sonner-toast] {
   pointer-events: none;
 }
 .main__modal .presets__option__main__name:is(:hover, :focus-visible) span {
-  text-shadow: 1px 1px 0 var(--main-red);
+  color: var(--main-red);
+  font-weight: bold;
 }
 .main__modal .presets__option__main__name > span {
   max-width: 100%;
   text-align: center;
   text-wrap: balance;
   word-wrap: break-word;
-  font-weight: bold;
-  text-shadow: 1px 1px 0 var(--main-purple-variation);
 }
 .main__modal .presets__option__main__name:focus-visible {
   outline: none;
