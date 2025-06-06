@@ -11,6 +11,7 @@ import NoAnimWrapper from "./NoAnimWrapper";
 import { useNavigate } from "react-router-dom";
 import Draggable from "react-draggable";
 import { objectEquality } from "../utils/objectEquality"
+import { use } from "react";
 
 export default function Modal({ callbacks }) {
     const dispatch = useDispatch();
@@ -751,7 +752,7 @@ export default function Modal({ callbacks }) {
         })
 
     }, [index])
-
+    
 
     return (
         <dialog className="main__modal" ref={modal}>
