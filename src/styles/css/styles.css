@@ -25,14 +25,14 @@
   box-sizing: border-box;
 }
 
-/* @view-transition {
+@view-transition {
   navigation: auto;
 }
-
 ::view-transition-group(*) {
   animation-duration: 200ms;
   animation-timing-function: ease;
-} */
+}
+
 :root {
   interpolate-size: allow-keywords;
 }
