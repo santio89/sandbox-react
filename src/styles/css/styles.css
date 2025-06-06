@@ -3,16 +3,17 @@
   --font-primary: monospace, "Courier New", Courier;
   --main-purple: #6b1ff8;
   --main-purple-variation: #3b158d;
+  --main-purple-tab: #5208ff;
   --main-red: #d31d53;
   --main-white: rgb(248, 248, 248);
-  --main-white-op: rgb(248, 248, 248, .5);
+  --main-white-op: rgb(248, 248, 248, 0.5);
   --main-black: rgb(30, 30, 30);
-  --main-black-op: rgb(30, 30, 30, .5);
+  --main-black-op: rgb(30, 30, 30, 0.5);
   --main-gray: rgb(80, 80, 80);
-  --main-gray-op: rgb(100, 100, 100, .5);
+  --main-gray-op: rgb(100, 100, 100, 0.5);
   --clr-nav: rgb(248, 248, 248);
   --color-code: rgb(248, 248, 248);
-  --main-btn-bg: rgb(107, 31, 248);
+  --main-btn-bg: rgb(8, 5, 12);
   --main-btn-clr: rgb(248, 248, 248);
   --bg-main: rgb(40, 40, 40);
   --bg-code: #1e1e1e;
@@ -79,6 +80,7 @@ body,
 .dark-theme {
   --main-purple: rgb(107, 31, 248);
   --main-purple-variation: rgb(59, 21, 141);
+  --main-purple-tab: #b085ff;
   --main-red: rgb(210, 28, 83);
   --main-white: rgb(248, 248, 248);
   --main-white-op: rgb(248, 248, 248, 0.5);
@@ -96,6 +98,7 @@ body,
 
 .light-theme {
   --main-purple: rgb(107, 31, 248);
+  --main-purple-tab: #a483ff;
   --main-red: rgb(210, 28, 83);
   --main-white: rgb(30, 30, 30);
   --main-white-op: rgb(30, 30, 30, 0.5);
@@ -1409,7 +1412,7 @@ li[data-sonner-toast] {
   text-align: left;
   white-space: pre-wrap;
   padding: 4px;
-  color: rgb(248, 248, 248);
+  color: var(--main-white);
   background: var(--main-gray-op);
   border-radius: 0 2px 2px 0;
   width: 66px;
@@ -1419,20 +1422,17 @@ li[data-sonner-toast] {
 }
 .main__modal .presets__tabs__btn:hover, .main__modal .presets__tabs__btn:focus-visible {
   font-weight: bold;
-  background-color: var(--main-purple-variation);
-  color: rgb(248, 248, 248);
+  background-color: var(--main-purple-tab);
   filter: grayscale(0);
 }
 .main__modal .presets__tabs__btn:active {
   font-weight: bold;
-  background-color: var(--main-purple-variation);
-  color: rgb(248, 248, 248);
+  background-color: var(--main-purple-tab);
   filter: grayscale(0);
 }
 .main__modal .presets__tabs__btn--active {
   font-weight: bold;
-  background-color: var(--main-purple-variation);
-  color: rgb(248, 248, 248);
+  background-color: var(--main-purple-tab);
   filter: grayscale(0);
 }
 .main__modal::backdrop {
