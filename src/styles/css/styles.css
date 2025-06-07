@@ -824,7 +824,7 @@ li[data-sonner-toast] {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
 }
 .main__modal__header__buttons button {
   font-weight: bold;
