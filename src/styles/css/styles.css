@@ -962,12 +962,23 @@ li[data-sonner-toast] {
   padding: 2px;
   border-radius: 50%;
   width: 120px;
+  position: relative;
+}
+.main__modal .presets__profile__userInfo__data__img::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  filter: blur(4px);
+  z-index: 0;
 }
 .main__modal .presets__profile__userInfo__data__img img {
   width: 100%;
   aspect-ratio: 1;
   border-radius: 50%;
   object-fit: cover;
+  z-index: 1;
 }
 .main__modal .presets__profile__userInfo__data__img input[type=file] {
   display: none;

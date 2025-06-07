@@ -218,12 +218,24 @@
             padding: 2px;
             border-radius: 50%;
             width: 120px;
+            position: relative;
+
+            &::before {
+              content: "";
+              position: absolute;
+              inset: 0;
+              border-radius: inherit;
+              background: inherit;
+              filter: blur(4px);
+              z-index: 0;
+            }
 
             img {
               width: 100%;
               aspect-ratio: 1;
               border-radius: 50%;
               object-fit: cover;
+              z-index: 1;
             }
 
             input[type="file"] {
