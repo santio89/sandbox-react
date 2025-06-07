@@ -244,13 +244,13 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2px;
+  gap: 8px;
 }
 .main__header .new-project-confirm-btns {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2px;
+  gap: 8px;
 }
 .main__header .new-project-confirm-btns button {
   cursor: pointer;
