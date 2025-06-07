@@ -190,11 +190,11 @@
       translate: -50% -50%;
       color: var(--main-white);
       pointer-events: none;
-      opacity: 0.5;
+      opacity: 0.25;
     }
 
     &:active::after {
-      opacity: 0.75;
+      opacity: 0.5;
     }
   }
 
