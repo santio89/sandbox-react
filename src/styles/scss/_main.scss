@@ -56,9 +56,11 @@ body,
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  font-family: var(--font-primary);
-  line-height: 1.2;
   background: var(--bg-main);
+  font-family: var(--font-primary);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .dark-theme {

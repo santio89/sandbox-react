@@ -699,7 +699,7 @@
         font-weight: bold;
         line-height: 1.4;
         color: var(--main-white);
-        border-radius: 0.2em 0.2em 0 0;
+        border-radius: 0.25em 0.25em 0 0;
         transition: background-color 200ms ease;
 
         &:not(:placeholder-shown) {
@@ -721,8 +721,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 0.2em 0.4em;
-        border-radius: 0.2em;
+        padding: 0.25em 0.5em;
+        border-radius: 0.25em;
         outline: none;
         border: 1px solid var(--main-purple);
         font-weight: bold;
@@ -784,7 +784,7 @@
         padding: 4px;
         color: var(--main-white);
         background: var(--main-gray-op);
-        border-radius: 0 2px 2px 0;
+        border-radius: 0 0.25em 0.25em 0;
         width: 66px;
         height: 40px;
         filter: grayscale(1);
