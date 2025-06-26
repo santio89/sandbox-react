@@ -201,12 +201,7 @@
             align-items: center;
             position: relative;
             aspect-ratio: 1;
-            background-color: var(--main-purple-variation);
-            background-image: linear-gradient(
-              45deg,
-              var(--main-purple),
-              var(--main-red)
-            );
+            background-color: var(--main-purple);
             padding: 2px;
             border-radius: 50%;
             width: 120px;
@@ -728,12 +723,6 @@
         outline: none;
         border: none;
         border-bottom: 2px solid var(--main-purple);
-        border-image: linear-gradient(
-          45deg,
-          var(--main-purple),
-          var(--main-red)
-        );
-        border-image-slice: 1;
         text-align: center;
         text-wrap: balance;
         max-width: 90%;
