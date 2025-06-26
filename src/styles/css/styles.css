@@ -175,13 +175,12 @@ button {
   justify-content: space-between;
   align-items: center;
   z-index: 2;
-  position: sticky;
   top: 0;
-  overflow: hidden;
   background: var(--main-black);
-  border-top: 2px solid var(--main-white);
-  border-image: linear-gradient(45deg, var(--main-purple), var(--main-red));
+  border-bottom: 1px solid var(--main-white);
+  border-image: linear-gradient(45deg, var(--main-purple), var(--main-red), var(--main-purple));
   border-image-slice: 1;
+  position: relative;
 }
 .main__header nav {
   display: flex;
@@ -773,9 +772,9 @@ button {
 
 /* sonner-toast-wrapper */
 li[data-sonner-toast] {
-  background: linear-gradient(45deg, var(--main-purple), var(--main-red)) !important;
+  background: var(--main-black) !important;
   border-color: var(--main-purple-variation) !important;
-  color: rgb(248, 248, 248) !important;
+  color: var(--main-white) !important;
   word-break: break-all !important;
   white-space: pre-wrap !important;
 }
@@ -1315,6 +1314,49 @@ li[data-sonner-toast] {
   flex: 1;
   max-width: 100%;
 }
+.main__modal .presets__save button {
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.25em 0.5em;
+  border-radius: 0.25em;
+  outline: none;
+  border: 1px solid var(--main-purple);
+  font-weight: bold;
+  background: var(--main-black);
+  color: var(--main-btn-clr);
+  font-size: clamp(1.125rem, 1.125rem + 2vw, 1.25rem);
+  cursor: pointer;
+  transition: 200ms ease;
+  position: relative;
+}
+.main__modal .presets__save button::after {
+  content: attr(data-saved);
+  font-weight: normal;
+  position: absolute;
+  top: 50%;
+  right: -150%;
+  translate: 0 -50%;
+  color: var(--main-purple);
+  transition: scale 200ms ease;
+}
+.main__modal .presets__save button:hover, .main__modal .presets__save button:focus-visible {
+  box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
+  filter: grayscale(0);
+}
+.main__modal .presets__save button:active {
+  box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
+  scale: 0.95;
+  filter: grayscale(0);
+}
+.main__modal .presets__save button[disabled] {
+  border: 1px solid rgb(60, 60, 60);
+  background: rgb(80, 80, 80);
+  pointer-events: none;
+  filter: grayscale(1);
+  color: rgb(228, 228, 228);
+}
 .main__modal .presets__save .save-tabs {
   display: flex;
   justify-content: center;
@@ -1336,6 +1378,8 @@ li[data-sonner-toast] {
   background-position: 0% 50%;
   border: 1px solid var(--main-purple);
   filter: grayscale(0);
+  background: var(--main-purple);
+  color: rgb(248, 248, 248);
 }
 .main__modal .presets__save form {
   display: flex;
@@ -1373,46 +1417,6 @@ li[data-sonner-toast] {
 .main__modal .presets__save input::placeholder {
   font-weight: normal;
   color: var(--main-white-op);
-}
-.main__modal .presets__save button {
-  align-self: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.25em 0.5em;
-  border-radius: 0.25em;
-  outline: none;
-  border: 1px solid var(--main-purple);
-  font-weight: bold;
-  background-color: var(--main-purple);
-  background-image: linear-gradient(45deg, var(--main-purple), var(--main-red));
-  color: var(--main-btn-clr);
-  font-size: clamp(1.125rem, 1.125rem + 2vw, 1.25rem);
-  cursor: pointer;
-  transition: 200ms ease;
-  position: relative;
-}
-.main__modal .presets__save button::after {
-  content: attr(data-saved);
-  font-weight: normal;
-  position: absolute;
-  top: 50%;
-  right: -150%;
-  translate: 0 -50%;
-  color: var(--main-purple);
-  transition: scale 200ms ease;
-}
-.main__modal .presets__save button:hover, .main__modal .presets__save button:focus-visible {
-  box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
-}
-.main__modal .presets__save button:active {
-  box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
-  scale: 0.95;
-}
-.main__modal .presets__save button[disabled] {
-  border: 1px solid rgb(60, 60, 60);
-  background: rgb(80, 80, 80);
-  pointer-events: none;
 }
 .main__modal .presets__tabs {
   display: flex;

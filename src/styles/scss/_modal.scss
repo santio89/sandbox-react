@@ -642,6 +642,55 @@
       flex: 1;
       max-width: 100%;
 
+      button {
+        align-self: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.25em 0.5em;
+        border-radius: 0.25em;
+        outline: none;
+        border: 1px solid var(--main-purple);
+        font-weight: bold;
+        background: var(--main-black);
+        color: var(--main-btn-clr);
+        font-size: clamp(1.125rem, 1.125rem + 2vw, 1.25rem);
+        cursor: pointer;
+        transition: 200ms ease;
+        position: relative;
+
+        &::after {
+          content: attr(data-saved);
+          font-weight: normal;
+          position: absolute;
+          top: 50%;
+          right: -150%;
+          translate: 0 -50%;
+          color: var(--main-purple);
+          transition: scale 200ms ease;
+        }
+
+        &:hover,
+        &:focus-visible {
+          box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
+          filter: grayscale(0);
+        }
+
+        &:active {
+          box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
+          scale: 0.95;
+          filter: grayscale(0);
+        }
+
+        &[disabled] {
+          border: 1px solid rgb(60, 60, 60);
+          background: rgb(80, 80, 80);
+          pointer-events: none;
+          filter: grayscale(1);
+          color: rgb(228, 228, 228);
+        }
+      }
+
       .save-tabs {
         display: flex;
         justify-content: center;
@@ -666,6 +715,8 @@
             background-position: 0% 50%;
             border: 1px solid var(--main-purple);
             filter: grayscale(0);
+            background: var(--main-purple);
+            color: rgb(248, 248, 248);
           }
         }
       }
@@ -713,56 +764,6 @@
         &::placeholder {
           font-weight: normal;
           color: var(--main-white-op);
-        }
-      }
-
-      button {
-        align-self: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0.25em 0.5em;
-        border-radius: 0.25em;
-        outline: none;
-        border: 1px solid var(--main-purple);
-        font-weight: bold;
-        background-color: var(--main-purple);
-        background-image: linear-gradient(
-          45deg,
-          var(--main-purple),
-          var(--main-red)
-        );
-        color: var(--main-btn-clr);
-        font-size: clamp(1.125rem, 1.125rem + 2vw, 1.25rem);
-        cursor: pointer;
-        transition: 200ms ease;
-        position: relative;
-
-        &::after {
-          content: attr(data-saved);
-          font-weight: normal;
-          position: absolute;
-          top: 50%;
-          right: -150%;
-          translate: 0 -50%;
-          color: var(--main-purple);
-          transition: scale 200ms ease;
-        }
-
-        &:hover,
-        &:focus-visible {
-          box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
-        }
-
-        &:active {
-          box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
-          scale: 0.95;
-        }
-
-        &[disabled] {
-          border: 1px solid rgb(60, 60, 60);
-          background: rgb(80, 80, 80);
-          pointer-events: none;
         }
       }
     }
