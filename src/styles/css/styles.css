@@ -92,8 +92,8 @@ body,
   --main-gray-op: rgb(100, 100, 100, 0.5);
   --clr-nav: rgb(248, 248, 248);
   --color-code: rgb(248, 248, 248);
-  --main-btn-bg: rgb(107, 31, 248);
-  --main-btn-clr: rgb(248, 248, 248);
+  --main-btn-bg: rgb(248, 248, 248);
+  --main-btn-clr: rgb(8, 5, 12);
   --bg-main: rgb(40, 40, 40);
   --bg-code: #1e1e1e;
 }
@@ -109,8 +109,8 @@ body,
   --main-gray: rgb(220, 220, 220);
   --clr-nav: rgb(248, 248, 248);
   --color-code: rgb(30, 30, 30);
-  --main-btn-bg: rgb(107, 31, 248);
-  --main-btn-clr: rgb(248, 248, 248);
+  --main-btn-bg: rgb(248, 248, 248);
+  --main-btn-clr: rgb(8, 5, 12);
   --bg-main: rgb(238, 238, 238);
   --bg-code: #fffffe;
 }
@@ -168,7 +168,6 @@ button {
 /* header */
 .main__header {
   width: 100%;
-  background: linear-gradient(45deg, var(--main-purple), var(--main-red));
   color: var(--clr-nav);
   padding: 4px 8px;
   font-size: 0.875rem;
@@ -179,6 +178,10 @@ button {
   position: sticky;
   top: 0;
   overflow: hidden;
+  background: var(--main-black);
+  border-top: 2px solid var(--main-white);
+  border-image: linear-gradient(45deg, var(--main-purple), var(--main-red));
+  border-image-slice: 1;
 }
 .main__header nav {
   display: flex;
@@ -187,7 +190,8 @@ button {
 }
 .main__header__site {
   font-weight: normal;
-  text-shadow: 1px 1px 0 rgb(40, 40, 40);
+  text-shadow: 1px 1px 0 var(--main-black);
+  color: var(--main-white);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -215,10 +219,10 @@ button {
   border-radius: 50%;
   padding: 2px;
   transition: 200ms ease;
-  color: var(--main-black);
+  color: var(--main-white);
 }
 .main__header__buttons > div button svg {
-  fill: var(--main-black);
+  fill: var(--main-white);
 }
 .main__header__buttons > div button:hover, .main__header__buttons > div button:focus-visible {
   filter: drop-shadow(0 0 4px var(--main-black));
@@ -228,12 +232,12 @@ button {
   scale: 0.9;
 }
 .main__header__buttons > div button.create-new {
-  color: var(--main-red);
-  background: var(--main-black);
+  color: var(--main-white);
+  background: var(--main-purple);
   border-radius: 0;
 }
 .main__header__buttons > div button.create-new svg {
-  fill: var(--main-red);
+  fill: var(--main-white);
 }
 .main__header .new-project {
   display: flex;
@@ -363,36 +367,34 @@ button {
   outline: none;
   border: none;
   font-weight: bold;
-  background-color: var(--main-purple);
-  background-image: linear-gradient(45deg, var(--main-purple), var(--main-red));
-  background-size: 300%;
-  background-position: 50% 50%;
+  background: var(--main-btn-bg);
   color: var(--main-btn-clr);
+  text-shadow: 1px 1px 0 var(--main-btn-bg);
   font-size: clamp(1.125rem, 1.125rem + 2vw, 1.25rem);
   cursor: pointer;
   border: 1px solid var(--main-red);
-  text-shadow: 1px 1px 0 rgb(40, 40, 40);
   filter: grayscale(0.5);
   transition: 200ms ease;
+  background: var(--bg-main);
 }
 .tabs button:hover, .tabs button:focus-visible {
-  box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
-  background-position: 0% 50%;
   border: 1px solid var(--main-purple);
   filter: grayscale(0);
+  background: var(--main-black);
+  box-shadow: -2px 2px 8px 0 var(--main-black);
 }
 .tabs button:active {
-  box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
-  background-position: 0% 50%;
   border: 1px solid var(--main-purple);
   scale: 0.95;
   filter: grayscale(0);
+  background: var(--main-black);
+  box-shadow: -2px 2px 8px 0 var(--main-black);
 }
 .tabs button[data-active=true] {
-  box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
-  background-position: 0% 50%;
   border: 1px solid var(--main-purple);
   filter: grayscale(0);
+  background: var(--main-black);
+  box-shadow: -2px 2px 8px 0 var(--main-black);
 }
 
 .mainCode {

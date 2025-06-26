@@ -1,7 +1,6 @@
 /* header */
 .main__header {
   width: 100%;
-  background: linear-gradient(45deg, var(--main-purple), var(--main-red));
   color: var(--clr-nav);
   padding: 4px 8px;
   font-size: .875rem;
@@ -12,6 +11,10 @@
   position: sticky;
   top: 0;
   overflow: hidden;
+  background: var(--main-black);
+  border-top: 2px solid var(--main-white);
+  border-image: linear-gradient(45deg, var(--main-purple), var(--main-red));
+  border-image-slice: 1;
 
   nav {
     display: flex;
@@ -21,7 +24,8 @@
 
   &__site {
     font-weight: normal;
-    text-shadow: 1px 1px 0 rgb(40, 40, 40);
+    text-shadow: 1px 1px 0 var(--main-black);
+    color: var(--main-white);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,10 +56,10 @@
       border-radius: 50%;
       padding: 2px;
       transition: 200ms ease;
-      color: var(--main-black);
+      color: var(--main-white);
 
       svg {
-        fill: var(--main-black);
+        fill: var(--main-white);
       }
 
       &:hover,
@@ -69,12 +73,12 @@
       }
 
       &.create-new {
-        color: var(--main-red);
-        background: var(--main-black);
+        color: var(--main-white);
+        background: var(--main-purple);
         border-radius: 0;
 
         svg {
-          fill: var(--main-red);
+          fill: var(--main-white);
         }
       }
     }
