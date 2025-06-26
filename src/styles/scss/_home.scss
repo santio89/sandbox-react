@@ -353,7 +353,6 @@
         overflow: hidden;
         border-radius: 0.5rem;
         border: 2px solid rgb(100, 100, 100);
-        background: var(--bg-code);
 
         @media (min-width: 800px) {
           height: 100%;
@@ -362,8 +361,6 @@
 
         &::-webkit-resizer {
           background-color: transparent;
-          /* background-image: url("/resize-vert.svg");
-          background-repeat: no-repeat; */
         }
       }
     }
