@@ -3,7 +3,7 @@
   --font-primary: monospace, "Courier New", Courier;
   --main-purple: rgb(107, 31, 248);
   --main-purple-variation: rgb(59, 21, 141);
-  --main-purple-tab: rgb(82, 8, 255);
+  --main-purple-new: rgb(82, 8, 255);
   --main-red: #d31d53;
   --main-white: rgb(248, 248, 248);
   --main-white-op: rgb(248, 248, 248, 0.5);
@@ -22,7 +22,7 @@
 
 .light-theme {
   --main-purple: rgb(107, 31, 248);
-  --main-purple-tab: rgb(156, 131, 255);
+  --main-purple-new: rgb(156, 131, 255);
   --main-red: rgb(210, 28, 83);
   --main-white: rgb(30, 30, 30);
   --main-white-op: rgb(30, 30, 30, 0.5);
@@ -214,7 +214,7 @@ button {
 .main__header__buttons > div button.create-new {
   color: var(--main-white);
   border-radius: 0;
-  background: var(--main-purple-tab);
+  background: var(--main-purple-new);
 }
 .main__header__buttons > div button.create-new svg {
   fill: var(--main-white);
@@ -252,7 +252,7 @@ button {
   background: var(--main-gray);
 }
 .main__header .new-project-confirm-btns button:hover, .main__header .new-project-confirm-btns button:focus-visible {
-  background: var(--main-purple-tab);
+  background: var(--main-purple-new);
   color: rgb(248, 248, 248);
 }
 

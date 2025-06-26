@@ -79,7 +79,7 @@
       &.create-new {
         color: var(--main-white);
         border-radius: 0;
-        background: var(--main-purple-tab);
+        background: var(--main-purple-new);
 
         svg {
           fill: var(--main-white);
@@ -122,7 +122,7 @@
 
           &:hover,
           &:focus-visible {
-            background: var(--main-purple-tab);
+            background: var(--main-purple-new);
             color: rgb(248, 248, 248);
           }
         }
