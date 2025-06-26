@@ -161,7 +161,7 @@ button {
   border-bottom: 1px solid var(--main-white);
   border-image: linear-gradient(45deg, var(--main-purple), var(--main-red), var(--main-purple));
   border-image-slice: 1;
-  height: 32px;
+  height: 31px;
   overflow: hidden;
 }
 .main__header nav {
