@@ -102,7 +102,7 @@
       border: 1px solid var(--main-purple);
       filter: grayscale(0);
       background: var(--main-black);
-      box-shadow: -2px 2px 8px 0 var(--main-black);
+      box-shadow: 0 0 4px 0 var(--main-purple);
     }
 
     &:active {
@@ -110,14 +110,14 @@
       scale: 0.95;
       filter: grayscale(0);
       background: var(--main-black);
-      box-shadow: -2px 2px 8px 0 var(--main-black);
+      box-shadow: 0 0 4px 0 var(--main-purple);
     }
 
     &[data-active="true"] {
       border: 1px solid var(--main-purple);
       filter: grayscale(0);
       background: var(--main-black);
-      box-shadow: -2px 2px 8px 0 var(--main-black);
+      box-shadow: 0 0 4px 0 var(--main-purple);
     }
   }
 }

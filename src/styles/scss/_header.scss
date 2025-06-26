@@ -2,8 +2,8 @@
 .main__header {
   width: 100%;
   color: var(--clr-nav);
-  padding: 4px 8px;
-  font-size: .875rem;
+  padding: 1px 8px;
+  font-size: 0.875rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -11,9 +11,15 @@
   top: 0;
   background: var(--main-black);
   border-bottom: 1px solid var(--main-white);
-  border-image: linear-gradient(45deg, var(--main-purple), var(--main-red), var(--main-purple));
+  border-image: linear-gradient(
+    45deg,
+    var(--main-purple),
+    var(--main-red),
+    var(--main-purple)
+  );
   border-image-slice: 1;
-  position: relative;
+  height: 32px;
+  overflow: hidden;
 
   nav {
     display: flex;
@@ -44,7 +50,7 @@
     align-items: center;
     gap: 8px;
 
-    >div button {
+    > div button {
       background: none;
       outline: none;
       border: none;
@@ -68,13 +74,13 @@
 
       &:active {
         filter: drop-shadow(0 0 4px var(--main-black));
-        scale: .9
+        scale: 0.9;
       }
 
       &.create-new {
         color: var(--main-white);
-        background: var(--main-purple);
         border-radius: 0;
+        background: var(--main-purple-tab);
 
         svg {
           fill: var(--main-white);
@@ -82,7 +88,6 @@
       }
     }
   }
-
 
   .new-project {
     display: flex;
@@ -118,7 +123,8 @@
 
           &:hover,
           &:focus-visible {
-            background: var(--main-purple);
+            background: var(--main-purple-tab);
+            color: rgb(248, 248, 248);
           }
         }
       }
