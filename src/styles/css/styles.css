@@ -510,7 +510,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-inline: 0.4rem;
+  margin-inline: 0.5rem;
   gap: 4px;
 }
 .mainCode__input__type__clearConfirm__buttons {
@@ -560,7 +560,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
 }
 .mainCode__input__textWrapper {
   flex: 1;
@@ -702,7 +702,7 @@ button {
 }
 
 .dim {
-  opacity: 0.4;
+  opacity: 0.5;
   color: transparent !important;
 }
 
@@ -782,18 +782,18 @@ li[data-sonner-toast] {
   flex-direction: column;
   justify-content: start;
   align-items: stretch;
-  border-radius: 1em;
   aspect-ratio: 7/5;
   width: clamp(300px, 300px + 30vw, 720px);
   min-height: 420px;
   background: var(--main-purple-variation);
   max-width: 100%;
+  border-radius: 1em;
+  border: 1px solid var(--main-purple);
   overflow: hidden;
   position: relative;
 }
 .main__modal__header {
-  background: var(--main-purple-variation);
-  background: linear-gradient(45deg, var(--main-purple-variation), var(--main-red), var(--main-purple-variation));
+  background: var(--main-purple);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -822,7 +822,7 @@ li[data-sonner-toast] {
   transition: 200ms ease;
   aspect-ratio: 1;
   fill: var(--main-purple);
-  background: rgba(20, 20, 20, 0.4);
+  background: rgba(20, 20, 20, 0.5);
 }
 .main__modal__header__buttons button svg {
   fill: inherit;
@@ -853,15 +853,12 @@ li[data-sonner-toast] {
 }
 .main__modal__content {
   flex: 1;
-  border-radius: 0 0 1em 1em;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-flow: row wrap;
   overflow-y: auto;
-  border: 2px solid var(--main-purple-variation);
-  border-top: none;
   background: var(--main-black);
   overflow-x: hidden;
   padding-inline: min(20%, 5rem);
@@ -1099,7 +1096,7 @@ li[data-sonner-toast] {
   color: rgb(248, 248, 248);
   padding: 1em;
   background: transparent;
-  border-radius: 0.4em;
+  border-radius: 0.5em;
   cursor: pointer;
   box-shadow: 0 0 8px 0 var(--main-purple);
   border: 2px solid var(--main-purple);
@@ -1124,10 +1121,10 @@ li[data-sonner-toast] {
   aspect-ratio: 7/5;
   width: clamp(100px, 100px + 8vw, 140px);
   background-color: var(--main-gray-op);
-  border-top: 4px solid var(--main-purple);
+  border-top: 2px solid var(--main-purple);
   border-image: linear-gradient(45deg, var(--main-purple), var(--main-red));
   border-image-slice: 1;
-  border-radius: 0 0 0.4em 0.4em;
+  border-radius: 0 0 0.5em 0.5em;
   color: var(--main-white);
   font-size: 1rem;
   display: flex;
@@ -1406,7 +1403,7 @@ li[data-sonner-toast] {
   flex-direction: column;
   position: absolute;
   bottom: 16px;
-  left: -2px;
+  left: -4px;
   padding: 4px;
   gap: 4px;
 }
@@ -1417,27 +1414,29 @@ li[data-sonner-toast] {
   white-space: pre-wrap;
   padding: 4px;
   color: var(--main-white);
-  background: var(--main-gray-op);
+  background: var(--main-gray);
   border-radius: 0 0.25em 0.25em 0;
-  width: 66px;
+  width: 64px;
   height: 40px;
-  filter: grayscale(1);
   transition: 200ms ease;
 }
 .main__modal .presets__tabs__btn:hover, .main__modal .presets__tabs__btn:focus-visible {
   font-weight: bold;
-  background-color: var(--main-purple-tab);
+  background-color: var(--main-purple);
+  color: rgb(248, 248, 248);
   filter: grayscale(0);
 }
 .main__modal .presets__tabs__btn:active {
   font-weight: bold;
-  background-color: var(--main-purple-tab);
+  background-color: var(--main-purple);
+  color: rgb(248, 248, 248);
   filter: grayscale(0);
 }
 .main__modal .presets__tabs__btn--active {
   font-weight: bold;
-  background-color: var(--main-purple-tab);
+  background-color: var(--main-purple);
   filter: grayscale(0);
+  color: rgb(248, 248, 248);
 }
 .main__modal::backdrop {
   background: transparent;
