@@ -2,7 +2,7 @@
 .main__header {
   width: 100%;
   color: var(--clr-nav);
-  padding: 1px 8px;
+  padding: 8px 16px;
   font-size: 0.875rem;
   display: flex;
   justify-content: space-between;
@@ -10,16 +10,33 @@
   z-index: 2;
   top: 0;
   background: var(--main-black);
-  border-top: 1px solid var(--main-white);
+  border-radius: 1em;
+  position: relative;
+
+  background: linear-gradient(
+    90deg,
+    var(--main-purple),
+    var(--main-red),
+    var(--main-purple)
+  );
+
+  /*   border-bottom: 1px solid var(--main-white);
   border-image: linear-gradient(
     45deg,
     var(--main-purple),
     var(--main-red),
     var(--main-purple)
   );
-  border-image-slice: 1;
-  height: 31px;
-  overflow: hidden;
+  border-image-slice: 1; */
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    background: var(--main-black);
+    z-index: -1;
+    border-radius: inherit;
+  }
 
   nav {
     display: flex;
@@ -79,6 +96,7 @@
         color: var(--main-white);
         border-radius: 0;
         background: var(--main-purple-new);
+        border-radius: 50%;
 
         svg {
           fill: var(--main-white);

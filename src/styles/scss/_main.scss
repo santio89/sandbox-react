@@ -20,7 +20,7 @@
 html {
   /* INICIO SCROLLBAR */
   scrollbar-width: thin;
-  scrollbar-color: var(--main-purple) var(--bg-main);
+  scrollbar-color: var(--main-purple) transparent;
 
   /* width */
   ::-webkit-scrollbar {
@@ -28,21 +28,21 @@ html {
     height: 8px;
   }
 
-  /* track */
-  ::-webkit-scrollbar-track {
-    background: var(--bg-main);
-  }
-
   /* handle */
   ::-webkit-scrollbar-thumb {
     background: var(--main-purple);
   }
 
+  /* track */
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
   /* FIN SCROLLBAR */
 
   ::selection {
-    color: var(--main-purple-variation);
-    background: var(--main-purple);
+    color: var(--main-white);
+    background: var(--main-purple-new);
   }
 }
 
@@ -61,6 +61,14 @@ body,
   line-height: 1.4;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
+}
+
+.root-theme {
+  padding: 8px 16px;
+
+  @media (max-width: $panel-breakpoint) {
+    padding: 8px 8px;
+  }
 }
 
 a,

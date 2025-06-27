@@ -149,7 +149,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+    padding-inline: 1rem;
 
     @media (max-width: 799px) {
       display: none !important;

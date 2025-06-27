@@ -50,7 +50,7 @@ export default function Nav({ rootTheme }) {
     return () => { document.removeEventListener("keydown", modalShortcut) }
   }, [modalActive])
 
-  return (
+  return (<>
     <header className='main__header'>
       <nav>
         <Link className="main__header__site" to={"/"}><h1>SandBox|HTML-CSS-JS</h1></Link>
@@ -95,8 +95,9 @@ export default function Nav({ rootTheme }) {
               </button>
           }
         </div>
-        <Modal callbacks={{ setNewProject }} />
       </div>
     </header>
+    <Modal callbacks={{ setNewProject }} />
+  </>
   )
 }
