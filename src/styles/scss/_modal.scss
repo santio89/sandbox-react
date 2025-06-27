@@ -52,7 +52,7 @@
     > span {
       padding-inline: 6px;
       color: var(--main-white);
-     /*  font-weight: bold; */
+      /*  font-weight: bold; */
     }
 
     &__buttons {
@@ -71,8 +71,8 @@
         padding: 0.5rem;
         transition: 200ms ease;
         aspect-ratio: 1;
-        fill: var(--main-purple);
-        background: rgba(20, 20, 20, 0.5);
+        fill: rgb(248, 248, 248);
+        background: var(--main-gray-op);
 
         svg {
           fill: inherit;
@@ -83,14 +83,12 @@
 
         &:hover,
         &:focus-visible {
-          fill: rgb(248, 248, 248);
-          background: rgba(20, 20, 20, 0.6);
+          background: var(--main-purple);
         }
 
         &:active {
-          fill: rgb(248, 248, 248);
           scale: 0.9;
-          background: rgba(20, 20, 20, 0.6);
+          background: var(--main-purple);
         }
 
         &[disabled] {
@@ -106,6 +104,8 @@
         &.modalOptionActive {
           fill: rgb(248, 248, 248);
           background: rgba(20, 20, 20, 0.6);
+
+          background: var(--main-purple);
         }
       }
     }
