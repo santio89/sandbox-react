@@ -54,8 +54,8 @@
 
 html {
   /* INICIO SCROLLBAR */
-  /* scrollbar-width: thin;
-  scrollbar-color: var(--main-purple) transparent; */
+  scrollbar-width: thin;
+  scrollbar-color: var(--main-purple) transparent;
   /* width */
   /* handle */
   /* track */
@@ -67,6 +67,7 @@ html ::-webkit-scrollbar {
 }
 html ::-webkit-scrollbar-thumb {
   background: var(--main-purple);
+  border-radius: 8px;
 }
 html ::-webkit-scrollbar-track {
   background: transparent;
@@ -886,8 +887,8 @@ li[data-sonner-toast] {
   padding-block: min(10%, 3rem);
   scrollbar-gutter: stable both-edges;
   /* INICIO SCROLLBAR */
-  /* scrollbar-width: thin;
-  scrollbar-color: var(--main-purple) transparent; */
+  scrollbar-width: thin;
+  scrollbar-color: var(--main-purple) transparent;
   /* width */
   /* handle */
   /* track */
@@ -910,6 +911,7 @@ li[data-sonner-toast] {
 }
 .main__modal__content::-webkit-scrollbar-thumb {
   background: var(--main-purple);
+  border-radius: 8px;
 }
 .main__modal__content::-webkit-scrollbar-track {
   background: transparent;
