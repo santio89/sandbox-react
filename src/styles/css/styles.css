@@ -973,7 +973,7 @@ li[data-sonner-toast] {
   inset: 0;
   border-radius: inherit;
   background: inherit;
-  filter: blur(2px);
+  filter: blur(4px);
   z-index: 0;
 }
 .main__modal .presets__profile__userInfo__data__img img {
