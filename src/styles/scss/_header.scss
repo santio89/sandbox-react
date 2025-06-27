@@ -136,7 +136,8 @@
           transition: none;
           filter: none;
           color: var(--main-white);
-          background: var(--main-gray);
+          background: var(--main-gray-op);
+          border-radius: 2px;
 
           &:hover,
           &:focus-visible {

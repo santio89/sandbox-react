@@ -16,7 +16,6 @@
   --main-btn-bg: rgb(8, 5, 12);
   --main-btn-clr: rgb(248, 248, 248);
   --bg-main: rgb(40, 40, 40);
-  --bg-code: rgb(25, 25, 25);
   --size-main-container: 1500px;
 }
 
@@ -31,8 +30,7 @@
   --color-code: rgb(30, 30, 30);
   --main-btn-bg: rgb(248, 248, 248);
   --main-btn-clr: rgb(8, 5, 12);
-  --bg-main: rgb(235, 235, 235);
-  --bg-code: rgb(250, 250, 250);
+  --bg-main: rgb(215, 215, 215);
 }
 
 * {
@@ -271,7 +269,8 @@ button {
   transition: none;
   filter: none;
   color: var(--main-white);
-  background: var(--main-gray);
+  background: var(--main-gray-op);
+  border-radius: 2px;
 }
 .main__header .new-project-confirm-btns button:hover, .main__header .new-project-confirm-btns button:focus-visible {
   background: var(--main-purple-new);
@@ -545,7 +544,8 @@ button {
   justify-content: center;
   align-items: center;
   font-size: 0.95em;
-  background: var(--main-gray);
+  border-radius: 2px;
+  background: var(--main-gray-op);
   padding: 0;
   transition: none;
 }
@@ -960,6 +960,7 @@ li[data-sonner-toast] {
   position: relative;
   aspect-ratio: 1;
   background-color: var(--main-purple);
+  background-image: linear-gradient(45deg, var(--main-purple), var(--main-red), var(--main-purple));
   padding: 2px;
   border-radius: 50%;
   width: 120px;
@@ -971,7 +972,7 @@ li[data-sonner-toast] {
   inset: 0;
   border-radius: inherit;
   background: inherit;
-  filter: blur(4px);
+  filter: blur(2px);
   z-index: 0;
 }
 .main__modal .presets__profile__userInfo__data__img img {
@@ -1155,7 +1156,7 @@ li[data-sonner-toast] {
   pointer-events: none;
 }
 .main__modal .presets__option:hover, .main__modal .presets__option:focus-visible, .main__modal .presets__option:focus-within, .main__modal .presets__option:active {
-  box-shadow: 0 -2px 4px 0 var(--main-purple), 0px 2px 4px 0 var(--main-red);
+  box-shadow: 0 -2px 0 0 var(--main-purple), 0px 2px 0 0 var(--main-red);
 }
 .main__modal .presets__option:hover button, .main__modal .presets__option:focus-visible button, .main__modal .presets__option:focus-within button, .main__modal .presets__option:active button {
   opacity: 1;
@@ -1213,13 +1214,14 @@ li[data-sonner-toast] {
   line-height: 1;
   border-radius: 2px;
   cursor: pointer;
-  color: rgb(248, 248, 248);
+  color: var(--main-white);
+  background: var(--main-gray-op);
 }
 .main__modal .presets__option__confirm__buttons button:hover, .main__modal .presets__option__confirm__buttons button:focus-visible {
-  color: var(--main-red);
+  background: var(--main-purple-new);
 }
 .main__modal .presets__option__confirm__buttons button:active {
-  color: var(--main-red);
+  background: var(--main-purple-new);
 }
 .main__modal .presets__option__main {
   flex: 1;
@@ -1251,17 +1253,17 @@ li[data-sonner-toast] {
   padding: 4px;
   cursor: pointer;
 }
-.main__modal .presets__option__main__name[disabled] {
-  pointer-events: none;
-}
-.main__modal .presets__option__main__name:is(:hover, :focus-visible) span {
-  color: var(--main-red);
-}
 .main__modal .presets__option__main__name > span {
   max-width: 100%;
   text-align: center;
   text-wrap: balance;
   word-wrap: break-word;
+}
+.main__modal .presets__option__main__name[disabled] {
+  pointer-events: none;
+}
+.main__modal .presets__option__main__name:hover, .main__modal .presets__option__main__name:focus-visible {
+  background-color: var(--main-purple-new);
 }
 .main__modal .presets__option__main__name:focus-visible {
   outline: none;
@@ -1275,6 +1277,7 @@ li[data-sonner-toast] {
   gap: 2px;
   width: 100%;
   padding: 1px 4px;
+  background: var(--main-black);
 }
 .main__modal .presets__option__main__buttons button {
   display: flex;
@@ -1285,16 +1288,16 @@ li[data-sonner-toast] {
   cursor: pointer;
 }
 .main__modal .presets__option__main__buttons button svg {
-  color: rgb(248, 248, 248);
-  fill: rgb(248, 248, 248);
+  color: var(--main-white);
+  fill: var(--main-white);
 }
 .main__modal .presets__option__main__buttons button:hover svg, .main__modal .presets__option__main__buttons button:focus-visible svg {
-  color: var(--main-red);
-  fill: var(--main-red);
+  color: var(--main-purple);
+  fill: var(--main-purple);
 }
 .main__modal .presets__option__main__buttons button:active {
-  color: var(--main-red);
-  fill: var(--main-red);
+  color: var(--main-purple);
+  fill: var(--main-purple);
   scale: 0.9;
 }
 .main__modal .presets__option__main__buttons button:first-child {
