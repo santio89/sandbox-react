@@ -3,7 +3,7 @@
   --font-primary: monospace, "Courier New", Courier;
   --main-purple: rgb(107, 31, 248);
   --main-purple-variation: rgb(59, 21, 141);
-  --main-purple-new: rgb(82, 8, 255);
+  --main-purple-new: rgb(100, 33, 255);
   --main-red: rgb(211, 29, 83);
   --main-white: rgb(248, 248, 248);
   --main-white-op: rgb(248, 248, 248, 0.5);
@@ -250,7 +250,6 @@ button {
 }
 .main__header .new-project-confirm-btns button:hover, .main__header .new-project-confirm-btns button:focus-visible {
   background: var(--main-purple-new);
-  color: rgb(248, 248, 248);
 }
 
 /* fin header */
@@ -1189,11 +1188,9 @@ li[data-sonner-toast] {
 }
 .main__modal .presets__option__confirm__buttons button:hover, .main__modal .presets__option__confirm__buttons button:focus-visible {
   color: var(--main-red);
-  font-weight: bold;
 }
 .main__modal .presets__option__confirm__buttons button:active {
   color: var(--main-red);
-  font-weight: bold;
 }
 .main__modal .presets__option__main {
   flex: 1;
@@ -1230,7 +1227,6 @@ li[data-sonner-toast] {
 }
 .main__modal .presets__option__main__name:is(:hover, :focus-visible) span {
   color: var(--main-red);
-  font-weight: bold;
 }
 .main__modal .presets__option__main__name > span {
   max-width: 100%;
@@ -1400,29 +1396,23 @@ li[data-sonner-toast] {
   text-align: left;
   white-space: pre-wrap;
   padding: 4px;
-  color: var(--main-white);
-  background: var(--main-gray);
   border-radius: 0 0.25em 0.25em 0;
   width: 64px;
   height: 40px;
   transition: 200ms ease;
+  background-color: var(--main-gray-op);
+  color: var(--main-white);
 }
 .main__modal .presets__tabs__btn:hover, .main__modal .presets__tabs__btn:focus-visible {
-  font-weight: bold;
   background-color: var(--main-purple);
   color: rgb(248, 248, 248);
-  filter: grayscale(0);
 }
 .main__modal .presets__tabs__btn:active {
-  font-weight: bold;
   background-color: var(--main-purple);
   color: rgb(248, 248, 248);
-  filter: grayscale(0);
 }
 .main__modal .presets__tabs__btn--active {
-  font-weight: bold;
   background-color: var(--main-purple);
-  filter: grayscale(0);
   color: rgb(248, 248, 248);
 }
 .main__modal::backdrop {
