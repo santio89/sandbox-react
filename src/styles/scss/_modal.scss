@@ -141,8 +141,8 @@
     }
 
     /* INICIO SCROLLBAR */
-    scrollbar-width: thin;
-    scrollbar-color: var(--main-purple) transparent;
+    /* scrollbar-width: thin;
+    scrollbar-color: var(--main-purple) transparent; */
 
     /* width */
     &::-webkit-scrollbar {
@@ -475,7 +475,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 0.8em;
+        gap: 0.5rem;
         text-align: center;
         text-wrap: balance;
         padding: 4px;
@@ -485,12 +485,13 @@
           max-width: 100%;
           outline: none;
           border: none;
-          border-bottom: 1px dashed var(--main-purple-variation);
+          border-bottom: 1px dashed var(--main-gray-op);
           text-align: center;
           text-wrap: balance;
           font-weight: bold;
           transition: background-color 200ms ease;
           color: var(--main-white);
+          margin-bottom: 0.5rem;
 
           &:not(:placeholder-shown) {
             background-color: var(--main-gray-op);

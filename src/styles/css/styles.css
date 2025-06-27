@@ -2,7 +2,8 @@
 :root {
   --font-primary: monospace, "Courier New", Courier;
   --main-purple: rgb(107, 31, 248);
-  --main-purple-variation: rgb(59, 21, 141);
+  --main-purple-dark: rgb(59, 21, 141);
+  --main-purple-light: rgb(137, 73, 255);
   --main-purple-new: rgb(100, 33, 255);
   --main-red: rgb(222, 24, 80);
   --main-white: rgb(248, 248, 248);
@@ -53,8 +54,8 @@
 
 html {
   /* INICIO SCROLLBAR */
-  scrollbar-width: thin;
-  scrollbar-color: var(--main-purple) transparent;
+  /* scrollbar-width: thin;
+  scrollbar-color: var(--main-purple) transparent; */
   /* width */
   /* handle */
   /* track */
@@ -772,7 +773,7 @@ button {
 /* sonner-toast-wrapper */
 li[data-sonner-toast] {
   background: var(--main-black) !important;
-  border-color: var(--main-purple-variation) !important;
+  border-color: var(--main-purple) !important;
   color: var(--main-white) !important;
   word-break: break-all !important;
   white-space: pre-wrap !important;
@@ -885,8 +886,8 @@ li[data-sonner-toast] {
   padding-block: min(10%, 3rem);
   scrollbar-gutter: stable both-edges;
   /* INICIO SCROLLBAR */
-  scrollbar-width: thin;
-  scrollbar-color: var(--main-purple) transparent;
+  /* scrollbar-width: thin;
+  scrollbar-color: var(--main-purple) transparent; */
   /* width */
   /* handle */
   /* track */
@@ -1169,7 +1170,7 @@ li[data-sonner-toast] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.8em;
+  gap: 0.5rem;
   text-align: center;
   text-wrap: balance;
   padding: 4px;
@@ -1179,12 +1180,13 @@ li[data-sonner-toast] {
   max-width: 100%;
   outline: none;
   border: none;
-  border-bottom: 1px dashed var(--main-purple-variation);
+  border-bottom: 1px dashed var(--main-gray-op);
   text-align: center;
   text-wrap: balance;
   font-weight: bold;
   transition: background-color 200ms ease;
   color: var(--main-white);
+  margin-bottom: 0.5rem;
 }
 .main__modal .presets__option__confirm input:not(:placeholder-shown) {
   background-color: var(--main-gray-op);
