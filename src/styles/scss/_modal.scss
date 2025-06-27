@@ -654,12 +654,12 @@
 
         &:hover,
         &:focus-visible {
-          box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
+          box-shadow: 0 0 4px 0 var(--main-purple);
           filter: grayscale(0);
         }
 
         &:active {
-          box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
+          box-shadow: 0 0 4px 0 var(--main-purple);
           scale: 0.95;
           filter: grayscale(0);
         }
@@ -693,7 +693,7 @@
           }
 
           &[data-active="true"] {
-            box-shadow: -2px 2px 8px 0 var(--main-btn-bg);
+            box-shadow: 0 0 4px 0 var(--main-purple);
             background-position: 0% 50%;
             border: 1px solid var(--main-purple);
             filter: grayscale(0);
