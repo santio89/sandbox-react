@@ -7,11 +7,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 40px;
   z-index: 2;
-  top: 0;
   background: var(--main-black);
   border-radius: 1em;
-  position: relative;
+  position: sticky;
+  top: 0;
 
   background: linear-gradient(
     90deg,
