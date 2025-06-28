@@ -164,27 +164,11 @@ button {
   align-items: center;
   height: 40px;
   z-index: 2;
-  background: var(--main-black);
   border-radius: 1em;
   position: sticky;
   top: 0;
-  background: linear-gradient(90deg, var(--main-purple), var(--main-red), var(--main-purple));
-  /*   border-bottom: 1px solid var(--main-white);
-  border-image: linear-gradient(
-    45deg,
-    var(--main-purple),
-    var(--main-red),
-    var(--main-purple)
-  );
-  border-image-slice: 1; */
-}
-.main__header::after {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  background: var(--main-black);
-  z-index: -1;
-  border-radius: inherit;
+  background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(90deg, var(--main-purple), var(--main-red), var(--main-purple)) border-box;
+  border: 1px solid transparent;
 }
 .main__header nav {
   display: flex;
