@@ -1136,7 +1136,7 @@ li[data-sonner-toast] {
   width: clamp(100px, 100px + 8vw, 140px);
   background-color: var(--main-gray-op);
   border-top: 2px solid var(--main-purple);
-  border-radius: 0 0 0.5em 0.5em;
+  border-radius: 0.5em;
   color: var(--main-white);
   font-size: 1rem;
   display: flex;
