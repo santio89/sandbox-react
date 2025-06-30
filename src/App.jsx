@@ -4,19 +4,18 @@ import Home from "./components/Home";
 import Nav from "./components/Nav";
 import NotFound from "./components/NotFound";
 import './styles/css/styles.css'
-import { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authStateAction } from "./store/actions/auth.action";
 import { getDefaultPresets } from "./store/actions/presets.action";
 import { Toaster } from 'sonner'
 
 function App() {
   const dispatch = useDispatch();
-  const rootTheme = useRef();
+  const darkTheme = useSelector(state => state.theme.darkTheme)
 
   const Layout = () => (
     <>
-      <Nav rootTheme={rootTheme} />
+      <Nav />
       <div className="mainContainer">
         <Outlet />
       </div>
@@ -32,7 +31,7 @@ function App() {
 
   return (
     <>
-      <div ref={rootTheme} className={`root-theme`}>
+      <div className={`root-theme ${darkTheme ? "" : "light-theme"}`}>
         <Toaster />
         <BrowserRouter>
           <Routes>
