@@ -12,8 +12,6 @@
   --main-black-op: rgb(30, 30, 30, 0.5);
   --main-gray: rgb(80, 80, 80);
   --main-gray-op: rgb(100, 100, 100, 0.5);
-  --clr-nav: rgb(248, 248, 248);
-  --color-code: rgb(248, 248, 248);
   --main-btn-bg: rgb(8, 5, 12);
   --main-btn-clr: rgb(248, 248, 248);
   --bg-main: rgb(40, 40, 40);
@@ -27,8 +25,6 @@
   --main-black: rgb(248, 248, 248);
   --main-black-op: rgb(248, 248, 248, 0.5);
   --main-gray: rgb(220, 220, 220);
-  --clr-nav: rgb(248, 248, 248);
-  --color-code: rgb(30, 30, 30);
   --main-btn-bg: rgb(248, 248, 248);
   --main-btn-clr: rgb(8, 5, 12);
   --bg-main: rgb(215, 215, 215);
@@ -156,7 +152,7 @@ button {
 /* header */
 .main__header {
   width: 100%;
-  color: var(--clr-nav);
+  color: var(--main-white);
   padding: 8px 16px;
   font-size: 0.875rem;
   display: flex;
@@ -266,7 +262,7 @@ button {
 /* footer */
 .main__footer {
   background: color-mix(in srgb, var(--main-purple) 8%, black);
-  color: var(--clr-nav);
+  color: var(--main-white);
   padding: 0.25rem;
   font-size: 1rem;
   display: flex;
