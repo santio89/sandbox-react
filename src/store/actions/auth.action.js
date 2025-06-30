@@ -10,7 +10,16 @@ export const authStateAction = () => {
 
     return async dispatch => {
         onAuthStateChanged(auth, (user) => {
-            dispatch(getPresets(user?.uid))
+            if (user) {
+                dispatch({
+                    type: "SIGN_IN",
+                    userId: user?.uid,
+                    email: user?.email,
+                    displayName: user?.displayName,
+                    avatar: user?.photoURL
+                })
+                dispatch(getPresets(user?.uid))
+            }
         })
     }
 }
@@ -29,13 +38,15 @@ export const signInGoogle = () => {
                     .then((result) => {
                         const user = result.user;
 
-                        dispatch({
+                        /*SIGN_IN dispatch -> on authStateAction
+                            dispatch({
                             type: "SIGN_IN",
                             userId: user.uid,
                             email: user.email,
                             displayName: user.displayName,
                             avatar: user.photoURL
-                        })
+                        })*/
+
                         toast.message('Auth', {
                             description: `User signed in: ${user.displayName}`,
                         })

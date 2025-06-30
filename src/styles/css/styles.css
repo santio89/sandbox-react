@@ -26,18 +26,20 @@
   --bg-main: rgb(215, 215, 215);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 @view-transition {
   navigation: auto;
 }
 ::view-transition-group(*) {
   animation-duration: 200ms;
   animation-timing-function: ease;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
@@ -69,8 +71,18 @@ html ::selection {
   background: var(--main-purple-new);
 }
 
-body,
-#root,
+body {
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  font-family: var(--font-primary);
+  line-height: 1.4;
+  color: var(--white);
+}
+
+#root {
+  isolation: isolate;
+}
+
 .root-theme {
   width: 100%;
   min-height: 100vh;
@@ -84,9 +96,6 @@ body,
   line-height: 1.4;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
-}
-
-.root-theme {
   padding: 8px 16px;
 }
 @media (max-width: 800px) {
