@@ -87,6 +87,7 @@ export const signOutUser = () => {
             dispatch({
                 type: "SIGN_OUT",
             })
+            
             toast.message('Auth', {
                 description: `User signed out`,
             })
