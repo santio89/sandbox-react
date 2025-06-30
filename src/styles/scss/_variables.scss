@@ -2,36 +2,30 @@ $panel-breakpoint: 800px;
 
 :root {
   --font-primary: monospace, "Courier New", Courier;
+  --size-main-container: 1500px;
 
   --main-purple: rgb(107, 31, 248);
   --main-purple-dark: rgb(59, 21, 141);
   --main-purple-light: rgb(137, 73, 255);
   --main-purple-new: rgb(100, 33, 255);
   --main-red: rgb(222, 24, 80);
-  --main-white: rgb(248, 248, 248);
-  --main-white-op: rgb(248, 248, 248, 0.5);
+  --main-white: rgb(255, 255, 254);
+  --main-white-op: rgb(255, 255, 254, 0.5);
   --main-black: rgb(30, 30, 30);
   --main-black-op: rgb(30, 30, 30, 0.5);
   --main-gray: rgb(80, 80, 80);
   --main-gray-op: rgb(100, 100, 100, 0.5);
-  
-  --main-btn-bg: rgb(8, 5, 12);
-  --main-btn-clr: rgb(248, 248, 248);
 
   --bg-main: rgb(40, 40, 40);
-  --size-main-container: 1500px;
 }
 
 .light-theme {
   --main-purple-new: rgb(156, 131, 255);
   --main-white: rgb(30, 30, 30);
   --main-white-op: rgb(30, 30, 30, 0.5);
-  --main-black: rgb(248, 248, 248);
-  --main-black-op: rgb(248, 248, 248, 0.5);
+  --main-black: rgb(255, 255, 254);
+  --main-black-op: rgb(255, 255, 254, 0.5);
   --main-gray: rgb(220, 220, 220);
-
-  --main-btn-bg: rgb(248, 248, 248);
-  --main-btn-clr: rgb(8, 5, 12);
 
   --bg-main: rgb(215, 215, 215);
 }

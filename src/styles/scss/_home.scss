@@ -87,17 +87,17 @@
     outline: none;
     border: none;
     font-weight: bold;
-    background: var(--main-btn-bg);
-    color: var(--main-btn-clr);
     font-size: clamp(1.125rem, 1.125rem + 2vw, 1.25rem);
     cursor: pointer;
     border: 1px solid var(--main-red);
     filter: grayscale(0.5);
     transition: 200ms ease;
     background: var(--bg-main);
+    color: var(--main-white);
 
     &:hover,
-    &:focus-visible {
+    &:focus-visible,
+    &:active {
       border: 1px solid var(--main-purple);
       filter: grayscale(0);
       background: var(--main-black);
@@ -105,11 +105,7 @@
     }
 
     &:active {
-      border: 1px solid var(--main-purple);
       scale: 0.95;
-      filter: grayscale(0);
-      background: var(--main-black);
-      box-shadow: 0 0 4px 0 var(--main-purple);
     }
 
     &[data-active="true"] {
@@ -131,14 +127,14 @@
   gap: 2rem;
   padding: 1rem;
 
-  @media (min-width: 800px) {
+  @media (min-width: $panel-breakpoint) {
     flex-direction: row;
     gap: 0;
     padding: 0;
   }
 
   .NoSplitPane {
-    @media (min-width: 800px) {
+    @media (min-width: $panel-breakpoint) {
       display: none !important;
     }
   }
@@ -200,7 +196,7 @@
     flex-direction: column;
     overflow: hidden;
 
-    @media (min-width: 800px) {
+    @media (min-width: $panel-breakpoint) {
       min-width: initial;
       flex: 1;
       min-height: min(1080px, 75vh);
@@ -342,7 +338,7 @@
       overflow: hidden;
       color: var(--main-purple);
 
-      @media (min-width: 800px) {
+      @media (min-width: $panel-breakpoint) {
         min-width: initial;
       }
 
@@ -355,7 +351,7 @@
         border-radius: 0.5rem;
         border: 2px solid rgb(100, 100, 100);
 
-        @media (min-width: 800px) {
+        @media (min-width: $panel-breakpoint) {
           height: 100%;
           resize: vertical;
         }
@@ -376,7 +372,7 @@
     flex-direction: column;
     overflow: hidden;
 
-    @media (min-width: 800px) {
+    @media (min-width: $panel-breakpoint) {
       min-width: initial;
       flex: 1;
       min-height: min(1080px, 75vh);
@@ -453,7 +449,7 @@
       min-height: 172px;
       overflow: hidden;
 
-      @media (min-width: 800px) {
+      @media (min-width: $panel-breakpoint) {
         height: 100%;
         resize: vertical;
       }

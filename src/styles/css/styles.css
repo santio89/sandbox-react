@@ -1,32 +1,28 @@
 @charset "UTF-8";
 :root {
   --font-primary: monospace, "Courier New", Courier;
+  --size-main-container: 1500px;
   --main-purple: rgb(107, 31, 248);
   --main-purple-dark: rgb(59, 21, 141);
   --main-purple-light: rgb(137, 73, 255);
   --main-purple-new: rgb(100, 33, 255);
   --main-red: rgb(222, 24, 80);
-  --main-white: rgb(248, 248, 248);
-  --main-white-op: rgb(248, 248, 248, 0.5);
+  --main-white: rgb(255, 255, 254);
+  --main-white-op: rgb(255, 255, 254, 0.5);
   --main-black: rgb(30, 30, 30);
   --main-black-op: rgb(30, 30, 30, 0.5);
   --main-gray: rgb(80, 80, 80);
   --main-gray-op: rgb(100, 100, 100, 0.5);
-  --main-btn-bg: rgb(8, 5, 12);
-  --main-btn-clr: rgb(248, 248, 248);
   --bg-main: rgb(40, 40, 40);
-  --size-main-container: 1500px;
 }
 
 .light-theme {
   --main-purple-new: rgb(156, 131, 255);
   --main-white: rgb(30, 30, 30);
   --main-white-op: rgb(30, 30, 30, 0.5);
-  --main-black: rgb(248, 248, 248);
-  --main-black-op: rgb(248, 248, 248, 0.5);
+  --main-black: rgb(255, 255, 254);
+  --main-black-op: rgb(255, 255, 254, 0.5);
   --main-gray: rgb(220, 220, 220);
-  --main-btn-bg: rgb(248, 248, 248);
-  --main-btn-clr: rgb(8, 5, 12);
   --bg-main: rgb(215, 215, 215);
 }
 
@@ -350,27 +346,22 @@ button {
   outline: none;
   border: none;
   font-weight: bold;
-  background: var(--main-btn-bg);
-  color: var(--main-btn-clr);
   font-size: clamp(1.125rem, 1.125rem + 2vw, 1.25rem);
   cursor: pointer;
   border: 1px solid var(--main-red);
   filter: grayscale(0.5);
   transition: 200ms ease;
   background: var(--bg-main);
+  color: var(--main-white);
 }
-.tabs button:hover, .tabs button:focus-visible {
+.tabs button:hover, .tabs button:focus-visible, .tabs button:active {
   border: 1px solid var(--main-purple);
   filter: grayscale(0);
   background: var(--main-black);
   box-shadow: 0 0 4px 0 var(--main-purple);
 }
 .tabs button:active {
-  border: 1px solid var(--main-purple);
   scale: 0.95;
-  filter: grayscale(0);
-  background: var(--main-black);
-  box-shadow: 0 0 4px 0 var(--main-purple);
 }
 .tabs button[data-active=true] {
   border: 1px solid var(--main-purple);
@@ -1313,7 +1304,7 @@ li[data-sonner-toast] {
   border: 1px solid var(--main-purple);
   font-weight: bold;
   background: var(--main-black);
-  color: var(--main-btn-clr);
+  color: var(--main-white);
   font-size: clamp(1.125rem, 1.125rem + 2vw, 1.25rem);
   cursor: pointer;
   transition: 200ms ease;
