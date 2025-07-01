@@ -12,7 +12,7 @@
   --main-black: rgb(30, 30, 30);
   --main-black-op: rgb(30, 30, 30, 0.5);
   --main-gray: rgb(80, 80, 80);
-  --main-gray-op: rgb(100, 100, 100, 0.5);
+  --main-gray-op: rgb(60, 60, 60, 0.5);
   --bg-main: rgb(40, 40, 40);
 }
 
@@ -23,6 +23,7 @@
   --main-black: rgb(255, 255, 254);
   --main-black-op: rgb(255, 255, 254, 0.5);
   --main-gray: rgb(220, 220, 220);
+  --main-gray-op: rgb(240, 240, 240, 0.5);
   --bg-main: rgb(215, 215, 215);
 }
 
@@ -824,21 +825,20 @@ li[data-sonner-toast] {
   padding: 0.5rem;
   transition: 200ms ease;
   aspect-ratio: 1;
-  fill: rgb(248, 248, 248);
   background: var(--main-gray-op);
 }
 .main__modal__header__buttons button svg {
-  fill: inherit;
+  fill: var(--main-white);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .main__modal__header__buttons button:hover, .main__modal__header__buttons button:focus-visible {
-  background: var(--main-purple);
+  background: var(--main-purple-new);
 }
 .main__modal__header__buttons button:active {
   scale: 0.9;
-  background: var(--main-purple);
+  background: var(--main-purple-new);
 }
 .main__modal__header__buttons button[disabled] {
   pointer-events: none;
@@ -849,9 +849,7 @@ li[data-sonner-toast] {
   fill: rgb(80, 80, 80);
 }
 .main__modal__header__buttons button.modalOptionActive {
-  fill: rgb(248, 248, 248);
-  background: rgba(20, 20, 20, 0.6);
-  background: var(--main-purple);
+  background: var(--main-purple-new);
 }
 .main__modal__content {
   flex: 1;
@@ -985,7 +983,7 @@ li[data-sonner-toast] {
   bottom: -12px;
   right: -12px;
   margin: auto;
-  color: var(--main-gray-op);
+  color: var(--main-white);
   aspect-ratio: 1;
   display: flex;
   justify-content: center;
@@ -1040,7 +1038,7 @@ li[data-sonner-toast] {
 }
 .main__modal .presets__profile__userInfo__data__text__line__btnContainer button {
   cursor: pointer;
-  color: var(--main-gray-op);
+  color: var(--main-white);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1073,7 +1071,6 @@ li[data-sonner-toast] {
 .main__modal .presets__profile__userInfo__data__signOut {
   cursor: pointer;
   color: var(--main-red);
-  fill: var(--main-red);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1081,7 +1078,7 @@ li[data-sonner-toast] {
   font-weight: bold;
 }
 .main__modal .presets__profile__userInfo__data__signOut svg {
-  fill: inherit;
+  fill: var(--main-red);
 }
 .main__modal .presets__profile__userInfo__data__signOut:hover, .main__modal .presets__profile__userInfo__data__signOut:focus-visible {
   color: var(--main-white);
@@ -1110,11 +1107,10 @@ li[data-sonner-toast] {
   cursor: pointer;
   box-shadow: 0 0 8px 0 var(--main-purple);
   border: 2px solid var(--main-purple);
-  fill: var(--main-purple);
   transition: 200ms ease;
 }
 .main__modal .presets__profile__googleBtn svg {
-  fill: inherit;
+  fill: var(--main-purple);
 }
 .main__modal .presets__profile__googleBtn:hover, .main__modal .presets__profile__googleBtn:focus-visible {
   box-shadow: 0 0 8px 0 var(--main-red);
@@ -1427,16 +1423,13 @@ li[data-sonner-toast] {
   color: var(--main-white);
 }
 .main__modal .presets__tabs__btn:hover, .main__modal .presets__tabs__btn:focus-visible {
-  background-color: var(--main-purple);
-  color: rgb(248, 248, 248);
+  background-color: var(--main-purple-new);
 }
 .main__modal .presets__tabs__btn:active {
-  background-color: var(--main-purple);
-  color: rgb(248, 248, 248);
+  background-color: var(--main-purple-new);
 }
 .main__modal .presets__tabs__btn--active {
-  background-color: var(--main-purple);
-  color: rgb(248, 248, 248);
+  background-color: var(--main-purple-new);
 }
 .main__modal::backdrop {
   background: transparent;
