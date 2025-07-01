@@ -1211,6 +1211,7 @@ li[data-sonner-toast] {
 }
 .main__modal .presets__option__confirm__buttons button:active {
   background: var(--main-purple-new);
+  scale: 0.95;
 }
 .main__modal .presets__option__main {
   flex: 1;
