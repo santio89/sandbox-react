@@ -351,7 +351,7 @@ button {
   justify-content: center;
   align-items: center;
   padding: 0.25em 0.5em;
-  border-radius: 0.25em;
+  border-radius: 0.25rem;
   width: clamp(60px, 60px + 2vw, 80px);
   outline: none;
   border: none;
@@ -746,6 +746,9 @@ button {
   gap: clamp(0.5rem, 0.5rem + 1vw, 2rem);
   transition: none !important;
   animation: none !important;
+  max-width: 600px;
+  margin-inline: auto;
+  padding: 2rem;
 }
 
 .noAnimWrapper {
@@ -855,14 +858,14 @@ li[data-sonner-toast] {
   flex: 1;
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   flex-flow: row wrap;
   overflow-y: auto;
   background: var(--bg-main);
   overflow-x: hidden;
-  padding-inline: min(20%, 6rem);
-  padding-block: min(10%, 3rem);
+  /* padding-inline: min(10%, 3rem);
+  padding-block: 2rem; */
   scrollbar-gutter: stable both-edges;
   /* INICIO SCROLLBAR */
   scrollbar-width: thin;
@@ -900,9 +903,9 @@ li[data-sonner-toast] {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-  gap: clamp(1rem, 1rem + 1vw, 2rem);
+  padding: 2rem;
 }
 .main__modal .presets__noSnippet {
   font-size: 1.25rem;
@@ -917,9 +920,10 @@ li[data-sonner-toast] {
 }
 .main__modal .presets__profile__userInfo {
   display: flex;
-  justify-content: start;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
   color: var(--main-white);
   flex: 1;
   max-width: 380px;
@@ -1003,7 +1007,7 @@ li[data-sonner-toast] {
   justify-content: center;
   align-items: start;
   gap: 1rem;
-  min-width: 280px;
+  width: 300px;
 }
 .main__modal .presets__profile__userInfo__data__text__line {
   display: flex;
@@ -1018,7 +1022,6 @@ li[data-sonner-toast] {
 }
 .main__modal .presets__profile__userInfo__data__text__line > span:nth-child(2) {
   flex: 1;
-  max-width: 240px;
 }
 .main__modal .presets__profile__userInfo__data__text__line input {
   background: none;
@@ -1112,15 +1115,15 @@ li[data-sonner-toast] {
 .main__modal .presets__profile__googleBtn svg {
   fill: var(--main-purple);
 }
-.main__modal .presets__profile__googleBtn:hover, .main__modal .presets__profile__googleBtn:focus-visible {
+.main__modal .presets__profile__googleBtn:hover, .main__modal .presets__profile__googleBtn:focus-visible, .main__modal .presets__profile__googleBtn:active {
   box-shadow: 0 0 8px 0 var(--main-red);
   border-color: var(--main-red);
   fill: var(--main-red);
 }
-.main__modal .presets__profile__googleBtn:active {
-  box-shadow: 0 0 4px 0 var(--main-red);
-  border-color: var(--main-red);
+.main__modal .presets__profile__googleBtn:hover svg, .main__modal .presets__profile__googleBtn:focus-visible svg, .main__modal .presets__profile__googleBtn:active svg {
   fill: var(--main-red);
+}
+.main__modal .presets__profile__googleBtn:active {
   scale: 0.9;
 }
 .main__modal .presets__option {
@@ -1304,7 +1307,7 @@ li[data-sonner-toast] {
   justify-content: center;
   align-items: center;
   padding: 0.25em 0.5em;
-  border-radius: 0.25em;
+  border-radius: 0.25rem;
   outline: none;
   border: 1px solid var(--main-purple);
   font-weight: bold;
@@ -1325,14 +1328,12 @@ li[data-sonner-toast] {
   color: var(--main-purple);
   transition: scale 200ms ease;
 }
-.main__modal .presets__save button:hover, .main__modal .presets__save button:focus-visible {
-  box-shadow: 0 0 4px 0 var(--main-purple);
+.main__modal .presets__save button:hover, .main__modal .presets__save button:focus-visible, .main__modal .presets__save button:active {
   filter: grayscale(0);
+  background: var(--main-purple-new);
 }
 .main__modal .presets__save button:active {
-  box-shadow: 0 0 4px 0 var(--main-purple);
   scale: 0.95;
-  filter: grayscale(0);
 }
 .main__modal .presets__save button[disabled] {
   border: 1px solid rgb(60, 60, 60);
@@ -1346,7 +1347,7 @@ li[data-sonner-toast] {
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 .main__modal .presets__save .save-tabs button {
   font-weight: normal;
@@ -1356,22 +1357,21 @@ li[data-sonner-toast] {
 }
 .main__modal .presets__save .save-tabs button:hover, .main__modal .presets__save .save-tabs button:focus-visible, .main__modal .presets__save .save-tabs button:active {
   filter: grayscale(0);
+  background: var(--main-purple-new);
 }
 .main__modal .presets__save .save-tabs button[data-active=true] {
-  box-shadow: 0 0 4px 0 var(--main-purple);
   background-position: 0% 50%;
   border: 1px solid var(--main-purple);
   filter: grayscale(0);
-  background: var(--main-purple);
-  color: rgb(248, 248, 248);
+  background: var(--main-purple-new);
+  font-weight: bold;
 }
 .main__modal .presets__save form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* flex: 1; */
-  gap: 1.5rem;
+  gap: 2rem;
   max-width: 100%;
 }
 .main__modal .presets__save input {
@@ -1402,34 +1402,38 @@ li[data-sonner-toast] {
 }
 .main__modal .presets__tabs {
   display: flex;
-  flex-direction: column;
-  position: absolute;
-  bottom: 16px;
-  left: -4px;
-  padding: 4px;
-  gap: 4px;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 .main__modal .presets__tabs__btn {
   cursor: pointer;
-  font-size: 0.75rem;
+  font-size: 1rem;
   text-align: left;
   white-space: pre-wrap;
-  padding: 4px;
-  border-radius: 0 0.25rem 0.25rem 0;
-  width: 64px;
-  height: 40px;
+  padding: 4px 8px;
+  border-radius: 0.25rem;
   transition: 200ms ease;
   background-color: var(--main-gray-op);
   color: var(--main-white);
+  border: 1px solid var(--main-purple);
+  filter: grayscale(1);
+  flex: 1;
 }
-.main__modal .presets__tabs__btn:hover, .main__modal .presets__tabs__btn:focus-visible {
+.main__modal .presets__tabs__btn:only-child {
+  font-weight: bold;
+}
+.main__modal .presets__tabs__btn:hover, .main__modal .presets__tabs__btn:focus-visible, .main__modal .presets__tabs__btn:active {
   background-color: var(--main-purple-new);
+  filter: grayscale(0);
 }
 .main__modal .presets__tabs__btn:active {
-  background-color: var(--main-purple-new);
+  scale: 0.95;
 }
 .main__modal .presets__tabs__btn--active {
   background-color: var(--main-purple-new);
+  filter: grayscale(0);
+  font-weight: bold;
 }
 .main__modal::backdrop {
   background: transparent;

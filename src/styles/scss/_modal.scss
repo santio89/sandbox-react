@@ -111,14 +111,14 @@
     flex: 1;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     flex-flow: row wrap;
     overflow-y: auto;
     background: var(--bg-main);
     overflow-x: hidden;
-    padding-inline: min(20%, 6rem);
-    padding-block: min(10%, 3rem);
+    /* padding-inline: min(10%, 3rem);
+    padding-block: 2rem; */
     scrollbar-gutter: stable both-edges;
 
     div[role="button"].presets__noSnippet {
@@ -165,9 +165,9 @@
       min-height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: start;
       align-items: center;
-      gap: clamp(1rem, 1rem + 1vw, 2rem);
+      padding: 2rem;
     }
   }
 
@@ -186,9 +186,10 @@
 
       &__userInfo {
         display: flex;
-        justify-content: start;
+        justify-content: center;
+        align-items: center;
         flex-direction: column;
-        gap: 1rem;
+        gap: 2rem;
         color: var(--main-white);
         flex: 1;
         max-width: 380px;
@@ -288,7 +289,7 @@
             justify-content: center;
             align-items: start;
             gap: 1rem;
-            min-width: 280px;
+            width: 300px;
 
             &__line {
               display: flex;
@@ -304,7 +305,6 @@
 
               > span:nth-child(2) {
                 flex: 1;
-                max-width: 240px;
               }
 
               input {
@@ -421,16 +421,18 @@
         }
 
         &:hover,
-        &:focus-visible {
+        &:focus-visible,
+        &:active {
           box-shadow: 0 0 8px 0 var(--main-red);
           border-color: var(--main-red);
           fill: var(--main-red);
+
+          svg {
+            fill: var(--main-red);
+          }
         }
 
         &:active {
-          box-shadow: 0 0 4px 0 var(--main-red);
-          border-color: var(--main-red);
-          fill: var(--main-red);
           scale: 0.9;
         }
       }
@@ -656,7 +658,7 @@
         justify-content: center;
         align-items: center;
         padding: 0.25em 0.5em;
-        border-radius: 0.25em;
+        border-radius: 0.25rem;
         outline: none;
         border: 1px solid var(--main-purple);
         font-weight: bold;
@@ -679,15 +681,14 @@
         }
 
         &:hover,
-        &:focus-visible {
-          box-shadow: 0 0 4px 0 var(--main-purple);
+        &:focus-visible,
+        &:active {
           filter: grayscale(0);
+          background: var(--main-purple-new);
         }
 
         &:active {
-          box-shadow: 0 0 4px 0 var(--main-purple);
           scale: 0.95;
-          filter: grayscale(0);
         }
 
         &[disabled] {
@@ -704,7 +705,7 @@
         justify-content: center;
         align-items: center;
         gap: 1rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
 
         button {
           font-weight: normal;
@@ -716,15 +717,15 @@
           &:focus-visible,
           &:active {
             filter: grayscale(0);
+            background: var(--main-purple-new);
           }
 
           &[data-active="true"] {
-            box-shadow: 0 0 4px 0 var(--main-purple);
             background-position: 0% 50%;
             border: 1px solid var(--main-purple);
             filter: grayscale(0);
-            background: var(--main-purple);
-            color: rgb(248, 248, 248);
+            background: var(--main-purple-new);
+            font-weight: bold;
           }
         }
       }
@@ -734,8 +735,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        /* flex: 1; */
-        gap: 1.5rem;
+        gap: 2rem;
         max-width: 100%;
       }
 
@@ -772,37 +772,43 @@
 
     &__tabs {
       display: flex;
-      flex-direction: column;
-      position: absolute;
-      bottom: 16px;
-      left: -4px;
-      padding: 4px;
-      gap: 4px;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
 
       &__btn {
         cursor: pointer;
-        font-size: 0.75rem;
+        font-size: 1rem;
         text-align: left;
         white-space: pre-wrap;
-        padding: 4px;
-        border-radius: 0 0.25rem 0.25rem 0;
-        width: 64px;
-        height: 40px;
+        padding: 4px 8px;
+        border-radius: 0.25rem;
         transition: 200ms ease;
         background-color: var(--main-gray-op);
         color: var(--main-white);
+        border: 1px solid var(--main-purple);
+        filter: grayscale(1);
+        flex: 1;
+
+        &:only-child{
+          font-weight: bold;
+        }
 
         &:hover,
-        &:focus-visible {
+        &:focus-visible,
+        &:active {
           background-color: var(--main-purple-new);
+          filter: grayscale(0);
         }
 
         &:active {
-          background-color: var(--main-purple-new);
+          scale: 0.95;
         }
 
         &--active {
           background-color: var(--main-purple-new);
+          filter: grayscale(0);
+          font-weight: bold;
         }
       }
     }

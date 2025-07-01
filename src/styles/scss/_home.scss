@@ -82,7 +82,7 @@
     justify-content: center;
     align-items: center;
     padding: 0.25em 0.5em;
-    border-radius: 0.25em;
+    border-radius: 0.25rem;
     width: clamp(60px, 60px + 2vw, 80px);
     outline: none;
     border: none;
@@ -519,6 +519,9 @@
   gap: clamp(0.5rem, 0.5rem + 1vw, 2rem);
   transition: none !important;
   animation: none !important;
+  max-width: 600px;
+  margin-inline: auto;
+  padding: 2rem;
 }
 
 .noAnimWrapper {

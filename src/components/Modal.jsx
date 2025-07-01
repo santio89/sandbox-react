@@ -357,6 +357,9 @@ export default function Modal({ callbacks }) {
                                         </div>
                                     </div>
                                 </div>
+                                <div className="presets__tabs">
+                                    <button className={`presets__tabs__btn `} onClick={() => { signOutCurrentUser() }}>Sign out</button>
+                                </div>
                             </div>
                             :
                             (authLoader ?
@@ -752,7 +755,7 @@ export default function Modal({ callbacks }) {
         })
 
     }, [index])
-    
+
 
     return (
         <dialog className="main__modal" ref={modal}>
@@ -787,24 +790,17 @@ export default function Modal({ callbacks }) {
                     </div>
                     <div className="main__modal__content">
                         <div className="main__modal__content__innerWrapper">
+                            {modalOption === "snippets" &&
+                                <>
+                                    <div className="presets__tabs">
+                                        <button className={`presets__tabs__btn ${snippetTab === "mySnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("mySnippets") }}>My{`\n`}snippets</button>
+                                        <button className={`presets__tabs__btn ${snippetTab === "featuredSnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("featuredSnippets") }}>Featured{`\n`}snippets</button>
+                                    </div>
+                                </>
+                            }
                             {modalContent()}
                         </div>
                     </div>
-                    {modalOption === "snippets" &&
-                        <>
-                            <div className="presets__tabs">
-                                <button className={`presets__tabs__btn ${snippetTab === "mySnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("mySnippets") }}>My{`\n`}snippets</button>
-                                <button className={`presets__tabs__btn ${snippetTab === "featuredSnippets" && "presets__tabs__btn--active"}`} onClick={() => { setSnippetTab("featuredSnippets") }}>Featured{`\n`}snippets</button>
-                            </div>
-                        </>
-                    }
-                    {modalOption === "profile" && user.userId &&
-                        <>
-                            <div className="presets__tabs">
-                                <button className={`presets__tabs__btn `} onClick={() => { signOutCurrentUser() }}>Sign out</button>
-                            </div>
-                        </>
-                    }
                 </div>
             </Draggable>
         </dialog>
