@@ -786,7 +786,7 @@ li[data-sonner-toast] {
   width: clamp(300px, 300px + 30vw, 720px);
   min-height: 420px;
   max-width: 100%;
-  border-radius: 1em;
+  border-radius: 1rem;
   border: 1px solid var(--main-purple);
   background: var(--main-purple);
   overflow: hidden;
@@ -1415,7 +1415,7 @@ li[data-sonner-toast] {
   text-align: left;
   white-space: pre-wrap;
   padding: 4px;
-  border-radius: 0 0.25em 0.25em 0;
+  border-radius: 0 0.25rem 0.25rem 0;
   width: 64px;
   height: 40px;
   transition: 200ms ease;
