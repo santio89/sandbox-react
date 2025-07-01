@@ -776,6 +776,10 @@
       align-items: center;
       gap: 1rem;
 
+      &:has(+ .animWrapper) {
+        margin-bottom: 2rem;
+      }
+
       &__btn {
         cursor: pointer;
         font-size: 1rem;

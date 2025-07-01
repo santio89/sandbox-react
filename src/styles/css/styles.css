@@ -748,7 +748,6 @@ button {
   animation: none !important;
   max-width: 600px;
   margin-inline: auto;
-  padding-block: 2rem;
 }
 
 .noAnimWrapper {
@@ -1405,6 +1404,9 @@ li[data-sonner-toast] {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+}
+.main__modal .presets__tabs:has(+ .animWrapper) {
+  margin-bottom: 2rem;
 }
 .main__modal .presets__tabs__btn {
   cursor: pointer;
