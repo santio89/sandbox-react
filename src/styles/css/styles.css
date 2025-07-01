@@ -1311,6 +1311,7 @@ li[data-sonner-toast] {
   outline: none;
   border: 1px solid var(--main-purple);
   font-weight: bold;
+  text-transform: uppercase;
   background: var(--main-black);
   color: var(--main-white);
   font-size: clamp(1.125rem, 1.125rem + 2vw, 1.25rem);
@@ -1384,7 +1385,6 @@ li[data-sonner-toast] {
   text-align: center;
   text-wrap: balance;
   max-width: 90%;
-  font-weight: bold;
   line-height: 1.4;
   color: var(--main-white);
   border-radius: 0.25em 0.25em 0 0;
@@ -1419,6 +1419,7 @@ li[data-sonner-toast] {
   border: 1px solid var(--main-purple);
   filter: grayscale(1);
   flex: 1;
+  text-transform: uppercase;
 }
 .main__modal .presets__tabs__btn:only-child {
   font-weight: bold;
