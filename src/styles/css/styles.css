@@ -981,6 +981,9 @@ li[data-sonner-toast] {
 .main__modal .presets__profile__userInfo__data__img__uploadImgLabel:active {
   color: var(--main-purple);
 }
+.main__modal .presets__profile__userInfo__data__img__uploadImgLabel:active + label {
+  scale: 0.95;
+}
 .main__modal .presets__profile__userInfo__data__img__upload {
   position: absolute;
   bottom: -12px;
@@ -999,6 +1002,7 @@ li[data-sonner-toast] {
 }
 .main__modal .presets__profile__userInfo__data__img__upload:active {
   color: var(--main-purple);
+  scale: 0.95;
 }
 .main__modal .presets__profile__userInfo__data__text {
   display: flex;
