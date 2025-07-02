@@ -829,6 +829,10 @@
           linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
         border: 1px solid var(--main-gray-op);
 
+        &:only-child{
+          font-weight: bold;
+        }
+
         &:hover,
         &:focus-visible,
         &:active {
