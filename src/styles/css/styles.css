@@ -1307,7 +1307,6 @@ li[data-sonner-toast] {
   padding: 0.25em 0.5em;
   border-radius: 0.25rem;
   outline: none;
-  font-weight: bold;
   text-transform: uppercase;
   color: var(--main-white);
   font-size: 1rem;
@@ -1317,6 +1316,9 @@ li[data-sonner-toast] {
   background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
   filter: grayscale(1);
   border: 1px solid var(--main-gray-op);
+}
+.main__modal .presets__save button[data-saved] {
+  font-weight: bold;
 }
 .main__modal .presets__save button::after {
   content: attr(data-saved);
@@ -1372,6 +1374,7 @@ li[data-sonner-toast] {
 .main__modal .presets__save .save-tabs button[data-active=true] {
   filter: grayscale(0);
   border-color: transparent;
+  font-weight: bold;
 }
 .main__modal .presets__save form {
   display: flex;
@@ -1441,6 +1444,7 @@ li[data-sonner-toast] {
 .main__modal .presets__tabs__btn--active {
   filter: grayscale(0);
   border-color: transparent;
+  font-weight: bold;
 }
 .main__modal::backdrop {
   background: transparent;
