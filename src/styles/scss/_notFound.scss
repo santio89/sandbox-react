@@ -45,12 +45,12 @@
       line-height: 1;
       border: 1px solid transparent;
       outline: none;
+      filter: grayscale(1);
 
       &:hover,
       &:focus-visible,
       &:active {
-        box-shadow: 1px -1px 4px var(--main-red),
-          -1px 1px 4px var(--main-purple);
+        filter: grayscale(0);
       }
 
       &:active {

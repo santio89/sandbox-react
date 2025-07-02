@@ -7,7 +7,7 @@ import { setCodeAll } from "../store/actions/code.action";
 import { setModal, setCreateNew } from "../store/actions/modal.action";
 import { useNavigate } from "react-router-dom";
 
-export default function Nav() {
+export default function Nav({ rootRef }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const darkTheme = useSelector(state => state.theme.darkTheme);
@@ -31,6 +31,11 @@ export default function Nav() {
   const openModal = () => {
     dispatch(setModal(true))
   }
+
+  /* toggle dark theme directly to avoid re-render */
+  useEffect(() => {
+    rootRef.current.classList.toggle("light-theme", !darkTheme);
+  }, [darkTheme])
 
   useEffect(() => {
     /* toggle modal on esc */
