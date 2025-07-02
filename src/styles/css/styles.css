@@ -290,13 +290,12 @@ button {
   justify-content: center;
   align-items: start;
   gap: 0.5rem;
-  background: rgb(var(--main-white));
   padding: 2rem;
   border-radius: 0.5em;
   white-space: pre-wrap;
   margin: auto;
-  background: var(--main-black);
-  border: 2px solid var(--main-red);
+  border: 2px solid transparent;
+  background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
 }
 .home__sharedNotFound h2, .home__sharedLoading h2 {
   line-height: 1;
@@ -308,24 +307,27 @@ button {
 }
 .home__sharedNotFound a, .home__sharedLoading a {
   padding: 0.5rem;
-  background: linear-gradient(45deg, var(--main-purple), var(--main-red));
+  background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
+  color: var(--main-white);
   border-radius: 0.25em;
-  color: rgb(248, 248, 248);
   margin-top: 0.5rem;
   transition: scale 200ms ease;
   font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   gap: 0.5rem;
   line-height: 1;
+  border: 1px solid transparent;
+  outline: none;
+  filter: grayscale(1);
 }
-.home__sharedNotFound a:hover, .home__sharedNotFound a:focus-visible, .home__sharedLoading a:hover, .home__sharedLoading a:focus-visible {
-  outline: 2px solid var(--main-purple);
+.home__sharedNotFound a:hover, .home__sharedNotFound a:focus-visible, .home__sharedNotFound a:active, .home__sharedLoading a:hover, .home__sharedLoading a:focus-visible, .home__sharedLoading a:active {
+  filter: grayscale(0);
 }
 .home__sharedNotFound a:active, .home__sharedLoading a:active {
-  outline: 2px solid var(--main-purple);
-  scale: 0.9;
+  scale: 0.95;
 }
 .home__sharedLoading {
   border-color: var(--main-purple);
@@ -1335,11 +1337,9 @@ li[data-sonner-toast] {
   scale: 0.95;
 }
 .main__modal .presets__save button[disabled] {
-  border: 1px solid rgb(60, 60, 60);
-  background: rgb(80, 80, 80);
+  background: var(--main-gray-op);
   pointer-events: none;
   filter: grayscale(1);
-  color: rgb(228, 228, 228);
 }
 .main__modal .presets__save .save-tabs {
   display: flex;
@@ -1351,8 +1351,9 @@ li[data-sonner-toast] {
 .main__modal .presets__save .save-tabs button {
   font-weight: normal;
   width: unset;
-  filter: grayscale(1);
   font-size: 1rem;
+  background: var(--main-gray-op);
+  filter: grayscale(1);
 }
 .main__modal .presets__save .save-tabs button:hover, .main__modal .presets__save .save-tabs button:focus-visible, .main__modal .presets__save .save-tabs button:active {
   filter: grayscale(0);
@@ -1513,7 +1514,8 @@ li[data-sonner-toast] {
   justify-content: center;
   align-items: start;
   gap: 0.5rem;
-  background: rgb(var(--main-white));
+  border: 2px solid transparent;
+  background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
   padding: 2rem;
   width: clamp(300px, 300px + 10vw, 800px);
   border-radius: 0.5em;
@@ -1539,6 +1541,7 @@ li[data-sonner-toast] {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   gap: 0.5rem;
   line-height: 1;
   border: 1px solid transparent;

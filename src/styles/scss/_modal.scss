@@ -699,11 +699,9 @@
         }
 
         &[disabled] {
-          border: 1px solid rgb(60, 60, 60);
-          background: rgb(80, 80, 80);
+          background: var(--main-gray-op);
           pointer-events: none;
           filter: grayscale(1);
-          color: rgb(228, 228, 228);
         }
       }
 
@@ -717,8 +715,9 @@
         button {
           font-weight: normal;
           width: unset;
-          filter: grayscale(1);
           font-size: 1rem;
+          background: var(--main-gray-op);
+          filter: grayscale(1);
 
           &:hover,
           &:focus-visible,
