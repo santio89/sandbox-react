@@ -677,8 +677,8 @@
           linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
         filter: grayscale(1);
         border: 1px solid var(--main-gray-op);
-        
-        &[data-saved]{
+
+        &[data-saved] {
           font-weight: bold;
         }
 
@@ -781,13 +781,7 @@
         background: linear-gradient(var(--bg-main), var(--bg-main)) padding-box,
           linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
 
-        &:not(:placeholder-shown) {
-          background: linear-gradient(var(--main-black), var(--main-black))
-              padding-box,
-            linear-gradient(45deg, var(--main-purple), var(--main-red))
-              border-box;
-        }
-
+        &:not(:placeholder-shown),
         &:focus {
           background: linear-gradient(var(--main-black), var(--main-black))
               padding-box,
@@ -796,7 +790,6 @@
         }
 
         &::placeholder {
-          font-weight: normal;
           color: var(--main-white-op);
         }
       }
@@ -829,7 +822,7 @@
           linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
         border: 1px solid var(--main-gray-op);
 
-        &:only-child{
+        &:only-child {
           font-weight: bold;
         }
 

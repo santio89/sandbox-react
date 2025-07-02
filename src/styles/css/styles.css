@@ -1400,14 +1400,10 @@ li[data-sonner-toast] {
   border: 2px solid transparent;
   background: linear-gradient(var(--bg-main), var(--bg-main)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
 }
-.main__modal .presets__save input:not(:placeholder-shown) {
-  background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
-}
-.main__modal .presets__save input:focus {
+.main__modal .presets__save input:not(:placeholder-shown), .main__modal .presets__save input:focus {
   background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
 }
 .main__modal .presets__save input::placeholder {
-  font-weight: normal;
   color: var(--main-white-op);
 }
 .main__modal .presets__tabs {
