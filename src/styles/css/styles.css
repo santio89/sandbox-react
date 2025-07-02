@@ -791,7 +791,7 @@ li[data-sonner-toast] {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0.25rem;
   font-size: 1rem;
   z-index: 1;
   background: var(--main-black);
