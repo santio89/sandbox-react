@@ -1528,17 +1528,17 @@ li[data-sonner-toast] {
 .notFound__inner h1 {
   font-size: 2rem;
   line-height: 1;
-  color: rgb(248, 248, 248);
+  color: var(--main-white);
   font-size: 3rem;
 }
 .notFound__inner p {
-  color: rgb(248, 248, 248);
+  color: var(--main-white);
 }
 .notFound__inner a {
   padding: 0.5rem;
-  background: linear-gradient(45deg, var(--main-purple), var(--main-red));
+  background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
+  color: var(--main-white);
   border-radius: 0.25em;
-  color: rgb(248, 248, 248);
   margin-top: 0.5rem;
   transition: scale 200ms ease;
   font-weight: bold;
@@ -1547,13 +1547,14 @@ li[data-sonner-toast] {
   align-items: center;
   gap: 0.5rem;
   line-height: 1;
+  border: 1px solid transparent;
+  outline: none;
 }
-.notFound__inner a:hover {
-  outline: 2px solid var(--main-purple);
+.notFound__inner a:hover, .notFound__inner a:focus-visible, .notFound__inner a:active {
+  box-shadow: 1px -1px 4px var(--main-red), -1px 1px 4px var(--main-purple);
 }
 .notFound__inner a:active {
-  outline: 2px solid var(--main-purple);
-  scale: 0.9;
+  scale: 0.95;
 }
 
 /*# sourceMappingURL=styles.css.map */
