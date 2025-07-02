@@ -357,20 +357,22 @@ button {
   font-weight: bold;
   font-size: clamp(1.125rem, 1.125rem + 2vw, 1.25rem);
   cursor: pointer;
-  transition: 200ms ease;
   color: var(--main-white);
-  border: 1px solid transparent;
+  transition: 200ms ease;
   background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
   filter: grayscale(1);
+  border: 1px solid var(--main-gray-op);
 }
 .tabs button:hover, .tabs button:focus-visible, .tabs button:active {
   filter: grayscale(0);
+  border-color: transparent;
 }
 .tabs button:active {
   scale: 0.95;
 }
 .tabs button[data-active=true] {
   filter: grayscale(0);
+  border-color: transparent;
 }
 
 .mainCode {
