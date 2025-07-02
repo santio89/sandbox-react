@@ -87,10 +87,9 @@
     padding: 0.25em 0.5em;
     border-radius: 0.25rem;
     width: clamp(60px, 60px + 2vw, 80px);
-    outline: none;
-    border: none;
     font-weight: bold;
     font-size: clamp(1.125rem, 1.125rem + 2vw, 1.25rem);
+    text-transform: uppercase;
     cursor: pointer;
     color: var(--main-white);
     transition: 200ms ease;

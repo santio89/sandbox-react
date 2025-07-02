@@ -352,10 +352,9 @@ button {
   padding: 0.25em 0.5em;
   border-radius: 0.25rem;
   width: clamp(60px, 60px + 2vw, 80px);
-  outline: none;
-  border: none;
   font-weight: bold;
   font-size: clamp(1.125rem, 1.125rem + 2vw, 1.25rem);
+  text-transform: uppercase;
   cursor: pointer;
   color: var(--main-white);
   transition: 200ms ease;
@@ -1308,29 +1307,31 @@ li[data-sonner-toast] {
   padding: 0.25em 0.5em;
   border-radius: 0.25rem;
   outline: none;
-  border: 1px solid var(--main-purple);
   font-weight: bold;
   text-transform: uppercase;
-  background: var(--main-black);
   color: var(--main-white);
-  font-size: clamp(1.125rem, 1.125rem + 2vw, 1.25rem);
+  font-size: 1rem;
   cursor: pointer;
   transition: 200ms ease;
   position: relative;
+  background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
+  filter: grayscale(1);
+  border: 1px solid var(--main-gray-op);
 }
 .main__modal .presets__save button::after {
   content: attr(data-saved);
   font-weight: normal;
+  font-size: 0.75em;
   position: absolute;
-  top: 50%;
-  right: -150%;
-  translate: 0 -50%;
-  color: var(--main-purple);
+  bottom: -100%;
+  left: 50%;
+  translate: -50% 0;
+  color: var(--main-white);
   transition: scale 200ms ease;
 }
 .main__modal .presets__save button:hover, .main__modal .presets__save button:focus-visible, .main__modal .presets__save button:active {
   filter: grayscale(0);
-  background: var(--main-purple-new);
+  border-color: transparent;
 }
 .main__modal .presets__save button:active {
   scale: 0.95;
@@ -1348,22 +1349,29 @@ li[data-sonner-toast] {
   margin-bottom: 2rem;
 }
 .main__modal .presets__save .save-tabs button {
-  font-weight: normal;
-  width: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.25em 0.5em;
+  border-radius: 0.25rem;
   font-size: 1rem;
-  background: var(--main-gray-op);
+  cursor: pointer;
+  color: var(--main-white);
+  transition: 200ms ease;
+  background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
   filter: grayscale(1);
+  border: 1px solid var(--main-gray-op);
 }
 .main__modal .presets__save .save-tabs button:hover, .main__modal .presets__save .save-tabs button:focus-visible, .main__modal .presets__save .save-tabs button:active {
   filter: grayscale(0);
-  background: var(--main-purple-new);
+  border-color: transparent;
+}
+.main__modal .presets__save .save-tabs button:active {
+  scale: 0.95;
 }
 .main__modal .presets__save .save-tabs button[data-active=true] {
-  background-position: 0% 50%;
-  border: 1px solid var(--main-purple);
   filter: grayscale(0);
-  background: var(--main-purple-new);
-  font-weight: bold;
+  border-color: transparent;
 }
 .main__modal .presets__save form {
   display: flex;
@@ -1379,7 +1387,6 @@ li[data-sonner-toast] {
   font-size: clamp(1rem, 1rem + 4vw, 1.75rem);
   outline: none;
   border: none;
-  border-bottom: 2px solid var(--main-purple);
   text-align: center;
   text-wrap: balance;
   max-width: 90%;
@@ -1387,12 +1394,14 @@ li[data-sonner-toast] {
   color: var(--main-white);
   border-radius: 0.25em 0.25em 0 0;
   transition: background-color 200ms ease;
+  border-bottom: 2px solid transparent;
+  background: linear-gradient(var(--bg-main), var(--bg-main)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
 }
 .main__modal .presets__save input:not(:placeholder-shown) {
-  background-color: var(--main-gray-op);
+  background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
 }
 .main__modal .presets__save input:focus {
-  background-color: var(--main-gray-op);
+  background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
 }
 .main__modal .presets__save input::placeholder {
   font-weight: normal;
@@ -1408,32 +1417,30 @@ li[data-sonner-toast] {
   margin-bottom: 2rem;
 }
 .main__modal .presets__tabs__btn {
-  cursor: pointer;
-  font-size: 1rem;
-  text-align: start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 0.25em 0.5em;
   border-radius: 0.25rem;
-  transition: 200ms ease;
-  background-color: var(--main-gray-op);
-  color: var(--main-white);
-  border: 1px solid var(--main-purple);
-  filter: grayscale(1);
+  font-size: 1rem;
   text-transform: uppercase;
-}
-.main__modal .presets__tabs__btn:only-child {
-  font-weight: bold;
+  cursor: pointer;
+  color: var(--main-white);
+  transition: 200ms ease;
+  filter: grayscale(1);
+  background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
+  border: 1px solid var(--main-gray-op);
 }
 .main__modal .presets__tabs__btn:hover, .main__modal .presets__tabs__btn:focus-visible, .main__modal .presets__tabs__btn:active {
-  background-color: var(--main-purple-new);
   filter: grayscale(0);
+  border-color: transparent;
 }
 .main__modal .presets__tabs__btn:active {
   scale: 0.95;
 }
 .main__modal .presets__tabs__btn--active {
-  background-color: var(--main-purple-new);
   filter: grayscale(0);
-  font-weight: bold;
+  border-color: transparent;
 }
 .main__modal::backdrop {
   background: transparent;
