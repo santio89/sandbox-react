@@ -1395,9 +1395,9 @@ li[data-sonner-toast] {
   max-width: 90%;
   line-height: 1.4;
   color: var(--main-white);
-  border-radius: 0.25em 0.25em 0 0;
+  border-radius: 0.25rem;
   transition: background-color 200ms ease;
-  border-bottom: 2px solid transparent;
+  border: 2px solid transparent;
   background: linear-gradient(var(--bg-main), var(--bg-main)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
 }
 .main__modal .presets__save input:not(:placeholder-shown) {
