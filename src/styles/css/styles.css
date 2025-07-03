@@ -1058,7 +1058,7 @@ li[data-sonner-toast] {
   scale: 0.8;
 }
 .main__modal .presets__profile__userInfo__data__text__line__btnContainer button:not(.editName):hover, .main__modal .presets__profile__userInfo__data__text__line__btnContainer button:not(.editName):focus-visible {
-  background: var(--main-purple);
+  background: var(--main-purple-new);
 }
 .main__modal .presets__profile__userInfo__data__text__line__btnContainer button:active {
   scale: 0.9;
