@@ -22,7 +22,7 @@
   --main-white-op: rgb(30, 30, 30, 0.5);
   --main-black: rgb(255, 255, 254);
   --main-black-op: rgb(255, 255, 254, 0.5);
-  --main-gray: rgb(220, 220, 220);
+  --main-gray: rgb(180, 180, 180);
   --main-gray-op: rgb(240, 240, 240, 0.5);
   --bg-main: rgb(215, 215, 215);
 }
@@ -783,8 +783,7 @@ li[data-sonner-toast] {
   min-height: 420px;
   max-width: 100%;
   border-radius: 1rem;
-  border: 1px solid var(--main-purple);
-  background: var(--main-purple);
+  border: 1px solid var(--main-gray);
   overflow: hidden;
 }
 .main__modal__header {
@@ -796,9 +795,15 @@ li[data-sonner-toast] {
   font-size: 1rem;
   z-index: 1;
   background: var(--main-black);
-  border-bottom: 1px solid transparent;
-  border-image: linear-gradient(90deg, var(--main-purple), var(--main-red), var(--main-purple));
-  border-image-slice: 1;
+  /* border-bottom: 1px solid transparent;
+  border-image: linear-gradient(
+    90deg,
+    var(--main-purple),
+    var(--main-red),
+    var(--main-purple)
+  );
+  border-image-slice: 1; */
+  border-bottom: 1px solid var(--main-gray);
 }
 .main__modal__header > span {
   padding-inline: 6px;
@@ -1397,11 +1402,11 @@ li[data-sonner-toast] {
   color: var(--main-white);
   border-radius: 0.25rem;
   transition: background-color 200ms ease;
-  border: 2px solid transparent;
-  background: linear-gradient(var(--bg-main), var(--bg-main)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
+  border: 1px solid transparent;
+  background: linear-gradient(var(--bg-main), var(--bg-main)) padding-box, linear-gradient(45deg, var(--main-gray), var(--main-gray)) border-box;
 }
 .main__modal .presets__save input:not(:placeholder-shown), .main__modal .presets__save input:focus {
-  background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
+  background: linear-gradient(var(--bg-main), var(--bg-main)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
 }
 .main__modal .presets__save input::placeholder {
   color: var(--main-white-op);

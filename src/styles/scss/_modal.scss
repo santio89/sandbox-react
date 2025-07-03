@@ -25,8 +25,7 @@
     min-height: 420px;
     max-width: 100%;
     border-radius: 1rem;
-    border: 1px solid var(--main-purple);
-    background: var(--main-purple);
+    border: 1px solid var(--main-gray);
     overflow: hidden;
   }
 
@@ -38,16 +37,16 @@
     padding: 0.25rem;
     font-size: 1rem;
     z-index: 1;
-
     background: var(--main-black);
-    border-bottom: 1px solid transparent;
+    /* border-bottom: 1px solid transparent;
     border-image: linear-gradient(
       90deg,
       var(--main-purple),
       var(--main-red),
       var(--main-purple)
     );
-    border-image-slice: 1;
+    border-image-slice: 1; */
+    border-bottom: 1px solid var(--main-gray);
 
     > span {
       padding-inline: 6px;
@@ -777,13 +776,13 @@
         color: var(--main-white);
         border-radius: 0.25rem;
         transition: background-color 200ms ease;
-        border: 2px solid transparent;
+        border: 1px solid transparent;
         background: linear-gradient(var(--bg-main), var(--bg-main)) padding-box,
-          linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
+          linear-gradient(45deg, var(--main-gray), var(--main-gray)) border-box;
 
         &:not(:placeholder-shown),
         &:focus {
-          background: linear-gradient(var(--main-black), var(--main-black))
+          background: linear-gradient(var(--bg-main), var(--bg-main))
               padding-box,
             linear-gradient(45deg, var(--main-purple), var(--main-red))
               border-box;
