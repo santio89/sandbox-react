@@ -23,7 +23,7 @@
   --main-black: rgb(255, 255, 254);
   --main-black-op: rgb(255, 255, 254, 0.5);
   --main-gray: rgb(180, 180, 180);
-  --main-gray-op: rgb(240, 240, 240, 0.5);
+  --main-gray-op: rgb(220, 220, 220, 0.5);
   --bg-main: rgb(215, 215, 215);
 }
 
@@ -105,13 +105,32 @@ body {
   }
 }
 
+/* text */
+p {
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
 a,
 button,
 textarea,
-input {
+input,
+select,
+option {
   font: inherit;
   color: inherit;
   text-decoration: none;
+  text-wrap: balance;
 }
 
 button {
@@ -166,7 +185,7 @@ button {
   align-items: center;
   height: 40px;
   z-index: 2;
-  border-radius: 1em;
+  border-radius: 1rem;
   position: sticky;
   top: 0;
   background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(90deg, var(--main-purple), var(--main-red), var(--main-purple)) border-box;
@@ -220,7 +239,6 @@ button {
 }
 .main__header__buttons > div button.create-new {
   color: var(--main-white);
-  border-radius: 0;
   background: var(--main-purple-new);
   border-radius: 50%;
 }
@@ -247,9 +265,7 @@ button {
 }
 .main__header .new-project-confirm-btns button {
   cursor: pointer;
-  border-radius: 0;
   padding: 0;
-  border-radius: 0;
   width: 28px;
   display: flex;
   justify-content: center;
@@ -291,7 +307,7 @@ button {
   align-items: start;
   gap: 0.5rem;
   padding: 2rem;
-  border-radius: 0.5em;
+  border-radius: 0.5rem;
   white-space: pre-wrap;
   margin: auto;
   border: 2px solid transparent;
@@ -309,7 +325,7 @@ button {
   padding: 0.5rem;
   background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
   color: var(--main-white);
-  border-radius: 0.25em;
+  border-radius: 0.25rem;
   margin-top: 0.5rem;
   transition: scale 200ms ease;
   font-weight: bold;
@@ -349,7 +365,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.25em 0.5em;
+  padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
   width: clamp(60px, 60px + 2vw, 80px);
   font-weight: bold;
@@ -359,8 +375,7 @@ button {
   color: var(--main-white);
   transition: 200ms ease;
   background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
-  filter: grayscale(1);
-  border: 1px solid var(--main-gray-op);
+  border: 1px solid var(--main-gray);
 }
 .tabs button:hover, .tabs button:focus-visible, .tabs button:active {
   filter: grayscale(0);
@@ -370,7 +385,6 @@ button {
   scale: 0.95;
 }
 .tabs button[data-active=true] {
-  filter: grayscale(0);
   border-color: transparent;
 }
 
@@ -520,7 +534,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.95em;
+  font-size: 0.9em;
   border-radius: 2px;
   background: var(--main-gray-op);
   padding: 0;
@@ -685,7 +699,7 @@ button {
   background-repeat: no-repeat; */
 }
 .mainCode__output__iframe {
-  border-radius: 0.25em;
+  border-radius: 0.25rem;
   width: 100%;
   height: 100%;
   min-height: 100%;
@@ -751,7 +765,7 @@ button {
 /* sonner-toast-wrapper */
 li[data-sonner-toast] {
   background: var(--main-black) !important;
-  border-color: var(--main-purple) !important;
+  border-color: var(--main-gray) !important;
   color: var(--main-white) !important;
   word-break: break-all !important;
   white-space: pre-wrap !important;
@@ -787,11 +801,10 @@ li[data-sonner-toast] {
   overflow: hidden;
 }
 .main__modal__header {
-  background: var(--main-purple);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.25rem;
+  padding: 4px;
   font-size: 1rem;
   z-index: 1;
   background: var(--main-black);
@@ -1106,9 +1119,9 @@ li[data-sonner-toast] {
   align-items: center;
   gap: 1rem;
   color: rgb(248, 248, 248);
-  padding: 1em;
+  padding: 1rem;
   background: transparent;
-  border-radius: 0.5em;
+  border-radius: 0.5rem;
   cursor: pointer;
   box-shadow: 0 0 8px 0 var(--main-purple);
   border: 2px solid var(--main-purple);
@@ -1131,9 +1144,7 @@ li[data-sonner-toast] {
 .main__modal .presets__option {
   aspect-ratio: 7/5;
   width: clamp(100px, 100px + 8vw, 140px);
-  background-color: var(--main-gray-op);
-  border-top: 2px solid var(--main-purple);
-  border-radius: 0.5em;
+  border-radius: 0.5rem;
   color: var(--main-white);
   font-size: 1rem;
   display: flex;
@@ -1142,15 +1153,15 @@ li[data-sonner-toast] {
   overflow: hidden;
   position: relative;
   touch-action: none;
+  background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
+  border: 1px solid var(--main-gray);
 }
 .main__modal .presets__option.dragged * {
   pointer-events: none;
 }
 .main__modal .presets__option:hover, .main__modal .presets__option:focus-visible, .main__modal .presets__option:focus-within, .main__modal .presets__option:active {
-  box-shadow: 0 -2px 0 0 var(--main-purple), 0px 2px 0 0 var(--main-red);
-}
-.main__modal .presets__option:hover button, .main__modal .presets__option:focus-visible button, .main__modal .presets__option:focus-within button, .main__modal .presets__option:active button {
-  opacity: 1;
+  border-color: transparent;
+  background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
 }
 .main__modal .presets__option__confirm {
   flex: 1;
@@ -1160,10 +1171,18 @@ li[data-sonner-toast] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
   text-align: center;
   text-wrap: balance;
-  padding: 4px;
+  gap: 4px;
+  padding: 2px;
+}
+.main__modal .presets__option__confirm form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
 }
 .main__modal .presets__option__confirm input {
   background: none;
@@ -1176,7 +1195,7 @@ li[data-sonner-toast] {
   font-weight: bold;
   transition: background-color 200ms ease;
   color: var(--main-white);
-  margin-bottom: 0.5rem;
+  width: 100%;
 }
 .main__modal .presets__option__confirm input:not(:placeholder-shown) {
   background-color: var(--main-gray-op);
@@ -1202,7 +1221,7 @@ li[data-sonner-toast] {
   min-width: 48px;
   max-width: 48px;
   font-weight: normal;
-  font-size: 0.95em;
+  font-size: 0.9em;
   line-height: 1;
   border-radius: 2px;
   cursor: pointer;
@@ -1243,7 +1262,7 @@ li[data-sonner-toast] {
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  padding: 4px;
+  padding: 2px;
   cursor: pointer;
 }
 .main__modal .presets__option__main__name > span {
@@ -1256,11 +1275,8 @@ li[data-sonner-toast] {
   pointer-events: none;
 }
 .main__modal .presets__option__main__name:hover, .main__modal .presets__option__main__name:focus-visible {
-  background-color: var(--main-purple-new);
-}
-.main__modal .presets__option__main__name:focus-visible {
+  color: var(--main-purple);
   outline: none;
-  box-shadow: 0 0 8px 0 var(--main-red) inset;
 }
 .main__modal .presets__option__main__buttons {
   background-color: var(--main-gray-op);
@@ -1269,8 +1285,7 @@ li[data-sonner-toast] {
   align-items: center;
   gap: 2px;
   width: 100%;
-  padding: 1px 4px;
-  background: var(--main-black);
+  padding: 2px;
 }
 .main__modal .presets__option__main__buttons button {
   display: flex;
@@ -1309,7 +1324,7 @@ li[data-sonner-toast] {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.25em 0.5em;
+  padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
   outline: none;
   text-transform: uppercase;
@@ -1359,18 +1374,16 @@ li[data-sonner-toast] {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.25em 0.5em;
+  padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
   font-size: 1rem;
   cursor: pointer;
   color: var(--main-white);
   transition: 200ms ease;
   background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
-  filter: grayscale(1);
-  border: 1px solid var(--main-gray-op);
+  border: 1px solid var(--main-gray);
 }
 .main__modal .presets__save .save-tabs button:hover, .main__modal .presets__save .save-tabs button:focus-visible, .main__modal .presets__save .save-tabs button:active {
-  filter: grayscale(0);
   border-color: transparent;
 }
 .main__modal .presets__save .save-tabs button:active {
@@ -1424,16 +1437,15 @@ li[data-sonner-toast] {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.25em 0.5em;
+  padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
   font-size: 1rem;
   text-transform: uppercase;
   cursor: pointer;
   color: var(--main-white);
   transition: 200ms ease;
-  filter: grayscale(1);
   background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
-  border: 1px solid var(--main-gray-op);
+  border: 1px solid var(--main-gray);
 }
 .main__modal .presets__tabs__btn:only-child {
   font-weight: bold;
@@ -1446,7 +1458,6 @@ li[data-sonner-toast] {
   scale: 0.95;
 }
 .main__modal .presets__tabs__btn--active {
-  filter: grayscale(0);
   border-color: transparent;
   font-weight: bold;
 }
@@ -1532,7 +1543,7 @@ li[data-sonner-toast] {
   background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
   padding: 2rem;
   width: clamp(300px, 300px + 10vw, 800px);
-  border-radius: 0.5em;
+  border-radius: 0.5rem;
   white-space: pre-wrap;
 }
 .notFound__inner h1 {
@@ -1548,7 +1559,7 @@ li[data-sonner-toast] {
   padding: 0.5rem;
   background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
   color: var(--main-white);
-  border-radius: 0.25em;
+  border-radius: 0.25rem;
   margin-top: 0.5rem;
   transition: scale 200ms ease;
   font-weight: bold;
