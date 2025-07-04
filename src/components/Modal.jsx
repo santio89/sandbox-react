@@ -322,7 +322,7 @@ export default function Modal({ callbacks }) {
                                                     e.preventDefault();
                                                     newDisplayName.trim() !== user.displayName && newDisplayName.trim() !== "" && sendUpdateDisplayName(newDisplayName.trim())
                                                 }}>
-                                                    <input spellCheck="false" maxLength={50} value={newDisplayName} type="text" onChange={(e) => setNewDisplayName(e.target.value)} />
+                                                    <input spellCheck="false" maxLength={56} value={newDisplayName} type="text" onChange={(e) => setNewDisplayName(e.target.value)} />
                                                 </form>
                                                 :
                                                 <span>{user.displayName}</span>
@@ -450,7 +450,7 @@ export default function Modal({ callbacks }) {
                                                                             <span className="presets__option__confirm" onClick={e => e.stopPropagation()}>
                                                                                 <span>Rename?</span>
                                                                                 <form onSubmit={(e) => { e.preventDefault(); editSelectedPreset(preset.name, preset.id, editName) }}>
-                                                                                    <input spellCheck={false} type="text" value={editName} onChange={e => { setEditName(e.target.value) }} maxLength={30} placeholder="NEW NAME" />
+                                                                                    <input spellCheck={false} type="text" value={editName} onChange={e => { setEditName(e.target.value) }} maxLength={28} placeholder="NEW NAME" />
                                                                                     <span className="presets__option__confirm__buttons">
                                                                                         <button onClick={(e) => { e.stopPropagation(); editSelectedPreset(preset.name, preset.id, editName) }}>Yes</button>
                                                                                         <button onClick={(e) => { e.stopPropagation(); setEditId(null) }}>No</button>
@@ -598,7 +598,7 @@ export default function Modal({ callbacks }) {
                                             <button disabled={!currentSnippet?.id || currentSnippet?.userId != user.userId || defaultPresets.some((defaultPreset) => defaultPreset.id === currentSnippet?.id)} data-saved={saved ? 'saving...' : ''}>Save current</button>
                                         </form> :
                                         <form onSubmit={(e) => { e.preventDefault(); saveNewPreset(savePresetName, html, css, js) }}>
-                                            <input spellCheck="false" type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} maxLength={30} />
+                                            <input spellCheck="false" type="text" placeholder="SNIPPET NAME" value={savePresetName} onChange={e => { setSavePresetName(e.target.value) }} maxLength={28} />
                                             <button disabled={savePresetName.trim() === ""} data-saved={saved ? 'saving...' : ''}>Save new</button>
                                         </form>
                                 }
