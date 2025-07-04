@@ -269,11 +269,11 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: 200ms ease;
-  filter: none;
   color: var(--main-white);
   background: var(--main-gray-op);
   border-radius: 2px;
+  filter: none;
+  transition: none;
 }
 .main__header .new-project-confirm-btns button:hover, .main__header .new-project-confirm-btns button:focus-visible, .main__header .new-project-confirm-btns button:active {
   background: var(--main-purple-new);
@@ -538,7 +538,7 @@ button {
   border-radius: 2px;
   background: var(--main-gray-op);
   padding: 0;
-  transition: 200ms ease;
+  transition: none;
 }
 .mainCode__input__type__clearConfirm__buttons button:hover, .mainCode__input__type__clearConfirm__buttons button:focus-visible {
   background: var(--main-red);
@@ -1150,7 +1150,7 @@ li[data-sonner-toast] {
 .main__modal .presets__option.dragged * {
   pointer-events: none;
 }
-.main__modal .presets__option:hover, .main__modal .presets__option:focus-visible, .main__modal .presets__option:focus-within, .main__modal .presets__option:active {
+.main__modal .presets__option:hover, .main__modal .presets__option:focus-visible, .main__modal .presets__option:focus-within, .main__modal .presets__option:active, .main__modal .presets__option:has(.presets__option__confirm, .dropdownWrapper) {
   border-color: transparent;
   background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
 }
@@ -1215,7 +1215,7 @@ li[data-sonner-toast] {
   border-radius: 2px;
   cursor: pointer;
   color: var(--main-white);
-  transition: 200ms ease;
+  transition: none;
 }
 .main__modal .presets__option__confirm__buttons button:hover, .main__modal .presets__option__confirm__buttons button:focus-visible {
   background: var(--main-gray-op);
@@ -1361,7 +1361,7 @@ li[data-sonner-toast] {
   scale: 0.95;
 }
 .main__modal .presets__save button[disabled] {
-  background: var(--main-gray-op);
+  background: var(--main-gray);
   pointer-events: none;
   filter: grayscale(1);
 }
@@ -1472,16 +1472,16 @@ li[data-sonner-toast] {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--main-black);
-  border: 1px solid var(--main-gray);
   border-radius: 0.5rem;
   padding: 2px;
   gap: 2px;
-  transition: background-color 200ms ease, scale 100ms ease, opacity 100ms ease;
+  transition: scale 100ms ease, opacity 100ms ease;
   z-index: 1;
   position: absolute;
   width: fit-content;
   top: 0;
+  border: 1px solid transparent;
+  background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
 }
 .dropdownWrapper[data-direction=row] {
   flex-direction: row;
@@ -1494,7 +1494,7 @@ li[data-sonner-toast] {
   transform-origin: top right;
 }
 .dropdownWrapper[data-anchor=left] {
-  left: 0;
+  left: -44px;
   transform-origin: top left;
 }
 @starting-style {

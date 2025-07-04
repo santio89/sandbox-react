@@ -463,7 +463,8 @@
       &:hover,
       &:focus-visible,
       &:focus-within,
-      &:active {
+      &:active,
+      &:has(.presets__option__confirm, .dropdownWrapper) {
         border-color: transparent;
         background: linear-gradient(var(--main-black), var(--main-black))
             padding-box,
@@ -536,7 +537,7 @@
             border-radius: 2px;
             cursor: pointer;
             color: var(--main-white);
-            transition: 200ms ease;
+            transition: none;
 
             &:hover,
             &:focus-visible {
@@ -561,7 +562,8 @@
         align-items: center;
         padding-top: 0;
 
-        &__open, &__share{
+        &__open,
+        &__share {
           transition: 200ms ease;
         }
 
@@ -649,10 +651,12 @@
             button {
               padding: 0;
               background: transparent;
-            
-              &:hover, &:focus-visible, &:active{
-                svg{
-                  fill: var(--main-purple)
+
+              &:hover,
+              &:focus-visible,
+              &:active {
+                svg {
+                  fill: var(--main-purple);
                 }
               }
             }
@@ -724,7 +728,7 @@
         }
 
         &[disabled] {
-          background: var(--main-gray-op);
+          background: var(--main-gray);
           pointer-events: none;
           filter: grayscale(1);
         }

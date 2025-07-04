@@ -2,16 +2,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--main-black);
-  border: 1px solid var(--main-gray);
   border-radius: 0.5rem;
   padding: 2px;
   gap: 2px;
-  transition: background-color 200ms ease, scale 100ms ease, opacity 100ms ease;
+  transition: scale 100ms ease, opacity 100ms ease;
   z-index: 1;
   position: absolute;
   width: fit-content;
   top: 0;
+  border: 1px solid transparent;
+  background: linear-gradient(var(--main-black), var(--main-black)) padding-box,
+    linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
 
   &[data-direction="row"] {
     flex-direction: row;
@@ -26,7 +27,7 @@
   }
 
   &[data-anchor="left"] {
-    left: 0;
+    left: -44px;
     transform-origin: top left;
   }
 
@@ -57,8 +58,8 @@
       z-index: 1;
     }
 
-    &:active{
-      scale: .9
+    &:active {
+      scale: 0.9;
     }
   }
 }

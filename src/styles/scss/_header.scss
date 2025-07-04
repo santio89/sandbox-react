@@ -113,11 +113,11 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          transition: 200ms ease;
-          filter: none;
           color: var(--main-white);
           background: var(--main-gray-op);
           border-radius: 2px;
+          filter: none;
+          transition: none;
 
           &:hover,
           &:focus-visible,
