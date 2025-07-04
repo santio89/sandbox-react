@@ -711,6 +711,7 @@ export default function Modal({ callbacks }) {
     }, [shared])
 
     useEffect(() => {
+        setDropdownOpen(false)
         setSelectedId(null)
         setDeleteId(null)
         setEditId(null)
