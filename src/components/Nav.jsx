@@ -53,9 +53,9 @@ export default function Nav({ rootRef }) {
 
   return (<>
     <header className='main__header'>
-      <nav>
-        <Link className="main__header__site" to={"/"}><h1>SandBox|HTML-CSS-JS</h1></Link>
-      </nav>
+      <div className="main__header__site">
+        <h1>SandBox|HTML-CSS-JS</h1>
+      </div>
       <div className="main__header__buttons">
         <div className="snippets-box">
           <button onClick={() => { openModal() }} title="Manage">
