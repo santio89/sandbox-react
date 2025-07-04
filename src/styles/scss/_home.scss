@@ -270,15 +270,15 @@
 
           button {
             cursor: pointer;
-            width: 36px;
+            width: 32px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 0.9em;
+            font-size: 0.875rem;
             border-radius: 2px;
             background: var(--main-gray-op);
             padding: 0;
-            transition: none;
+            transition: 200ms ease;
 
             &:hover,
             &:focus-visible {

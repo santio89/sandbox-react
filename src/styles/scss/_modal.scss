@@ -37,14 +37,6 @@
     font-size: 1rem;
     z-index: 1;
     background: var(--main-black);
-    /* border-bottom: 1px solid transparent;
-    border-image: linear-gradient(
-      90deg,
-      var(--main-purple),
-      var(--main-red),
-      var(--main-purple)
-    );
-    border-image-slice: 1; */
     border-bottom: 1px solid var(--main-gray);
 
     > span {
@@ -456,13 +448,13 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
       position: relative;
       touch-action: none;
       background: linear-gradient(var(--main-black), var(--main-black))
           padding-box,
         linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
       border: 1px solid var(--main-gray);
+      position: relative;
 
       &.dragged * {
         pointer-events: none;
@@ -489,7 +481,7 @@
         text-align: center;
         text-wrap: balance;
         gap: 4px;
-        padding: 2px;
+        padding: 4px;
 
         form {
           display: flex;
@@ -538,23 +530,21 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-width: 48px;
-            max-width: 48px;
-            font-weight: normal;
-            font-size: 0.9em;
+            width: 32px;
+            font-size: 0.875rem;
             line-height: 1;
             border-radius: 2px;
             cursor: pointer;
             color: var(--main-white);
-            background: var(--main-gray-op);
+            transition: 200ms ease;
 
             &:hover,
             &:focus-visible {
-              background: var(--main-purple-new);
+              background: var(--main-gray-op);
             }
 
             &:active {
-              background: var(--main-purple-new);
+              background: var(--main-gray-op);
               scale: 0.95;
             }
           }
@@ -570,6 +560,10 @@
         justify-content: start;
         align-items: center;
         padding-top: 0;
+
+        &__open, &__share{
+          transition: 200ms ease;
+        }
 
         &__feat {
           font-size: 0.8em;
@@ -589,7 +583,7 @@
           flex-flow: row wrap;
           justify-content: center;
           align-items: center;
-          padding: 2px;
+          padding: 4px;
           cursor: pointer;
 
           > span {
@@ -618,42 +612,57 @@
         }
 
         &__buttons {
-          background-color: var(--main-gray-op);
           display: flex;
-          justify-content: end;
+          justify-content: space-between;
           align-items: center;
-          gap: 2px;
-          width: 100%;
-          padding: 2px;
+          padding: 4px;
 
           button {
             display: flex;
             justify-content: center;
             align-items: center;
             aspect-ratio: 1;
-            width: 20px;
-            cursor: pointer;
+            border-radius: 0.25rem;
+            padding: 2px;
 
             svg {
               color: var(--main-white);
               fill: var(--main-white);
             }
 
-            &:hover svg,
-            &:focus-visible svg {
-              color: var(--main-purple);
-              fill: var(--main-purple);
+            &:hover,
+            &:focus-visible,
+            &:active,
+            &.active {
+              background: var(--main-gray-op);
             }
 
             &:active {
-              color: var(--main-purple);
-              fill: var(--main-purple);
               scale: 0.9;
             }
+          }
 
-            &:first-child {
-              margin-right: auto;
+          &:not(.topRight) {
+            width: 100%;
+            background: var(--main-gray-op);
+
+            button {
+              padding: 0;
+              background: transparent;
+            
+              &:hover, &:focus-visible, &:active{
+                svg{
+                  fill: var(--main-purple)
+                }
+              }
             }
+          }
+
+          &.topRight {
+            position: absolute;
+            top: 0;
+            right: 0;
+            justify-content: center;
           }
         }
       }

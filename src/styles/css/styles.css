@@ -140,6 +140,7 @@ button {
   outline: none;
   border: none;
   background: none;
+  cursor: pointer;
 }
 
 .mainContainer {
@@ -264,11 +265,11 @@ button {
   border-radius: 0;
   padding: 0;
   border-radius: 0;
-  width: 28px;
+  width: 32px;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: none;
+  transition: 200ms ease;
   filter: none;
   color: var(--main-white);
   background: var(--main-gray-op);
@@ -529,15 +530,15 @@ button {
 }
 .mainCode__input__type__clearConfirm__buttons button {
   cursor: pointer;
-  width: 36px;
+  width: 32px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.9em;
+  font-size: 0.875rem;
   border-radius: 2px;
   background: var(--main-gray-op);
   padding: 0;
-  transition: none;
+  transition: 200ms ease;
 }
 .mainCode__input__type__clearConfirm__buttons button:hover, .mainCode__input__type__clearConfirm__buttons button:focus-visible {
   background: var(--main-red);
@@ -807,14 +808,6 @@ li[data-sonner-toast] {
   font-size: 1rem;
   z-index: 1;
   background: var(--main-black);
-  /* border-bottom: 1px solid transparent;
-  border-image: linear-gradient(
-    90deg,
-    var(--main-purple),
-    var(--main-red),
-    var(--main-purple)
-  );
-  border-image-slice: 1; */
   border-bottom: 1px solid var(--main-gray);
 }
 .main__modal__header > span {
@@ -1148,11 +1141,11 @@ li[data-sonner-toast] {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
   position: relative;
   touch-action: none;
   background: linear-gradient(var(--main-black), var(--main-black)) padding-box, linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
   border: 1px solid var(--main-gray);
+  position: relative;
 }
 .main__modal .presets__option.dragged * {
   pointer-events: none;
@@ -1172,7 +1165,7 @@ li[data-sonner-toast] {
   text-align: center;
   text-wrap: balance;
   gap: 4px;
-  padding: 2px;
+  padding: 4px;
 }
 .main__modal .presets__option__confirm form {
   display: flex;
@@ -1216,21 +1209,19 @@ li[data-sonner-toast] {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 48px;
-  max-width: 48px;
-  font-weight: normal;
-  font-size: 0.9em;
+  width: 32px;
+  font-size: 0.875rem;
   line-height: 1;
   border-radius: 2px;
   cursor: pointer;
   color: var(--main-white);
-  background: var(--main-gray-op);
+  transition: 200ms ease;
 }
 .main__modal .presets__option__confirm__buttons button:hover, .main__modal .presets__option__confirm__buttons button:focus-visible {
-  background: var(--main-purple-new);
+  background: var(--main-gray-op);
 }
 .main__modal .presets__option__confirm__buttons button:active {
-  background: var(--main-purple-new);
+  background: var(--main-gray-op);
   scale: 0.95;
 }
 .main__modal .presets__option__main {
@@ -1242,6 +1233,9 @@ li[data-sonner-toast] {
   justify-content: start;
   align-items: center;
   padding-top: 0;
+}
+.main__modal .presets__option__main__open, .main__modal .presets__option__main__share {
+  transition: 200ms ease;
 }
 .main__modal .presets__option__main__feat {
   font-size: 0.8em;
@@ -1260,7 +1254,7 @@ li[data-sonner-toast] {
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  padding: 2px;
+  padding: 4px;
   cursor: pointer;
 }
 .main__modal .presets__option__main__name > span {
@@ -1279,37 +1273,45 @@ li[data-sonner-toast] {
   background-clip: text;
 }
 .main__modal .presets__option__main__buttons {
-  background-color: var(--main-gray-op);
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   align-items: center;
-  gap: 2px;
-  width: 100%;
-  padding: 2px;
+  padding: 4px;
 }
 .main__modal .presets__option__main__buttons button {
   display: flex;
   justify-content: center;
   align-items: center;
   aspect-ratio: 1;
-  width: 20px;
-  cursor: pointer;
+  border-radius: 0.25rem;
+  padding: 2px;
 }
 .main__modal .presets__option__main__buttons button svg {
   color: var(--main-white);
   fill: var(--main-white);
 }
-.main__modal .presets__option__main__buttons button:hover svg, .main__modal .presets__option__main__buttons button:focus-visible svg {
-  color: var(--main-purple);
-  fill: var(--main-purple);
+.main__modal .presets__option__main__buttons button:hover, .main__modal .presets__option__main__buttons button:focus-visible, .main__modal .presets__option__main__buttons button:active, .main__modal .presets__option__main__buttons button.active {
+  background: var(--main-gray-op);
 }
 .main__modal .presets__option__main__buttons button:active {
-  color: var(--main-purple);
-  fill: var(--main-purple);
   scale: 0.9;
 }
-.main__modal .presets__option__main__buttons button:first-child {
-  margin-right: auto;
+.main__modal .presets__option__main__buttons:not(.topRight) {
+  width: 100%;
+  background: var(--main-gray-op);
+}
+.main__modal .presets__option__main__buttons:not(.topRight) button {
+  padding: 0;
+  background: transparent;
+}
+.main__modal .presets__option__main__buttons:not(.topRight) button:hover svg, .main__modal .presets__option__main__buttons:not(.topRight) button:focus-visible svg, .main__modal .presets__option__main__buttons:not(.topRight) button:active svg {
+  fill: var(--main-purple);
+}
+.main__modal .presets__option__main__buttons.topRight {
+  position: absolute;
+  top: 0;
+  right: 0;
+  justify-content: center;
 }
 .main__modal .presets__save {
   display: flex;
@@ -1470,16 +1472,16 @@ li[data-sonner-toast] {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--main-color-bg);
-  border: 1px solid var(--main-gray-dark);
-  border-radius: var(--main-radius);
-  padding: 0.25rem;
-  gap: 0.25rem;
-  transition: background-color 400ms ease-in-out, scale 100ms ease-in-out, opacity 100ms ease-in-out;
+  background-color: var(--main-black);
+  border: 1px solid var(--main-gray);
+  border-radius: 0.5rem;
+  padding: 2px;
+  gap: 2px;
+  transition: background-color 200ms ease, scale 100ms ease, opacity 100ms ease;
   z-index: 1;
   position: absolute;
-  top: calc(100% + 0.25rem);
   width: fit-content;
+  top: 0;
 }
 .dropdownWrapper[data-direction=row] {
   flex-direction: row;
@@ -1488,7 +1490,7 @@ li[data-sonner-toast] {
   flex-direction: column;
 }
 .dropdownWrapper[data-anchor=right] {
-  right: 0;
+  right: -44px;
   transform-origin: top right;
 }
 .dropdownWrapper[data-anchor=left] {
@@ -1503,25 +1505,25 @@ li[data-sonner-toast] {
 }
 .dropdownWrapper button.dropdownBtn {
   width: 100%;
-  color: var(--main-gray-dark);
+  color: var(--main-white);
   padding: 0.25rem 0.5rem;
   font-size: 12px;
   background-color: transparent;
   text-transform: capitalize;
-  outline: 1px solid transparent;
   text-align: start;
   display: flex;
   justify-content: start;
   align-items: center;
-  border-radius: var(--main-radius);
+  border-radius: 0.25rem;
+  border: 1px solid transparent;
+  transition: 200ms ease;
 }
-.dropdownWrapper button.dropdownBtn:hover, .dropdownWrapper button.dropdownBtn:focus-visible, .dropdownWrapper button.dropdownBtn.selected {
-  background-color: var(--main-color-op-light);
-  color: var(--main-text);
-}
-.dropdownWrapper button.dropdownBtn:focus-visible {
+.dropdownWrapper button.dropdownBtn:hover, .dropdownWrapper button.dropdownBtn:focus-visible, .dropdownWrapper button.dropdownBtn:active {
+  background-color: var(--main-gray-op);
   z-index: 1;
-  outline: 1px solid var(--main-text);
+}
+.dropdownWrapper button.dropdownBtn:active {
+  scale: 0.9;
 }
 
 /* loader */

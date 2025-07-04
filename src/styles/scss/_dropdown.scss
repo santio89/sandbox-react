@@ -2,18 +2,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--main-color-bg);
-  border: 1px solid var(--main-gray-dark);
-  border-radius: var(--main-radius);
-  padding: 0.25rem;
-  gap: 0.25rem;
-  transition: background-color 400ms ease-in-out, scale 100ms ease-in-out,
-    opacity 100ms ease-in-out;
+  background-color: var(--main-black);
+  border: 1px solid var(--main-gray);
+  border-radius: 0.5rem;
+  padding: 2px;
+  gap: 2px;
+  transition: background-color 200ms ease, scale 100ms ease, opacity 100ms ease;
   z-index: 1;
   position: absolute;
-  top: calc(100% + 0.25rem);
   width: fit-content;
-  
+  top: 0;
+
   &[data-direction="row"] {
     flex-direction: row;
   }
@@ -22,7 +21,7 @@
   }
 
   &[data-anchor="right"] {
-    right: 0;
+    right: -44px;
     transform-origin: top right;
   }
 
@@ -38,28 +37,28 @@
 
   button.dropdownBtn {
     width: 100%;
-    color: var(--main-gray-dark);
+    color: var(--main-white);
     padding: 0.25rem 0.5rem;
     font-size: 12px;
     background-color: transparent;
     text-transform: capitalize;
-    outline: 1px solid transparent;
     text-align: start;
     display: flex;
     justify-content: start;
     align-items: center;
-    border-radius: var(--main-radius);
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+    transition: 200ms ease;
 
     &:hover,
     &:focus-visible,
-    &.selected {
-      background-color: var(--main-color-op-light);
-      color: var(--main-text);
+    &:active {
+      background-color: var(--main-gray-op);
+      z-index: 1;
     }
 
-    &:focus-visible {
-      z-index: 1;
-      outline: 1px solid var(--main-text);
+    &:active{
+      scale: .9
     }
   }
 }
