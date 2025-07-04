@@ -125,8 +125,10 @@
           border-radius: 2px;
 
           &:hover,
-          &:focus-visible {
+          &:focus-visible,
+          &:active {
             background: var(--main-purple-new);
+            filter: none;
           }
         }
       }

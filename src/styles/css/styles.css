@@ -278,8 +278,9 @@ button {
   background: var(--main-gray-op);
   border-radius: 2px;
 }
-.main__header .new-project-confirm-btns button:hover, .main__header .new-project-confirm-btns button:focus-visible {
+.main__header .new-project-confirm-btns button:hover, .main__header .new-project-confirm-btns button:focus-visible, .main__header .new-project-confirm-btns button:active {
   background: var(--main-purple-new);
+  filter: none;
 }
 
 /* fin header */
