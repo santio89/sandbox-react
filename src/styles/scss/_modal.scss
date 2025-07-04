@@ -599,8 +599,15 @@
 
           &:hover,
           &:focus-visible {
-            color: var(--main-purple);
             outline: none;
+            color: transparent;
+            background: linear-gradient(
+                45deg,
+                var(--main-purple),
+                var(--main-red)
+              )
+              border-box;
+            background-clip: text;
           }
         }
 

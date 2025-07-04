@@ -473,9 +473,9 @@ export default function Home({ sharedSnippetHome }) {
                     :
                     <>
                         <div className="tabs">
-                            <div className="tabs__option"><button title="HTML (alt+shift+1)" data-active={tabActive === "html"} onClick={() => setTabActive("html")}>HTML</button></div>
-                            <div className="tabs__option"><button title="CSS (alt+shift+2)" data-active={tabActive === "css"} onClick={() => setTabActive("css")}>CSS</button></div>
-                            <div className="tabs__option"><button title="JS (alt+shift+3)" data-active={tabActive === "js"} onClick={() => setTabActive("js")}>JS</button></div>
+                            <div className="tabs__option"><button title="HTML (alt+shift+1)" data-active={tabActive === "html"} onClick={() => setTabActive("html")}><span>HTML</span></button></div>
+                            <div className="tabs__option"><button title="CSS (alt+shift+2)" data-active={tabActive === "css"} onClick={() => setTabActive("css")}><span>CSS</span></button></div>
+                            <div className="tabs__option"><button title="JS (alt+shift+3)" data-active={tabActive === "js"} onClick={() => setTabActive("js")}><span>JS</span></button></div>
                         </div>
                         <div className="currentSnippet">{currentSnippet?.name && `Current snippet: ${currentSnippet?.name}`}</div>
                         <div className="mainCode">
