@@ -667,6 +667,7 @@ export default function Modal({ callbacks }) {
         setDeleteId(null)
         setEditId(null)
         setSavePresetName("")
+        setSaveTab(currentSnippet ? "current" : "new")
         setDragItem(null)
         setDragId(null)
 
@@ -719,6 +720,7 @@ export default function Modal({ callbacks }) {
         setDisplayNameMode(false)
         setPicUpload(null)
         setSavePresetName("")
+        setSaveTab(currentSnippet ? "current" : "new")
         setDragItem(null)
         setDragId(null)
     }, [modalOption])
