@@ -9,7 +9,7 @@
   align-items: center;
   height: 40px;
   z-index: 2;
-  border-radius: 1rem;
+  border-radius: 1em;
   position: sticky;
   top: 0;
   background: linear-gradient(var(--main-black), var(--main-black)) padding-box,
@@ -67,22 +67,25 @@
       }
 
       &:hover,
-      &:focus-visible {
-        filter: drop-shadow(0 0 4px var(--main-black));
+      &:focus-visible,
+      &:active {
+        filter: drop-shadow(0 0 4px var(--main-white));
       }
 
       &:active {
-        filter: drop-shadow(0 0 4px var(--main-black));
         scale: 0.9;
       }
 
       &.create-new {
         color: var(--main-white);
+        border-radius: 0;
         background: var(--main-purple-new);
         border-radius: 50%;
 
-        svg {
-          fill: var(--main-white);
+        &:hover,
+        &:focus-visible,
+        &:active {
+          filter: drop-shadow(0 0 4px var(--main-purple-new));
         }
       }
     }
@@ -108,7 +111,9 @@
 
         button {
           cursor: pointer;
+          border-radius: 0;
           padding: 0;
+          border-radius: 0;
           width: 28px;
           display: flex;
           justify-content: center;

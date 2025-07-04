@@ -57,7 +57,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 0.25rem;
+      gap: 0.125rem;
 
       button {
         font-weight: bold;
@@ -69,7 +69,7 @@
         padding: 0.5rem;
         transition: 200ms ease;
         aspect-ratio: 1;
-        background: var(--main-gray-op);
+        border: 1px solid transparent;
 
         svg {
           fill: var(--main-white);
@@ -79,13 +79,16 @@
         }
 
         &:hover,
-        &:focus-visible {
-          background: var(--main-purple-new);
+        &:focus-visible,
+        &:active {
+          background: linear-gradient(var(--main-black), var(--main-black))
+              padding-box,
+            linear-gradient(45deg, var(--main-purple), var(--main-red))
+              border-box;
         }
 
         &:active {
           scale: 0.9;
-          background: var(--main-purple-new);
         }
 
         &[disabled] {
@@ -99,7 +102,10 @@
         }
 
         &.modalOptionActive {
-          background: var(--main-purple-new);
+          background: linear-gradient(var(--main-black), var(--main-black))
+              padding-box,
+            linear-gradient(45deg, var(--main-purple), var(--main-red))
+              border-box;
         }
       }
     }
