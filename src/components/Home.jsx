@@ -610,7 +610,7 @@ export default function Home({ sharedSnippetHome }) {
                                     </div>
                                 </>
                                 :
-                                <SplitPane ref={splitPane} split="vertical" minSize={300} defaultSize={"42%"} maxSize={-300} onDragStarted={() => { setPanelDrag(true) }} onDragFinished={() => { setPanelDrag(false); }}>
+                                <SplitPane ref={splitPane} split="vertical" minSize={300} defaultSize={"42%"} maxSize={-214} onDragStarted={() => { setPanelDrag(true) }} onDragFinished={() => { setPanelDrag(false); }}>
                                     <div className={`mainCode__input ${panelDrag && "pe-none"}`}>
                                         <div className="mainCode__input__type">
                                             <span className="mainCode__input__type__active">
