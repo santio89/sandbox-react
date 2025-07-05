@@ -429,7 +429,11 @@ button {
   align-items: center;
 }
 .mainCode .Pane1.vertical {
-  min-width: 420px;
+  min-width: 300px;
+}
+.mainCode .Pane2.vertical {
+  flex: 1;
+  min-width: 150px;
 }
 .mainCode .Resizer.vertical {
   cursor: col-resize;
@@ -464,7 +468,6 @@ button {
 }
 @media (min-width: 800px) {
   .mainCode__input {
-    min-width: initial;
     flex: 1;
     min-height: min(1080px, 75vh);
     min-height: min(1080px, 75dvh);
@@ -618,8 +621,8 @@ button {
 }
 @media (min-width: 800px) {
   .mainCode__output {
-    min-width: initial;
     flex: 1;
+    min-width: 150px;
     min-height: min(1080px, 75vh);
     min-height: min(1080px, 75dvh);
     height: clamp(min(1080px, 75vh), 75vh, 1080px);

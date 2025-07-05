@@ -157,7 +157,12 @@
   }
 
   .Pane1.vertical {
-    min-width: 420px;
+    min-width: 300px;
+  }
+
+  .Pane2.vertical {
+    flex: 1;
+    min-width: 150px;
   }
 
   .Resizer.vertical {
@@ -195,7 +200,6 @@
     overflow: hidden;
 
     @media (min-width: $panel-breakpoint) {
-      min-width: initial;
       flex: 1;
       min-height: min(1080px, 75vh);
       min-height: min(1080px, 75dvh);
@@ -371,8 +375,8 @@
     overflow: hidden;
 
     @media (min-width: $panel-breakpoint) {
-      min-width: initial;
       flex: 1;
+      min-width: 150px;
       min-height: min(1080px, 75vh);
       min-height: min(1080px, 75dvh);
       height: clamp(min(1080px, 75vh), 75vh, 1080px);
