@@ -666,14 +666,8 @@ export default function Modal({ callbacks }) {
         setSelectedId(null)
         setDeleteId(null)
         setEditId(null)
-        setSavePresetName("")
-        setSaveTab(currentSnippet ? "current" : "new")
         setDragItem(null)
         setDragId(null)
-
-        if (snippetTab === "saveSnippet") {
-            setSaveTab(currentSnippet?.id ? "current" : "new")
-        }
     }, [snippetTab])
 
     useEffect(() => {
@@ -720,9 +714,13 @@ export default function Modal({ callbacks }) {
         setDisplayNameMode(false)
         setPicUpload(null)
         setSavePresetName("")
-        setSaveTab(currentSnippet ? "current" : "new")
+        setSaveTab(currentSnippet?.id ? "current" : "new")
         setDragItem(null)
         setDragId(null)
+
+        if (modalOption === "saveSnippet") {
+            setSaveTab(currentSnippet?.id ? "current" : "new")
+        }
     }, [modalOption])
 
     useEffect(() => {
