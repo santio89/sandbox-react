@@ -121,14 +121,15 @@
       cursor: pointer;
       text-align: center;
       text-wrap: balance;
+      text-underline-offset: 2px;
 
       &:hover,
       &:focus-visible {
-        color: var(--main-purple);
+        text-decoration: underline;
       }
 
       &:active {
-        color: var(--main-purple);
+        text-decoration: underline;
       }
     }
 
