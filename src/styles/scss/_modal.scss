@@ -408,29 +408,23 @@
         justify-content: center;
         align-items: center;
         gap: 1rem;
-        color: rgb(248, 248, 248);
         padding: 1rem;
-        background: transparent;
         border-radius: 0.5rem;
         cursor: pointer;
-        box-shadow: 0 0 8px 0 var(--main-purple);
-        border: 2px solid var(--main-purple);
         transition: 200ms ease;
+        background: linear-gradient(var(--main-black), var(--main-black))
+            padding-box,
+          linear-gradient(45deg, var(--main-purple), var(--main-red)) border-box;
+        border: 1px solid var(--main-gray);
 
         svg {
-          fill: var(--main-purple);
+          fill: var(--main-white);
         }
 
         &:hover,
         &:focus-visible,
         &:active {
-          box-shadow: 0 0 8px 0 var(--main-red);
-          border-color: var(--main-red);
-          fill: var(--main-red);
-
-          svg {
-            fill: var(--main-red);
-          }
+          border: 1px solid transparent;
         }
 
         &:active {
